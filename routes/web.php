@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 */
 //ROOT PATH
 Route::get('/', 'Front\FrontController@index')->name('homepage');
+// login register front
+Route::get('/my-account', 'Front\FrontController@loginRegisterVendor')->name('myAccount');
 
 Route::get('wishlist', 'Front\ShopController@view_wishlist')->name('shop.view_wishlist');
 Route::get('shop', 'Front\ShopController@index')->name('shop.index');
