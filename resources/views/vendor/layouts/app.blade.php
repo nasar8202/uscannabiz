@@ -108,7 +108,44 @@
             {{--</div>--}}
             <!-- SidebarSearch Form -->
             <!-- Sidebar Menu -->
-
+            @if (auth()->user()->role_id == 3)
+            <nav class="mt-2">
+                <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent" data-widget="treeview" role="menu" data-accordion="false">
+                    <!-- Add icons to the links using the .nav-icon class
+                         with font-awesome or any other icon font library -->
+                    <li class="nav-item">
+                        <a href="{{url('admin/dashboard')}}" class="nav-link {{ request()->IS('admin/dashboard') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>
+                              Vender  Dashboard
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('product.index')}}" class="nav-link {{ request()->IS('admin/product') ? 'active' : '' }}">
+                            <i class="nav-icon fa fa-angle-double-right"></i>
+                            <p>Product</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{url('admin/changePassword')}}" class="nav-link {{ request()->IS('admin/changePassword') ? 'active' : '' }}">
+                            <i class="nav-icon fa fa-comments"></i>
+                            <p>Change Password</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="dropdown-item nav-link" href="{{ route('logout') }}"
+                           onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();">
+                            <i class="nav-icon fas fa-lock"></i> <p>{{ __('Logout') }}</p>
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    </li>
+                </ul>
+            </nav>
+            @else
             <nav class="mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent" data-widget="treeview" role="menu" data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class
@@ -304,7 +341,7 @@
 
                 </ul>
             </nav>
-
+            @endif
             <!-- /.sidebar-menu -->
         </div>
         <!-- /.sidebar -->
