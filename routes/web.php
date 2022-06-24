@@ -74,6 +74,12 @@ Route::middleware(['user'])->prefix('user')->group(function () {
     Route::get('getCities/stateId/{id}', 'User\UserController@getCities')->name('getCities');
 
 });
+Route::namespace('Vendor')->prefix('/vendor')->middleware('vendor')->group(function () {
+    //Dashboard
+    Route::get('dashboard', 'VendorController@dashboard')->name('dashboard');
+    Route::get('product', 'ProductController@index')->name('product');
+    Route::get('new-product', 'ProductController@addProductForm')->name('productForm');
+});
 
 Route::namespace('Admin')->prefix('/admin')->middleware('admin')->group(function () {
     //Dashboard

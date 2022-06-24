@@ -26,7 +26,7 @@
                                      <div data-block-name="woocommerce/product-categories" data-has-empty="true" class="wp-block-woocommerce-product-categories wc-block-product-categories is-list ">
                                         <ul class="wc-block-product-categories-list wc-block-product-categories-list--depth-0">
                                             @foreach ($categories as $category)
-                                                <li class="{{ setActiveCategory($category->slug) }}"><a href="{{ route('shop.index', ['category' => $category->category_slug]) }}">{{ $category->name }}</a></li>
+                                            <li class="wc-block-product-categories-list-item {{setActiveCategory($category->slug) }}" ><a href="{{ route('shop.index', ['category' => $category->category_slug]) }}">{{ $category->name }}</a></li>
                                             @endforeach
                                            {{-- <li class="wc-block-product-categories-list-item">
                                             <a href="product-category/uncategorized/">Uncategorized</a>
@@ -50,42 +50,25 @@
                          </div>
                          <div class="et_pb_module et_pb_code et_pb_code_0 main-cate">
                             <div class="et_pb_code_inner">
+
+                                @forelse ($categories as $category)
                                <div class="woocommerce columns-4">
                                   <ul class="products columns-4">
                                      <li class="product-category product first">
-                                        <a href="product-category/flowers/">
-                                           <img src="assets/uploads/2022/03/Mask-Group-1-300x300.png" alt="Flowers" width="300" height="300" srcset="assets/uploads/2022/03/Mask-Group-1-300x300.png 300w, assets/uploads/2022/03/Mask-Group-1-150x150.png 150w, assets/uploads/2022/03/Mask-Group-1-100x100.png 100w" sizes="(max-width: 300px) 100vw, 300px">
+                                        <a href="{{ route('shop.index', ['category' => $category->category_slug]) }}">
+                                           <img src="" alt="Flowers" width="300" height="300" srcset="assets/uploads/2022/03/Mask-Group-1-300x300.png 300w, assets/uploads/2022/03/Mask-Group-1-150x150.png 150w, assets/uploads/2022/03/Mask-Group-1-100x100.png 100w" sizes="(max-width: 300px) 100vw, 300px">
                                            <h2 class="woocommerce-loop-category__title">
-                                              Flowers <mark class="count">(6)</mark>
+                                            {{ $category->name }} <mark class="count">(6)</mark>
                                            </h2>
                                         </a>
                                      </li>
-                                     <li class="product-category product">
-                                        <a href="product-category/distillate/">
-                                           <img src="assets/uploads/2022/03/Mask-Group-2-300x300.png" alt="Distillate" width="300" height="300" srcset="assets/uploads/2022/03/Mask-Group-2-300x300.png 300w, assets/uploads/2022/03/Mask-Group-2-150x150.png 150w, assets/uploads/2022/03/Mask-Group-2-100x100.png 100w" sizes="(max-width: 300px) 100vw, 300px">
-                                           <h2 class="woocommerce-loop-category__title">
-                                              Distillate <mark class="count">(6)</mark>
-                                           </h2>
-                                        </a>
-                                     </li>
-                                     <li class="product-category product">
-                                        <a href="product-category/clones-teens/">
-                                           <img src="assets/uploads/2022/03/Mask-Group-3-300x300.png" alt="Clones + Teens" width="300" height="300" srcset="assets/uploads/2022/03/Mask-Group-3-300x300.png 300w, assets/uploads/2022/03/Mask-Group-3-150x150.png 150w, assets/uploads/2022/03/Mask-Group-3-100x100.png 100w" sizes="(max-width: 300px) 100vw, 300px">
-                                           <h2 class="woocommerce-loop-category__title">
-                                              Clones + Teens <mark class="count">(7)</mark>
-                                           </h2>
-                                        </a>
-                                     </li>
-                                     <li class="product-category product last">
-                                        <a href="product-category/trim-fresh-frozen/">
-                                           <img src="assets/uploads/2022/03/Mask-Group-4-300x300.png" alt="Trim + Fresh Frozen" width="300" height="300" srcset="assets/uploads/2022/03/Mask-Group-4-300x300.png 300w, assets/uploads/2022/03/Mask-Group-4-150x150.png 150w, assets/uploads/2022/03/Mask-Group-4-100x100.png 100w" sizes="(max-width: 300px) 100vw, 300px">
-                                           <h2 class="woocommerce-loop-category__title">
-                                              Trim + Fresh Frozen <mark class="count">(4)</mark>
-                                           </h2>
-                                        </a>
-                                     </li>
+
+
                                   </ul>
                                </div>
+                               @empty
+                                    <div style="text-align: left">No items found</div>
+                               @endforelse
                             </div>
                          </div>
                       </div>

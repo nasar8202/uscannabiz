@@ -32,7 +32,7 @@ class RedirectIfAuthenticated
                     return redirect('user/dashboard');
                     break;
                 case '3':
-                    return redirect('admin/dashboard');
+                    return redirect('vendor/dashboard');
                     break;
                 case '4':
                     return redirect('admin/dashboard');
