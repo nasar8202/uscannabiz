@@ -1,3 +1,4 @@
+
 @extends('admin.layouts.app')
 @section('title', 'Customers')
 @section('page_css')
@@ -63,7 +64,7 @@
                             <!-- /.card-header -->
 
                                 <div class="card-header">
-                                    <button type="button" class="btn btn-primary float-right"  data-toggle="modal" data-target=".bd-example-modal-lg">Add Customer</button>
+                                    <button type="button" class="btn btn-primary float-right"  data-toggle="modal" data-target=".bd-example-modal-lg">Add Broker</button>
                                 </div>
                             <div class="card-body">
                                 <table id="example1" class="table table-bordered table-striped">
@@ -123,8 +124,22 @@
                 <br>
                 <div class="container">
                     <form method="POST" action="{{route('customers.store')}}">
+                        
                         @csrf
+                        <?php 
+                        use App\User;
+                        $users = User::where('role_id',"=", 3)->get(); ?>
                         <div class="form-group">
+                            <select name="user_id" class="form-control" aria-label="Default select example">
+                                <option selected>Select Vendor For This Broker</option>
+                                @foreach($users as $user)
+                                <option value="{{$user->id}}">{{$user->name}}</option>
+                                @endforeach
+                              </select>
+                        
+                        </div>
+                        <div class="form-group">
+                            
                             <h5>First Name</h5>
                             <input type="text" class="form-control" required name="first_name" placeholder="Enter First Name">
                           </div>
