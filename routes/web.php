@@ -41,7 +41,7 @@ Route::match(['get', 'post'], '/contact-us', 'Front\ContactUsController@index')-
 //ADMIN LOGIN
 Route::get('/admin/login', function () {
     return view('admin.auth.login');
-})->middleware('guest');
+})->middleware('guest');    
 
 Route::get('/cart', 'Front\CartController@index')->name('cart.index');
 Route::patch('/cart/update/{product}', 'Front\CartController@update')->name('cart.update');
@@ -155,6 +155,8 @@ Route::namespace('Admin')->prefix('/admin')->middleware('admin')->group(function
 
     Route::resource('customers', 'CustomersController');
     Route::delete('/customers/destroy/{id}', 'CustomersController@destroy')->name('customers.destroy');
+    Route::post('/updatecustomers', 'CustomersController@update')->name('customers.update');
+    Route::view('Addbroker','admin.customers.add' );
 
     Route::get('/catalog/attribute-groups', 'AttributeGroupController@show')->name('catalog.attributeGroups');
     Route::match(['get', 'post'], '/catalog/add-attribute-group', 'AttributeGroupController@add')->name('catalog.addAttributeGroup');

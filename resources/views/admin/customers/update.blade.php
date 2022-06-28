@@ -1,4 +1,3 @@
-
 @extends('admin.layouts.app')
 @section('title', 'Customers')
 @section('page_css')
@@ -51,45 +50,68 @@
                 <div class="row">
                     <div class="col-12">
 
-                        <!-- /.card -->
-
-                        <div class="card">
-                            <div class="card-header">
-
-{{--                                <a class="btn btn-primary pull-right addBtn" href="#">Add Customer</a>--}}
-                            </div>
-                            <div class="col-md-12">
-
-                            </div>
-                            <!-- /.card-header -->
-
-                                <div class="card-header">
-                                    <a href="Addbroker" class="btn btn-primary float-right" >Add Broker</a>
-                                </div>
-                            <div class="card-body">
-                                <table id="example1" class="table table-bordered table-striped">
-                                    <thead>
-                                    <tr style="text-align: center">
-                                        <th>Id</th>
-                                        <th>First Name</th>
-                                        <th>Last Name</th>
-                                        <th>Email</th>
-                                        <th>Phone No</th>
-                                        <th>City</th>
-                                        <th>State</th>
-                                        <th>Country</th>
-                                        <th>Address</th>
-                                        <th>Action</th>
-                                        
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!-- /.card-body -->
-                        </div>
-                        <!-- /.card -->
+                        <div class="jumbotron bg-white">
+                            <h3>Update Broker</h3>
+                            <br>
+                            <div class="container">
+                                <form method="post" action="{{route('customers.update')}}">
+                                    <?php 
+                                    use App\User;
+                                    $users = User::where('role_id',"=", 3)->get(); ?>
+                                    <div class="form-group">
+                                        <select name="user_id" class="form-control" aria-label="Default select example">
+                                            <?php 
+                                             
+                                            $saved_user = User::where('id', $customer->user_id)->first(); ?>
+                                            <option selected value="{{$saved_user->id}}">{{$saved_user->name}}</option>
+                                            @foreach($users as $user)
+                                            <option value="{{$user->id}}">{{$user->name}}</option>
+                                            @endforeach
+                                          </select>
+                                    
+                                    </div>
+                                    @csrf
+                                    <div class="form-group">
+                                        <input type="hidden" class="form-control" required name="id" value="{{$customer->id}}">
+                                      
+                                        <h5>First Name</h5>
+                                        <input type="text" class="form-control" required name="first_name" value="{{$customer->first_name}}" placeholder="Enter First Name">
+                                      </div>
+                                      <div class="form-group">
+                                        <h5>Last Name</h5>
+                                        <input type="text" class="form-control" required name="last_name" value="{{$customer->last_name}}" placeholder="Enter Last Name">
+                                      </div>
+                                      <div class="form-group">
+                                        <h5>Email</h5>
+                                        <input type="email" class="form-control" required name="email" value="{{$customer->email}}" placeholder="Enter Email">
+                                      </div>
+                                      <div class="form-group">
+                                        <h5>Phone Number</h5>
+                                        <input type="number" class="form-control" required name="phone" value="{{$customer->phone_no}}" placeholder="Enter Phone">
+                                      </div>
+                                      <div class="form-group">
+                                        <h5>City</h5>
+                                        <input type="text" class="form-control" required name="city" value="{{$customer->city}}" placeholder="Enter City">
+                                      </div>
+                                      <div class="form-group">
+                                        <h5>State</h5>
+                                        <input type="text" class="form-control" required name="state" value="{{$customer->state}}" placeholder="Enter State">
+                                      </div>
+                                      <div class="form-group">
+                                        <h5>Country</h5>
+                                        <input type="text" class="form-control" required name="country" value="{{$customer->country}}" placeholder="Enter Country">
+                                      </div>
+                                      <div class="form-group">
+                                        <h5>Address</h5> 
+                                        <input type="text" class="form-control" required name="address" value="{{$customer->address}}" placeholder="Enter Address">
+                                      </div>
+                                      
+                                      <button type="submit" class="btn btn-primary">Update Customer</button>
+                          </div>
+                
+            
+                        </form>
+                   
                     </div>
                     <!-- /.col -->
                 </div>
@@ -119,7 +141,49 @@
     <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
-            
+            <div class="jumbotron bg-white">
+                <h3>Add Customer</h3>
+                <br>
+                <div class="container">
+                    <form method="POST" action="{{route('customers.store')}}">
+                        @csrf
+                        <div class="form-group">
+                            <h5>First Name</h5>
+                            <input type="text" class="form-control" required name="first_name" placeholder="Enter First Name">
+                          </div>
+                          <div class="form-group">
+                            <h5>Last Name</h5>
+                            <input type="text" class="form-control" required name="last_name" placeholder="Enter Last Name">
+                          </div>
+                          <div class="form-group">
+                            <h5>Email</h5>
+                            <input type="email" class="form-control" required name="email" placeholder="Enter Email">
+                          </div>
+                          <div class="form-group">
+                            <h5>Phone Number</h5>
+                            <input type="number" class="form-control" required name="phone" placeholder="Enter Phone">
+                          </div>
+                          <div class="form-group">
+                            <h5>City</h5>
+                            <input type="text" class="form-control" required name="city" placeholder="Enter City">
+                          </div>
+                          <div class="form-group">
+                            <h5>State</h5>
+                            <input type="text" class="form-control" required name="state" placeholder="Enter State">
+                          </div>
+                          <div class="form-group">
+                            <h5>Country</h5>
+                            <input type="text" class="form-control" required name="country" placeholder="Enter Country">
+                          </div>
+                          <div class="form-group">
+                            <h5>Address</h5> 
+                            <input type="text" class="form-control" required name="address" placeholder="Enter Address">
+                          </div>
+                          
+                    
+              </div>
+    
+            </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="submit" class="btn btn-primary">Save Customer</button>
