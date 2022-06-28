@@ -12,6 +12,10 @@ use Illuminate\Http\Request;
 
 class FrontController extends Controller
 {
+    public function loginRegisterVendor()
+    {
+        return view('front.loginRegisterVendor');
+    }
     public function index(Request $request)
     {
         $products = Product::with('whishlist')->where('status',1)

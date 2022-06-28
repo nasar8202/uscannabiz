@@ -96,7 +96,12 @@
 </footer>
 </div>
 </div>
-
+@section('extra-js')
+    <!-- Include AlgoliaSearch JS Client and autocomplete.js library -->
+    <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.min.js"></script>
+{{--    <script src="{{ asset('js/algolia.js') }}"></script>--}}
+@endsection
 <script type="text/javascript">
 (function () {
 var c = document.body.className;
@@ -119,26 +124,26 @@ jQuery(this).toggleClass('active') ;
 
 });
 });
-</script><script type="text/javascript" src="assets/plugins/woocommerce/assets/js/jquery-blockui/jquery.blockUI.min.js?ver=2.7.0-wc.6.3.1" id="jquery-blockui-js"></script>
+</script><script type="text/javascript" src="{{ URL::asset('assets/plugins/woocommerce/assets/js/jquery-blockui/jquery.blockUI.min.js?ver=2.7.0-wc.6.3.1" id="jquery-blockui-js')}}"></script>
 <script type="text/javascript" id="wc-add-to-cart-js-extra">
 /* <![CDATA[ */
 var wc_add_to_cart_params = {"ajax_url":"\/wp\/uscannabiz\/wp-admin\/admin-ajax.php","wc_ajax_url":"\/wp\/uscannabiz\/?wc-ajax=%%endpoint%%","i18n_view_cart":"View cart","cart_url":"https:\/\/webprojectmockup.com\/wp\/uscannabizhtml\/cart\/","is_cart":"","cart_redirect_after_add":"no"};
 /* ]]> */
 </script>
-<script type="text/javascript" src="assets/plugins/woocommerce/assets/js/frontend/add-to-cart.min.js?ver=6.3.1" id="wc-add-to-cart-js"></script>
-<script type="text/javascript" src="assets/plugins/woocommerce/assets/js/js-cookie/js.cookie.min.js?ver=2.1.4-wc.6.3.1" id="js-cookie-js"></script>
+<script type="text/javascript" src="{{ URL::asset('assets/plugins/woocommerce/assets/js/frontend/add-to-cart.min.js?ver=6.3.1" id="wc-add-to-cart-js')}}"></script>
+<script type="text/javascript" src="{{ URL::asset('assets/plugins/woocommerce/assets/js/js-cookie/js.cookie.min.js?ver=2.1.4-wc.6.3.1" id="js-cookie-js')}}"></script>
 <script type="text/javascript" id="woocommerce-js-extra">
 /* <![CDATA[ */
 var woocommerce_params = {"ajax_url":"\/wp\/uscannabiz\/wp-admin\/admin-ajax.php","wc_ajax_url":"\/wp\/uscannabiz\/?wc-ajax=%%endpoint%%"};
 /* ]]> */
 </script>
-<script type="text/javascript" src="assets/plugins/woocommerce/assets/js/frontend/woocommerce.min.js?ver=6.3.1" id="woocommerce-js"></script>
+<script type="text/javascript" src="{{ URL::asset('assets/plugins/woocommerce/assets/js/frontend/woocommerce.min.js?ver=6.3.1')}}" id="woocommerce-js"></script>
 <script type="text/javascript" id="wc-cart-fragments-js-extra">
 /* <![CDATA[ */
 var wc_cart_fragments_params = {"ajax_url":"\/wp\/uscannabiz\/wp-admin\/admin-ajax.php","wc_ajax_url":"\/wp\/uscannabiz\/?wc-ajax=%%endpoint%%","cart_hash_key":"wc_cart_hash_4b2954fb646b3ffe8c79fff6a1fcab46","fragment_name":"wc_fragments_4b2954fb646b3ffe8c79fff6a1fcab46","request_timeout":"5000"};
 /* ]]> */
 </script>
-<script type="text/javascript" src="assets/plugins/woocommerce/assets/js/frontend/cart-fragments.min.js?ver=6.3.1" id="wc-cart-fragments-js"></script>
+<script type="text/javascript" src="{{ URL::asset('assets/plugins/woocommerce/assets/js/frontend/cart-fragments.min.js?ver=6.3.1')}}" id="wc-cart-fragments-js"></script>
 <script type="text/javascript" id="divi-custom-script-js-extra">
 /* <![CDATA[ */
 var DIVI = {"item_count":"%d Item","items_count":"%d Items"};
@@ -148,9 +153,9 @@ var et_pb_custom = {"ajaxurl":"https:\/\/webprojectmockup.com\/wp\/uscannabizhtm
 var et_pb_box_shadow_elements = [];
 /* ]]> */
 </script>
-<script type="text/javascript" src="assets/themes/Divi/js/scripts.min.js?ver=4.15.1" id="divi-custom-script-js"></script>
-<script type="text/javascript" src="assets/themes/Divi/includes/builder/feature/dynamic-assets/assets/js/jquery.fitvids.js?ver=4.15.1" id="fitvids-js"></script>
-<script type="text/javascript" src="assets/plugins/dokan-lite/assets/js/login-form-popup.js?ver=1647983870" id="dokan-login-form-popup-js"></script>
-<script type="text/javascript" src="assets/themes/Divi/core/admin/js/common.js?ver=4.15.1" id="et-core-common-js"></script>
+<script type="text/javascript" src="{{ URL::asset('assets/themes/Divi/js/scripts.min.js?ver=4.15.1')}}" id="divi-custom-script-js"></script>
+<script type="text/javascript" src="{{ URL::asset('assets/themes/Divi/includes/builder/feature/dynamic-assets/assets/js/jquery.fitvids.js?ver=4.15.1')}}" id="fitvids-js"></script>
+<script type="text/javascript" src="{{ URL::asset('assets/plugins/dokan-lite/assets/js/login-form-popup.js?ver=1647983870')}}" id="dokan-login-form-popup-js"></script>
+<script type="text/javascript" src="{{ URL::asset('assets/themes/Divi/core/admin/js/common.js?ver=4.15.1')}}" id="et-core-common-js"></script>
 </body>
 </html>

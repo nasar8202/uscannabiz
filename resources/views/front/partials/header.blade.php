@@ -11,6 +11,7 @@
       <title>Us Cannazon | Market Place | @yield('title', '')</title>
       <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
       <meta name="robots" content="max-image-preview:large">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
       <script type="text/javascript">
          let jqueryParams=[],jQuery=function(r){return jqueryParams=[...jqueryParams,r],jQuery},$=function(r){return jqueryParams=[...jqueryParams,r],$};window.jQuery=jQuery,window.$=jQuery;let customHeadScripts=!1;jQuery.fn=jQuery.prototype={},$.fn=jQuery.prototype={},jQuery.noConflict=function(r){if(window.jQuery)return jQuery=window.jQuery,$=window.jQuery,customHeadScripts=!0,jQuery.noConflict},jQuery.ready=function(r){jqueryParams=[...jqueryParams,r]},$.ready=function(r){jqueryParams=[...jqueryParams,r]},jQuery.load=function(r){jqueryParams=[...jqueryParams,r]},$.load=function(r){jqueryParams=[...jqueryParams,r]},jQuery.fn.ready=function(r){jqueryParams=[...jqueryParams,r]},$.fn.ready=function(r){jqueryParams=[...jqueryParams,r]};
       </script>
@@ -41,6 +42,7 @@
          var dokan = {"ajaxurl":"https:\/\/webprojectmockup.com\/wp\/uscannabizhtml\/wp-admin\/admin-ajax.php","nonce":"21e97816cc","ajax_loader":"https:\/\/webprojectmockup.com\/wp\/uscannabizhtml\/wp-content\/plugins\/dokan-lite\/assets\/images\/ajax-loader.gif","seller":{"available":"Available","notAvailable":"Not Available"},"delete_confirm":"Are you sure?","wrong_message":"Something went wrong. Please try again.","vendor_percentage":"90","commission_type":"percentage","rounding_precision":"6","mon_decimal_point":".","product_types":["simple"],"loading_img":"https:\/\/webprojectmockup.com\/wp\/uscannabizhtml\/wp-content\/plugins\/dokan-lite\/assets\/images\/loading.gif","store_product_search_nonce":"5f075d9a26","i18n_download_permission":"Are you sure you want to revoke access to this download?","i18n_download_access":"Could not grant access - the user may already have permission for this file or billing email is not set. Ensure the billing email is set, and the order has been saved.","maximum_tags_select_length":"-1","rest":{"root":"https:\/\/webprojectmockup.com\/wp\/uscannabizhtml\/wp-json\/","nonce":"e4a6c761f3","version":"dokan\/v1"},"api":null,"libs":[],"routeComponents":{"default":null},"routes":[],"urls":{"assetsUrl":"https:\/\/webprojectmockup.com\/wp\/uscannabizhtml\/wp-content\/plugins\/dokan-lite\/assets"}};
          /* ]]> */
       </script>
+
       <script type="text/javascript" src="{{ URL::asset('assets/plugins/dokan-lite/assets/vendors/i18n/jed.js?ver=3.4.1')}}" id="dokan-i18n-jed-js"></script>
       <script type="text/javascript" src="{{ URL::asset('assets/plugins/dokan-lite/assets/vendors/sweetalert2/sweetalert2.all.min.js?ver=1647983870')}}" id="dokan-sweetalert2-js"></script>
       <script type="text/javascript" src="{{ URL::asset('assets/plugins/dokan-lite/assets/js/helper.js?ver=1647983870')}}" id="dokan-util-helper-js"></script>
@@ -62,9 +64,11 @@
                      <a href="mailto:Emailinfo@uscannazon.com"><span id="et-info-email">Emailinfo@uscannazon.com</span></a>
                   </div>
                   <div id="et-secondary-menu">
-                     <a href="cart/" class="et-cart-info">
-                     <span>0 Items</span>
-                     </a>
+                    <a href="{{ route('cart.index') }}">Cart
+                        @if (Cart::instance('default')->count() > 0)
+                            <span class="cart-count"><span>{{ Cart::instance('default')->count() }}</span></span>
+                        @endif
+                    </a>
                   </div>
                </div>
             </div>
@@ -72,18 +76,49 @@
                <div class="container clearfix et_menu_container">
                   <div class="logo_container">
                      <span class="logo_helper"></span>
-                     <a href="">
+                     <a href="/">
                      <img src="assets/uploads/2022/03/Uscannazon4.png" width="149" height="104" alt="Us Cannazon" id="logo" data-height-percentage="54">
                      </a>
                   </div>
+
                   <div id="et-top-navigation" data-height="66" data-fixed-height="40">
                      <nav id="top-menu-nav">
+
                         <ul id="top-menu" class="nav">
-                           <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-34 current_page_item menu-item-43"><a href="" aria-current="page">Home</a></li>
+
+                           <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-34 current_page_item menu-item-43"><a href="/" aria-current="page">Home</a></li>
                            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-44"><a href="about-us">About Us</a></li>
                            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-46"><a href="faq">FAQ Page</a></li>
                            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-45"><a href="contact-us">Contact Us</a></li>
+                           @if(Auth::check())
+                            <li>
+                                <a href="{{route('shop.view_wishlist')}}">
+                                    Wishlist
+                                </a>
+                            </li>
+                            @endif
+
+
+                           @guest
                            <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-47"><a href="my-account">Login/Sign Up</a></li>
+                           @else
+                           <li>
+                            <a href="{{ url('vendor/edit') }}">My Account</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">
+                                    Logout
+                                </a>
+                            </li>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                            </form>
+
+                        @endguest
+
                         </ul>
                      </nav>
                      <div id="et_mobile_nav_menu">
