@@ -27,6 +27,9 @@ Route::post('shop/add-wishlist', 'Front\ShopController@add_wishlist')->name('sho
 Route::get('/checkProductPrice', 'Front\ShopController@checkProductPrice')->name('shop.checkProductPrice');
 Route::post('/product/review/{id}', 'Front\ShopController@addReview')->name('shop.addReview');
 
+Route::get('/product-category/{slug}', 'Front\ShopController@productCategory')->name('productCategory');
+
+
 Route::get('/search-products', 'Front\ShopController@search')->name('shop.search-products');
 Route::get('/blogs', 'Front\BlogController@index')->name('blogs');
 Route::get('/blog-details/{id}', 'Front\BlogController@show')->name('blog-details');
@@ -108,6 +111,8 @@ Route::namespace('Admin')->prefix('/admin')->middleware('admin')->group(function
     Route::get('/checkProductSlug', 'ProductController@checkProductSlug')->name('checkProductSlug');
     Route::get('product/changeProductStatus/{id}', 'ProductController@changeProductStatus')->name('changeProductStatus');
     Route::resource('product', 'ProductController');
+
+
 
     //ORDER
     Route::get('/order', 'OrderController@index')->name('order.index');

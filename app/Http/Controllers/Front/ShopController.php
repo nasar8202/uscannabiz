@@ -33,12 +33,16 @@ class ShopController extends Controller
               $products = $products->orderBy('product_current_price', 'desc');
           }
 
-            $products = $products->where('status',1)->paginate(12);
+            $products = $products->where('status',1)->get();
 
+        $categories_for_div = Category::where('status',1)->get();
         $categories = Category::where('status',1)->get();
-        return view('front.shop.index',compact('products','categories'));
+        return view('front.shop.index',compact('products','categories','categories_for_div'));
     }
-
+    public function productCategory($slug)
+    {
+        return $slug;
+    }
     public function show($slug)
     {
          $product = Product::where('slug', $slug)->with('product_images','products_attributes','products_attributes.attribute','products_options')->firstOrFail();
