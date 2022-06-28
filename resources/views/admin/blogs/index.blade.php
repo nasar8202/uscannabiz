@@ -109,7 +109,7 @@
                                         <th>ID</th>
                                         <th>Title</th>
 {{--                                        <th>Description</th>--}}
-                                        <th>Status</th>
+                                        <th>Stats</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>

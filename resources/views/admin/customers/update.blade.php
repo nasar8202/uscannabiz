@@ -50,45 +50,53 @@
                 <div class="row">
                     <div class="col-12">
 
-                        <!-- /.card -->
-
-                        <div class="card">
-                            <div class="card-header">
-
-{{--                                <a class="btn btn-primary pull-right addBtn" href="#">Add Customer</a>--}}
-                            </div>
-                            <div class="col-md-12">
-
-                            </div>
-                            <!-- /.card-header -->
-
-                                <div class="card-header">
-                                    <button type="button" class="btn btn-primary float-right"  data-toggle="modal" data-target=".bd-example-modal-lg">Add Customer</button>
-                                </div>
-                            <div class="card-body">
-                                <table id="example1" class="table table-bordered table-striped">
-                                    <thead>
-                                    <tr style="text-align: center">
-                                        <th>Id</th>
-                                        <th>First Name</th>
-                                        <th>Last Name</th>
-                                        <th>Email</th>
-                                        <th>Phone No</th>
-                                        <th>City</th>
-                                        <th>State</th>
-                                        <th>Country</th>
-                                        <th>Address</th>
-                                        <th>Action</th>
-                                        
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!-- /.card-body -->
-                        </div>
-                        <!-- /.card -->
+                        <div class="jumbotron bg-white">
+                            <h3>Update Customer</h3>
+                            <br>
+                            <div class="container">
+                                <form method="post" action="{{route('customers.update')}}">
+                                    @csrf
+                                    <div class="form-group">
+                                        <input type="hidden" class="form-control" required name="id" value="{{$customer->id}}">
+                                      
+                                        <h5>First Name</h5>
+                                        <input type="text" class="form-control" required name="first_name" value="{{$customer->first_name}}" placeholder="Enter First Name">
+                                      </div>
+                                      <div class="form-group">
+                                        <h5>Last Name</h5>
+                                        <input type="text" class="form-control" required name="last_name" value="{{$customer->last_name}}" placeholder="Enter Last Name">
+                                      </div>
+                                      <div class="form-group">
+                                        <h5>Email</h5>
+                                        <input type="email" class="form-control" required name="email" value="{{$customer->email}}" placeholder="Enter Email">
+                                      </div>
+                                      <div class="form-group">
+                                        <h5>Phone Number</h5>
+                                        <input type="number" class="form-control" required name="phone" value="{{$customer->phone_no}}" placeholder="Enter Phone">
+                                      </div>
+                                      <div class="form-group">
+                                        <h5>City</h5>
+                                        <input type="text" class="form-control" required name="city" value="{{$customer->city}}" placeholder="Enter City">
+                                      </div>
+                                      <div class="form-group">
+                                        <h5>State</h5>
+                                        <input type="text" class="form-control" required name="state" value="{{$customer->state}}" placeholder="Enter State">
+                                      </div>
+                                      <div class="form-group">
+                                        <h5>Country</h5>
+                                        <input type="text" class="form-control" required name="country" value="{{$customer->country}}" placeholder="Enter Country">
+                                      </div>
+                                      <div class="form-group">
+                                        <h5>Address</h5> 
+                                        <input type="text" class="form-control" required name="address" value="{{$customer->address}}" placeholder="Enter Address">
+                                      </div>
+                                      
+                                      <button type="submit" class="btn btn-primary">Update Customer</button>
+                          </div>
+                
+            
+                        </form>
+                   
                     </div>
                     <!-- /.col -->
                 </div>

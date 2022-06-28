@@ -111,7 +111,7 @@
                                     @forelse($data['latestOrders'] as $latestOrders)
                                     <tr onclick="window.location='order/{{$latestOrders->id}}'; " style='cursor: pointer;'>
                                         <td> {{$latestOrders->order_no}} </td>
-                                        <td> {{$latestOrders->customer->first_name}} </td>
+                                        <td> {{$latestOrders->customer->first_name??''}} </td>
                                         <td> {{ucfirst($latestOrders->order_status)}} </td>
                                         <td> {{date('d-M-Y',strtotime($latestOrders->created_at))}} </td>
                                         <td> ${{$latestOrders->total_amount}} </td>
