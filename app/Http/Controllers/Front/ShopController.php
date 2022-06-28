@@ -20,12 +20,12 @@ class ShopController extends Controller
         $products = Product::query();
         $pagination = 9;
 
-            if (request()->category) {
-                $products = $products->with('sub_category')->whereHas('sub_category', function ($query) {
-                    $query->where('category_slug', request()->category);
-                });
+            // if (request()->category) {
+            //     $products = $products->with('sub_category')->whereHas('sub_category', function ($query) {
+            //         $query->where('category_slug', request()->category);
+            //     });
 
-            }
+            // }
 
           if (request()->sort == 'low_high') {
               $products = $products->orderBy('product_current_price');
@@ -36,12 +36,15 @@ class ShopController extends Controller
             $products = $products->where('status',1)->get();
 
         $categories_for_div = Category::where('status',1)->get();
-        $categories = Category::where('status',1)->get();
+        $categories = Category::where('status',1)->with('products')->get();
+        // return $categories;
+        // die;
         return view('front.shop.index',compact('products','categories','categories_for_div'));
     }
-    public function productCategory($slug)
+    public function productCategory($slug,$id)
     {
-        return $slug;
+        $products = Product::where('category_id',$id)->get();
+        return view('front.shop.show',compact('products'));
     }
     public function show($slug)
     {

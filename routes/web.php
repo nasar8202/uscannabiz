@@ -27,7 +27,7 @@ Route::post('shop/add-wishlist', 'Front\ShopController@add_wishlist')->name('sho
 Route::get('/checkProductPrice', 'Front\ShopController@checkProductPrice')->name('shop.checkProductPrice');
 Route::post('/product/review/{id}', 'Front\ShopController@addReview')->name('shop.addReview');
 
-Route::get('/product-category/{slug}', 'Front\ShopController@productCategory')->name('productCategory');
+Route::get('/product-category/{slug}/{id}', 'Front\ShopController@productCategory')->name('productCategory');
 
 
 Route::get('/search-products', 'Front\ShopController@search')->name('shop.search-products');
@@ -41,7 +41,7 @@ Route::match(['get', 'post'], '/contact-us', 'Front\ContactUsController@index')-
 //ADMIN LOGIN
 Route::get('/admin/login', function () {
     return view('admin.auth.login');
-})->middleware('guest');    
+})->middleware('guest');
 
 Route::get('/cart', 'Front\CartController@index')->name('cart.index');
 Route::patch('/cart/update/{product}', 'Front\CartController@update')->name('cart.update');

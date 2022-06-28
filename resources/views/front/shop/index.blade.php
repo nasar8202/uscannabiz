@@ -325,7 +325,7 @@
 
 
                                                             <a
-                                                                href="{{ route('shop.index', ['category' => $array_chunk['category_slug']]) }}">
+                                                                href="{{ route('productCategory', ['slug' => $array_chunk['category_slug'],'id'=>$array_chunk['id']]) }}">
                                                                 <img src="{{asset('uploads/category').'/'.$array_chunk['category_image']}}" alt="Flowers" width="300"
                                                                     height="300"
                                                                     srcset="{{asset('uploads/category').'/'.$array_chunk['category_image']}} 300w, {{asset('uploads/category').'/'.$array_chunk['category_image']}} 150w, {{asset('uploads/category').'/'.$array_chunk['category_image']}} 100w"
