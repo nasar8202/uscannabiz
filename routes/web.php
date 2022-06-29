@@ -21,6 +21,7 @@ Route::get('/my-account', 'Front\FrontController@loginRegisterVendor')->name('my
 Route::get('wishlist', 'Front\ShopController@view_wishlist')->name('shop.view_wishlist');
 Route::get('shop', 'Front\ShopController@index')->name('shop.index');
 Route::get('shop/{slug}', 'Front\ShopController@show')->name('shop.show');
+Route::get('shop/{slug}', 'Front\ShopController@show')->name('shop.showProduct');
 Route::post('shop/add-wishlist', 'Front\ShopController@add_wishlist')->name('shop.wishlist');
 
 
