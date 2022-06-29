@@ -64,7 +64,7 @@
                             <!-- /.card-header -->
 
                                 <div class="card-header">
-                                    <button type="button" class="btn btn-primary float-right"  data-toggle="modal" data-target=".bd-example-modal-lg">Add Broker</button>
+                                    <a href="Addbroker" class="btn btn-primary float-right" >Add Broker</a>
                                 </div>
                             <div class="card-body">
                                 <table id="example1" class="table table-bordered table-striped">
@@ -119,63 +119,7 @@
     <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
-            <div class="jumbotron bg-white">
-                <h3>Add Customer</h3>
-                <br>
-                <div class="container">
-                    <form method="POST" action="{{route('customers.store')}}">
-                        
-                        @csrf
-                        <?php 
-                        use App\User;
-                        $users = User::where('role_id',"=", 3)->get(); ?>
-                        <div class="form-group">
-                            <select name="user_id" class="form-control" aria-label="Default select example">
-                                <option selected>Select Vendor For This Broker</option>
-                                @foreach($users as $user)
-                                <option value="{{$user->id}}">{{$user->name}}</option>
-                                @endforeach
-                              </select>
-                        
-                        </div>
-                        <div class="form-group">
-                            
-                            <h5>First Name</h5>
-                            <input type="text" class="form-control" required name="first_name" placeholder="Enter First Name">
-                          </div>
-                          <div class="form-group">
-                            <h5>Last Name</h5>
-                            <input type="text" class="form-control" required name="last_name" placeholder="Enter Last Name">
-                          </div>
-                          <div class="form-group">
-                            <h5>Email</h5>
-                            <input type="email" class="form-control" required name="email" placeholder="Enter Email">
-                          </div>
-                          <div class="form-group">
-                            <h5>Phone Number</h5>
-                            <input type="number" class="form-control" required name="phone" placeholder="Enter Phone">
-                          </div>
-                          <div class="form-group">
-                            <h5>City</h5>
-                            <input type="text" class="form-control" required name="city" placeholder="Enter City">
-                          </div>
-                          <div class="form-group">
-                            <h5>State</h5>
-                            <input type="text" class="form-control" required name="state" placeholder="Enter State">
-                          </div>
-                          <div class="form-group">
-                            <h5>Country</h5>
-                            <input type="text" class="form-control" required name="country" placeholder="Enter Country">
-                          </div>
-                          <div class="form-group">
-                            <h5>Address</h5> 
-                            <input type="text" class="form-control" required name="address" placeholder="Enter Address">
-                          </div>
-                          
-                    
-              </div>
-    
-            </div>
+            
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="submit" class="btn btn-primary">Save Customer</button>

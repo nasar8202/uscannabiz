@@ -27,6 +27,9 @@ Route::post('shop/add-wishlist', 'Front\ShopController@add_wishlist')->name('sho
 Route::get('/checkProductPrice', 'Front\ShopController@checkProductPrice')->name('shop.checkProductPrice');
 Route::post('/product/review/{id}', 'Front\ShopController@addReview')->name('shop.addReview');
 
+Route::get('/product-category/{slug}/{id}', 'Front\ShopController@productCategory')->name('productCategory');
+
+
 Route::get('/search-products', 'Front\ShopController@search')->name('shop.search-products');
 Route::get('/blogs', 'Front\BlogController@index')->name('blogs');
 Route::get('/blog-details/{id}', 'Front\BlogController@show')->name('blog-details');
@@ -38,7 +41,7 @@ Route::match(['get', 'post'], '/contact-us', 'Front\ContactUsController@index')-
 //ADMIN LOGIN
 Route::get('/admin/login', function () {
     return view('admin.auth.login');
-})->middleware('guest');    
+})->middleware('guest');
 
 Route::get('/cart', 'Front\CartController@index')->name('cart.index');
 Route::patch('/cart/update/{product}', 'Front\CartController@update')->name('cart.update');
@@ -109,6 +112,8 @@ Route::namespace('Admin')->prefix('/admin')->middleware('admin')->group(function
     Route::get('product/changeProductStatus/{id}', 'ProductController@changeProductStatus')->name('changeProductStatus');
     Route::resource('product', 'ProductController');
 
+
+
     //ORDER
     Route::get('/order', 'OrderController@index')->name('order.index');
     Route::get('/order/{id}', 'OrderController@show')->name('order.show');
@@ -151,6 +156,7 @@ Route::namespace('Admin')->prefix('/admin')->middleware('admin')->group(function
     Route::resource('customers', 'CustomersController');
     Route::delete('/customers/destroy/{id}', 'CustomersController@destroy')->name('customers.destroy');
     Route::post('/updatecustomers', 'CustomersController@update')->name('customers.update');
+    Route::view('Addbroker','admin.customers.add' );
 
     Route::get('/catalog/attribute-groups', 'AttributeGroupController@show')->name('catalog.attributeGroups');
     Route::match(['get', 'post'], '/catalog/add-attribute-group', 'AttributeGroupController@add')->name('catalog.addAttributeGroup');

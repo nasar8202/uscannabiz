@@ -76,12 +76,7 @@ class CustomersController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
         else{
-            $user =  User::create([
-                'name' => $request->input('first_name'),
-                'email' => $request->input('email'),
-                'password' => Hash::make($request->input('first_name')),
-                'role_id' => 4,
-            ]);
+            
 
         $customer = new Customers;
         $customer->first_name = $request->input('first_name');
@@ -94,8 +89,25 @@ class CustomersController extends Controller
         $customer->address = $request->input('address');  
         $customer->user_id = $request->input('user_id');
         $customer->save();
-        return redirect()->back()->with('success',"customer Inserted");
+        $customer_id = $customer->id;
         
+        $user = new User;
+        $user->name = $request->input('first_name');
+        $user->email = $request->input('email');
+        $user->password = Hash::make($request->input('first_name'));
+        $user->role_id = 4;
+        $user->customers_id = $customer_id;
+        $user->save();
+        // $user =  User::create([
+        //     'name' => $request->input('first_name'),
+        //     'email' => $request->input('email'),
+        //     'password' => Hash::make($request->input('first_name')),
+        //     'role_id' => 4,
+        //     'customer_id'=>$customer_id,
+        // ]);
+        
+        return redirect()->back()->with('success',"customer Inserted");
+
         } 
     }
 
@@ -153,6 +165,13 @@ class CustomersController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
         else{
+            // $user =  User::save([
+            //     'name' => $request->input('first_name'),
+            //     'email' => $request->input('email'),
+            //     'password' => Hash::make($request->input('first_name')),
+            //     'role_id' => 4,
+            // ]);
+
         $id = $request->id;
         $customer = Customers::find($id);
         $customer->first_name = $request->input('first_name');
@@ -163,8 +182,19 @@ class CustomersController extends Controller
         $customer->state = $request->input('state'); 
         $customer->country = $request->input('country');
         $customer->address = $request->input('address');  
-        $customer->user_id = Auth::user()->id;
+        $customer->user_id = $request->input('user_id');
         $customer->save();
+        
+        $customer_id = $customer->id;
+
+        $user =  User::where('customers_id','=',$customer_id)->first();
+        
+        $user->name = $request->input('first_name');
+        $user->email = $request->input('email');
+        $user->password = Hash::make($request->input('first_name'));
+        $user->role_id = 4;
+        $user->customers_id = $customer_id;
+        $user->save();
         return back()->with('success','Customer Updated Successfully');
         }
     }
@@ -178,8 +208,14 @@ class CustomersController extends Controller
     public function destroy($id)
     {
         $content=Customers::find($id);
+        
+        
+        $user = User::where('customers_id','=',$id)->delete();
+        
         if(!empty($content) ){
+        
             $content->delete();
+        
             echo 1;
         }else{echo 2;}
     }
