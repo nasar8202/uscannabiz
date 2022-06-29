@@ -27,7 +27,10 @@ class BlogController extends Controller
                         }
                     })
                     ->addColumn('action', function ($data) {
-                        return '<a title="View" href="blog/' . $data->id . '" class="btn btn-dark btn-sm"><i class="fas fa-eye"></i></a>&nbsp;<a title="edit" href="blog/' . $data->id . '/edit" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>&nbsp;<button title="Delete" type="button" name="delete" id="' . $data->id . '" class="delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>';
+                        return '<a title="View" href="blog/' . $data->id . '" class="btn btn-dark btn-sm"><i class="fas fa-eye"></i></a>&nbsp;
+                        <a title="edit" href="blog/' . $data->id . '/edit" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i>
+                        </a>&nbsp;<button title="Delete" type="button" name="delete" 
+                        id="' . $data->id . '" class="delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>';
                     })->rawColumns(['status', 'action'])->make(true);
             }
         } catch (\Exception $ex) {

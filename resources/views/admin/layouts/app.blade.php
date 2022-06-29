@@ -121,7 +121,32 @@
                             </p>
                         </a>
                     </li>
-
+                    <?php
+                    use Illuminate\Support\Facades\Auth;
+                    $role = Auth::user()->role_id;
+                    if($role == 4){
+                    
+                    ?>
+                    <li class="nav-item">
+                        <a href="{{route('order.index')}}" class="nav-link {{ request()->IS('admin/order') ? 'active' : '' }}">
+                            <i class="nav-icon fa fa-shopping-cart" aria-hidden="true"></i>
+                            <p>Orders</p>
+                        </a>
+                    </li>
+                    <?php  } 
+                    
+                    $role = Auth::user()->role_id;
+                    if($role == 1){
+                    
+                    
+                    
+                    ?>
+                    <li class="nav-item">
+                        <a href="{{route('order.index')}}" class="nav-link {{ request()->IS('admin/order') ? 'active' : '' }}">
+                            <i class="nav-icon fa fa-shopping-cart" aria-hidden="true"></i>
+                            <p>Orders</p>
+                        </a>
+                    </li>
                     <li class="nav-item has-treeview {{ request()->IS('admin/settings') ? 'menu-is-opening menu-open' : '' }}">
                         <a href="#" class="nav-link ">
                             <i class="nav-icon fas fa-tags fw"></i>
@@ -249,6 +274,7 @@
                             </li>
                         </ul>
                     </li>
+                    
                     <li class="nav-item">
                         <a href="{{route('customers.index')}}" class="nav-link {{ request()->IS('admin/customers') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-user"></i>
@@ -256,11 +282,12 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{route('order.index')}}" class="nav-link {{ request()->IS('admin/order') ? 'active' : '' }}">
-                            <i class="nav-icon fa fa-shopping-cart" aria-hidden="true"></i>
-                            <p>Orders</p>
+                        <a href="{{route('Vendor.index')}}" class="nav-link {{ request()->IS('admin/customers') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-user"></i>
+                            <p>Vendor</p>
                         </a>
                     </li>
+                    
                     <li class="nav-item">
                         <a href="{{route('blog.index')}}" class="nav-link {{ request()->IS('admin/blog') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-tags fw"></i>
@@ -285,6 +312,7 @@
                             <p>Testimonial</p>
                         </a>
                     </li>
+                    <?php  } ?>
                     <li class="nav-item">
                         <a href="{{url('admin/changePassword')}}" class="nav-link {{ request()->IS('admin/changePassword') ? 'active' : '' }}">
                             <i class="nav-icon fa fa-comments"></i>
