@@ -77,7 +77,7 @@ class ShopController extends Controller
         }
         $productReviews = ProductReview::with('customer')->where('status', 1)->where('product_id', $product->id)->get();
 
-        return view('front.shop.show')->with([
+        return view('front.shop.showProduct')->with([
             'product' => $product,
             'stockLevel' => $stockLevel,
             'mightAlsoLike' => $mightAlsoLike,
