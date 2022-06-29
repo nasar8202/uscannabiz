@@ -125,6 +125,7 @@ jQuery(this).toggleClass('active') ;
 });
 });
 </script><script type="text/javascript" src="{{ URL::asset('assets/plugins/woocommerce/assets/js/jquery-blockui/jquery.blockUI.min.js?ver=2.7.0-wc.6.3.1" id="jquery-blockui-js')}}"></script>
+<script type="text/javascript" src="{{ URL::asset('assets/plugins/dokan-lite/assets/js/vendor-registeration.js')}}"></script>
 <script type="text/javascript" id="wc-add-to-cart-js-extra">
 /* <![CDATA[ */
 var wc_add_to_cart_params = {"ajax_url":"\/wp\/uscannabiz\/wp-admin\/admin-ajax.php","wc_ajax_url":"\/wp\/uscannabiz\/?wc-ajax=%%endpoint%%","i18n_view_cart":"View cart","cart_url":"https:\/\/webprojectmockup.com\/wp\/uscannabizhtml\/cart\/","is_cart":"","cart_redirect_after_add":"no"};
@@ -157,5 +158,31 @@ var et_pb_box_shadow_elements = [];
 <script type="text/javascript" src="{{ URL::asset('assets/themes/Divi/includes/builder/feature/dynamic-assets/assets/js/jquery.fitvids.js?ver=4.15.1')}}" id="fitvids-js"></script>
 <script type="text/javascript" src="{{ URL::asset('assets/plugins/dokan-lite/assets/js/login-form-popup.js?ver=1647983870')}}" id="dokan-login-form-popup-js"></script>
 <script type="text/javascript" src="{{ URL::asset('assets/themes/Divi/core/admin/js/common.js?ver=4.15.1')}}" id="et-core-common-js"></script>
+<script>
+   $('.for_vender').hide();
+
+   $('.form-row.form-group.user-role.vendor-customer-registration .radio input').change(function(){
+
+   var value = $(this).val();
+
+if ( value === '3') {
+    $('.for_vender').find( 'input, select' ).removeAttr( 'disabled' );
+    $('.for_vender').slideDown();
+
+    if ( $( '.tc_check_box' ).length > 0 ) {
+        $('button[name=register]').attr('disabled','disabled');
+    }
+
+} else {
+    $('.for_vender').find( 'input, select' ).attr( 'disabled', 'disabled' );
+    $('.for_vender').slideUp();
+
+    if ( $( '.tc_check_box' ).length > 0 ) {
+        $( 'button[name=register]' ).removeAttr( 'disabled' );
+    }
+}
+});
+
+   </script>
 </body>
 </html>
