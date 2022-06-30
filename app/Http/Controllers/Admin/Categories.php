@@ -21,6 +21,7 @@ class Categories extends Controller
     final public function index()
     {
 
+
         try {
             if (request()->ajax()) {
                 return datatables()->of(Category::with('sub_category')->get())
