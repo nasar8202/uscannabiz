@@ -110,8 +110,9 @@ ul.et_pb_social_media_follow{list-style-type:none!important;margin:0 0 22px;padd
 	             </div>
 	          </div>
 	          <div class="et_pb_column et_pb_column_1_2 et_pb_column_3_tb_body  et_pb_css_mix_blend_mode_passthrough et-last-child">
-                <form class="cart" action="{{ url('cart/store', $product->id) }}" method="POST" enctype="multipart/form-data">
+                <form class="cart" action="" method="get">
                     {{ csrf_field() }}
+					<input type="hidden" name="id" value="{{  $product->id }}">
 	             <div class="et_pb_module et_pb_wc_title et_pb_wc_title_1_tb_body et_pb_bg_layout_light">
 	                <div class="et_pb_module_inner">
 	                   <h1>{{ $product->product_name }}</h1>
@@ -134,7 +135,7 @@ ul.et_pb_social_media_follow{list-style-type:none!important;margin:0 0 22px;padd
 	                         <label class="screen-reader-text" for="quantity_62b36070a592a">abc-shirt quantity</label>
 	                         <input type="number" id="quantity_62b36070a592a" class="input-text qty text" step="1" min="1" max="" name="quantity" value="1" title="Qty" size="4" placeholder="" inputmode="numeric" autocomplete="off">
 	                      </div>
-	                      <button type="submit" name="add-to-cart" value="381" class="single_add_to_cart_button button alt">Add to cart</button>
+	                      <a href="{{ Route('vendorAddProductForm',$product->id ) }}" name="add-to-cart" value="381" class="single_add_to_cart_button button alt">Add to cart</a>
 
 	                </div>
 	             </div>

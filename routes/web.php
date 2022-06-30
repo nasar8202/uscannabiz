@@ -19,6 +19,7 @@ Route::get('/', 'Front\FrontController@index')->name('homepage');
 Route::post('/register', 'Front\FrontController@Register')->name('register');
 Route::get('/my-account', 'Front\FrontController@loginRegisterVendor')->name('myAccount');
 Route::post('/registerVendorAndCustomer', 'Front\FrontController@registerVendorAndCustomer')->name('registerVendorAndCustomer');
+Route::get('vendor-add-product-form/{id}', 'Vendor\ProductController@vendorAddProductForm')->name('vendorAddProductForm');
 
 Route::get('wishlist', 'Front\ShopController@view_wishlist')->name('shop.view_wishlist');
 Route::get('shop', 'Front\ShopController@index')->name('shop.index');

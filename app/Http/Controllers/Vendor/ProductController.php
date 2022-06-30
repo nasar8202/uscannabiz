@@ -21,4 +21,10 @@ class ProductController extends Controller
     {
         dd($request->all());
     }
+    public function vendorAddProductForm(Request $request,$id)
+    {
+        $data = Product::find($id);
+        
+        return view('front.shop.vendorAddProductForm',compact(['data',$data ]));
+    }
 }
