@@ -142,7 +142,7 @@
                                     <tr style="text-align: center">
                                         <th>Id</th>
                                         <th>First Name</th>
-                                        <th>Email</th>
+                                        <th>Last Name</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                         
@@ -233,8 +233,8 @@
 
                     { data: 'DT_RowIndex', name: 'DT_RowIndex' },
                     // {data: 'id', name: 'id'},
-                    {data: 'name', name: 'First Name'},
-                    {data: 'email', name: 'Email'},
+                    {data: 'first_name', name: 'First Name'},
+                    {data: 'last_name', name: 'Email'},
                     {data: 'status', name: 'status'},
                     
 
@@ -286,6 +286,8 @@
         $(document).on('click','#status-switch',function(){
                 let id = $(this).data('id');
                 let val = $(this).data('val');
+                
+                
                 $.ajax({
                     type:"get",
                     url:"{{route('changeVendorStatus')}}",
@@ -297,7 +299,7 @@
                         val:val
                     },
                     success: function (data) {
-                        DataTable.ajax.reload();
+                        // DataTable.ajax.reload();
 
                         if(data==0) {
                             toastr.error('Exception Here !');

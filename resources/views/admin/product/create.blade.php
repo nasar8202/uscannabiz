@@ -129,9 +129,7 @@
                                                     <label for="exampleInputEmail1">Main Category*</label>
                                                     <select class="form-control {{ $errors->has('main_category') ? 'has-error' : ''}}" name="main_category" id="main-category" required>
                                                         <option value="">Select Category</option>
-                                                        @foreach($mainCategories as $category)
-                                                            <option value="{{$category->id}}" @if(old('main_category') == $category->id) {{ 'selected' }} @endif>{{$category->name}}</option>
-                                                        @endforeach
+                                                            <option></option>
                                                     </select>
                                                     {!! $errors->first('main_category', '<p class="help-block">:message</p>') !!}
                                                 </div>
@@ -143,9 +141,8 @@
                                                     <label for="exampleInputEmail1">Manufacturer</label>
                                                     <select class="form-control {{ $errors->has('manufacturer') ? 'has-error' : ''}}" name="manufacturer" id="manufacturer">
                                                         <option value="">Select Manufacturer</option>
-                                                        @foreach($manufacturers as $manufacturer)
-                                                            <option value="{{$manufacturer->id}}"  @if(old('main_category') == $manufacturer->id) {{ 'selected' }} @endif>{{$manufacturer->name}}</option>
-                                                        @endforeach
+                                                            <option value=""></option>
+                                                        
                                                     </select>
                                                     {!! $errors->first('manufacturer', '<p class="help-block">:message</p>') !!}
                                                 </div>

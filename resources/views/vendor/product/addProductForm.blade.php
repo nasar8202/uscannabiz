@@ -7,75 +7,133 @@
   <div class="container">
      <div id="content-area" class="clearfix">
         <div id="left-area">
-           <nav class="woocommerce-breadcrumb"><a href="">Home</a>&nbsp;&#47;&nbsp;Business &amp; Licenses for Sales</nav>
-           <header class="woocommerce-products-header">
-              <h1 class="woocommerce-products-header__title page-title">Business &amp; Licenses for Sales</h1>
-           </header>
-           <div class="woocommerce-notices-wrapper"></div>
-           <p class="woocommerce-result-count">
-              Showing all 2 results
-           </p>
-           <form class="woocommerce-ordering" method="get">
-              <select name="orderby" class="orderby" aria-label="Shop order">
-                 <option value="menu_order" selected>Default sorting</option>
-                 <option value="popularity">Sort by popularity</option>
-                 <option value="rating">Sort by average rating</option>
-                 <option value="date">Sort by latest</option>
-                 <option value="price">Sort by price: low to high</option>
-                 <option value="price-desc">Sort by price: high to low</option>
-              </select>
-              <input type="hidden" name="paged" value="1">
-           </form>
-           <ul class="products columns-3">
-              <li class="product type-product post-179 status-publish first instock product_cat-business-licenses-for-sales product_cat-cartridges-vapes product_cat-clones-teens product_cat-concentrates product_cat-distillate product_cat-edibles product_cat-equipment-for-sale product_cat-flowers product_cat-prerolls product_cat-trim-fresh-frozen product_cat-white-label has-post-thumbnail shipping-taxable purchasable product-type-simple">
-                 <a href="/product/lorem-ipsum-3/" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
-                    <span class="et_shop_image"><img width="51" height="53" src="assets/uploads/2022/03/images.jpg" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="" loading="lazy"><span class="et_overlay"></span></span>
-                    <h2 class="woocommerce-loop-product__title">Lorem Ipsum</h2>
-                    <span class="price"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">&#36;</span>40.00</bdi></span></span>
-                 </a>
-              </li>
-              <li class="product type-product post-182 status-publish instock product_cat-all product_cat-all-concentrates product_cat-badder product_cat-business-licenses-for-sales product_cat-cartridges-vapes product_cat-clones-teens product_cat-concentrates product_cat-crumble product_cat-diamonds product_cat-distillate product_cat-edibles product_cat-equipment-for-sale product_cat-exotic product_cat-flowers product_cat-glass-house product_cat-hash product_cat-hoop-house product_cat-indoor product_cat-light-dep product_cat-out-door product_cat-prerolls product_cat-rosin-resin product_cat-sauce product_cat-sugar product_cat-trim-fresh-frozen product_cat-wax product_cat-white-label has-post-thumbnail shipping-taxable purchasable product-type-simple">
-                 <a href="/product/lorem-ipsum-6/" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
-                    <span class="et_shop_image"><img width="51" height="53" src="assets/uploads/2022/03/Sexual_Healing_Plus.jpg" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="" loading="lazy"><span class="et_overlay"></span></span>
-                    <h2 class="woocommerce-loop-product__title">Lorem Ipsum</h2>
-                    <span class="price"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">&#36;</span>40.00</bdi></span></span>
-                 </a>
-              </li>
-           </ul>
-        </div>
-        <div id="sidebar">
-           <div id="block-2" class="et_pb_widget widget_block widget_search">
-              <form role="search" method="get" action="/" class="wp-block-search__button-outside wp-block-search__text-button wp-block-search">
-                 <label for="wp-block-search__input-1" class="wp-block-search__label">Search</label>
-                 <div class="wp-block-search__inside-wrapper ">
-                    <input type="search" id="wp-block-search__input-1" class="wp-block-search__input " name="s" value="" placeholder="" required><button type="submit" class="wp-block-search__button  ">Search</button>
+     
+           
+         <div class="u-column2 col-2">
+            <h2>Add Product</h2>
+            <form method="post" action="{{ route('register') }}" class="woocommerce-form woocommerce-form-register register">
+             {{ csrf_field() }}
+              
+             <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+               
+               <div class="col">
+                  <label for="exampleInputEmail1">Main Category*</label>
+                  <select class="form-control {{ $errors->has('main_category') ? 'has-error' : ''}}" name="main_category" id="main-category" required>
+                      <option value="">Select Category</option>
+                          <option></option>
+                  </select>
+                  
+            </p>
+            
+             <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+                  <label for="reg_email">Product Name&nbsp;<span class="required">*</span></label>
+                  <input type="text" class="woocommerce-Input woocommerce-Input--text input-text" 
+                  name="product_name" id="reg_email" autocomplete="email" value="">
+               </p>
+              
+               <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+                  <label for="reg_password">Current Price&nbsp;<span class="required">*</span></label>
+                  <input type="number" class="woocommerce-Input woocommerce-Input--text input-text" name="current_price" id="reg_password" autocomplete="new-password">
+               </p>
+               
+                  <div class="split-row form-row-wide">
+                     <p class="form-row form-group">
+                        <label for="first-name">Product Sku <span class="required">*</span></label>
+                        <input type="text" class="input-text form-control" name="product_sku" id="first-name" value="" required="required">
+                     </p>
+                     <p class="form-row form-group">
+                        <label for="last-name">Product Slug <span class="required">*</span></label>
+                        <input type="text" class="input-text form-control" name="product_slug" id="last-name" value="" required="required">
+                     </p>
+                     <p class="form-row form-group">
+                        <label for="exampleInputEmail1">Sale(%)</label>
+                        <input type="number" name="product_sale_percentage" placeholder="10" class="form-control" readonly id="product_sale_percentage" value="{{old('product_sale_percentage')}}" required>
+                        </p>
+                  </div>
+                  
+                  <p class="form-row form-group form-row-wide">
+                     <label for="exampleInputEmail1">Product Sale</label>
+                 <input type="checkbox" name="product_sale" class="form-control" id="product_sale" style="height: 20px;width: 20px;" value="yes" @if(old('product_sale') == 'yes') {{ 'checked' }} @endif>
+                  </p>
+                 
+               
+                  <p class="form-row form-group form-row-wide">
+                     <label for="exampleInputEmail1">Product Stock</label>
+                     <input type="checkbox" name="product_stock" class="form-control" id="product_stock" style="height: 20px;width: 20px;" value="yes" @if(old('product_stock') == 'yes') {{ 'checked' }} @endif>
+                
+                  </p>
+                  
+                  <p class="form-row form-group form-row-wide">
+                     <label for="exampleInputEmail1">Product Stock Qty</label>
+                     <input type="number" name="product_stock_qty" class="form-control" placeholder="10" readonly id="product_stock_qty" value="{{old('product_stock_qty')}}" required>
+                 
+                  </p>
+                  
+                  <p class="form-row form-group form-row-wide">
+                     <label for="switch">Status</label>
+                     <label class="switch"><input type="checkbox" @if(old('status') == '1') {{ 'checked' }} @endif data-id="" id="status-switch" name="status" value="1">
+                     <span class="slider round"></span>
+                  </label>
+                                               
+                  </p>
+                  <p class="form-row form-group form-row-wide">
+                     <label for="category">Description</label>
+                  <textarea class="form-control {{ $errors->has('main_category') ? 'has-error' : ''}}" name="description" id="description" placeholder="Description" required>{{old('description')}}</textarea>
+                  {!! $errors->first('description', '<p class="help-block">:message</p>') !!}
+                                                
+                  </p>
+                  <p class="form-row form-group form-row-wide">
+                     <label for="category">Meta Title</label>
+                     <input type="text" class="form-control {{ $errors->has('meta-title') ? 'has-error' : ''}}" name="meta-title" id="meta-title"  value="{{old('meta-title')}}" placeholder="Meta Title" required >
+                     {!! $errors->first('meta-title', '<p class="help-block">:message</p>') !!}
+                
+                  </p>
+                  <p class="form-row form-group form-row-wide">
+                     <label for="category">Meta Description</label>
+                   <textarea class="form-control {{ $errors->has('meta-description') ? 'has-error' : ''}}" name="meta-description" id="meta-description" placeholder="Meta Description" required>{{old('meta-description')}}</textarea>
+                     {!! $errors->first('meta-description', '<p class="help-block">:message</p>') !!}
+                                                
+                  </p>
+                  <p class="form-row form-group form-row-wide">
+                     <label for="category">Meta Keywords</label>
+                     <textarea class="form-control {{ $errors->has('meta-keywords') ? 'has-error' : ''}}" name="meta-keywords" id="meta-keywords"  placeholder="Meta Keywords" required>{{old('meta-keywords')}}</textarea>
+                    {!! $errors->first('meta-keywords', '<p class="help-block">:message</p>') !!}
+                                                
+                  </p>
+                  <div class="row">
+                     <table class="table">
+                         <tr>
+                             <th>Product Image</th>
+                             <th>Select Image</th>
+                         </tr>
+                         <tbody>
+                             <tr>
+                                 <td>
+                                     <img src="{{asset('admin/images/placeholder.png')}}" alt="" id="img_0" style="height: 150px;width: 150px;">
+                                 </td>
+                                 <td>
+                                     <div class="input-group">
+                                         <div class="custom-file">
+                                             <input type="file" class="custom-file-input"  name="product_image_first" id="gallery_0" onchange="PreviewImage('0')" accept="image/*" required>
+                                             <label class="custom-file-label" for="category-image">Choose file</label>
+                                         </div>
+                                         {!! $errors->first('product_image_first', '<p class="help-block">:message</p>') !!}
+                                     </div>
+                                 </td>
+                             </tr>
+                         </tbody>
+                     </table>
                  </div>
-              </form>
+                  
+               <p class="woocommerce-form-row form-row">
+                  <button type="submit" class="woocommerce-Button woocommerce-button button woocommerce-form-register__submit" name="register" value="Register">Register</button>
+
+               </p>
+            </form>
+         </div>
+         
            </div>
-           <div id="block-3" class="et_pb_widget widget_block">
-              <div class="wp-container-62b360594849d wp-block-group">
-                 <div class="wp-block-group__inner-container">
-                    <h2>Recent Posts</h2>
-                    <ul class="wp-block-latest-posts__list wp-block-latest-posts">
-                       <li><a href="/2022/03/22/hello-world/">Hello world!</a></li>
-                    </ul>
-                 </div>
-              </div>
-           </div>
-           <div id="block-4" class="et_pb_widget widget_block">
-              <div class="wp-container-62b3605948af9 wp-block-group">
-                 <div class="wp-block-group__inner-container">
-                    <h2>Recent Comments</h2>
-                    <ol class="wp-block-latest-comments">
-                       <li class="wp-block-latest-comments__comment">
-                          <article>
-                             <footer class="wp-block-latest-comments__comment-meta"><a class="wp-block-latest-comments__comment-author" href="https://wordpress.org/">A WordPress Commenter</a> on <a class="wp-block-latest-comments__comment-link" href="/2022/03/22/hello-world/#comment-1">Hello world!</a></footer>
-                          </article>
-                       </li>
-                    </ol>
-                 </div>
-              </div>
-           </div>
+           
         </div>
      </div>
   </div>

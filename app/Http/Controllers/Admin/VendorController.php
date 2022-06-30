@@ -20,30 +20,32 @@ class VendorController extends Controller
      */
     public function index()
     {
-        $data = Customers::join('Users','Users.id' ,'=' ,'Customers.user_id')
+        // $data = Customers::join('Users','Users.id' ,'=' ,'Customers.user_id')->where('role_id','=',3)
         
-        ->get();
-        foreach($data as $item){
-             echo($item->role_id); 
-        }
-        die();
+        // ->get();
+        // dd($data);
+        // // foreach($data as $item){
+        
+        // //     $role_id = $item->role_id; 
+        // // }
+        // // echo $role_id;
+        // die();
         
         try {
             
             if (request()->ajax()) {
-                return datatables()->of(User::where('role_id','=',3)->get())
+                return datatables()->of(Customers::join('Users','Users.id' ,'=' ,'Customers.user_id')->where('role_id','=',3)->get())
                     ->addIndexColumn()
                     ->addColumn('status', function ($data) {
                         if($data->status == 0){
-                            return '<label class="switch"><input type="checkbox"  data-id="'.$data->id.'" data-val=0  id="status-switch"><span class="slider round"></span></label>';
+                            return '<label class="switch"><input type="checkbox"  data-id="'.$data->user_id.'" data-val="1"  id="status-switch"><span class="slider round"></span></label>';
                         }else{
-                            return '<label class="switch"><input type="checkbox" checked data-id="'.$data->id.'" data-val=1  id="status-switch"><span class="slider round"></span></label>';
+                            return '<label class="switch"><input type="checkbox" checked data-id="'.$data->user_id.'" data-val="0"  id="status-switch"><span class="slider round"></span></label>';
                         }
                     })
                     ->addColumn('action', function ($data) {
                         return '<a title="View" href="customers/' . $data->id . '" 
                         class="btn btn-dark btn-sm"><i class="fas fa-eye"></i></a>&nbsp;
-                        <a title="edit" href="customers/' . $data->id . '/edit" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>&nbsp;
                         <button title="Delete" type="button" name="delete" id="' . $data->id . '" 
                         class="delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>';
                     })->rawColumns(['status','action'])->make(true);
@@ -122,10 +124,12 @@ class VendorController extends Controller
     }
     public function changeVendorStatus(Request $request)
     {
-        $find = $request->id;
-        $status = Customers::find($find);
-        $status->status = $request->val;
-        $status->save();
+        //return $request->id;
+           $data = array(
+            'status'=>$request->val
+           );
+        $status = Customers::where('user_id',$request->id)->update($data);
+       
         return response()->json(['success'=>'Status Updated Successfully']);
  
         // $product = Customers::where('id',$request->id);

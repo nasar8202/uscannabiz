@@ -46,7 +46,7 @@
 						         </ul>
 						         <!-- .post-statuses-filter -->
 						         <span class="dokan-add-product-link">
-						         <a href="new-product/" class="dokan-btn dokan-btn-theme dokan-add-new-product">
+						         <a href="{{Route('productForm')}}" class="dokan-btn dokan-btn-theme dokan-add-new-product">
 						         <i class="fas fa-briefcase">&nbsp;</i>
 						         Add new product                                        </a>
 						         </span>
