@@ -16,9 +16,9 @@ class CreateVendorRequest extends Migration
         Schema::create('vendor_request', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('product_id')->nullable();
-            $table->foreign('product_id')->references('id')->on('products')->nullOnDelete(); 
+            $table->foreign('product_id')->references('id')->on('products')->nullOnDelete();
             $table->unsignedBigInteger('vender_id')->nullable();
-            $table->foreign('vender_id')->references('vender_id')->on('products')->nullOnDelete(); 
+            //$table->foreign('vender_id')->references('vender_id')->on('products')->nullOnDelete();
             $table->string('full_name');
             $table->string('phone_num');
             $table->string('email');
