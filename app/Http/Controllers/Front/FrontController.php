@@ -14,6 +14,11 @@ use App\Models\Customers;
 use Illuminate\Support\Facades\Hash;
 class FrontController extends Controller
 {
+    public function Register()
+    {
+        dd($request->all());
+        return view('front.loginRegisterVendor');
+    }
     public function loginRegisterVendor()
     {
         return view('front.loginRegisterVendor');

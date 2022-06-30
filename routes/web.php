@@ -16,6 +16,7 @@ use app\Http\Controllers\Admin\VendorController;
 //ROOT PATH
 Route::get('/', 'Front\FrontController@index')->name('homepage');
 // login register front
+Route::post('/register', 'Front\FrontController@Register')->name('register');
 Route::get('/my-account', 'Front\FrontController@loginRegisterVendor')->name('myAccount');
 Route::post('/registerVendorAndCustomer', 'Front\FrontController@registerVendorAndCustomer')->name('registerVendorAndCustomer');
 
