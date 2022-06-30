@@ -17,6 +17,7 @@ use app\Http\Controllers\Admin\VendorController;
 Route::get('/', 'Front\FrontController@index')->name('homepage');
 // login register front
 Route::get('/my-account', 'Front\FrontController@loginRegisterVendor')->name('myAccount');
+Route::post('/registerVendorAndCustomer', 'Front\FrontController@registerVendorAndCustomer')->name('registerVendorAndCustomer');
 
 Route::get('wishlist', 'Front\ShopController@view_wishlist')->name('shop.view_wishlist');
 Route::get('shop', 'Front\ShopController@index')->name('shop.index');
@@ -159,7 +160,7 @@ Route::namespace('Admin')->prefix('/admin')->middleware('admin')->group(function
     Route::post('/updatecustomers', 'CustomersController@update')->name('customers.update');
     Route::view('Addbroker','admin.customers.add' );
 
-    
+
     Route::resource('Vendor', 'VendorController');
     Route::get('vendor/changeVendorStatus/', 'VendorController@changeVendorStatus')->name('changeVendorStatus');
 
