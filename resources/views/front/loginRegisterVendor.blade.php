@@ -99,12 +99,12 @@
                                             <div class="for_vender">
                                                <p class="form-row form-group form-row-wide">
                                                   <label for="company-name">Shop Name <span class="">*</span></label>
-                                                  <input type="text" class="input-text form-control" name="shopname" id="company-name" value="" required="">
+                                                  <input type="text" class="input-text form-control" name="store_name" id="company-name" value="" required="">
                                                 </p>
                                                 <p class="form-row form-group form-row-wide">
                                                    <label for="seller-url" class="pull-left">Shop URL <span class="">*</span></label>
                                                    <strong id="url-alart-mgs" class="pull-right"></strong>
-                                                   <input type="text" class="input-text form-control" name="shopurl" id="seller-url" value="" required="">
+                                                   <input type="text" class="input-text form-control" name="store_url" id="seller-url" value="" required="">
                                                    <small>/Us-Cannazon/<strong id="url-alart"></strong></small>
                                                 </p>
                                              </div>

@@ -11,6 +11,7 @@ use App\Models\Collection;
 use Illuminate\Http\Request;
 use App\User;
 use App\Models\Customers;
+use App\Models\VendorStore;
 use Illuminate\Support\Facades\Hash;
 class FrontController extends Controller
 {
@@ -69,12 +70,20 @@ class FrontController extends Controller
                 'role_id' => 3,
             ]);
 
-            Customers::create([
+            $customer = Customers::create([
                 'user_id' => $user->id,
                 'first_name' => $request->fname,
                 'last_name' => $request->lname,
                 'phone_no' => $request->phone,
                 'email' => $request->email,
+            ]);
+
+            $customer_id = $customer->id;
+
+            VendorStore::create([
+                'vendor_id'=>$customer_id,
+                'store_name'=>$request->store_name,
+                'store_url'=>$request->store_url
             ]);
             // $userData['role_id'] = 3;
             // $user = User::create([$userData]);
