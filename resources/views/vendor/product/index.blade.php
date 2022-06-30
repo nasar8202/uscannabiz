@@ -18,7 +18,7 @@
 	                           <label id="mobile-menu-icon" for="toggle-mobile-menu" aria-label="Menu">☰</label><input id="toggle-mobile-menu" type="checkbox">
 	                           <ul class="dokan-dashboard-menu">
 	                              <li class="active dashboard"><a href=""><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-	                              <li class="products"><a href="products/"><i class="fas fa-briefcase"></i> Products</a></li>
+	                              <li class="products"><a href="product"><i class="fas fa-briefcase"></i> Products</a></li>
 	                              <li class="orders"><a href="orders/"><i class="fas fa-shopping-cart"></i> Orders</a></li>
 	                              <li class="withdraw"><a href="withdraw/"><i class="fas fa-upload"></i> Withdraw</a></li>
 	                              <li class="settings"><a href="settings/store/"><i class="fas fa-cog"></i> Settings <i class="fas fa-angle-right pull-right"></i></a></li>
@@ -46,7 +46,7 @@
 						         </ul>
 						         <!-- .post-statuses-filter -->
 						         <span class="dokan-add-product-link">
-						         <a href="new-product/" class="dokan-btn dokan-btn-theme dokan-add-new-product">
+						         <a href="{{Route('productForm')}}" class="dokan-btn dokan-btn-theme dokan-add-new-product">
 						         <i class="fas fa-briefcase">&nbsp;</i>
 						         Add new product                                        </a>
 						         </span>

@@ -13,6 +13,6 @@ class ProductController extends Controller
     }
     public function addProductForm()
     {
-        return view('vendor.product.addProductForm');
+        return view('Vendor.product.addProductForm');
     }
 }
