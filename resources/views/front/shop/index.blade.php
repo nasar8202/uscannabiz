@@ -291,16 +291,10 @@
                                                                 <li
                                                                     class="wc-block-product-categories-list-item {{ setActiveCategory($category->slug) }}">
                                                                     <a
-                                                                        href="{{ route('shop.index', ['category' => $category->category_slug]) }}">{{ $category->name }}</a>
+                                                                        href="{{ route('productCategory', ['slug' => $category->category_slug,'id'=>$category->id]) }}">{{ $category->name }}</a>
                                                                 </li>
                                                             @endforeach
-                                                            {{-- <li class="wc-block-product-categories-list-item">
-                                            <a href="product-category/uncategorized/">Uncategorized</a>
-                                            <span class="wc-block-product-categories-list-item-count">
-                                            <span aria-hidden="true">1</span>
-                                            <span class="screen-reader-text">1 product</span>
-                                            </span>
-                                            </li> --}}
+
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -316,35 +310,27 @@
                                             <h1>Featured Products</h1>
                                         </div>
                                     </div>
-                                    <table class="et_pb_code_inner">
-                                        <?php foreach (array_chunk($categories_for_div->toArray(), 2) as $a) { ?>
-                                        <tr class="woocommerce columns-4">
-                                                        <?php foreach ($a as $array_chunk) {
-                                                             ?>
-                                                        <td class="products columns-4">
+                                    <div class="et_pb_module et_pb_code et_pb_code_0 main-cate">
+                                        <div class="et_pb_code_inner">
+                                            <div class="woocommerce columns-4">
+                                                <ul class="products columns-4" style="display:flex;flex-wrap:wrap;">
+                                            @forelse ($categories_for_div as $category)
 
-
-                                                            <a
-                                                                href="{{ route('productCategory', ['slug' => $array_chunk['category_slug'],'id'=>$array_chunk['id']]) }}">
-                                                                <img src="{{asset('uploads/category').'/'.$array_chunk['category_image']}}" alt="Flowers" width="300"
-                                                                    height="300"
-                                                                    srcset="{{asset('uploads/category').'/'.$array_chunk['category_image']}} 300w, {{asset('uploads/category').'/'.$array_chunk['category_image']}} 150w, {{asset('uploads/category').'/'.$array_chunk['category_image']}} 100w"
-                                                                    sizes="(max-width: 300px) 100vw, 300px">
-                                                                <h2 class="woocommerce-loop-category__title">
-                                                                    {{ $array_chunk['name'] }} <mark class="count">(6)</mark>
-                                                                </h2>
-                                                            </a>
-
-
-                                                        </td>
-                                                        <?php
-                                        } ?>
-
-
-
-                                        </tr>
-                                        <?php }    ?>
-                                    </table>
+                                                    <li class="product-category product first">
+                                                        <a  href="{{ route('productCategory', ['slug' => $category->category_slug,'id'=>$category->id]) }}">
+                                                            <img src="{{asset('uploads/category').'/'.$category->category_image}}"  srcset="{{asset('uploads/category').'/'.$category->category_image}} 300w, {{asset('uploads/category').'/'.$category->category_image}} 150w, {{asset('uploads/category').'/'.$category->category_image}} 100w">
+                                                            <h2 class="woocommerce-loop-category__title">
+                                                                {{ $category->name }} <mark class="count">(6)</mark>
+                                                            </h2>
+                                                        </a>
+                                                    </li>
+                                            @empty
+                                                <div style="text-align: left">No items found</div>
+                                            @endforelse
+                                                </ul>
+                                            </div>
+                                        </div>
+                                     </div>
 
                                 </div>
                                 <div

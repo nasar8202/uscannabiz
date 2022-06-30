@@ -47,23 +47,23 @@
               <input type="hidden" name="paged" value="1">
            </form>
            <ul class="products columns-3" style="display:flex;flex-wrap:wrap;">
-            @foreach ($products as $product)
+            @forelse ($products as $product)
 
             <li class="product type-product post-179 status-publish first instock product_cat-business-licenses-for-sales product_cat-cartridges-vapes product_cat-clones-teens product_cat-concentrates product_cat-distillate product_cat-edibles product_cat-equipment-for-sale product_cat-flowers product_cat-prerolls product_cat-trim-fresh-frozen product_cat-white-label has-post-thumbnail shipping-taxable purchasable product-type-simple">
-                <a href="/product/lorem-ipsum-3/" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
-                    <span class="et_shop_image"><img width="51" height="53" src="{{asset('uploads/products').'/'.$product->product_image}}" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="" loading="lazy"><span class="et_overlay"></span></span>
+                <a href="{{ route('shop.showProduct', $product->slug) }}" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
+                    <span class="et_shop_image"><img width="51" height="53" src="{{ productImage($product->product_image) }}" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="" loading="lazy"><span class="et_overlay"></span></span>
                     <h2 class="woocommerce-loop-product__title">{{$product->product_name}}</h2>
                     <span class="price"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">&#36;</span>{{$product->product_current_price}}</bdi></span></span>
                 </a>
+                @if(Auth::check())
+                        <a href="javascript:void(0)" data-product="{{ $product->id }}" @if(isset($product->whishlist)) data-wishlist='{{ $product->whishlist->id }}' @endif data-customer="{{ Auth::id() ?? 0 }}" class="grey @if(!isset($product->whishlist)) add_to_wishlist @else remove_to_wishlist wishlist-added @endif">
+                                                        <i class="fas fa-heart"></i>
+                                                    </a>
+                                                    @endif
             </li>
-            @endforeach
-              {{-- <li class="product type-product post-182 status-publish instock product_cat-all product_cat-all-concentrates product_cat-badder product_cat-business-licenses-for-sales product_cat-cartridges-vapes product_cat-clones-teens product_cat-concentrates product_cat-crumble product_cat-diamonds product_cat-distillate product_cat-edibles product_cat-equipment-for-sale product_cat-exotic product_cat-flowers product_cat-glass-house product_cat-hash product_cat-hoop-house product_cat-indoor product_cat-light-dep product_cat-out-door product_cat-prerolls product_cat-rosin-resin product_cat-sauce product_cat-sugar product_cat-trim-fresh-frozen product_cat-wax product_cat-white-label has-post-thumbnail shipping-taxable purchasable product-type-simple">
-                 <a href="/product/lorem-ipsum-6/" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
-                    <span class="et_shop_image"><img width="51" height="53" src="assets/uploads/2022/03/Sexual_Healing_Plus.jpg" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="" loading="lazy"><span class="et_overlay"></span></span>
-                    <h2 class="woocommerce-loop-product__title">Lorem Ipsum</h2>
-                    <span class="price"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">&#36;</span>40.00</bdi></span></span>
-                 </a>
-              </li> --}}
+                @empty
+                    <div style="text-align: left">No items found</div>
+                @endforelse
            </ul>
         </div>
         <div id="sidebar">
@@ -110,3 +110,10 @@
 
 @endsection
 
+
+@section('extra-js')
+    <!-- Include AlgoliaSearch JS Client and autocomplete.js library -->
+    <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.min.js"></script>
+{{--    <script src="{{ asset('js/algolia.js') }}"></script>--}}
+@endsection

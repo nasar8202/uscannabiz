@@ -2,7 +2,7 @@
 
 use App\Models\NewsLetter;
 use Illuminate\Support\Facades\Route;
-
+use app\Http\Controllers\Admin\VendorController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,6 +22,7 @@ Route::get('/my-account', 'Front\FrontController@loginRegisterVendor')->name('my
 Route::get('wishlist', 'Front\ShopController@view_wishlist')->name('shop.view_wishlist');
 Route::get('shop', 'Front\ShopController@index')->name('shop.index');
 Route::get('shop/{slug}', 'Front\ShopController@show')->name('shop.show');
+Route::get('shop/{slug}', 'Front\ShopController@show')->name('shop.showProduct');
 Route::post('shop/add-wishlist', 'Front\ShopController@add_wishlist')->name('shop.wishlist');
 
 
@@ -158,6 +159,10 @@ Route::namespace('Admin')->prefix('/admin')->middleware('admin')->group(function
     Route::delete('/customers/destroy/{id}', 'CustomersController@destroy')->name('customers.destroy');
     Route::post('/updatecustomers', 'CustomersController@update')->name('customers.update');
     Route::view('Addbroker','admin.customers.add' );
+
+    
+    Route::resource('Vendor', 'VendorController');
+    Route::get('vendor/changeVendorStatus/', 'VendorController@changeVendorStatus')->name('changeVendorStatus');
 
     Route::get('/catalog/attribute-groups', 'AttributeGroupController@show')->name('catalog.attributeGroups');
     Route::match(['get', 'post'], '/catalog/add-attribute-group', 'AttributeGroupController@add')->name('catalog.addAttributeGroup');
