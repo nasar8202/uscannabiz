@@ -12,6 +12,11 @@ use Illuminate\Http\Request;
 
 class FrontController extends Controller
 {
+    public function Register()
+    {
+        dd($request->all());
+        return view('front.loginRegisterVendor');
+    }
     public function loginRegisterVendor()
     {
         return view('front.loginRegisterVendor');
