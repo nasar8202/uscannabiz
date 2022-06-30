@@ -11,28 +11,29 @@
            
          <div class="u-column2 col-2">
             <h2>Add Product</h2>
-            <form method="post" action="{{ route('register') }}" class="woocommerce-form woocommerce-form-register register">
+            <form method="post" action="{{ route('add_product') }}" class="woocommerce-form woocommerce-form-register register" enctype="multipart/form-data">
              {{ csrf_field() }}
               
              <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-               
                <div class="col">
-                  <label for="exampleInputEmail1">Main Category*</label>
+                  <label for="exampleInputEmail1">Main Category</label>
                   <select class="form-control {{ $errors->has('main_category') ? 'has-error' : ''}}" name="main_category" id="main-category" required>
-                      <option value="">Select Category</option>
-                          <option></option>
+                      <option value="" disabled selected>Select Category</option>
+                      @foreach ($categories as $category)
+                        <option value="{{$category->id}}">{{$category->name}}</option>
+                      @endforeach
                   </select>
-                  
+               </div>
             </p>
             
              <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-                  <label for="reg_email">Product Name&nbsp;<span class="required">*</span></label>
+                  <label for="reg_email">Product Name<span class="required">*</span></label>
                   <input type="text" class="woocommerce-Input woocommerce-Input--text input-text" 
                   name="product_name" id="reg_email" autocomplete="email" value="">
                </p>
               
                <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-                  <label for="reg_password">Current Price&nbsp;<span class="required">*</span></label>
+                  <label for="reg_password">Current Price<span class="required">*</span></label>
                   <input type="number" class="woocommerce-Input woocommerce-Input--text input-text" name="current_price" id="reg_password" autocomplete="new-password">
                </p>
                
