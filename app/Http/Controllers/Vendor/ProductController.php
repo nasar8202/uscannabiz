@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Controllers\Vendor;
-use App\Models\Product;
-use App\Http\Controllers\Controller;
+
+use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class ProductController extends Controller
 {
@@ -13,7 +14,12 @@ class ProductController extends Controller
     }
     public function addProductForm()
     {
-        return view('Vendor.product.addProductForm');
+        $categories = Category::get();
+        return view('Vendor.product.addProductForm',compact('categories'));
+    }
+    public function addProduct(Request $request)
+    {
+        dd($request->all());
     }
     public function vendorAddProductForm(Request $request,$id)
     {
