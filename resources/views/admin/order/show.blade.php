@@ -57,7 +57,7 @@
                                 <div class="col-md-12">
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
-                                            <h3 class="panel-title text-center"><i class="fa fa-user"></i> Customer Details</h3>
+                                            <h3 class="panel-title text-center"><i class="fa fa-user"></i> Vendor Details</h3>
                                         </div>
                                         <table class="table table-bordered">
                                             <tbody>
@@ -103,6 +103,9 @@
 
                             <div class="panel panel-default">
                                 <div class="panel-body">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title text-center"><i class="fa fa-shopping-cart"></i> Order Details</h3>
+                                    </div>
                                     <table class="table table-bordered">
                                         <thead>
                                         <tr>

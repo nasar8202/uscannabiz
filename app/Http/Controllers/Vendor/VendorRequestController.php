@@ -64,8 +64,8 @@ class VendorRequestController extends Controller
         $vendor->save();
 
         
-        return redirect()->back()->with('success',"Request Has Been Submited");
-            }
+        return back()->with('success',"Request Has Been Submited");
+        }
     }
 
     /**
