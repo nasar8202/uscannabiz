@@ -100,10 +100,10 @@
 
 
                            @guest
-                           <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-47"><a href="my-account">Login/Sign Up</a></li>
+                           <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-47"><a href="{{ url('myAccount') }}">Login/Sign Up</a></li>
                            @else
                            <li>
-                            <a href="{{ url('vendor/edit') }}">My Account</a>
+                            <a href="{{ Route('editVendor') }}">My Account</a>
                             </li>
                             <li>
                                 <a href="{{ route('logout') }}"
