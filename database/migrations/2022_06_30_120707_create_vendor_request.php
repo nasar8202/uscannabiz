@@ -17,8 +17,8 @@ class CreateVendorRequest extends Migration
             $table->id();
             $table->unsignedBigInteger('product_id')->nullable();
             $table->foreign('product_id')->references('id')->on('products')->nullOnDelete(); 
-            $table->unsignedBigInteger('vender_id')->nullable();
-            $table->foreign('vender_id')->references('vender_id')->on('products')->nullOnDelete(); 
+            $table->unsignedBigInteger('vendor_id')->nullable();
+            $table->foreign('vendor_id')->references('vender_id')->on('products')->nullOnDelete(); 
             $table->string('full_name');
             $table->string('phone_num');
             $table->string('email');
