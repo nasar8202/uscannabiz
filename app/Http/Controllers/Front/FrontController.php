@@ -12,14 +12,20 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Models\Customers;
 use App\Models\VendorStore;
+
+use App\Models\Category;
+use App\Models\CustomerWishlist;
+use App\Models\OptionProduct;
+
+
 use Illuminate\Support\Facades\Hash;
 class FrontController extends Controller
 {
-    public function Register()
-    {
-        dd($request->all());
-        return view('front.loginRegisterVendor');
-    }
+    // public function Register()
+    // {
+    //     dd($request->all());
+    //     return view('front.loginRegisterVendor');
+    // }
     public function loginRegisterVendor()
     {
         return view('front.loginRegisterVendor');
@@ -97,16 +103,39 @@ class FrontController extends Controller
     }
     public function index(Request $request)
     {
-        $products = Product::with('whishlist')->where('status',1)
-            ->orderBy('id', 'desc')->take(4)
-            ->get();
-        $featuredProducts = Product::with('whishlist')->where('status',1)
-            ->where('product_type', 'Feature')
-            ->orderBy('id', 'desc')->take(10)
-            ->get();
-        $blogs = Blog::where('status','active')->get();
-        $collections = Collection::with(['collectionProducts', 'collectionProducts.products'])->orderBy('id','asc')->get();
-        return view('front.index',compact('products', 'featuredProducts','blogs','collections'));
+        // $products = Product::with('whishlist')->where('status',1)
+        //     ->orderBy('id', 'desc')->take(4)
+        //     ->get();
+        // $featuredProducts = Product::with('whishlist')->where('status',1)
+        //     ->where('product_type', 'Feature')
+        //     ->orderBy('id', 'desc')->take(10)
+        //     ->get();
+        // $blogs = Blog::where('status','active')->get();
+        // $collections = Collection::with(['collectionProducts', 'collectionProducts.products'])->orderBy('id','asc')->get();
+        // return view('front.index',compact('products', 'featuredProducts','blogs','collections'));
+        $products = Product::query();
+        $pagination = 9;
+
+            // if (request()->category) {
+            //     $products = $products->with('sub_category')->whereHas('sub_category', function ($query) {
+            //         $query->where('category_slug', request()->category);
+            //     });
+
+            // }
+
+          if (request()->sort == 'low_high') {
+              $products = $products->orderBy('product_current_price');
+          } elseif (request()->sort == 'high_low') {
+              $products = $products->orderBy('product_current_price', 'desc');
+          }
+
+            $products = $products->where('status',1)->get();
+
+        $categories_for_div = Category::where('status',1)->get();
+        $categories = Category::where('status',1)->with('products')->get();
+        // return $categories;
+        // die;
+        return view('front.shop.index',compact('products','categories','categories_for_div'));
     }
     /*
      * Newsletter Subscription */
