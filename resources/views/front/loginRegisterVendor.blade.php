@@ -46,7 +46,7 @@
                                         </div>
                                     @endif
                                       <h2>Login</h2>
-                                      <form action="{{ route('login') }}" method="POST"  class="woocommerce-form woocommerce-form-login login" method="post">
+                                      <form action="{{ route('login') }}" method="POST"  class="woocommerce-form woocommerce-form-login login" >
                                         {{ csrf_field() }}
                                          <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
                                             <label for="username">Username or email address&nbsp;<span class="required">*</span></label>
