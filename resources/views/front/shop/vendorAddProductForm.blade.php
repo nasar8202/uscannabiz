@@ -7,11 +7,15 @@
   <div class="container">
      <div id="content-area" class="clearfix">
         <div id="left-area">
-     
+         @if (session()->has('success'))
+         <div class="alert alert-success">
+             {{ session()->get('success') }}
+         </div>
+         @endif
            
          <div class="u-column2 col-2">
             <h2>Add To Request</h2>
-            <form method="post" action="{{ route('register') }}" class="woocommerce-form woocommerce-form-register register">
+            <form method="Post" action="{{ route('vendorRequest') }}" class="woocommerce-form woocommerce-form-register register">
              {{ csrf_field() }}
               
              
@@ -19,7 +23,6 @@
                <table class="table">
                    <tr>
                        <th>Product Image</th>
-                       <th>Select Image</th>
                    </tr>
                    <tbody>
                        <tr>
@@ -32,8 +35,8 @@
                                    <label>Product Name</label>
                                   <h3>{{$data->product_name}}
                                     
-                                 <input type="" value="{{$data->id}}" name="product_id">
-                                 <input type="" value="{{$data->vender_id}}" name="vendor_id">
+                                 <input type="hidden" value="{{$data->id}}" name="product_id">
+                                 <input type="hidden" value="{{$data->vender_id}}" name="vendor_id">
                                  </h3> 
                                   
                                   <label>Product Price</label>

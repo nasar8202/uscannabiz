@@ -53,7 +53,6 @@ class VendorRequestController extends Controller
             //     'password' => Hash::make($request->input('first_name')),
             //     'role_id' => 4,
             // ]);
-
         $vendor = new VendorRequest;
         $vendor->product_id = $request->input('product_id');
         $vendor->vendor_id = $request->input('vendor_id'); 
