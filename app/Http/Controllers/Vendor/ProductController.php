@@ -2,10 +2,18 @@
 
 namespace App\Http\Controllers\Vendor;
 
-use App\Models\Category;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+
+use App\Models\Category;
+
 use App\Models\Product;
+use App\Models\ProductImage;
+use App\Models\ProductMetaData;
+use App\Models\RelatedProduct;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use DB;
+use Auth;
 class ProductController extends Controller
 {
     public function index()
@@ -19,7 +27,123 @@ class ProductController extends Controller
     }
     public function addProduct(Request $request)
     {
-        dd($request->all());
+        $validator = Validator::make($request->all(), array(
+            
+            'product_name' => 'required',
+            'product_sku' => 'required|unique:products,sku,',
+            'product_slug' => 'required|unique:products,slug,',
+            'current_price' => 'required|numeric',
+            'description' => 'required',
+            'product_image_first' => 'required',
+            // 'manufacturer' => 'required',
+        ));
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+        //image uploading
+            DB::beginTransaction();
+            try{
+                if ($request->file('product_image_first')) {
+                    $product_image_first = time() . '_' . $request->file('product_image_first')->getClientOriginalName();
+                    //            $product_image_first_path = $request->file('product_image_first')->storeAs('products', $product_image_first);
+                    $request->file('product_image_first')->move(public_path() . '/uploads/products/', $product_image_first);
+                } else {
+                    $product_image_first = null;
+                }
+
+                $product = Product::create([
+                    'category_id' => $request->get('main_category'),
+                    'product_name' => $request->get('product_name'),
+                    'sku' => $request->get('product_sku'),
+                    'slug' => $request->get('product_slug'),
+                    'product_current_price' => $request->get('current_price'),
+                    'product_sale' => $request->get('product_sale') ?? 'no',
+                    'product_sale_percentage' => $request->get('product_sale_percentage') ?? 0,
+                    'product_stock' => $request->get('product_stock') ?? 'no',
+                    'product_qty' => $request->get('product_stock_qty') ?? '0',
+                    'product_type' => $request->get('product_featured'),
+                    'length' => 11,
+                    'width' => 11,
+                    'height' => 1,
+                    'weight' => 2,
+                    'description' => $request->get('description'),
+                    'status' => $request->get('status') ?? 0,
+                    'product_image' => $product_image_first,
+                    'vender_id' => Auth::user()->id,
+
+                ]);
+
+                if ($request->get('meta-title') !== null && $request->get('meta-description') !== null && $request->get('meta-keywords') !== null) {
+                    ProductMetaData::create([
+                        'product_id' => $product->id,
+                        'meta_tag_title' => $request->get('meta-title'),
+                        'meta_tag_description' => $request->get('meta-description'),
+                        'meta_tag_keywords' => $request->get('meta-keywords'),
+                        'status' => 1,
+                    ]);
+                }
+
+                // if ($request->file('product_image')) {
+
+                //     foreach ($request->file('product_image') as $key => $product_image) {
+                //         $product_image_ad = time() . '_' . $product_image->getClientOriginalName();
+                //         $product_image_ad_path = $product_image->storeAs('products', $product_image_ad);
+                //         $product_image->move(public_path() . '/uploads/products/', $product_image_ad);
+
+                //         ProductImage::create([
+                //             'products_id' => $product->id,
+                //             'product_images' => $product_image_ad
+                //         ]);
+                //     }
+                // }
+
+                
+                
+
+            }
+            catch(\Illuminate\Database\QueryException $e)
+            {
+                // back to form with errors
+                DB::rollback();
+                return Redirect()->back()
+                    ->with('error',$e->getMessage() )
+                    ->withInput();
+
+            }catch(\Exception $e)
+            {
+                DB::rollback();
+                return Redirect()->back()
+                    ->with('error',$e->getMessage() )
+                    ->withInput();
+            }
+            DB::commit();
+
+        return back()->with(['success' => 'Product Added Successfully']);
+   
+
+
+        // $product = new Product;
+        // $product->category_id = $request->input('main_category');
+        // $product->product_name = $request->input('product_name');
+        // $product->product_current_price = $request->input('current_price');
+        // $product->sku = $request->input('product_sku');
+        // $product->slug = $request->input('product_slug');
+        // $product->product_sale_percentage = $request->input('product_sale_percentage');
+        // $product->product_sale = $request->input('product_sale');
+        // $product->product_stock = $request->input('product_stock');
+        // $product->product_qty = $request->input('product_stock_qty');
+        // $product->status = $request->input('status');
+        // $product->description = $request->input('description');
+        // $product->save();
+        // $product_id = $product->id;
+        // if($product){
+
+        //     $meta->product_id = $product_id;
+        //     $meta->meta_tag_title = $product_id;
+            
+
+        // }
+    
     }
     public function vendorAddProductForm(Request $request,$id)
     {
@@ -27,4 +151,5 @@ class ProductController extends Controller
         
         return view('front.shop.vendorAddProductForm',compact(['data',$data ]));
     }
+     
 }

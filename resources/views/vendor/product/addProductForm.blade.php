@@ -11,6 +11,11 @@
            
          <div class="u-column2 col-2">
             <h2>Add Product</h2>
+            @if (session()->has('success'))
+                                        <div class="alert alert-success">
+                                            {{ session()->get('success') }}
+                                        </div>
+                                        @endif
             <form method="post" action="{{ route('add_product') }}" class="woocommerce-form woocommerce-form-register register" enctype="multipart/form-data">
              {{ csrf_field() }}
               
@@ -47,32 +52,37 @@
                         <input type="text" class="input-text form-control" name="product_slug" id="last-name" value="" required="required">
                      </p>
                      <p class="form-row form-group">
+                     
                         <label for="exampleInputEmail1">Sale(%)</label>
-                        <input type="number" name="product_sale_percentage" placeholder="10" class="form-control" readonly id="product_sale_percentage" value="{{old('product_sale_percentage')}}" required>
+                        <input type="text" class="input-text form-control" name="product_sale_percentage" id="product_sale_percentage" value="" required="required">
+                     
                         </p>
                   </div>
                   
                   <p class="form-row form-group form-row-wide">
                      <label for="exampleInputEmail1">Product Sale</label>
-                 <input type="checkbox" name="product_sale" class="form-control" id="product_sale" style="height: 20px;width: 20px;" value="yes" @if(old('product_sale') == 'yes') {{ 'checked' }} @endif>
+                 <input type="checkbox" name="product_sale" class="form-control" id="product_sale" style="height: 20px;width: 20px;" value="yes" >
                   </p>
                  
                
                   <p class="form-row form-group form-row-wide">
                      <label for="exampleInputEmail1">Product Stock</label>
-                     <input type="checkbox" name="product_stock" class="form-control" id="product_stock" style="height: 20px;width: 20px;" value="yes" @if(old('product_stock') == 'yes') {{ 'checked' }} @endif>
+                     
+                      
+                     <input type="checkbox" name="product_stock" class="form-control" id="product_stock" style="height: 20px;width: 20px;" value="yes" >
                 
                   </p>
                   
                   <p class="form-row form-group form-row-wide">
                      <label for="exampleInputEmail1">Product Stock Qty</label>
-                     <input type="number" name="product_stock_qty" class="form-control" placeholder="10" readonly id="product_stock_qty" value="{{old('product_stock_qty')}}" required>
+                     <input type="text" class="input-text form-control" name="product_stock_qty" id="product_stock_qty" value="" required="required">
+                     
                  
                   </p>
                   
                   <p class="form-row form-group form-row-wide">
                      <label for="switch">Status</label>
-                     <label class="switch"><input type="checkbox" @if(old('status') == '1') {{ 'checked' }} @endif data-id="" id="status-switch" name="status" value="1">
+                     <label class="switch"><input type="checkbox"  data-id="" id="status-switch" name="status" value="1">
                      <span class="slider round"></span>
                   </label>
                                                
@@ -115,7 +125,7 @@
                                  <td>
                                      <div class="input-group">
                                          <div class="custom-file">
-                                             <input type="file" class="custom-file-input"  name="product_image_first" id="gallery_0" onchange="PreviewImage('0')" accept="image/*" required>
+                                             <input type="file" class="custom-file-input"  name="product_image_first" id="gallery_0" onchange="PreviewImage('0')" accept="image/*" >
                                              <label class="custom-file-label" for="category-image">Choose file</label>
                                          </div>
                                          {!! $errors->first('product_image_first', '<p class="help-block">:message</p>') !!}
@@ -127,7 +137,7 @@
                  </div>
                   
                <p class="woocommerce-form-row form-row">
-                  <button type="submit" class="woocommerce-Button woocommerce-button button woocommerce-form-register__submit" name="register" value="Register">Register</button>
+                  <button type="submit" class="woocommerce-Button woocommerce-button button woocommerce-form-register__submit" name="register" value="Register">Add Product</button>
 
                </p>
             </form>
