@@ -28,6 +28,7 @@ class FrontController extends Controller
     // }
     public function loginRegisterVendor()
     {
+        // return "abc";
         return view('front.loginRegisterVendor');
     }
 

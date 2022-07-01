@@ -10,7 +10,7 @@
                 <div class="container">
                     <div class="card">
                         <div class="card-header">
-                            <div class="row">
+                            {{-- <div class="row">
 
                                 <div class="col-md-5 float-right">
                                     <label for="">Order Status</label>
@@ -22,12 +22,12 @@
                                     </select>
 
                                 </div>
-                            </div>
+                            </div> --}}
 
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-md-12">
+                                {{-- <div class="col-md-12">
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
                                             <h3 class="panel-title text-center"><i class="fa fa-shopping-cart"></i> Order Details</h3>
@@ -53,11 +53,11 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="col-md-12">
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
-                                            <h3 class="panel-title text-center"><i class="fa fa-user"></i> Customer Details</h3>
+                                            <h3 class="panel-title text-center"><i class="fa fa-user"></i> Vendor Details</h3>
                                         </div>
                                         <table class="table table-bordered">
                                             <tbody>
@@ -67,7 +67,7 @@
                                                 </td>
                                                 <td>
                                                     {{-- @if($order->customer_id == null) --}}
-                                                        {{$order->customer_name}}
+                                                        {{$vender_detail->name}}
                                                     {{-- @else
                                                         {{$order->customer->first_name.''.$order->customer->last_name}}
                                                     @endif --}}
@@ -78,23 +78,23 @@
                                                 <td><button data-toggle="tooltip" title="" class="btn btn-info btn-xs" data-original-title="E-Mail"><i class="fa fa-envelope-o fa-fw"></i></button></td>
                                                 <td>
                                                     {{-- @if($order->customer_id == null) --}}
-                                                        <a href="mailto:{{$order->customer_email}}">{{$order->customer_email}}</a>
+                                                        <a href="mailto:{{$vender_detail->email}}">{{$vender_detail->email}}</a>
                                                     {{-- @else
                                                         <a href="mailto:{{$order->customer->user->email}}">{{$order->customer->user->email}}</a>
                                                     @endif --}}
 
                                                 </td>
                                             </tr>
-                                            <tr>
+                                            {{-- <tr>
                                                 <td><button data-toggle="tooltip" title="" class="btn btn-info btn-xs" data-original-title="Telephone"><i class="fa fa-phone fa-fw"></i></button></td>
                                                 <td>
-                                                    {{-- @if($order->customer_id == null) --}}
+                                                    @if($order->customer_id == null)
                                                         {{$order->phone_no}}
-                                                    {{-- @else
+                                                    @else
                                                         {{$order->customer->phone_no}}
-                                                    @endif --}}
+                                                    @endif
                                                 </td>
-                                            </tr>
+                                            </tr> --}}
                                             </tbody>
                                         </table>
                                     </div>
@@ -103,6 +103,9 @@
 
                             <div class="panel panel-default">
                                 <div class="panel-body">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title text-center"><i class="fa fa-shopping-cart"></i> Order Details</h3>
+                                    </div>
                                     <table class="table table-bordered">
                                         <thead>
                                         <tr>
@@ -113,23 +116,14 @@
                                         <tbody>
                                         <tr>
                                             <td class="text-left">
-                                                <strong>Address</strong> : {{$order->billing_address}}
+                                                <strong>Address</strong> : {{$vender_request->address}}
                                                 <br>
-                                                <strong>City</strong> : {{$order->billing_city}}
-                                                <br>
-                                                <strong>State</strong> : {{$order->billing_state}}
-                                                <br>
-                                                <strong>Country</strong> : {{$order->billing_country}}
-                                                <br>
+                                                <strong>City</strong> : {{$vender_request->city}}
                                             </td>
                                             <td class="text-left">
-                                                <strong>Address</strong> : {{$order->address}}
+                                                <strong>Address</strong> : {{$vender_request->address}}
                                                 <br>
-                                                <strong>City</strong> : {{$order->shipping_city}}
-                                                <br>
-                                                <strong>State</strong> : {{$order->shipping_state}}
-                                                <br>
-                                                <strong>Country</strong> : {{$order->shipping_country}}
+                                                <strong>City</strong> : {{$vender_request->city}}
                                             </td>
                                         </tr>
                                         </tbody>
@@ -145,22 +139,26 @@
                                         <thead>
                                         <tr>
                                             <th class="center">#</th>
+                                            <th class="center">Image</th>
                                             <th>Item</th>
-                                            <th class="right">Unit Cost</th>
-                                            <th class="center">Qty</th>
+                                            {{-- <th class="right">Unit Cost</th> --}}
                                             <th class="right">Total</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         @php
                                             $counter = 1;
-                                            $subTotal = 0;
+                                            // $subTotal = 0;
                                         @endphp
-                                        @forelse($order->orderItems as $orderItems)
+                                        {{-- @forelse($order->orderItems as $orderItems) --}} 
                                             <tr>
                                                 <td class="center">{{$counter++}}</td>
+                                                <td class="center">
+                                                    <img src="{{asset('assets/uploads/2022/03/'.$product->product_image)}}" alt="">
+                                                </td>
                                                 <td class="left strong">
-                                                    <a href="{{URL::to('/').'/shop/'.$orderItems->product->slug}}" target="_blank">
+                                                    {{$product->product_name}}
+                                                    {{-- <a href="{{URL::to('/').'/shop/'.$orderItems->product->slug}}" target="_blank">
                                                         {{$orderItems->product->product_name}}
                                                     </a><br>
                                                    @if($orderItems->orderOptions!==null) 
@@ -168,23 +166,21 @@
                                                         <p style="margin-bottom: 0 !important;"><b>{{ $option->optionValue['option']['option_name']}}</b> : {{ $option->optionValue['option_value']}}</p>
                                                     @empty
                                                     @endforelse
-                                                    @endif
+                                                    @endif --}}
                                                 </td>
-                                                <td class="right">${{$orderItems->product_per_price}}</td>
-                                                <td class="center">{{$orderItems->product_qty}}</td>
-                                                <td class="right">${{$orderItems->product_per_price*$orderItems->product_qty}}</td>
+                                                <td class="right">${{$product->product_current_price}}</td>
                                             </tr>
-                                            @php
+                                            {{-- @php
                                                 $subTotal += $orderItems->product_per_price;
                                             @endphp
                                         @empty
 
-                                        @endforelse
+                                        @endforelse --}}
 
                                         </tbody>
                                     </table>
                                 </div>
-                                <div class="row">
+                                {{-- <div class="row">
                                     <div class="col-lg-4 col-sm-5">
                                     </div>
                                     <div class="col-lg-4 col-sm-5 ml-auto">
@@ -224,7 +220,7 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     </div>
