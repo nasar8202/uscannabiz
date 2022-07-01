@@ -21,6 +21,7 @@ Route::get('/my-account', 'Front\FrontController@loginRegisterVendor')->name('my
 Route::post('/registerVendorAndCustomer', 'Front\FrontController@registerVendorAndCustomer')->name('registerVendorAndCustomer');
 Route::get('vendor-add-product-form/{id}', 'Vendor\ProductController@vendorAddProductForm')->name('vendorAddProductForm');
 
+Route::resource('vendor-request', 'VendorRequestController');
 Route::get('wishlist', 'Front\ShopController@view_wishlist')->name('shop.view_wishlist');
 Route::get('shop', 'Front\ShopController@index')->name('shop.index');
 Route::get('shop/{slug}', 'Front\ShopController@show')->name('shop.show');

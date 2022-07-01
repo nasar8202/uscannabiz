@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Vendor;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use App\Models\Product;
 class ProductController extends Controller
 {
     public function index()

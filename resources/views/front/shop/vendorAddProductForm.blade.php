@@ -30,10 +30,15 @@
                                <div class="input-group">
                                    <div class="custom-file">
                                    <label>Product Name</label>
-                                  <h3>{{$data->product_name}}</h3> 
+                                  <h3>{{$data->product_name}}
+                                    
+                                 <input type="" value="{{$data->id}}" name="product_id">
+                                 <input type="" value="{{$data->vender_id}}" name="vendor_id">
+                                 </h3> 
                                   
                                   <label>Product Price</label>
-                                  <h3>{{$data->product_current_price}}</h3> 
+                                  <h3>{{$data->product_current_price}}
+                                    </h3> 
                                  </div>
                                    {!! $errors->first('product_image_first', '<p class="help-block">:message</p>') !!}
                                </div>
@@ -47,24 +52,25 @@
                   <div class="split-row form-row-wide">
                      <p class="form-row form-group">
                         <label for="first-name">Full Name <span class="required">*</span></label>
-                        <input type="text" class="input-text form-control" name="product_sku" id="first-name" value="" required="required">
+                        <input type="text" class="input-text form-control" name="full_name" id="first-name" value="" required="required">
                      </p>
                      <p class="form-row form-group">
                         <label for="last-name">Phone Number <span class="required">*</span></label>
-                        <input type="number" class="input-text form-control" name="product_slug" id="last-name" value="" required="required">
+                        <input type="number" class="input-text form-control" name="phone_num" id="last-name" value="" required="required">
+                    
                      </p>
                   
                      <p class="form-row form-group">
                         <label for="last-name">Email <span class="required">*</span></label>
-                        <input type="email" class="input-text form-control" name="product_slug" id="last-name" value="" required="required">
+                        <input type="email" class="input-text form-control" name="email" id="last-name" value="" required="required">
                      </p>
                      <p class="form-row form-group">
                         <label for="last-name">Address <span class="required">*</span></label>
-                        <input type="text" class="input-text form-control" name="product_slug" id="last-name" value="" required="required">
+                        <input type="text" class="input-text form-control" name="address" id="last-name" value="" required="required">
                      </p>
                      <p class="form-row form-group">
                         <label for="last-name">City <span class="required">*</span></label>
-                        <input type="text" class="input-text form-control" name="product_slug" id="last-name" value="" required="required">
+                        <input type="text" class="input-text form-control" name="city" id="last-name" value="" required="required">
                      </p>
                   
                   
