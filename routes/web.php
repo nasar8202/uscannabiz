@@ -88,7 +88,7 @@ Route::namespace('Vendor')->prefix('/vendor')->middleware('vendor')->group(funct
     Route::get('dashboard', 'VendorController@dashboard')->name('dashboard');
     Route::get('product', 'ProductController@index')->name('product');
     Route::get('new-product', 'ProductController@addProductForm')->name('productForm');
-    
+    Route::post('new-product/add', 'ProductController@addProduct')->name('add_product');
 });
 
 Route::namespace('Admin')->prefix('/admin')->middleware('admin')->group(function () {
