@@ -154,6 +154,11 @@ ul.et_pb_social_media_follow{list-style-type:none!important;margin:0 0 22px;padd
 	                      <div class="et_pb_tab_content">
 	                         <div id="reviews" class="woocommerce-Reviews">
 	                            <div id="comments">
+                                    @if (session()->has('success'))
+                                    <div class="alert alert-success">
+                                        {{ session()->get('success') }}
+                                    </div>
+                                    @endif
 	                               <h2 class="woocommerce-Reviews-title">
                                     @if(count($productReviews) > 0) {{count($productReviews)}} @endif Reviews
 	                               </h2>
@@ -164,7 +169,9 @@ ul.et_pb_social_media_follow{list-style-type:none!important;margin:0 0 22px;padd
 	                               <div id="review_form">
 	                                  <div id="respond" class="comment-respond">
 	                                     <span id="reply-title" class="comment-reply-title">Be the first to review &ldquo;abc-shirt&rdquo; <small><a rel="nofollow" id="cancel-comment-reply-link" href="/product/abc-shirt/#respond" style="display:none;">Cancel reply</a></small></span>
-	                                     <form  id="commentform" class="comment-form">
+	                                     <form method="post" action="{{route('shop.addReview')}}" id="commentform" class="comment-form">
+                                            {{ csrf_field() }}
+                                            <input type="hidden" value="{{$product->id}}" name="product_id">
 	                                        <p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> <span class="required-field-message" aria-hidden="true">Required fields are marked <span class="required" aria-hidden="true">*</span></span></p>
 	                                        <div class="comment-form-rating">
 	                                           <label for="rating">Your rating&nbsp;<span class="required">*</span></label>
@@ -177,12 +184,12 @@ ul.et_pb_social_media_follow{list-style-type:none!important;margin:0 0 22px;padd
                                             </span>
 	                                        </div>
 	                                        <p class="comment-form-comment"><label for="comment">Your review&nbsp;<span class="required">*</span></label><textarea id="comment" name="text" cols="45" rows="8" required></textarea></p>
-	                                        <p class="comment-form-author"><label for="author">Name&nbsp;<span class="required">*</span></label><input id="author" name="name" type="text" value="" size="30" required></p>
+	                                        <p class="comment-form-author"><label for="author">Name&nbsp;<span class="required">*</span></label><input id="author" name="name" type="text" value="" size="30" required /></p>
 	                                        {{-- <p class="comment-form-email"><label for="email">Email&nbsp;<span class="required">*</span></label><input id="email" name="email" type="email" value="" size="30" required></p> --}}
 	                                        {{-- <p class="comment-form-cookies-consent"><input id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" type="checkbox" value="yes"> <label for="wp-comment-cookies-consent">Save my name, email, and website in this browser for the next time I comment.</label></p> --}}
 
                                             <input type="hidden" name="rating" id="rating" value="">
-                                            <button   id="button-review" >send</button>
+                                            <button type="submit">send</button>
 	                                     </form>
 	                                  </div>
 	                                  <!-- #respond -->
@@ -209,12 +216,12 @@ ul.et_pb_social_media_follow{list-style-type:none!important;margin:0 0 22px;padd
 
 @endsection
 
-<script>
+{{-- <script>
     alert("sdfdf")
-</script>
+</script> --}}
 
     <script>
-        alert(3)
+        // alert(3)
         (function(){
             const currentImage = document.querySelector('#currentImage');
             const images = document.querySelectorAll('.product-section-thumbnail');

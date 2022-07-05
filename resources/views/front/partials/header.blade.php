@@ -77,7 +77,7 @@
                   <div class="logo_container">
                      <span class="logo_helper"></span>
                      <a href="/">
-                     <img src="assets/uploads/2022/03/Uscannazon4.png" width="149" height="104" alt="Us Cannazon" id="logo" data-height-percentage="54">
+                     <img src="{{asset('assets/uploads/2022/03/Uscannazon4.png')}}" width="149" height="104" alt="Us Cannazon" id="logo" data-height-percentage="54">
                      </a>
                   </div>
 
