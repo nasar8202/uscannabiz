@@ -90,13 +90,13 @@
                            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-44"><a href="about-us">About Us</a></li>
                            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-46"><a href="faq">FAQ Page</a></li>
                            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-45"><a href="contact-us">Contact Us</a></li>
-                           @if(Auth::check())
+                           {{-- @if(Auth::check())
                             <li>
                                 <a href="{{route('shop.view_wishlist')}}">
                                     Wishlist
                                 </a>
                             </li>
-                            @endif
+                            @endif --}}
 
 
                            @guest

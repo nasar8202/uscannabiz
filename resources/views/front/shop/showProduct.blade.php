@@ -155,34 +155,34 @@ ul.et_pb_social_media_follow{list-style-type:none!important;margin:0 0 22px;padd
 	                         <div id="reviews" class="woocommerce-Reviews">
 	                            <div id="comments">
 	                               <h2 class="woocommerce-Reviews-title">
-	                                  Reviews
+                                    @if(count($productReviews) > 0) {{count($productReviews)}} @endif Reviews
 	                               </h2>
-	                               <p class="woocommerce-noreviews">There are no reviews yet.</p>
+	                               <p class="woocommerce-noreviews">@if(count($productReviews) > 0) {{count($productReviews)}} @else No @endif review(s) for this Product</p>
+
 	                            </div>
 	                            <div id="review_form_wrapper">
 	                               <div id="review_form">
 	                                  <div id="respond" class="comment-respond">
 	                                     <span id="reply-title" class="comment-reply-title">Be the first to review &ldquo;abc-shirt&rdquo; <small><a rel="nofollow" id="cancel-comment-reply-link" href="/product/abc-shirt/#respond" style="display:none;">Cancel reply</a></small></span>
-	                                     <form action="wp-comments-post.php" method="post" id="commentform" class="comment-form">
+	                                     <form  id="commentform" class="comment-form">
 	                                        <p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> <span class="required-field-message" aria-hidden="true">Required fields are marked <span class="required" aria-hidden="true">*</span></span></p>
 	                                        <div class="comment-form-rating">
 	                                           <label for="rating">Your rating&nbsp;<span class="required">*</span></label>
-	                                           <select name="rating" id="rating" required>
-	                                              <option value="">Rate&hellip;</option>
-	                                              <option value="5">Perfect</option>
-	                                              <option value="4">Good</option>
-	                                              <option value="3">Average</option>
-	                                              <option value="2">Not that bad</option>
-	                                              <option value="1">Very poor</option>
-	                                           </select>
+	                                           <span>
+                                                <i data-value="1" class="fas fa-star"></i>
+                                                <i data-value="2" class="fas fa-star"></i>
+                                                <i data-value="3" class="fas fa-star"></i>
+                                                <i data-value="4" class="fas fa-star"></i>
+                                                <i data-value="5" class="fas fa-star"></i>
+                                            </span>
 	                                        </div>
-	                                        <p class="comment-form-comment"><label for="comment">Your review&nbsp;<span class="required">*</span></label><textarea id="comment" name="comment" cols="45" rows="8" required></textarea></p>
-	                                        <p class="comment-form-author"><label for="author">Name&nbsp;<span class="required">*</span></label><input id="author" name="author" type="text" value="" size="30" required></p>
-	                                        <p class="comment-form-email"><label for="email">Email&nbsp;<span class="required">*</span></label><input id="email" name="email" type="email" value="" size="30" required></p>
-	                                        <p class="comment-form-cookies-consent"><input id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" type="checkbox" value="yes"> <label for="wp-comment-cookies-consent">Save my name, email, and website in this browser for the next time I comment.</label></p>
-	                                        <p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Submit"> <input type="hidden" name="comment_post_ID" value="381" id="comment_post_ID">
-	                                           <input type="hidden" name="comment_parent" id="comment_parent" value="0">
-	                                        </p>
+	                                        <p class="comment-form-comment"><label for="comment">Your review&nbsp;<span class="required">*</span></label><textarea id="comment" name="text" cols="45" rows="8" required></textarea></p>
+	                                        <p class="comment-form-author"><label for="author">Name&nbsp;<span class="required">*</span></label><input id="author" name="name" type="text" value="" size="30" required></p>
+	                                        {{-- <p class="comment-form-email"><label for="email">Email&nbsp;<span class="required">*</span></label><input id="email" name="email" type="email" value="" size="30" required></p> --}}
+	                                        {{-- <p class="comment-form-cookies-consent"><input id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" type="checkbox" value="yes"> <label for="wp-comment-cookies-consent">Save my name, email, and website in this browser for the next time I comment.</label></p> --}}
+
+                                            <input type="hidden" name="rating" id="rating" value="">
+                                            <button   id="button-review" >send</button>
 	                                     </form>
 	                                  </div>
 	                                  <!-- #respond -->
@@ -194,43 +194,10 @@ ul.et_pb_social_media_follow{list-style-type:none!important;margin:0 0 22px;padd
 	                   </div>
 	                </div>
 	             </div>
-	             <div class="et_pb_module et_pb_wc_related_products et_pb_wc_related_products_0_tb_body et_pb_bg_layout_">
-	                <div class="et_pb_module_inner">
-	                   <section class="related products">
-	                      <h2>Related products</h2>
-	                      <ul class="products columns-4">
-	                         <li class="et_pb_post product type-product post-177 status-publish first instock product_cat-flowers product_cat-distillate product_cat-trim-fresh-frozen product_cat-clones-teens has-post-thumbnail shipping-taxable purchasable product-type-simple">
-	                            <a href="/product/lorem-ipsum/" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
-	                               <span class="et_shop_image"><img width="51" height="53" src="assets/uploads/2022/03/NoPath-Copy-5.jpg" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="" loading="lazy"><span class="et_overlay"></span></span>
-	                               <h2 class="woocommerce-loop-product__title">Lorem Ipsum</h2>
-	                               <span class="price"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">&#36;</span>40.00</bdi></span></span>
-	                            </a>
-	                         </li>
-	                         <li class="product type-product post-182 status-publish instock product_cat-flowers product_cat-exotic product_cat-indoor product_cat-glass-house product_cat-light-dep product_cat-hoop-house product_cat-out-door product_cat-all product_cat-distillate product_cat-trim-fresh-frozen product_cat-clones-teens product_cat-concentrates product_cat-badder product_cat-crumble product_cat-diamonds product_cat-hash product_cat-rosin-resin product_cat-sauce product_cat-sugar product_cat-wax product_cat-all-concentrates product_cat-prerolls product_cat-cartridges-vapes product_cat-edibles product_cat-white-label product_cat-business-licenses-for-sales product_cat-equipment-for-sale has-post-thumbnail shipping-taxable purchasable product-type-simple">
-	                            <a href="/product/lorem-ipsum-6/" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
-	                               <span class="et_shop_image"><img width="51" height="53" src="assets/uploads/2022/03/Sexual_Healing_Plus.jpg" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="" loading="lazy"><span class="et_overlay"></span></span>
-	                               <h2 class="woocommerce-loop-product__title">Lorem Ipsum</h2>
-	                               <span class="price"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">&#36;</span>40.00</bdi></span></span>
-	                            </a>
-	                         </li>
-	                         <li class="product type-product post-181 status-publish instock product_cat-flowers product_cat-distillate product_cat-trim-fresh-frozen product_cat-clones-teens product_cat-concentrates product_cat-prerolls product_cat-white-label has-post-thumbnail shipping-taxable purchasable product-type-simple">
-	                            <a href="/product/lorem-ipsum-5/" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
-	                               <span class="et_shop_image"><img width="51" height="53" src="assets/uploads/2022/03/NoPath-Copy-3.jpg" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="" loading="lazy"><span class="et_overlay"></span></span>
-	                               <h2 class="woocommerce-loop-product__title">Lorem Ipsum</h2>
-	                               <span class="price"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">&#36;</span>40.00</bdi></span></span>
-	                            </a>
-	                         </li>
-	                         <li class="product type-product post-179 status-publish last instock product_cat-flowers product_cat-distillate product_cat-trim-fresh-frozen product_cat-clones-teens product_cat-concentrates product_cat-prerolls product_cat-cartridges-vapes product_cat-edibles product_cat-white-label product_cat-business-licenses-for-sales product_cat-equipment-for-sale has-post-thumbnail shipping-taxable purchasable product-type-simple">
-	                            <a href="/product/lorem-ipsum-3/" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
-	                               <span class="et_shop_image"><img width="51" height="53" src="assets/uploads/2022/03/images.jpg" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="" loading="lazy"><span class="et_overlay"></span></span>
-	                               <h2 class="woocommerce-loop-product__title">Lorem Ipsum</h2>
-	                               <span class="price"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">&#36;</span>40.00</bdi></span></span>
-	                            </a>
-	                         </li>
-	                      </ul>
-	                   </section>
-	                </div>
-	             </div>
+                 @if(!empty($mightAlsoLike) && count($mightAlsoLike) > 0)
+                    @include('front.partials.might-like')
+                @endif
+
 	          </div>
 	       </div>
 	    </div>
@@ -242,10 +209,12 @@ ul.et_pb_social_media_follow{list-style-type:none!important;margin:0 0 22px;padd
 
 @endsection
 
+<script>
+    alert("sdfdf")
+</script>
 
-
-@section('extra-js')
     <script>
+        alert(3)
         (function(){
             const currentImage = document.querySelector('#currentImage');
             const images = document.querySelectorAll('.product-section-thumbnail');
@@ -327,12 +296,12 @@ ul.et_pb_social_media_follow{list-style-type:none!important;margin:0 0 22px;padd
             });
         })
         $('#button-review').on('click', function() {
-            //console.log("assss");return false;
+
             $.ajax({
                 url: '{{url("/product/review/$product->id")}}',
                 type: 'post',
                 dataType: 'json',
-                data: $("#form-review").serialize(),
+                data: $("#commentform").serialize(),
                 beforeSend: function() {
                     $('#button-review').button('loading');
                 },
@@ -364,5 +333,4 @@ ul.et_pb_social_media_follow{list-style-type:none!important;margin:0 0 22px;padd
     <script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.min.js"></script>
     {{--    <script src="{{ asset('js/algolia.js') }}"></script>--}}
 
-@endsection
 
