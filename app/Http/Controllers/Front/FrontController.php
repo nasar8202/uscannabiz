@@ -16,7 +16,7 @@ use App\Models\VendorStore;
 use App\Models\Category;
 use App\Models\CustomerWishlist;
 use App\Models\OptionProduct;
-
+use App\Jobs\SendEmailVendorJob;
 
 use Illuminate\Support\Facades\Hash;
 class FrontController extends Controller
@@ -92,9 +92,15 @@ class FrontController extends Controller
                 'store_name'=>$request->store_name,
                 'store_url'=>$request->store_url
             ]);
-            // $userData['role_id'] = 3;
-            // $user = User::create([$userData]);
-            // $user_id = $user->id;
+            $userData['role_id'] = 3;
+            $user = User::create([$userData]);
+            $user_id = $user->id;
+            $details['email'] =$request->email;
+
+            // dispatch(new App\Jobs\SendEmailJob($details));
+            SendEmailVendorJob::dispatch($details);
+            dd('done');
+
 
             // Customers::create([$customerData]);
             // return $user;

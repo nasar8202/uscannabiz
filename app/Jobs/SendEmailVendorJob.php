@@ -7,13 +7,14 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use App\Mail\SendEmailVendorJob;
+use App\Mail\SendEmailVendorRegistration;
 use Mail;
-
-class SendEmailJob implements ShouldQueue
+class SendEmailVendorJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+
     protected $details;
+
     /**
      * Create a new job instance.
      *
@@ -22,7 +23,6 @@ class SendEmailJob implements ShouldQueue
     public function __construct($details)
     {
         $this->details = $details;
-        $this->handle();
     }
 
     /**
@@ -32,11 +32,10 @@ class SendEmailJob implements ShouldQueue
      */
     public function handle()
     {
-        $mailData = $this->details;
-        // $email = new SendEmailTest();
-        Mail::send('admin.emails.emailTemplate', $mailData, function($message) use($mailData){
-            $message->to($mailData['email'])
-                ->subject($mailData['subject']);
-        });
+        $email = new SendEmailVendorRegistration();
+        Mail::to($this->details['email'])->send($email);
+
+       // Mail::to($this->details)->send(new SendEmailVendorRegistration($details));
+
     }
 }

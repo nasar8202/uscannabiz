@@ -29,19 +29,19 @@ class MailConfigServiceProvider extends ServiceProvider
             $mail = DB::table('email_settings')->first();
             if ($mail) //checking if table is not empty
             {
-                $config = array(
-                    'driver'     => $mail->mail_domain,
-                    'host'       => $mail->mail_host,
-                    'port'       => $mail->mail_port,
-                    'encryption' => $mail->ssl,
-                    'username'   => $mail->username,
-                    'password'   => $mail->password,
-                    'sendmail'   => '/usr/sbin/sendmail -bs',
-                    'pretend'    => false,
-                    'MAIL_FROM_ADDRESS'    => $mail->from_address,
-                );
-                
-                Config::set('mail', $config);
+                // $config = array(
+                //     'driver'     => $mail->mail_domain,
+                //     'host'       => $mail->mail_host,
+                //     'port'       => $mail->mail_port,
+                //     'encryption' => $mail->ssl,
+                //     'username'   => $mail->username,
+                //     'password'   => $mail->password,
+                //     'sendmail'   => '/usr/sbin/sendmail -bs',
+                //     'pretend'    => false,
+                //     'MAIL_FROM_ADDRESS'    => $mail->from_address,
+                // );
+
+                // Config::set('mail', $config);
                 //dd(Config::get('mail'));
             }
         }
