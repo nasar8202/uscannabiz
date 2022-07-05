@@ -27,7 +27,7 @@ class CustomersController extends Controller
         try {
             
             if (request()->ajax()) {
-                return datatables()->of(Customers::all())
+                return datatables()->of(Customers::join('Users','Users.id' ,'=' ,'Customers.user_id')->where('role_id','=',4)->get())
                     ->addIndexColumn()
                     ->addColumn('action', function ($data) {
                         return '<a title="View" href="customers/' . $data->id . '" 

@@ -32,17 +32,27 @@
                            <div class="dokan-dashboard-content">
                               <article class="dashboard-content-area woocommerce edit-account-wrap">
                                  <h1 class="entry-title">Edit Account Details</h1>
+                                 @if (session()->has('success'))
+                                        <div class="alert alert-success">
+                                            {{ session()->get('success') }}
+                                        </div>
+                                        @endif
+                                        @if (session()->has('error'))
+                                        <div class="alert alert-success">
+                                            {{ session()->get('success') }}
+                                        </div>
+                                        @endif
                                  <form class="edit-account" action="{{route('updateVendor',$user->id)}}" method="post">
                                     {{ csrf_field() }}
                                     <p class="form-row form-row-first">
-                                       <label for="account_first_name">Full name <span class="required">*</span></label>
-                                       <input type="text" class="input-text" name="full_name" value="{{$user->name}}" id="account_first_name" value="">
+                                       <label for="account_first_name">First name <span class="required">*</span></label>
+                                       <input type="text" class="input-text" name="first_name" value="{{$customer->first_name}}" id="account_first_name" value="">
                                      
                                        
                                     </p>
                                     <p class="form-row form-row-first">
                                        <label for="account_first_name">Last name <span class="required">*</span></label>
-                                       <input type="text" class="input-text" name="last_name" value="" id="account_first_name" value="">
+                                       <input type="text" class="input-text" name="last_name" value="{{$customer->last_name}}" id="account_first_name" value="">
                                      
                                        
                                     </p>

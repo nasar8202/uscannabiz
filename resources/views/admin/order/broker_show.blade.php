@@ -154,7 +154,7 @@
                                             <tr>
                                                 <td class="center">{{$counter++}}</td>
                                                 <td class="center">
-                                                    <img src="{{asset('assets/uploads/2022/03/'.$product->product_image)}}" alt="">
+                                                    <img src="{{asset('uploads/products/'.$product->product_image)}}" width="50" height="50" alt="">
                                                 </td>
                                                 <td class="left strong">
                                                     {{$product->product_name}}
