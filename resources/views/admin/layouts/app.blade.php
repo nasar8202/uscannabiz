@@ -282,7 +282,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{route('Vendor.index')}}" class="nav-link {{ request()->IS('admin/customers') ? 'active' : '' }}">
+                        <a href="{{route('Vendor.index')}}" class="nav-link {{ request()->IS('admin/vendor') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-user"></i>
                             <p>Vendor</p>
                         </a>

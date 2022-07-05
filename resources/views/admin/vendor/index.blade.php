@@ -133,9 +133,7 @@
                             </div>
                             <!-- /.card-header -->
 
-                                <div class="card-header">
-                                    <a href="Addbroker" class="btn btn-primary float-right" >Add Vendor</a>
-                                </div>
+                                
                             <div class="card-body">
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
