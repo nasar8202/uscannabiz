@@ -86,12 +86,25 @@ Route::middleware(['user'])->prefix('user')->group(function () {
 });
 Route::namespace('Vendor')->prefix('/vendor')->middleware('vendor')->group(function () {
     //Dashboard
+<<<<<<< HEAD
+    Route::get('dashboard', 'VendorController@dashboard')->name('dashboard');
+    Route::get('product', 'ProductController@index')->name('product');
+    Route::get('new-product', 'ProductController@addProductForm')->name('productForm');
+    Route::post('new-product/add', 'ProductController@addProduct')->name('add_product');
+    Route::get('delete-product/{id}', 'ProductController@destroyProduct')->name('deleteProduct');
+    Route::get('edit-products/{id}', 'ProductController@editProduct')->name('editProduct');
+    Route::post('update-products/{id}', 'ProductController@updateProduct')->name('updateProduct');
+    
+    Route::get('editVendor', 'VendorController@vendorEdit')->name('editVendor');
+    Route::post('updateVendor/{id}', 'VendorController@vendorUpdate')->name('updateVendor');
+=======
     Route::get('/dashboard', 'VendorController@dashboard')->name('dashboard');
     Route::get('/product', 'ProductController@index')->name('product');
     Route::get('/new-product', 'ProductController@addProductForm')->name('productForm');
     Route::post('/new-product/add', 'ProductController@addProduct')->name('add_product');
     Route::get('/editVendor', 'VendorController@vendorEdit')->name('editVendor');
     Route::post('/updateVendor/{id}', 'VendorController@vendorUpdate')->name('updateVendor');
+>>>>>>> 8fb8e55f5603066dbf181747431619204b95b500
 
 });
 
