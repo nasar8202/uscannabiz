@@ -98,42 +98,52 @@ class ShopController extends Controller
        return $price+$product->product_current_price;
     }
 
-    public function addReview(Request $request, $id){
-        dd($request->all());
+    public function addReview(Request $request){
+        // dd($request->all());
         try{
-            if($request->method() == 'POST'){
+            // if($request->method() == 'POST'){
                 $user_id = 0;
                 $json = array();
                 if(Auth::check()){
                     $user_id = Auth::id();
+                    // dd($user_id);
                 }
-                if ((strlen($request->name) < 3) || (strlen($request->name) > 25)) {
-                    $json['error'] = "Warning: Review Name must be between 3 and 25 characters!";
-                }
+                // if ((strlen($request->name) < 3) || (strlen($request->name) > 25)) {
+                //     $json['error'] = "Warning: Review Name must be between 3 and 25 characters!";
+                // }
 
-                if ((strlen($request->text) < 25) || (strlen($request->text) > 1000)) {
-                    $json['error'] = "Warning: Review Text must be between 25 and 1000 characters!";
-                }
+                // if ((strlen($request->text) < 25) || (strlen($request->text) > 1000)) {
+                //     $json['error'] = "Warning: Review Text must be between 25 and 1000 characters!";
+                // }
 
-                if (!isset($request->rating) || $request->rating < 0 || $request->rating > 5) {
-                    $json['error'] = "Warning: Please select a review rating!";
-                }
+                // if (!isset($request->rating) || $request->rating < 0 || $request->rating > 5) {
+                //     $json['error'] = "Warning: Please select a review rating!";
+                // }
 
 
-                if(!isset($json['error'])){
-                    ProductReview::create([
-                        'product_id' => $id,
-                        'customer_id' => $user_id,
-                        'author' => $request->name,
-                        'description' => $request->text,
-                        'rating' => $request->rating,
-                        'status' => 0
-                    ]);
-                    $json['success'] = "Thank you for your review. It has been submitted to the webmaster for approval.";
-                }
+                // if(!isset($json['error'])){
+                    $product_review = new ProductReview;
+                    $product_review->product_id = $request->product_id;
+                    $product_review->customer_id = $user_id;
+                    $product_review->author = $request->name;
+                    $product_review->description = $request->text;
+                    $product_review->rating = $request->rating;
+                    $product_review->status = 0;
+                    $product_review->save();
+                    // ProductReview::insert([
+                    //     'product_id' => $request->product_id,
+                    //     'customer_id' => $user_id,
+                    //     'author' => $request->name,
+                    //     'description' => $request->text,
+                    //     'rating' => $request->rating,
+                    //     'status' => 0
+                    // ]);
+                    // $json['success'] = "Thank you for your review. It has been submitted to the webmaster for approval.";
+                // }
 
-                return $json;
-            }
+                // return $json;
+                return back()->with('success','Review Submitted Successfully');
+            // }
 
         }catch(\Exception $ex) {
             return redirect()->back();

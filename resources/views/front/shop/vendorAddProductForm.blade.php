@@ -27,7 +27,7 @@
                    <tbody>
                        <tr>
                            <td>
-                               <img src="{{asset('admin/images/.$product->image')}}" alt="" id="img_0" style="height: 150px;width: 150px;">
+                               <img src="{{asset('admin/images/'.$data->product_image)}}" alt="" id="img_0" style="height: 150px;width: 150px;">
                            </td>
                            <td>
                                <div class="input-group">
