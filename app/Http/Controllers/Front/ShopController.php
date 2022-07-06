@@ -99,6 +99,7 @@ class ShopController extends Controller
     }
 
     public function addReview(Request $request, $id){
+        dd($request->all());
         try{
             if($request->method() == 'POST'){
                 $user_id = 0;
