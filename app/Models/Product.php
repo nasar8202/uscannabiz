@@ -29,7 +29,7 @@ class Product extends Model implements Buyable
         'category_id','sub_category_id','product_type', 'product_name', 'sku', 'slug', 'description',
         'product_current_price', 'product_sale', 'product_sale_percentage','description',
         'product_stock', 'product_qty', 'length',
-        'width', 'height', 'weight','product_image','status', 'manufacturer_id','vender_id'
+        'width', 'height', 'weight','product_image','status', 'manufacturer_id','vender_id','created_at','updated_at','deleted_at'
     ];
 
     public function category(){

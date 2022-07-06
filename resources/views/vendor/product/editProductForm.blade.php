@@ -10,13 +10,13 @@
      
            
          <div class="u-column2 col-2">
-            <h2>Add Product</h2>
+            <h2>Edit Product</h2>
             @if (session()->has('success'))
                                         <div class="alert alert-success">
                                             {{ session()->get('success') }}
                                         </div>
                                         @endif
-            <form method="post" action="{{ route('add_product') }}" class="woocommerce-form woocommerce-form-register register" enctype="multipart/form-data">
+            <form method="post" action="{{ route('updateProduct', ['id' => $product->id])}}" class="woocommerce-form woocommerce-form-register register" enctype="multipart/form-data">
              {{ csrf_field() }}
               
              <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
@@ -34,27 +34,27 @@
              <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
                   <label for="reg_email">Product Name<span class="required">*</span></label>
                   <input type="text" class="woocommerce-Input woocommerce-Input--text input-text" 
-                  name="product_name" id="reg_email" autocomplete="email" value="">
+                  name="product_name" id="reg_email" autocomplete="email" value="{{$product->product_name}}">
                </p>
               
                <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
                   <label for="reg_password">Current Price<span class="required">*</span></label>
-                  <input type="number" class="woocommerce-Input woocommerce-Input--text input-text" name="current_price" id="reg_password" autocomplete="new-password">
+                  <input type="number" class="woocommerce-Input woocommerce-Input--text input-text" value="{{$product->product_current_price}}" name="current_price" id="reg_password" autocomplete="new-password">
                </p>
                
                   <div class="split-row form-row-wide">
                      <p class="form-row form-group">
                         <label for="first-name">Product Sku <span class="required">*</span></label>
-                        <input type="text" class="input-text form-control" name="product_sku" id="first-name" value="" required="required">
+                        <input type="text" class="input-text form-control" name="product_sku" id="first-name" value="{{$product->sku}}" required="required">
                      </p>
                      <p class="form-row form-group">
                         <label for="last-name">Product Slug <span class="required">*</span></label>
-                        <input type="text" class="input-text form-control" name="product_slug" id="last-name" value="" required="required">
+                        <input type="text" class="input-text form-control" name="product_slug" id="last-name" value="{{$product->slug}}" required="required">
                      </p>
                      <p class="form-row form-group">
                      
                         <label for="exampleInputEmail1">Sale(%)</label>
-                        <input type="text" class="input-text form-control" name="product_sale_percentage" id="product_sale_percentage" value="" required="required">
+                        <input type="text" class="input-text form-control" name="product_sale_percentage" id="product_sale_percentage" value="{{$product->product_sale_percentage}}" required="required">
                      
                         </p>
                   </div>
@@ -75,7 +75,7 @@
                   
                   <p class="form-row form-group form-row-wide">
                      <label for="exampleInputEmail1">Product Stock Qty</label>
-                     <input type="text" class="input-text form-control" name="product_stock_qty" id="product_stock_qty" value="" required="required">
+                     <input type="text" class="input-text form-control" name="product_stock_qty" id="product_stock_qty" value="{{$product->product_stock}}" required="required">
                      
                  
                   </p>
@@ -89,25 +89,25 @@
                   </p>
                   <p class="form-row form-group form-row-wide">
                      <label for="category">Description</label>
-                  <textarea class="form-control {{ $errors->has('main_category') ? 'has-error' : ''}}" name="description" id="description" placeholder="Description" required>{{old('description')}}</textarea>
+                  <textarea class="form-control {{ $errors->has('main_category') ? 'has-error' : ''}}"  name="description" id="description" placeholder="Description" required>{{$product->description}}</textarea>
                   {!! $errors->first('description', '<p class="help-block">:message</p>') !!}
                                                 
                   </p>
                   <p class="form-row form-group form-row-wide">
                      <label for="category">Meta Title</label>
-                     <input type="text" class="form-control {{ $errors->has('meta-title') ? 'has-error' : ''}}" name="meta-title" id="meta-title"  value="{{old('meta-title')}}" placeholder="Meta Title" required >
+                     <input type="text" class="form-control" name="meta-title" id="meta-title"  value="{{$meta->meta_tag_title}}" placeholder="Meta Title" required >
                      {!! $errors->first('meta-title', '<p class="help-block">:message</p>') !!}
                 
                   </p>
                   <p class="form-row form-group form-row-wide">
                      <label for="category">Meta Description</label>
-                   <textarea class="form-control {{ $errors->has('meta-description') ? 'has-error' : ''}}" name="meta-description" id="meta-description" placeholder="Meta Description" required>{{old('meta-description')}}</textarea>
+                   <textarea class="form-control " name="meta-description" id="meta-description" placeholder="Meta Description" required>{{$meta->meta_tag_description}}</textarea>
                      {!! $errors->first('meta-description', '<p class="help-block">:message</p>') !!}
                                                 
                   </p>
                   <p class="form-row form-group form-row-wide">
                      <label for="category">Meta Keywords</label>
-                     <textarea class="form-control {{ $errors->has('meta-keywords') ? 'has-error' : ''}}" name="meta-keywords" id="meta-keywords"  placeholder="Meta Keywords" required>{{old('meta-keywords')}}</textarea>
+                     <textarea class="form-control" name="meta-keywords" id="meta-keywords"  placeholder="Meta Keywords" required>{{$meta->meta_tag_keywords}}</textarea>
                     {!! $errors->first('meta-keywords', '<p class="help-block">:message</p>') !!}
                                                 
                   </p>
@@ -125,7 +125,7 @@
                                  <td>
                                      <div class="input-group">
                                          <div class="custom-file">
-                                             <input type="file" class="custom-file-input"  name="product_image_first" id="gallery_0" accept="image/*" >
+                                             <input type="file" class="custom-file-input"  name="product_image_first" id="gallery_0" onchange="PreviewImage('0')" accept="image/*" >
                                              <label class="custom-file-label" for="category-image">Choose file</label>
                                          </div>
                                          {!! $errors->first('product_image_first', '<p class="help-block">:message</p>') !!}
@@ -137,7 +137,7 @@
                  </div>
                   
                <p class="woocommerce-form-row form-row">
-                  <button type="submit" class="woocommerce-Button woocommerce-button button woocommerce-form-register__submit" name="register" value="Register">Add Product</button>
+                  <button type="submit" class="woocommerce-Button woocommerce-button button woocommerce-form-register__submit" name="register" value="Register">Update Product</button>
 
                </p>
             </form>
@@ -152,16 +152,15 @@
 <script>
 
 $(document).ready(function () {
-            $('#gallery_0').on('change',function(e) {
-               var oFReader = new FileReader();
-            oFReader.readAsDataURL(document.getElementById('gallery_0').files[0]);
+    $('#gallery_0').on('change',function(e) {
+       var oFReader = new FileReader();
+    oFReader.readAsDataURL(document.getElementById('gallery_0').files[0]);
 
-            oFReader.onload = function (oFREvent) {
-                document.getElementById('img_0').src = oFREvent.target.result;
-            };
-            });
-         });
+    oFReader.onload = function (oFREvent) {
+        document.getElementById('img_0').src = oFREvent.target.result;
+    };
+    });
+ });
 
-   </script>
+</script>
 @endsection
-
