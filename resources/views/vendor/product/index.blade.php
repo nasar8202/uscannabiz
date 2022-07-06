@@ -11,6 +11,11 @@
 	         <div id="left-area">
 	            <article id="post-7" class="post-7 page type-page status-publish hentry">
 	               <h1 class="entry-title main_title">Dashboard</h1>
+				   @if (session()->has('success'))
+                                        <div class="alert alert-success">
+                                            {{ session()->get('success') }}
+                                        </div>
+										@endif
 	               <div class="entry-content">
 	                  <div class="dokan-dashboard-wrap">
 	                     <div class="dokan-dash-sidebar">
@@ -63,34 +68,11 @@
 						            <div class="dokan-form-group">
 						               <select name="product_cat" id="product_cat" class="product_cat dokan-form-control chosen">
 						                  <option value="-1" selected="selected">– Select a category –</option>
-						                  <option class="level-0" value="25">Business &amp; Licenses for Sales</option>
-						                  <option class="level-0" value="22">Cartridges + Vapes</option>
-						                  <option class="level-0" value="18">Clones + Teens</option>
-						                  <option class="level-0" value="20">Concentrates</option>
-						                  <option class="level-1" value="42">&nbsp;&nbsp;&nbsp;All</option>
-						                  <option class="level-1" value="34">&nbsp;&nbsp;&nbsp;Badder</option>
-						                  <option class="level-1" value="35">&nbsp;&nbsp;&nbsp;Crumble</option>
-						                  <option class="level-1" value="36">&nbsp;&nbsp;&nbsp;Diamonds</option>
-						                  <option class="level-1" value="37">&nbsp;&nbsp;&nbsp;Hash</option>
-						                  <option class="level-1" value="38">&nbsp;&nbsp;&nbsp;Rosin + Resin</option>
-						                  <option class="level-1" value="39">&nbsp;&nbsp;&nbsp;Sauce</option>
-						                  <option class="level-1" value="40">&nbsp;&nbsp;&nbsp;Sugar</option>
-						                  <option class="level-1" value="41">&nbsp;&nbsp;&nbsp;Wax</option>
-						                  <option class="level-0" value="17">Distillate</option>
-						                  <option class="level-0" value="23">Edibles</option>
-						                  <option class="level-0" value="26">Equipment For Sale</option>
-						                  <option class="level-0" value="16">Flowers</option>
-						                  <option class="level-1" value="33">&nbsp;&nbsp;&nbsp;All</option>
-						                  <option class="level-1" value="27">&nbsp;&nbsp;&nbsp;Exotic</option>
-						                  <option class="level-1" value="29">&nbsp;&nbsp;&nbsp;Glass House</option>
-						                  <option class="level-1" value="31">&nbsp;&nbsp;&nbsp;Hoop House</option>
-						                  <option class="level-1" value="28">&nbsp;&nbsp;&nbsp;Indoor</option>
-						                  <option class="level-1" value="30">&nbsp;&nbsp;&nbsp;Light Dep</option>
-						                  <option class="level-1" value="32">&nbsp;&nbsp;&nbsp;Out Door</option>
-						                  <option class="level-0" value="21">PreRolls</option>
-						                  <option class="level-0" value="19">Trim + Fresh Frozen</option>
-						                  <option class="level-0" value="15">Uncategorized</option>
-						                  <option class="level-0" value="24">White Label</option>
+						                 @foreach ($category as $cat)
+										 <option class="level-0" value="{{$cat->id}}">{{$cat->name}}</option>
+						                 	 
+										 @endforeach 
+										  
 						               </select>
 						            </div>
 						            <div class="dokan-form-group">
@@ -141,6 +123,7 @@
 						                  </tr>
 						               </thead>
 						               <tbody>
+										@foreach($product as $pro)
 						                  <tr class="">
 						                     <th class="dokan-product-select check-column">
 						                        <label for="cb-select-432"></label>
@@ -150,9 +133,11 @@
 						                        <a href="products/?product_id=432&amp;action=edit"><img width="150" height="150" src="assets/uploads/2022/03/banner-150x150.png" class="attachment-thumbnail size-thumbnail" alt=""></a>
 						                     </td>
 						                     <td data-title="Name" class="column-primary">
-						                        <strong><a href="products/?product_id=432&amp;action=edit">Testing Products</a></strong>
+						                        <strong><a href="products/?product_id=432&amp;action=edit">{{$pro->product_name}}</a></strong>
 						                        <div class="row-actions">
-						                           <span class="edit"><a href="products/?product_id=432&amp;action=edit">Edit</a> | </span> <span class="delete"><a href="products/?action=dokan-delete-product&amp;product_id=432&amp;_wpnonce=7e65809427" onclick="dokan_show_delete_prompt( event, 'Are you sure?' );">Delete Permanently</a> | </span> <span class="view"><a href="product/testing-products/">View</a></span>
+						                           <span class="edit"><a href="edit-products/{{$pro->id}}">Edit</a> | </span> 
+												   <span class="delete"><a href="delete-product/{{$pro->id}}" >Delete Permanently</a> | </span>
+												    <span class="view"><a href="product/testing-products/">View</a></span>
 						                        </div>
 						                        <button type="button" class="toggle-row"></button>
 						                     </td>
@@ -160,281 +145,30 @@
 						                        <label class="dokan-label dokan-label-success">Online</label>
 						                     </td>
 						                     <td data-title="SKU">
-						                        <span class="na">–</span>
+						                        <span class="na">{{$pro->sku}}</span>
 						                     </td>
 						                     <td data-title="Stock">
-						                        <mark class="instock">In stock</mark>
+						                        <mark class="instock">{{$pro->product_stock}}</mark>
 						                     </td>
 						                     <td data-title="Price">
-						                        <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>5.00</span>
+						                        <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>{{$pro->product_current_price}}</span>
 						                     </td>
 						                     <td data-title="Earning">
 						                        <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>4.50</span>
 						                     </td>
 						                     <td data-title="Type">
-						                        <span class="product-type tips simple" title="" data-original-title="Simple"></span>
+						                        <span class="product-type tips simple" title="" data-original-title="Simple">{{$pro->product_type}}</span>
 						                     </td>
 						                     <td data-title="Views">
 						                        1
 						                     </td>
 						                     <td class="post-date" data-title="Date">
-						                        <abbr title="May 18, 2022 1:14 am">May 18, 2022</abbr>
+						                        <abbr title="May 18, 2022 1:14 am">{{$pro->created_at}}</abbr>
 						                        <div class="status">Published        </div>
 						                     </td>
 						                     <td class="diviader"></td>
 						                  </tr>
-						                  <tr class="">
-						                     <th class="dokan-product-select check-column">
-						                        <label for="cb-select-182"></label>
-						                        <input class="cb-select-items dokan-checkbox" type="checkbox" data-product-name="Lorem Ipsum" name="bulk_products[]" value="182">
-						                     </th>
-						                     <td data-title="Image" class="column-thumb">
-						                        <a href="products/?product_id=182&amp;action=edit"><img width="51" height="53" src="assets/uploads/2022/03/Sexual_Healing_Plus.jpg" class="attachment-thumbnail size-thumbnail" alt=""></a>
-						                     </td>
-						                     <td data-title="Name" class="column-primary">
-						                        <strong><a href="products/?product_id=182&amp;action=edit">Lorem Ipsum</a></strong>
-						                        <div class="row-actions">
-						                           <span class="edit"><a href="products/?product_id=182&amp;action=edit">Edit</a> | </span> <span class="delete"><a href="products/?action=dokan-delete-product&amp;product_id=182&amp;_wpnonce=7e65809427" onclick="dokan_show_delete_prompt( event, 'Are you sure?' );">Delete Permanently</a> | </span> <span class="view"><a href="product/lorem-ipsum-6/">View</a></span>
-						                        </div>
-						                        <button type="button" class="toggle-row"></button>
-						                     </td>
-						                     <td class="post-status" data-title="Status">
-						                        <label class="dokan-label dokan-label-success">Online</label>
-						                     </td>
-						                     <td data-title="SKU">
-						                        <span class="na">–</span>
-						                     </td>
-						                     <td data-title="Stock">
-						                        <mark class="instock">In stock</mark>
-						                     </td>
-						                     <td data-title="Price">
-						                        <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>40.00</span>
-						                     </td>
-						                     <td data-title="Earning">
-						                        <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>36.00</span>
-						                     </td>
-						                     <td data-title="Type">
-						                        <span class="product-type tips simple" title="" data-original-title="Simple"></span>
-						                     </td>
-						                     <td data-title="Views">
-						                        3
-						                     </td>
-						                     <td class="post-date" data-title="Date">
-						                        <abbr title="March 24, 2022 6:49 pm">March 24, 2022</abbr>
-						                        <div class="status">Published        </div>
-						                     </td>
-						                     <td class="diviader"></td>
-						                  </tr>
-						                  <tr class="">
-						                     <th class="dokan-product-select check-column">
-						                        <label for="cb-select-181"></label>
-						                        <input class="cb-select-items dokan-checkbox" type="checkbox" data-product-name="Lorem Ipsum" name="bulk_products[]" value="181">
-						                     </th>
-						                     <td data-title="Image" class="column-thumb">
-						                        <a href="products/?product_id=181&amp;action=edit"><img width="51" height="53" src="assets/uploads/2022/03/NoPath-Copy-3.jpg" class="attachment-thumbnail size-thumbnail" alt=""></a>
-						                     </td>
-						                     <td data-title="Name" class="column-primary">
-						                        <strong><a href="products/?product_id=181&amp;action=edit">Lorem Ipsum</a></strong>
-						                        <div class="row-actions">
-						                           <span class="edit"><a href="products/?product_id=181&amp;action=edit">Edit</a> | </span> <span class="delete"><a href="products/?action=dokan-delete-product&amp;product_id=181&amp;_wpnonce=7e65809427" onclick="dokan_show_delete_prompt( event, 'Are you sure?' );">Delete Permanently</a> | </span> <span class="view"><a href="product/lorem-ipsum-5/">View</a></span>
-						                        </div>
-						                        <button type="button" class="toggle-row"></button>
-						                     </td>
-						                     <td class="post-status" data-title="Status">
-						                        <label class="dokan-label dokan-label-success">Online</label>
-						                     </td>
-						                     <td data-title="SKU">
-						                        <span class="na">–</span>
-						                     </td>
-						                     <td data-title="Stock">
-						                        <mark class="instock">In stock</mark>
-						                     </td>
-						                     <td data-title="Price">
-						                        <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>40.00</span>
-						                     </td>
-						                     <td data-title="Earning">
-						                        <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>36.00</span>
-						                     </td>
-						                     <td data-title="Type">
-						                        <span class="product-type tips simple" title="" data-original-title="Simple"></span>
-						                     </td>
-						                     <td data-title="Views">
-						                        4
-						                     </td>
-						                     <td class="post-date" data-title="Date">
-						                        <abbr title="March 24, 2022 6:45 pm">March 24, 2022</abbr>
-						                        <div class="status">Published        </div>
-						                     </td>
-						                     <td class="diviader"></td>
-						                  </tr>
-						                  <tr class="">
-						                     <th class="dokan-product-select check-column">
-						                        <label for="cb-select-180"></label>
-						                        <input class="cb-select-items dokan-checkbox" type="checkbox" data-product-name="Lorem Ipsum" name="bulk_products[]" value="180">
-						                     </th>
-						                     <td data-title="Image" class="column-thumb">
-						                        <a href="products/?product_id=180&amp;action=edit"><img width="51" height="53" src="assets/uploads/2022/03/NoPath-Copy-2.jpg" class="attachment-thumbnail size-thumbnail" alt=""></a>
-						                     </td>
-						                     <td data-title="Name" class="column-primary">
-						                        <strong><a href="products/?product_id=180&amp;action=edit">Lorem Ipsum</a></strong>
-						                        <div class="row-actions">
-						                           <span class="edit"><a href="products/?product_id=180&amp;action=edit">Edit</a> | </span> <span class="delete"><a href="products/?action=dokan-delete-product&amp;product_id=180&amp;_wpnonce=7e65809427" onclick="dokan_show_delete_prompt( event, 'Are you sure?' );">Delete Permanently</a> | </span> <span class="view"><a href="/lorem-ipsum-4/">View</a></span>
-						                        </div>
-						                        <button type="button" class="toggle-row"></button>
-						                     </td>
-						                     <td class="post-status" data-title="Status">
-						                        <label class="dokan-label dokan-label-success">Online</label>
-						                     </td>
-						                     <td data-title="SKU">
-						                        <span class="na">–</span>
-						                     </td>
-						                     <td data-title="Stock">
-						                        <mark class="instock">In stock</mark>
-						                     </td>
-						                     <td data-title="Price">
-						                        <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>40.00</span>
-						                     </td>
-						                     <td data-title="Earning">
-						                        <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>36.00</span>
-						                     </td>
-						                     <td data-title="Type">
-						                        <span class="product-type tips simple" title="" data-original-title="Simple"></span>
-						                     </td>
-						                     <td data-title="Views">
-						                        1
-						                     </td>
-						                     <td class="post-date" data-title="Date">
-						                        <abbr title="March 24, 2022 6:44 pm">March 24, 2022</abbr>
-						                        <div class="status">Published        </div>
-						                     </td>
-						                     <td class="diviader"></td>
-						                  </tr>
-						                  <tr class="">
-						                     <th class="dokan-product-select check-column">
-						                        <label for="cb-select-179"></label>
-						                        <input class="cb-select-items dokan-checkbox" type="checkbox" data-product-name="Lorem Ipsum" name="bulk_products[]" value="179">
-						                     </th>
-						                     <td data-title="Image" class="column-thumb">
-						                        <a href="products/?product_id=179&amp;action=edit"><img loading="lazy" width="51" height="53" src="assets/uploads/2022/03/images.jpg" class="attachment-thumbnail size-thumbnail" alt=""></a>
-						                     </td>
-						                     <td data-title="Name" class="column-primary">
-						                        <strong><a href="products/?product_id=179&amp;action=edit">Lorem Ipsum</a></strong>
-						                        <div class="row-actions">
-						                           <span class="edit"><a href="products/?product_id=179&amp;action=edit">Edit</a> | </span> <span class="delete"><a href="products/?action=dokan-delete-product&amp;product_id=179&amp;_wpnonce=7e65809427" onclick="dokan_show_delete_prompt( event, 'Are you sure?' );">Delete Permanently</a> | </span> <span class="view"><a href="product/lorem-ipsum-3/">View</a></span>
-						                        </div>
-						                        <button type="button" class="toggle-row"></button>
-						                     </td>
-						                     <td class="post-status" data-title="Status">
-						                        <label class="dokan-label dokan-label-success">Online</label>
-						                     </td>
-						                     <td data-title="SKU">
-						                        <span class="na">–</span>
-						                     </td>
-						                     <td data-title="Stock">
-						                        <mark class="instock">In stock</mark>
-						                     </td>
-						                     <td data-title="Price">
-						                        <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>40.00</span>
-						                     </td>
-						                     <td data-title="Earning">
-						                        <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>36.00</span>
-						                     </td>
-						                     <td data-title="Type">
-						                        <span class="product-type tips simple" title="" data-original-title="Simple"></span>
-						                     </td>
-						                     <td data-title="Views">
-						                        4
-						                     </td>
-						                     <td class="post-date" data-title="Date">
-						                        <abbr title="March 24, 2022 6:43 pm">March 24, 2022</abbr>
-						                        <div class="status">Published        </div>
-						                     </td>
-						                     <td class="diviader"></td>
-						                  </tr>
-						                  <tr class="">
-						                     <th class="dokan-product-select check-column">
-						                        <label for="cb-select-178"></label>
-						                        <input class="cb-select-items dokan-checkbox" type="checkbox" data-product-name="Lorem Ipsum" name="bulk_products[]" value="178">
-						                     </th>
-						                     <td data-title="Image" class="column-thumb">
-						                        <a href="products/?product_id=178&amp;action=edit"><img loading="lazy" width="51" height="53" src="assets/uploads/2022/03/NoPath-Copy-4.jpg" class="attachment-thumbnail size-thumbnail" alt=""></a>
-						                     </td>
-						                     <td data-title="Name" class="column-primary">
-						                        <strong><a href="products/?product_id=178&amp;action=edit">Lorem Ipsum</a></strong>
-						                        <div class="row-actions">
-						                           <span class="edit"><a href="products/?product_id=178&amp;action=edit">Edit</a> | </span> <span class="delete"><a href="products/?action=dokan-delete-product&amp;product_id=178&amp;_wpnonce=7e65809427" onclick="dokan_show_delete_prompt( event, 'Are you sure?' );">Delete Permanently</a> | </span> <span class="view"><a href="product/lorem-ipsum-2/">View</a></span>
-						                        </div>
-						                        <button type="button" class="toggle-row"></button>
-						                     </td>
-						                     <td class="post-status" data-title="Status">
-						                        <label class="dokan-label dokan-label-success">Online</label>
-						                     </td>
-						                     <td data-title="SKU">
-						                        <span class="na">–</span>
-						                     </td>
-						                     <td data-title="Stock">
-						                        <mark class="instock">In stock</mark>
-						                     </td>
-						                     <td data-title="Price">
-						                        <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>40.00</span>
-						                     </td>
-						                     <td data-title="Earning">
-						                        <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>36.00</span>
-						                     </td>
-						                     <td data-title="Type">
-						                        <span class="product-type tips simple" title="" data-original-title="Simple"></span>
-						                     </td>
-						                     <td data-title="Views">
-						                        2
-						                     </td>
-						                     <td class="post-date" data-title="Date">
-						                        <abbr title="March 24, 2022 6:41 pm">March 24, 2022</abbr>
-						                        <div class="status">Published        </div>
-						                     </td>
-						                     <td class="diviader"></td>
-						                  </tr>
-						                  <tr class="">
-						                     <th class="dokan-product-select check-column">
-						                        <label for="cb-select-177"></label>
-						                        <input class="cb-select-items dokan-checkbox" type="checkbox" data-product-name="Lorem Ipsum" name="bulk_products[]" value="177">
-						                     </th>
-						                     <td data-title="Image" class="column-thumb">
-						                        <a href="products/?product_id=177&amp;action=edit"><img loading="lazy" width="51" height="53" src="assets/uploads/2022/03/NoPath-Copy-5.jpg" class="attachment-thumbnail size-thumbnail" alt=""></a>
-						                     </td>
-						                     <td data-title="Name" class="column-primary">
-						                        <strong><a href="products/?product_id=177&amp;action=edit">Lorem Ipsum</a></strong>
-						                        <div class="row-actions">
-						                           <span class="edit"><a href="products/?product_id=177&amp;action=edit">Edit</a> | </span> <span class="delete"><a href="products/?action=dokan-delete-product&amp;product_id=177&amp;_wpnonce=7e65809427" onclick="dokan_show_delete_prompt( event, 'Are you sure?' );">Delete Permanently</a> | </span> <span class="view"><a href="product/lorem-ipsum/">View</a></span>
-						                        </div>
-						                        <button type="button" class="toggle-row"></button>
-						                     </td>
-						                     <td class="post-status" data-title="Status">
-						                        <label class="dokan-label dokan-label-success">Online</label>
-						                     </td>
-						                     <td data-title="SKU">
-						                        <span class="na">–</span>
-						                     </td>
-						                     <td data-title="Stock">
-						                        <mark class="instock">In stock</mark>
-						                     </td>
-						                     <td data-title="Price">
-						                        <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>40.00</span>
-						                     </td>
-						                     <td data-title="Earning">
-						                        <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>36.00</span>
-						                     </td>
-						                     <td data-title="Type">
-						                        <span class="product-type tips simple" title="" data-original-title="Simple"></span>
-						                     </td>
-						                     <td data-title="Views">
-						                        10
-						                     </td>
-						                     <td class="post-date" data-title="Date">
-						                        <abbr title="March 24, 2022 6:39 pm">March 24, 2022</abbr>
-						                        <div class="status">Published        </div>
-						                     </td>
-						                     <td class="diviader"></td>
-						                  </tr>
+										  @endforeach
 						               </tbody>
 						            </table>
 						         </form>
