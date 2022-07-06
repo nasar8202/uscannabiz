@@ -5,7 +5,7 @@
          <div class="et_pb_row et_pb_row_0_tb_footer">
             <div class="et_pb_column et_pb_column_1_4 et_pb_column_0_tb_footer  et_pb_css_mix_blend_mode_passthrough">
                <div class="et_pb_module et_pb_image et_pb_image_0_tb_footer">
-                  <a href=""><span class="et_pb_image_wrap "><img loading="lazy" width="149" height="104" src="assets/uploads/2022/03/Uscannazon-1.png" alt="" title="Uscannazon" class="wp-image-80"></span></a>
+                  <a href=""><span class="et_pb_image_wrap "><img loading="lazy" width="149" height="104" src="{{asset('assets/uploads/2022/03/Uscannazon-1.png')}}" alt="" title="Uscannazon" class="wp-image-80"></span></a>
                </div>
                <div class="et_pb_module et_pb_text et_pb_text_0_tb_footer  et_pb_text_align_left et_pb_bg_layout_light">
                   <div class="et_pb_text_inner">

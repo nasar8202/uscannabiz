@@ -22,15 +22,15 @@ Route::post('/registerVendorAndCustomer', 'Front\FrontController@registerVendorA
 Route::get('vendor-add-product-form/{id}', 'Vendor\ProductController@vendorAddProductForm')->name('vendorAddProductForm');
 
 Route::post('/vendor-request', 'Vendor\VendorRequestController@store')->name('vendorRequest');
-Route::get('wishlist', 'Front\ShopController@view_wishlist')->name('shop.view_wishlist');
-Route::get('shop', 'Front\ShopController@index')->name('shop.index');
-Route::get('shop/{slug}', 'Front\ShopController@show')->name('shop.show');
-Route::get('shop/{slug}', 'Front\ShopController@show')->name('shop.showProduct');
+Route::get('/wishlist', 'Front\ShopController@view_wishlist')->name('shop.view_wishlist');
+Route::get('/shop', 'Front\ShopController@index')->name('shop.index');
+Route::get('/shop/{slug}', 'Front\ShopController@show')->name('shop.show');
+Route::get('/shop/{slug}', 'Front\ShopController@show')->name('shop.showProduct');
 Route::post('shop/add-wishlist', 'Front\ShopController@add_wishlist')->name('shop.wishlist');
 
 
 Route::get('/checkProductPrice', 'Front\ShopController@checkProductPrice')->name('shop.checkProductPrice');
-Route::post('/product/review/{id}', 'Front\ShopController@addReview')->name('shop.addReview');
+Route::post('/product/review', 'Front\ShopController@addReview')->name('shop.addReview');
 
 Route::get('/product-category/{slug}/{id}', 'Front\ShopController@productCategory')->name('productCategory');
 
@@ -50,42 +50,43 @@ Route::get('/admin/login', function () {
 
 Route::get('/cart', 'Front\CartController@index')->name('cart.index');
 Route::patch('/cart/update/{product}', 'Front\CartController@update')->name('cart.update');
-Route::post('cart/store/{product}', 'Front\CartController@store')->name('cart.store');
+Route::post('/cart/store/{product}', 'Front\CartController@store')->name('cart.store');
 Route::delete('/cart/{product}', 'Front\CartController@destroy')->name('cart.destroy');
 //checkout
 Route::get('/checkout', 'Front\CheckoutController@index')->name('checkout.index')->middleware('auth');
 Route::post('/checkout/checkout', 'Front\CheckoutController@checkout')->name('checkout.checkout');
 Route::get('/checkout/success', 'Front\CheckoutController@success')->name('checkout.success');
 Route::get('/guestCheckout', 'Front\CheckoutController@index')->name('guestCheckout.index');
-Route::post('stripeCharge', 'Front\PaymentController@stripeCharge')->name('stripeCharge');
-Route::post('paypalCharge', 'Front\PaymentController@paypalCharge')->name('paypalCharge');
-Route::post('authorizeCharge','Front\PaymentController@authorizeCharge')->name('authorizeCharge');
+Route::post('/stripeCharge', 'Front\PaymentController@stripeCharge')->name('stripeCharge');
+Route::post('/paypalCharge', 'Front\PaymentController@paypalCharge')->name('paypalCharge');
+Route::post('/authorizeCharge','Front\PaymentController@authorizeCharge')->name('authorizeCharge');
 Route::get('/checkout/apply-coupon', 'Front\CouponsController@applyCoupon')->name('checkout.coupon');
 Route::get('/about-us', 'Front\ContactUsController@aboutUs')->name('aboutUs');
-Route::get('faq', 'Front\ContactUsController@faq')->name('faq');
+Route::get('/faq', 'Front\ContactUsController@faq')->name('faq');
 
 
 Route::middleware(['user'])->prefix('user')->group(function () {
-    Route::get('dashboard', 'User\UserController@dashboard')->name('dashboard');
+    Route::get('/dashboard', 'User\UserController@dashboard')->name('dashboard');
 
     //WishList
-    Route::get('getOrderDetail/{id}', 'User\UserController@getOrderDetail')->name('getOrderDetail');
-    Route::post('add-wishlist', 'User\UserController@add_wishlist')->name('user.wishlist');
-    Route::get('wishlist', 'User\UserController@view_wishlist')->name('user.view_wishlist');
+    Route::get('/getOrderDetail/{id}', 'User\UserController@getOrderDetail')->name('getOrderDetail');
+    Route::post('/add-wishlist', 'User\UserController@add_wishlist')->name('user.wishlist');
+    Route::get('/wishlist', 'User\UserController@view_wishlist')->name('user.view_wishlist');
 
     //Account Info Update
-    Route::post('updateAccountInformation', 'User\UserController@updateAccountInformation')->name('updateAccountInformation');
-    Route::post('addCustomerAddress', 'User\UserController@addCustomerAddress')->name('addCustomerAddress');
-    Route::post('updateCustomerAddress', 'User\UserController@updateCustomerAddress')->name('updateCustomerAddress');
-    Route::get('getAddressDetail/{id}', 'User\UserController@getAddressDetail')->name('getAddressDetail');
+    Route::post('/updateAccountInformation', 'User\UserController@updateAccountInformation')->name('updateAccountInformation');
+    Route::post('/addCustomerAddress', 'User\UserController@addCustomerAddress')->name('addCustomerAddress');
+    Route::post('/updateCustomerAddress', 'User\UserController@updateCustomerAddress')->name('updateCustomerAddress');
+    Route::get('/getAddressDetail/{id}', 'User\UserController@getAddressDetail')->name('getAddressDetail');
 
-    Route::get('getCountries', 'User\UserController@getCountries')->name('getCountries');
-    Route::get('getStates/countryId/{id}', 'User\UserController@getStates')->name('getStates');
-    Route::get('getCities/stateId/{id}', 'User\UserController@getCities')->name('getCities');
+    Route::get('/getCountries', 'User\UserController@getCountries')->name('getCountries');
+    Route::get('/getStates/countryId/{id}', 'User\UserController@getStates')->name('getStates');
+    Route::get('/getCities/stateId/{id}', 'User\UserController@getCities')->name('getCities');
 
 });
 Route::namespace('Vendor')->prefix('/vendor')->middleware('vendor')->group(function () {
     //Dashboard
+<<<<<<< HEAD
     Route::get('dashboard', 'VendorController@dashboard')->name('dashboard');
     Route::get('product', 'ProductController@index')->name('product');
     Route::get('new-product', 'ProductController@addProductForm')->name('productForm');
@@ -96,19 +97,27 @@ Route::namespace('Vendor')->prefix('/vendor')->middleware('vendor')->group(funct
     
     Route::get('editVendor', 'VendorController@vendorEdit')->name('editVendor');
     Route::post('updateVendor/{id}', 'VendorController@vendorUpdate')->name('updateVendor');
+=======
+    Route::get('/dashboard', 'VendorController@dashboard')->name('dashboard');
+    Route::get('/product', 'ProductController@index')->name('product');
+    Route::get('/new-product', 'ProductController@addProductForm')->name('productForm');
+    Route::post('/new-product/add', 'ProductController@addProduct')->name('add_product');
+    Route::get('/editVendor', 'VendorController@vendorEdit')->name('editVendor');
+    Route::post('/updateVendor/{id}', 'VendorController@vendorUpdate')->name('updateVendor');
+>>>>>>> 8fb8e55f5603066dbf181747431619204b95b500
 
 });
 
 Route::namespace('Admin')->prefix('/admin')->middleware('admin')->group(function () {
     //Dashboard
-    Route::get('dashboard', 'AdminController@dashboard')->name('dashboard');
+    Route::get('/dashboard', 'AdminController@dashboard')->name('dashboard');
 
     //category
-    Route::get('category', 'Categories@index')->name('category');
+    Route::get('/category', 'Categories@index')->name('category');
     Route::match(['get', 'post'], '/add-category', 'Categories@addCategory')->name('admin.add-category');
     Route::match(['get', 'post'], '/category-edit/{id}', 'Categories@edit')->name('admin.edit-category');
     Route::get('/category-view/{id}', 'Categories@show')->name('category-view');
-    Route::delete('category/destroy/{id}', 'Categories@destroy');
+    Route::delete('/category/destroy/{id}', 'Categories@destroy');
 
     //setting
     Route::match(['get', 'post'], '/settings', 'SettingController@index')->name('settings');
@@ -122,8 +131,8 @@ Route::namespace('Admin')->prefix('/admin')->middleware('admin')->group(function
     Route::get('/getOptionValues', 'ProductController@getOptionValues')->name('getOptionValues');
     Route::get('/checkProductSku', 'ProductController@checkProductSku')->name('checkProductSku');
     Route::get('/checkProductSlug', 'ProductController@checkProductSlug')->name('checkProductSlug');
-    Route::get('product/changeProductStatus/{id}', 'ProductController@changeProductStatus')->name('changeProductStatus');
-    Route::resource('product', 'ProductController');
+    Route::get('/product/changeProductStatus/{id}', 'ProductController@changeProductStatus')->name('changeProductStatus');
+    Route::resource('/product', 'ProductController');
 
 
 
@@ -131,7 +140,7 @@ Route::namespace('Admin')->prefix('/admin')->middleware('admin')->group(function
     Route::get('/order', 'OrderController@index')->name('order.index');
     Route::get('/order/broker/{id}/{request_id}', 'OrderController@brokershow')->name('order.broker.show');
     Route::get('/order/{id}', 'OrderController@show')->name('order.show');
-    Route::get('order/changeOrderStatus/{id}', 'OrderController@changeOrderStatus')->name('order.changeOrderStatus');
+    Route::get('/order/changeOrderStatus/{id}', 'OrderController@changeOrderStatus')->name('order.changeOrderStatus');
     Route::delete('/order/destroy/{id}', 'OrderController@destroy')->name('order.destroy');
 
 
@@ -139,7 +148,7 @@ Route::namespace('Admin')->prefix('/admin')->middleware('admin')->group(function
     Route::get('/review', 'ReviewController@index')->name('review.index');
     Route::get('/review/{id}', 'ReviewController@show')->name('review.show');
     Route::match(['get', 'post'], '/review/edit/{id}', 'ReviewController@edit')->name('review.edit');
-    Route::delete('review/destroy/{id}', 'ReviewController@destroy');
+    Route::delete('/review/destroy/{id}', 'ReviewController@destroy');
 
     Route::get('/faq', 'FaqController@index')->name('faq.index');
     Route::get('/faq/create', 'FaqController@create')->name('faq.create');
@@ -150,7 +159,7 @@ Route::namespace('Admin')->prefix('/admin')->middleware('admin')->group(function
 
 
     // testimonial
-    Route::get('testimonial/changeBlogStatus/{id}', 'TestimonialController@changeBlogStatus')->name('changeBlogStatus');
+    Route::get('/testimonial/changeBlogStatus/{id}', 'TestimonialController@changeBlogStatus')->name('changeBlogStatus');
     Route::get('/testimonial', 'TestimonialController@index')->name('testimonial.index');
     Route::get('/testimonial/create', 'TestimonialController@create')->name('testimonial.create');
     Route::post('/testimonial/store', 'TestimonialController@store')->name('testimonial.store');
@@ -167,14 +176,14 @@ Route::namespace('Admin')->prefix('/admin')->middleware('admin')->group(function
     Route::delete('/manufacturer/destroy/{id}', 'ManufacturerController@destroy');
 
 
-    Route::resource('customers', 'CustomersController');
+    Route::resource('/customers', 'CustomersController');
     Route::delete('/customers/destroy/{id}', 'CustomersController@destroy')->name('customers.destroy');
     Route::post('/updatecustomers', 'CustomersController@update')->name('customers.update');
     Route::view('Addbroker','admin.customers.add' );
 
 
-    Route::resource('Vendor', 'VendorController');
-    Route::get('vendor/changeVendorStatus/', 'VendorController@changeVendorStatus')->name('changeVendorStatus');
+    Route::resource('/Vendor', 'VendorController');
+    Route::get('/vendor/changeVendorStatus/', 'VendorController@changeVendorStatus')->name('changeVendorStatus');
 
     Route::get('/catalog/attribute-groups', 'AttributeGroupController@show')->name('catalog.attributeGroups');
     Route::match(['get', 'post'], '/catalog/add-attribute-group', 'AttributeGroupController@add')->name('catalog.addAttributeGroup');
@@ -231,8 +240,8 @@ Route::namespace('Admin')->prefix('/admin')->middleware('admin')->group(function
     Route::delete('/shipping/destroy/{id}', 'ShippingRateController@destroy');
 
     //Blogs
-    Route::get('blog/changeBlogStatus/{id}', 'BlogController@changeBlogStatus')->name('changeBlogStatus');
-    Route::resource('blog', 'BlogController');
+    Route::get('/blog/changeBlogStatus/{id}', 'BlogController@changeBlogStatus')->name('changeBlogStatus');
+    Route::resource('/blog', 'BlogController');
 
     Route::get('/coupons', 'CouponController@index')->name('coupons.index');
     Route::match(['get', 'post'], '/coupon/create', 'CouponController@create')->name('coupons.create');
@@ -242,7 +251,7 @@ Route::namespace('Admin')->prefix('/admin')->middleware('admin')->group(function
     Route::delete('/coupons/destroy/{id}', 'CouponController@destroy')->name('coupon.destroy');
     //Collection
     Route::delete('/collection/destroy/{id}', 'CollectionController@destroy');
-    Route::resource('collection', 'CollectionController');
+    Route::resource('/collection', 'CollectionController');
 
     //Collection Products
     Route::get('/collectionProducts','CollectionProductController@index')->name('collectionProducts.index');
@@ -261,7 +270,7 @@ Route::namespace('Admin')->prefix('/admin')->middleware('admin')->group(function
 });
 
 /*  USPS routes start */
-Route::get('getUspsShippingRate', 'Front\UspsController@getUspsShippingRate')->name('getUspsShippingRate');
+Route::get('/getUspsShippingRate', 'Front\UspsController@getUspsShippingRate')->name('getUspsShippingRate');
 /*  USPS routes end */
 
 

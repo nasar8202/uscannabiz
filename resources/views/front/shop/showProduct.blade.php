@@ -209,12 +209,10 @@ ul.et_pb_social_media_follow{list-style-type:none!important;margin:0 0 22px;padd
 
 @endsection
 
-<script>
-    alert("sdfdf")
-</script>
-
+@section('extra-js')
+alert(4)
     <script>
-        alert(3)
+
         (function(){
             const currentImage = document.querySelector('#currentImage');
             const images = document.querySelectorAll('.product-section-thumbnail');
@@ -309,6 +307,7 @@ ul.et_pb_social_media_follow{list-style-type:none!important;margin:0 0 22px;padd
                     $('#button-review').button('reset');
                 },
                 success: function(json) {
+                    console.log(data)
                     $('.alert-dismissible').remove();
 
                     if (json['error']) {
@@ -334,3 +333,5 @@ ul.et_pb_social_media_follow{list-style-type:none!important;margin:0 0 22px;padd
     {{--    <script src="{{ asset('js/algolia.js') }}"></script>--}}
 
 
+
+@endsection
