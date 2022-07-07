@@ -97,7 +97,6 @@ Route::namespace('Vendor')->prefix('/vendor')->middleware('vendor')->group(funct
     Route::get('delete-product/{id}', 'ProductController@destroyProduct')->name('deleteProduct');
     Route::get('edit-products/{id}', 'ProductController@editProduct')->name('editProduct');
     Route::post('update-products/{id}', 'ProductController@updateProduct')->name('updateProduct');
-
     Route::get('editVendor', 'VendorController@vendorEdit')->name('editVendor');
     Route::post('updateVendor/{id}', 'VendorController@vendorUpdate')->name('updateVendor');
 
@@ -138,7 +137,7 @@ Route::namespace('Admin')->prefix('/admin')->middleware('admin')->group(function
     Route::get('/order/changeOrderStatus/{id}', 'OrderController@changeOrderStatus')->name('order.changeOrderStatus');
     Route::delete('/order/destroy/{id}', 'OrderController@destroy')->name('order.destroy');
     Route::post('submit-request', 'OrderController@broker_price')->name('submit-request');
-    
+
 
     //REVIEW
     Route::get('/review', 'ReviewController@index')->name('review.index');
