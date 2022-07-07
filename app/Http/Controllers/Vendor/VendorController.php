@@ -38,13 +38,12 @@ class VendorController extends Controller
         if($check->role_id == 3){
             // $order_item = OrderItem::where('')
             $orders = Order::
-            // with(['orderItems','productShow'])
-            // join('order_items','orders.id','=','order_items.order_id')
-            // ->join('products','order_items.product_id','=','products.id')
-            where('vendor_id',$check->id)
+            with('orderItems')->
+             join('order_items','orders.id','=','order_items.order_id')->
+            join('products','order_items.product_id','=','products.id')->
+             where('vendor_id',$check->id)
             ->get();
         }
-        dd($orders);
         return view('vendor.order.index',compact('orders'));
     }
     public function vendorEdit()

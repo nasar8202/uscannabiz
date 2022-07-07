@@ -185,7 +185,7 @@
 
                     // {data: 'id', name: 'id'},
                     // {data: 'program_name', name: 'program_name'},
-                    { data: 'DT_RowIndex', name: 'DT_RowIndex' },
+                    {data: 'DT_RowIndex', name: 'DT_RowIndex' },
                     {data: 'order_no', name: 'order_no'},
                     {data: 'customer', name: 'customer'},
                     {data: 'total_amount', name: 'total_amount'},

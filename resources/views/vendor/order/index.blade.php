@@ -126,7 +126,7 @@
 										 <input class="cb-select-items dokan-checkbox" type="checkbox" data-product-name="Testing Products" name="bulk_products[]" value="432">
 									  </th>
 									  <td data-title="Image" class="column-thumb">
-										 <a href="products/?product_id=432&amp;action=edit"><img width="150" height="150" src="assets/uploads/2022/03/banner-150x150.png" class="attachment-thumbnail size-thumbnail" alt=""></a>
+										 <a href="products/?product_id=432&amp;action=edit"><img width="150" height="150" src="{{asset('admin/images/'.$order->product_image)}}" class="attachment-thumbnail size-thumbnail" alt=""></a>
 									  </td>
 									  <td data-title="Name" class="column-primary">
 										 <strong><a href="products/?product_id=432&amp;action=edit">{{$order->product_name}}</a></strong>
