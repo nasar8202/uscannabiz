@@ -151,7 +151,7 @@
 
                                     @forelse($data['latestReviews'] as $latestReviews)
                                     <tr onclick="window.location='review/{{$latestReviews->id}}'; " style='cursor: pointer;'>
-                                        <td>  {{$latestReviews->product->product_name}}</td>
+                                        <td>  {{$latestReviews->product->product_name??''}}</td>
                                         <td> {{$latestReviews->customer->first_name??''}} </td>
                                         <td> {{$latestReviews->rating}} </td>
                                         <td> {{date('d-M-Y',strtotime($latestReviews->created_at))}} </td>

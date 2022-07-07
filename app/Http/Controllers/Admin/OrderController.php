@@ -104,6 +104,8 @@ class OrderController extends Controller
     public function index()
     {
         $users = User::where(['id'=>Auth::user()->id,'email'=>Auth::user()->email])->first();
+        $order = Order::with('customer')->orderBy('created_at','desc')->get();
+        // dd($order);
         // dd($users->customers_id);
         try {
             if (request()->ajax()) {
@@ -162,6 +164,7 @@ class OrderController extends Controller
                     return date('d-M-Y', strtotime($data->created_at)) ?? '';
                 })
                 ->addColumn('action', function ($data) {
+                    // return $data->product_id;
                     return '<a title="View" href="order/broker/' . $data->product_id . '/' . $data->id . '" class="btn btn-dark btn-sm">
                             <i class="fas fa-eye"></i>
                             </a>&nbsp;<button title="Delete" type="button" name="delete" id="' . $data->id . '" class="delete btn btn-danger btn-sm">
