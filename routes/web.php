@@ -91,6 +91,7 @@ Route::middleware(['user'])->prefix('user')->group(function () {
 Route::namespace('Vendor')->prefix('/vendor')->middleware('vendor')->group(function () {
     //Dashboard
     Route::get('dashboard', 'VendorController@dashboard')->name('dashboard');
+    Route::view('/order', 'vendor.order.index')->name('vendor_order');
     Route::get('product', 'ProductController@index')->name('product');
     Route::get('new-product', 'ProductController@addProductForm')->name('productForm');
     Route::post('new-product/add', 'ProductController@addProduct')->name('add_product');
