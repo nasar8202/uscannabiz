@@ -99,7 +99,7 @@ class CheckoutController extends Controller
                             'name' => $request->input('first_name'). ' '.$request->input('last_name'),
                             'email' => $request->input('email'),
                             'password' => Hash::make($request->input('password')),
-                            'roll_id' => 2,
+                            'role_id' => 2,
                         ]);
                     }
                     if(!empty($user->id)){

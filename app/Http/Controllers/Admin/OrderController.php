@@ -95,8 +95,8 @@ class OrderController extends Controller
     //     } catch (\Exception $ex) {
     //         return redirect('/')->with('error', 'SomeThing Went Wrong baby');
     //     }
-    
-       
+
+
     //     return view('admin.order.index');
     // }
 
@@ -172,7 +172,7 @@ class OrderController extends Controller
         } catch (\Exception $ex) {
             return redirect('/')->with('error', 'SomeThing Went Wrong baby');
         }
-    
+
         if($users->role_id == 1){
             return view('admin.order.index');
         }

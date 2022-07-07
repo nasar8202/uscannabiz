@@ -4,6 +4,7 @@
 <style type="text/css">
 	.et_pb_section_0_tb_footer.et_pb_section{padding-bottom:20px;background-color:#0D4400!important}.et_pb_row_0_tb_footer.et_pb_row{padding-top:0px!important;padding-bottom:0px!important;padding-top:0px;padding-bottom:0px}.et_pb_image_0_tb_footer{margin-bottom:20px!important;text-align:left;margin-left:0}.et_pb_text_0_tb_footer.et_pb_text,.et_pb_text_5_tb_footer.et_pb_text,.et_pb_text_7_tb_footer.et_pb_text{color:#FFFFFF!important}.et_pb_text_0_tb_footer{font-size:18px;margin-bottom:30px!important}.et_pb_text_1_tb_footer h5{font-family:'Montserrat',Helvetica,Arial,Lucida,sans-serif;font-weight:600;font-size:25px;color:#FFFFFF!important}.et_pb_text_1_tb_footer{margin-bottom:15px!important}.et_pb_social_media_follow_0_tb_footer li a.icon:before{font-size:20px;line-height:40px;height:40px;width:40px}.et_pb_social_media_follow_0_tb_footer li a.icon{height:40px;width:40px}.et_pb_text_4_tb_footer h4,.et_pb_text_2_tb_footer h4,.et_pb_text_3_tb_footer h4{font-weight:600;font-size:25px;color:#FFFFFF!important}.et_pb_text_3_tb_footer,.et_pb_text_2_tb_footer,.et_pb_text_4_tb_footer{margin-bottom:20px!important}.et_pb_sidebar_1_tb_footer.et_pb_widget_area,.et_pb_sidebar_1_tb_footer.et_pb_widget_area li,.et_pb_sidebar_1_tb_footer.et_pb_widget_area li:before,.et_pb_sidebar_1_tb_footer.et_pb_widget_area a,.et_pb_sidebar_0_tb_footer.et_pb_widget_area,.et_pb_sidebar_0_tb_footer.et_pb_widget_area li,.et_pb_sidebar_0_tb_footer.et_pb_widget_area li:before,.et_pb_sidebar_0_tb_footer.et_pb_widget_area a{font-size:18px;color:#FFFFFF!important}.et_pb_sidebar_0_tb_footer.et_pb_widget_area,.et_pb_sidebar_1_tb_footer.et_pb_widget_area{border-right-color:RGBA(255,255,255,0)}.et_pb_text_5_tb_footer{line-height:1.4em;font-size:18px;line-height:1.4em;margin-bottom:30px!important}.et_pb_row_1_tb_footer.et_pb_row{padding-top:0px!important;padding-top:0px}.et_pb_text_7_tb_footer{font-size:18px}@media only screen and (max-width:980px){.et_pb_image_0_tb_footer .et_pb_image_wrap img{width:auto}.et_pb_sidebar_0_tb_footer.et_pb_widget_area,.et_pb_sidebar_1_tb_footer.et_pb_widget_area{border-right-color:RGBA(255,255,255,0)}.et_pb_row_1_tb_footer.et_pb_row{padding-top:20px!important;padding-top:20px!important}}@media only screen and (max-width:767px){.et_pb_image_0_tb_footer .et_pb_image_wrap img{width:auto}.et_pb_sidebar_0_tb_footer.et_pb_widget_area,.et_pb_sidebar_1_tb_footer.et_pb_widget_area{border-right-color:RGBA(255,255,255,0)}.et_pb_row_1_tb_footer.et_pb_row{padding-top:20px!important;padding-top:20px!important}}
 </style>
+
 <div class="page-template-default page theme-Divi et-tb-has-template et-tb-has-footer woocommerce-js et_button_no_icon et_pb_button_helper_class et_fixed_nav et_show_nav et_secondary_nav_enabled et_primary_nav_dropdown_animation_fade et_secondary_nav_dropdown_animation_fade et_header_style_left et_cover_background et_pb_gutter windows et_pb_gutters3 et_right_sidebar et_divi_theme et-db et_full_width_page et_no_sidebar dokan-dashboard dokan-theme-Divi customize-support chrome">
 	<div id="main-content">
 	   <div class="container">
@@ -45,7 +46,8 @@
 	                                    </li>
 	                                    <li>
 	                                       <div class="title">Pageview</div>
-	                                       <div class="count">25</div>
+	                                       <div class="count">{{$productViewed->view ?? 0}}</div>
+
 	                                    </li>
 	                                    <li>
 	                                       <div class="title">Order</div>
@@ -207,10 +209,10 @@
 	                                       </div>
 	                                    </div>
 	                                 </div>
+
 	                                 <script type="text/javascript">
 	                                    jQuery(function($) {
-                                            // var order_data = JSON.parse(`<?php echo $orderCount; ?>`);
-                                            // console.log(order_data);
+
 	                                        var order_data = jQuery.parseJSON( '{"order_counts":[["1654041600000",<?php echo $orderCount; ?>],["1654128000000",0],["1654214400000",0],["1654300800000",0],["1654387200000",0],["1654473600000",0],["1654560000000",0],["1654646400000",0],["1654732800000",0],["1654819200000",0],["1654905600000",0],["1654992000000",0],["1655078400000",0],["1655164800000",0],["1655251200000",0],["1655337600000",0],["1655424000000",0],["1655510400000",0],["1655596800000",0],["1655683200000",0],["1655769600000",0],["1655856000000",0],["1655942400000",0]],"order_amounts":[["1654041600000",0],["1654128000000",0],["1654214400000",0],["1654300800000",0],["1654387200000",0],["1654473600000",0],["1654560000000",0],["1654646400000",0],["1654732800000",0],["1654819200000",0],["1654905600000",0],["1654992000000",0],["1655078400000",0],["1655164800000",0],["1655251200000",0],["1655337600000",0],["1655424000000",0],["1655510400000",0],["1655596800000",0],["1655683200000",0],["1655769600000",0],["1655856000000",0],["1655942400000",0]]}' );
 
                                             var isRtl = '0';
