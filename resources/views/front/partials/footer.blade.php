@@ -74,9 +74,9 @@
                <div class="et_pb_module et_pb_text et_pb_text_6_tb_footer visa-cards  et_pb_text_align_left et_pb_bg_layout_light">
                   <div class="et_pb_text_inner">
                      <div class="main-div">
-                        <div><img src="assets/uploads/2022/03/Group-52.png"></div>
-                        <div><img src="assets/uploads/2022/03/Group-53.png"></div>
-                        <div><img src="assets/uploads/2022/03/Group-54.png"></div>
+                        <div><img src="{{asset('assets/uploads/2022/03/Group-52.png')}}"></div>
+                        <div><img src="{{asset('assets/uploads/2022/03/Group-53.png')}}"></div>
+                        <div><img src="{{asset('assets/uploads/2022/03/Group-54.png')}}"></div>
                      </div>
                   </div>
                </div>
