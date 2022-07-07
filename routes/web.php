@@ -86,7 +86,6 @@ Route::middleware(['user'])->prefix('user')->group(function () {
 });
 Route::namespace('Vendor')->prefix('/vendor')->middleware('vendor')->group(function () {
     //Dashboard
-<<<<<<< HEAD
     Route::get('dashboard', 'VendorController@dashboard')->name('dashboard');
     Route::get('product', 'ProductController@index')->name('product');
     Route::get('new-product', 'ProductController@addProductForm')->name('productForm');
@@ -97,14 +96,6 @@ Route::namespace('Vendor')->prefix('/vendor')->middleware('vendor')->group(funct
     
     Route::get('editVendor', 'VendorController@vendorEdit')->name('editVendor');
     Route::post('updateVendor/{id}', 'VendorController@vendorUpdate')->name('updateVendor');
-=======
-    Route::get('/dashboard', 'VendorController@dashboard')->name('dashboard');
-    Route::get('/product', 'ProductController@index')->name('product');
-    Route::get('/new-product', 'ProductController@addProductForm')->name('productForm');
-    Route::post('/new-product/add', 'ProductController@addProduct')->name('add_product');
-    Route::get('/editVendor', 'VendorController@vendorEdit')->name('editVendor');
-    Route::post('/updateVendor/{id}', 'VendorController@vendorUpdate')->name('updateVendor');
->>>>>>> 8fb8e55f5603066dbf181747431619204b95b500
 
 });
 
@@ -142,7 +133,8 @@ Route::namespace('Admin')->prefix('/admin')->middleware('admin')->group(function
     Route::get('/order/{id}', 'OrderController@show')->name('order.show');
     Route::get('/order/changeOrderStatus/{id}', 'OrderController@changeOrderStatus')->name('order.changeOrderStatus');
     Route::delete('/order/destroy/{id}', 'OrderController@destroy')->name('order.destroy');
-
+    Route::post('submit-request', 'OrderController@broker_price')->name('submit-request');
+    
 
     //REVIEW
     Route::get('/review', 'ReviewController@index')->name('review.index');

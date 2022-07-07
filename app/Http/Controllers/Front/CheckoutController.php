@@ -133,8 +133,11 @@ class CheckoutController extends Controller
                     foreach ($items as $item){
                         $subtotal += (float)$item->price * (int)$item->qty;
                     }
+                    $random = \Carbon\Carbon::now()->format('Ymd');
+        
                     $order = Order::create([
-                        'order_no' => md5(time()),
+                        // 'order_no' => md5(time()),
+                        'order_no'=>$random."18D2",
                         'customer_id' => $user->id,
                         'customer_name' => $user->name ?? $request->input('first_name') . ' ' . $request->input('last_name'),
                         'customer_email' => $user->email ?? $request->input('email'),
