@@ -13,12 +13,12 @@
 	               <h1 class="entry-title main_title">Dashboard</h1>
 	               <div class="entry-content">
 	                  <div class="dokan-dashboard-wrap">
-	                     <div class="dokan-dash-sidebar">
+						<div class="dokan-dash-sidebar">
 	                        <div id="dokan-navigation" aria-label="Menu">
 	                           <label id="mobile-menu-icon" for="toggle-mobile-menu" aria-label="Menu">☰</label><input id="toggle-mobile-menu" type="checkbox">
 	                           <ul class="dokan-dashboard-menu">
-	                              <li class="active dashboard"><a href=""><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-	                              <li class="products"><a href="products/"><i class="fas fa-briefcase"></i> Products</a></li>
+	                              <li class="active dashboard"><a href="dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+	                              <li class="products"><a href="product"><i class="fas fa-briefcase"></i> Products</a></li>
 	                              <li class="orders"><a href="{{route('vendor_order')}}"><i class="fas fa-shopping-cart"></i> Orders</a></li>
 	                              <li class="withdraw"><a href="withdraw/"><i class="fas fa-upload"></i> Withdraw</a></li>
 	                              <li class="settings"><a href="settings/store/"><i class="fas fa-cog"></i> Settings <i class="fas fa-angle-right pull-right"></i></a></li>
