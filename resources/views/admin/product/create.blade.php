@@ -104,7 +104,7 @@
                                     <li class="nav-item">
                                         <a class="nav-link active" aria-current="page" href="#product" role="tab" data-toggle="tab">General</a>
                                     </li>
-                                    <li class="nav-item">
+                                    {{-- <li class="nav-item">
                                         <a class="nav-link" href="#additionalImages" role="tab" data-toggle="tab">Additional Images</a>
                                     </li>
                                     <li class="nav-item">
@@ -112,7 +112,7 @@
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="#options" role="tab" data-toggle="tab">Options</a>
-                                    </li>
+                                    </li> --}}
                                     <li class="nav-item">
                                         <a class="nav-link" href="#related_products" role="tab" data-toggle="tab">Related Products</a>
                                     </li>
@@ -129,23 +129,25 @@
                                                     <label for="exampleInputEmail1">Main Category*</label>
                                                     <select class="form-control {{ $errors->has('main_category') ? 'has-error' : ''}}" name="main_category" id="main-category" required>
                                                         <option value="">Select Category</option>
-                                                            <option></option>
+                                                            @foreach ($mainCategories as $category )
+                                                                <option value="{{$category->id}}">{{$category->name}}</option>
+                                                            @endforeach
                                                     </select>
                                                     {!! $errors->first('main_category', '<p class="help-block">:message</p>') !!}
                                                 </div>
-                                                <div class="col">
+                                                {{-- <div class="col">
                                                     <label for="exampleInputEmail1">Sub Category</label>
                                                     <select class="form-control" name="sub_category" id="sub-category"></select>
-                                                </div>
-                                                <div class="col">
+                                                </div> --}}
+                                                {{-- <div class="col">
                                                     <label for="exampleInputEmail1">Manufacturer</label>
                                                     <select class="form-control {{ $errors->has('manufacturer') ? 'has-error' : ''}}" name="manufacturer" id="manufacturer">
                                                         <option value="">Select Manufacturer</option>
                                                             <option value=""></option>
-                                                        
+
                                                     </select>
                                                     {!! $errors->first('manufacturer', '<p class="help-block">:message</p>') !!}
-                                                </div>
+                                                </div> --}}
                                                 <div class="col">
                                                     <label for="exampleInputEmail1">Product Featured/New</label>
                                                     <select name="product_featured" id="" class="form-control">

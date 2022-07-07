@@ -87,9 +87,9 @@
                         <ul id="top-menu" class="nav">
 
                            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-34 current_page_item menu-item-43"><a href="/" aria-current="page">Home</a></li>
-                           <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-44"><a href="about-us">About Us</a></li>
-                           <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-46"><a href="faq">FAQ Page</a></li>
-                           <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-45"><a href="contact-us">Contact Us</a></li>
+                           <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-44"><a href="{{ route('aboutUs') }}">About Us</a></li>
+                           <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-46"><a href="{{ route('faq') }}">FAQ Page</a></li>
+                           <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-45"><a href="{{ route('contactUs') }}">Contact Us</a></li>
                            {{-- @if(Auth::check())
                             <li>
                                 <a href="{{route('shop.view_wishlist')}}">

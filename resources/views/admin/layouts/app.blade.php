@@ -62,7 +62,7 @@
                 <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
             </li>
         </ul>
-     
+
         <!-- Right navbar links -->
 
        {{-- <ul class="navbar-nav ml-auto">
@@ -130,7 +130,7 @@
                     use Illuminate\Support\Facades\Auth;
                     $role = Auth::user()->role_id;
                     if($role == 4){
-                    
+
                     ?>
                     <li class="nav-item">
                         <a href="{{route('order.index')}}" class="nav-link {{ request()->IS('admin/order') ? 'active' : '' }}">
@@ -138,20 +138,15 @@
                             <p>Orders</p>
                         </a>
                     </li>
-                    <?php  } 
-                    
+                    <?php  }
+
                     $role = Auth::user()->role_id;
                     if($role == 1){
-                    
-                    
-                    
+
+
+
                     ?>
-                    <li class="nav-item">
-                        <a href="{{route('order.index')}}" class="nav-link {{ request()->IS('admin/order') ? 'active' : '' }}">
-                            <i class="nav-icon fa fa-shopping-cart" aria-hidden="true"></i>
-                            <p>Orders</p>
-                        </a>
-                    </li>
+
                     <li class="nav-item has-treeview {{ request()->IS('admin/settings') ? 'menu-is-opening menu-open' : '' }}">
                         <a href="#" class="nav-link ">
                             <i class="nav-icon fas fa-tags fw"></i>
@@ -279,7 +274,12 @@
                             </li>
                         </ul>
                     </li>
-                    
+                    <li class="nav-item">
+                        <a href="{{route('order.index')}}" class="nav-link {{ request()->IS('admin/order') ? 'active' : '' }}">
+                            <i class="nav-icon fa fa-shopping-cart" aria-hidden="true"></i>
+                            <p>Orders</p>
+                        </a>
+                    </li>
                     <li class="nav-item">
                         <a href="{{route('customers.index')}}" class="nav-link {{ request()->IS('admin/customers') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-user"></i>
@@ -292,7 +292,7 @@
                             <p>Vendor</p>
                         </a>
                     </li>
-                    
+
                     <li class="nav-item">
                         <a href="{{route('blog.index')}}" class="nav-link {{ request()->IS('admin/blog') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-tags fw"></i>

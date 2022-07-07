@@ -15,7 +15,7 @@ use app\Http\Controllers\Admin\VendorController;
 */
 //ROOT PATH
 
-Route::get('google-chart', 'Front\ShopController@googleLineChart')->name('googleLineChart');
+
 
 
 Route::get('/', 'Front\FrontController@index')->name('homepage');
@@ -100,6 +100,8 @@ Route::namespace('Vendor')->prefix('/vendor')->middleware('vendor')->group(funct
     Route::post('update-products/{id}', 'ProductController@updateProduct')->name('updateProduct');
     Route::get('editVendor', 'VendorController@vendorEdit')->name('editVendor');
     Route::post('updateVendor/{id}', 'VendorController@vendorUpdate')->name('updateVendor');
+
+    Route::get('/checkProductSkuVendor', 'ProductController@checkProductSkuVendor')->name('checkProductSkuVendor');
 
 });
 

@@ -20,21 +20,21 @@ class ProductController extends Controller
     {
         $category = Category::all();
         $vendor_id = Auth::user()->id;
-        
+
         $product = DB::table('products')->where('vender_id',$vendor_id)->get();
-        // $product = Product::get();
-        // dd($product);
+
         return view('vendor.product.index',compact(['category',$category ,'product',$product]));
     }
     public function addProductForm()
     {
         $categories = Category::get();
-        return view('Vendor.product.addProductForm',compact('categories'));
+        $products = Product::whereStatus(1)->get();
+        return view('Vendor.product.addProductForm',compact('categories','products'));
     }
     public function addProduct(Request $request)
     {
         $validator = Validator::make($request->all(), array(
-            
+
             'product_name' => 'required',
             'product_sku' => 'required|unique:products,sku,',
             'product_slug' => 'required|unique:products,slug,',
@@ -103,8 +103,16 @@ class ProductController extends Controller
                 //     }
                 // }
 
-                
-                
+                // Related Products
+                if (!empty($request->get('related_prod_id'))) {
+                    foreach ($request->get('related_prod_id') as $relatedProduct) {
+                        RelatedProduct::create([
+                            'product_id' => $product->id,
+                            'related_id' => $relatedProduct
+                        ]);
+                    }
+                }
+
 
             }
             catch(\Illuminate\Database\QueryException $e)
@@ -125,7 +133,7 @@ class ProductController extends Controller
             DB::commit();
 
         return back()->with(['success' => 'Product Added Successfully']);
-   
+
 
 
         // $product = new Product;
@@ -146,43 +154,55 @@ class ProductController extends Controller
 
         //     $meta->product_id = $product_id;
         //     $meta->meta_tag_title = $product_id;
-            
+
 
         // }
-    
+
+    }
+
+    public function checkProductSkuVendor(Request $request)
+    {
+
+        $sku = $request->sku;
+
+        $product_sku = Product::where('sku', $sku)->count();
+
+        return response()->json([
+            'product_sku' => $product_sku
+        ]);
     }
     public function vendorAddProductForm(Request $request,$id)
     {
         $data = Product::find($id);
-        
+
         return view('front.shop.vendorAddProductForm',compact(['data',$data ]));
     }
     public function destroyProduct($id)
     {
-        
+
         $product = DB::table('products')->where('id',$id)->delete();
         $meta = DB::table('products_meta_data')->where('product_id',$id)->delete();
         if($product){
-        
-            
+
+
         return back()->with(['success' => 'Product Deleted Successfully']);
         }
         else{
 
             return back()->with(['error' => 'Something Error']);
         }
-   
+
     }
     public function editProduct($id)
     {
        $product = Product::where('id',$id)->first();
        $meta = ProductMetaData::where('product_id',$id)->first();
-        
+       $relatedProducts = RelatedProduct::with('products')->where('product_id', $id)->get();
         $categories = Category::get();
-        return view('Vendor.product.editProductForm',compact('categories','product','meta'));
-       
-        
-   
+        return view('Vendor.product.editProductForm',compact('categories','product','relatedProducts','meta'));
+
+
+
     }
     public function updateProduct(Request $request, $id)
     {
@@ -229,12 +249,12 @@ class ProductController extends Controller
             'status' => 1,
         ]);
 
-            
 
-        
-       
+
+
+
     return back()->with(['success' => 'Product Updated Successfully']);
 
-   
+
     }
 }

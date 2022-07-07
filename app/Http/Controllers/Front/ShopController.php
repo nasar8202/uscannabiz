@@ -15,17 +15,7 @@ use Validator;
 use App\Visitor;
 class ShopController extends Controller
 {
-    public function googleLineChart()
-    {
-        $visitors = Visitor::select("visit_date", "click", "viewer")->get();
 
-        $result[] = ['Dates','Clicks','Viewers'];
-        foreach ($visitors as $key => $value) {
-            $result[++$key] = [$value->visit_date, (int)$value->click, (int)$value->viewer];
-        }
-
-        return view('/', compact('result'));
-    }
 
     public function index()
     {
@@ -58,8 +48,9 @@ class ShopController extends Controller
     {
 
         $products = Product::where('category_id',$id)->get();
-
-        return view('front.shop.show',compact('products'));
+        $productCount = Product::where('category_id',$id)->count();
+        $categories = Category::where('status',1)->with('products')->first();
+        return view('front.shop.show',compact('products','categories','productCount'));
     }
     public function show($slug)
     {
@@ -77,9 +68,9 @@ class ShopController extends Controller
 //        $product_options = OptionProduct::where('product_id',$product->id)->with('option_val')->groupby('option_id')->get();
 //
 //        dd($options);
-        \DB::table('products')
-        ->where('id', $product->id)
-        ->increment('view', 1);
+            \DB::table('products')
+            ->where('id', $product->id)
+            ->increment('view', 1);
 
         $mightAlsoLike = RelatedProduct::with('products')->where('product_id', $product->id)->inRandomOrder()->take(4)->get();
 

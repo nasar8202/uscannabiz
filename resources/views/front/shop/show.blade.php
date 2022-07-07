@@ -27,13 +27,13 @@
   <div class="container">
      <div id="content-area" class="clearfix">
         <div id="left-area">
-           <nav class="woocommerce-breadcrumb"><a href="">Home</a>&nbsp;&#47;&nbsp;Business &amp; Licenses for Sales</nav>
+           <nav class="woocommerce-breadcrumb"><a href="">Home</a>&nbsp;&#47;&nbsp;{{$categories->name}} &amp; {{$categories->category_slug}}</nav>
            <header class="woocommerce-products-header">
-              <h1 class="woocommerce-products-header__title page-title">Business &amp; Licenses for Sales</h1>
+              <h1 class="woocommerce-products-header__title page-title">{{$categories->name}} &amp; {{$categories->category_slug}}</h1>
            </header>
            <div class="woocommerce-notices-wrapper"></div>
            <p class="woocommerce-result-count">
-              Showing all 2 results
+              Showing all {{$productCount?? 0}} results
            </p>
            <form class="woocommerce-ordering" method="get">
               <select name="orderby" class="orderby" aria-label="Shop order">
@@ -62,7 +62,7 @@
                                                     @endif
             </li>
                 @empty
-                    <div style="text-align: left">No items found</div>
+                    <div style="text-align: left">This Category has No Products found</div>
                 @endforelse
            </ul>
         </div>
