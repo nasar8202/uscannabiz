@@ -75,9 +75,12 @@
                         <label for="last-name">City <span class="required">*</span></label>
                         <input type="text" class="input-text form-control" name="city" id="last-name" value="" required="required">
                      </p>
+                  <br>
+                     <div class="quantity">
+                        <input type="number" name="quantity" id="quantity_62b36070a592a" class="input-text qty text" step="1" min="1" max="" name="quantity" value="1" title="Qty" size="4" placeholder="" inputmode="numeric" autocomplete="off">
+                     </div>
                   
-                  
-                  
+                  <br>
                <p class="woocommerce-form-row form-row">
                   <button type="submit" class="woocommerce-Button woocommerce-button button woocommerce-form-register__submit" name="register" value="Register">Add Product Request</button>
 

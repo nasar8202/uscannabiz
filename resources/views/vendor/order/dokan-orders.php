@@ -1,6 +1,4 @@
-@extends('front.layout.app')
-@section('title', 'Product')
-@section('content')
+<?php include_once('header.php');?>	
 <style type="text/css">
 	.et_pb_section_0_tb_footer.et_pb_section{padding-bottom:20px;background-color:#0D4400!important}.et_pb_row_0_tb_footer.et_pb_row{padding-top:0px!important;padding-bottom:0px!important;padding-top:0px;padding-bottom:0px}.et_pb_image_0_tb_footer{margin-bottom:20px!important;text-align:left;margin-left:0}.et_pb_text_0_tb_footer.et_pb_text,.et_pb_text_5_tb_footer.et_pb_text,.et_pb_text_7_tb_footer.et_pb_text{color:#FFFFFF!important}.et_pb_text_0_tb_footer{font-size:18px;margin-bottom:30px!important}.et_pb_text_1_tb_footer h5{font-family:'Montserrat',Helvetica,Arial,Lucida,sans-serif;font-weight:600;font-size:25px;color:#FFFFFF!important}.et_pb_text_1_tb_footer{margin-bottom:15px!important}.et_pb_social_media_follow_0_tb_footer li a.icon:before{font-size:20px;line-height:40px;height:40px;width:40px}.et_pb_social_media_follow_0_tb_footer li a.icon{height:40px;width:40px}.et_pb_text_4_tb_footer h4,.et_pb_text_2_tb_footer h4,.et_pb_text_3_tb_footer h4{font-weight:600;font-size:25px;color:#FFFFFF!important}.et_pb_text_3_tb_footer,.et_pb_text_2_tb_footer,.et_pb_text_4_tb_footer{margin-bottom:20px!important}.et_pb_sidebar_1_tb_footer.et_pb_widget_area,.et_pb_sidebar_1_tb_footer.et_pb_widget_area li,.et_pb_sidebar_1_tb_footer.et_pb_widget_area li:before,.et_pb_sidebar_1_tb_footer.et_pb_widget_area a,.et_pb_sidebar_0_tb_footer.et_pb_widget_area,.et_pb_sidebar_0_tb_footer.et_pb_widget_area li,.et_pb_sidebar_0_tb_footer.et_pb_widget_area li:before,.et_pb_sidebar_0_tb_footer.et_pb_widget_area a{font-size:18px;color:#FFFFFF!important}.et_pb_sidebar_0_tb_footer.et_pb_widget_area,.et_pb_sidebar_1_tb_footer.et_pb_widget_area{border-right-color:RGBA(255,255,255,0)}.et_pb_text_5_tb_footer{line-height:1.4em;font-size:18px;line-height:1.4em;margin-bottom:30px!important}.et_pb_row_1_tb_footer.et_pb_row{padding-top:0px!important;padding-top:0px}.et_pb_text_7_tb_footer{font-size:18px}@media only screen and (max-width:980px){.et_pb_image_0_tb_footer .et_pb_image_wrap img{width:auto}.et_pb_sidebar_0_tb_footer.et_pb_widget_area,.et_pb_sidebar_1_tb_footer.et_pb_widget_area{border-right-color:RGBA(255,255,255,0)}.et_pb_row_1_tb_footer.et_pb_row{padding-top:20px!important;padding-top:20px!important}}@media only screen and (max-width:767px){.et_pb_image_0_tb_footer .et_pb_image_wrap img{width:auto}.et_pb_sidebar_0_tb_footer.et_pb_widget_area,.et_pb_sidebar_1_tb_footer.et_pb_widget_area{border-right-color:RGBA(255,255,255,0)}.et_pb_row_1_tb_footer.et_pb_row{padding-top:20px!important;padding-top:20px!important}}
 </style>
@@ -13,13 +11,13 @@
 	               <h1 class="entry-title main_title">Dashboard</h1>
 	               <div class="entry-content">
 	                  <div class="dokan-dashboard-wrap">
-						<div class="dokan-dash-sidebar">
+	                     <div class="dokan-dash-sidebar">
 	                        <div id="dokan-navigation" aria-label="Menu">
 	                           <label id="mobile-menu-icon" for="toggle-mobile-menu" aria-label="Menu">☰</label><input id="toggle-mobile-menu" type="checkbox">
 	                           <ul class="dokan-dashboard-menu">
-	                              <li class="active dashboard"><a href="dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-	                              <li class="products"><a href="product"><i class="fas fa-briefcase"></i> Products</a></li>
-	                              <li class="orders"><a href="{{route('vendor_order')}}"><i class="fas fa-shopping-cart"></i> Orders</a></li>
+	                              <li class="active dashboard"><a href=""><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+	                              <li class="products"><a href="products/"><i class="fas fa-briefcase"></i> Products</a></li>
+	                              <li class="orders"><a href="orders/"><i class="fas fa-shopping-cart"></i> Orders</a></li>
 	                              <li class="withdraw"><a href="withdraw/"><i class="fas fa-upload"></i> Withdraw</a></li>
 	                              <li class="settings"><a href="settings/store/"><i class="fas fa-cog"></i> Settings <i class="fas fa-angle-right pull-right"></i></a></li>
 	                              <li class="dokan-common-links dokan-clearfix">
@@ -98,80 +96,9 @@
 						         </form>
 						         <div class="dokan-clearfix"></div>
 						      </div>
-							  @if(!$orders->isEmpty())
-							  <table class="dokan-table dokan-table-striped product-listing-table dokan-inline-editable-table" id="dokan-product-list-table">
-								<thead>
-								   <tr>
-									  <th id="cb" class="manage-column column-cb check-column">
-										 <label for="cb-select-all"></label>
-										 <input id="cb-select-all" class="dokan-checkbox" type="checkbox">
-									  </th>
-									  <th>Image</th>
-									  <th>Name</th>
-									  <th>Status</th>
-									  <th>SKU</th>
-									  <th>Stock</th>
-									  <th>Price</th>
-									  <th>Earning<span class="tips earning-info" title="" data-original-title="Earning could be greater than or less than the calculated value based on different criteria like tax and shipping fee receiver"></span></th>
-									  <th>Type</th>
-									  <th>Views</th>
-									  <th>Date</th>
-								   </tr>
-								</thead>
-								<tbody>
-								 @foreach($orders as $order)
-								   <tr class="">
-									  <th class="dokan-product-select check-column">
-										 <label for="cb-select-432"></label>
-										 <input class="cb-select-items dokan-checkbox" type="checkbox" data-product-name="Testing Products" name="bulk_products[]" value="432">
-									  </th>
-									  <td data-title="Image" class="column-thumb">
-										 <a href="products/?product_id=432&amp;action=edit"><img width="150" height="150" src="{{asset('admin/images/'.$order->product_image)}}" class="attachment-thumbnail size-thumbnail" alt=""></a>
-									  </td>
-									  <td data-title="Name" class="column-primary">
-										 <strong><a href="products/?product_id=432&amp;action=edit">{{$order->product_name}}</a></strong>
-										 <div class="row-actions">
-											<span class="edit"><a href="edit-products/{{$order->id}}">Edit</a> | </span> 
-											<span class="delete"><a href="delete-product/{{$order->id}}" >Delete Permanently</a> | </span>
-											 <span class="view"><a href="product/testing-products/">View</a></span>
-										 </div>
-										 <button type="button" class="toggle-row"></button>
-									  </td>
-									  <td class="post-status" data-title="Status">
-										 <label class="dokan-label dokan-label-success">Online</label>
-									  </td>
-									  <td data-title="SKU">
-										 <span class="na">{{$order->sku}}</span>
-									  </td>
-									  <td data-title="Stock">
-										 <mark class="instock">{{$order->product_stock}}</mark>
-									  </td>
-									  <td data-title="Price">
-										 <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>{{$order->product_current_price}}</span>
-									  </td>
-									  <td data-title="Earning">
-										 <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>4.50</span>
-									  </td>
-									  <td data-title="Type">
-										 <span class="product-type tips simple" title="" data-original-title="Simple">{{$order->product_type}}</span>
-									  </td>
-									  <td data-title="Views">
-										 1
-									  </td>
-									  <td class="post-date" data-title="Date">
-										 <abbr title="May 18, 2022 1:14 am">{{$order->created_at}}</abbr>
-										 <div class="status">Published        </div>
-									  </td>
-									  <td class="diviader"></td>
-								   </tr>
-								   @endforeach
-								</tbody>
-							 </table>
-							  @else
 						      <div class="dokan-error">
 						         No orders found    
 						      </div>
-							  @endif
 						      <script>
 						         (function($){
 						             $(document).ready(function(){
@@ -195,4 +122,4 @@
 	   </div>
 	</div>
 </div>
-@endsection
+<?php include_once('footer.php');?>	

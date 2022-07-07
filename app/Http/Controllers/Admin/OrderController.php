@@ -104,6 +104,8 @@ class OrderController extends Controller
     public function index()
     {
         $users = User::where(['id'=>Auth::user()->id,'email'=>Auth::user()->email])->first();
+        $order = Order::with('customer')->orderBy('created_at','desc')->get();
+        // dd($order);
         // dd($users->customers_id);
         try {
             if (request()->ajax()) {
@@ -162,6 +164,7 @@ class OrderController extends Controller
                     return date('d-M-Y', strtotime($data->created_at)) ?? '';
                 })
                 ->addColumn('action', function ($data) {
+                    // return $data->product_id;
                     return '<a title="View" href="order/broker/' . $data->product_id . '/' . $data->id . '" class="btn btn-dark btn-sm">
                             <i class="fas fa-eye"></i>
                             </a>&nbsp;<button title="Delete" type="button" name="delete" id="' . $data->id . '" class="delete btn btn-danger btn-sm">
@@ -266,11 +269,15 @@ class OrderController extends Controller
             $items->order_id = $order_id;
             $items->product_id = $request->input('product_id');
             $items->product_per_price = $request->input('total_amount');
+            $total_amount = $request->input('total_amount');
+            $quantity = $request->input('quantity');
+            $sub_total = $quantity * $total_amount;
+
             
-            $items->product_qty	 = 1;
+            $items->product_qty	 = $request->input('quantity');
             
             $items->status	 = 1;
-            $items->product_subtotal_price	 = $request->input('total_amount');
+            $items->product_subtotal_price	 = $sub_total;
             $items->save();
         
         

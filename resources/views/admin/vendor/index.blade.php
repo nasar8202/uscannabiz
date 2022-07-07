@@ -139,8 +139,8 @@
                                     <thead>
                                     <tr style="text-align: center">
                                         <th>Id</th>
-                                        <th>First Name</th>
-                                        <th>Last Name</th>
+                                        <th>Full Name</th>
+                                        <th> Email</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                         
@@ -231,8 +231,8 @@
 
                     { data: 'DT_RowIndex', name: 'DT_RowIndex' },
                     // {data: 'id', name: 'id'},
-                    {data: 'first_name', name: 'First Name'},
-                    {data: 'last_name', name: 'Email'},
+                    {data: 'name', name: 'Name'},
+                    {data: 'email', name: 'Email'},
                     {data: 'status', name: 'status'},
                     
 

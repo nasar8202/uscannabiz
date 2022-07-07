@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers\Vendor;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use DB;
 use Auth;
+use App\User;
+use App\Models\Order;
 use App\Models\Customers;
 use App\Models\OrderItem;
-use App\User;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
 use App\Rules\MatchOldPassword;
-use DB;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
+
 class VendorController extends Controller
 {
     public function dashboard()
@@ -29,6 +31,20 @@ class VendorController extends Controller
         $productViewed = \DB::table('products')->where('vender_id',$vendor_id)->first();
 
         return view('vendor.dashboard',compact('orderCount',$orderCount,'productCount',$productCount,'productViewed',$productViewed));
+    }
+    public function order(Type $var = null)
+    {
+        $check = Auth::user();
+        if($check->role_id == 3){
+            // $order_item = OrderItem::where('')
+            $orders = Order::
+            with('orderItems')->
+             join('order_items','orders.id','=','order_items.order_id')->
+            join('products','order_items.product_id','=','products.id')->
+             where('vendor_id',$check->id)
+            ->get();
+        }
+        return view('vendor.order.index',compact('orders'));
     }
     public function vendorEdit()
     {

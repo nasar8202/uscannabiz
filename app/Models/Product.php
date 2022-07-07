@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use Gloudemans\Shoppingcart\Contracts\Buyable;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\OrderItem;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Model;
+use Gloudemans\Shoppingcart\Contracts\Buyable;
 use Illuminate\Database\Eloquent\SoftDeletes; //add this line
 
 class Product extends Model implements Buyable
@@ -104,5 +105,9 @@ class Product extends Model implements Buyable
     public function whishlist(){
         return $this->hasOne(CustomerWishlist::class, 'product_id', 'id')->where('customer_id', Auth::id());
     }
+
+
+
+    
 
 }

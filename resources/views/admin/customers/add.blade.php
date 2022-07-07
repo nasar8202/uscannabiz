@@ -58,8 +58,8 @@
                                     
                                     @csrf
                                     <?php 
-                                    use App\User;
-                                    $users = User::where('role_id',"=", 3)->get(); ?>
+                                    use App\Models\Customers;
+                                    $users = Customers::join('Users','Users.id' ,'=' ,'Customers.user_id')->where('role_id','=',3)->get()?>
                                     <div class="form-group">
                                         <select name="user_id" class="form-control" aria-label="Default select example">
                                             <option selected>Select Vendor For This Broker</option>

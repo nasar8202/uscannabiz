@@ -36,6 +36,7 @@
                             
                             <input type="hidden" name="vendor_id" value="{{$vender_request->vendor_id}}">
                             <input type="hidden" name="shipping_city" value="{{$vender_request->city}}">
+                            <input type="hidden" name="quantity" value="{{$vender_request->quantity}}">
                             
                             <input type="hidden" name="total_amount" value="{{$product->product_current_price}}">
                             <input type="hidden" name="product_id" value="{{$product->id}}">
@@ -67,6 +68,17 @@
                                             </tbody>
                                         </table>
                                     </div>
+                                </div> --}}
+                                
+                                {{-- <div class="col-md-5 float-right">
+                                    <label for="">Order Status</label>
+                                    <select name="order_status" id="order_status" class="form-control" data-order_id="{{$order->id}}">
+                                        <option value="pending" @if($order->order_status == 'pending') selected @endif>Pending</option>
+                                        <option value="shipped" @if($order->order_status == 'shipped') selected @endif>Shipped</option>
+                                        <option value="completed" @if($order->order_status == 'completed') selected @endif>Completed</option>
+                                        <option value="cancelled" @if($order->order_status == 'cancelled') selected @endif>Cancelled</option>
+                                    </select>
+
                                 </div> --}}
                                 <div class="col-md-12">
                                     <div class="panel panel-default">
@@ -280,5 +292,6 @@
                 }
             })
         });
-    </script>
+
+</script>
 @endsection
