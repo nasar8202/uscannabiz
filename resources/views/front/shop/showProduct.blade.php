@@ -132,10 +132,6 @@ ul.et_pb_social_media_follow{list-style-type:none!important;margin:0 0 22px;padd
 	             <div class="et_pb_module et_pb_wc_add_to_cart et_pb_wc_add_to_cart_0_tb_body et_pb_fields_label_position_default et_pb_bg_layout_  et_pb_text_align_left">
 	                <div class="et_pb_module_inner">
 
-	                      <div class="quantity">
-	                         <label class="screen-reader-text" for="quantity_62b36070a592a">abc-shirt quantity</label>
-	                         <input type="number" id="quantity_62b36070a592a" class="input-text qty text" step="1" min="1" max="" name="quantity" value="1" title="Qty" size="4" placeholder="" inputmode="numeric" autocomplete="off">
-	                      </div>
 	                      <a href="{{ Route('vendorAddProductForm',$product->id ) }}" name="add-to-cart" value="381" class="single_add_to_cart_button button alt">Request to Broker</a>
 
 	                </div>

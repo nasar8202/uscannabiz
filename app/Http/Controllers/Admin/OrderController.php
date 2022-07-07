@@ -266,11 +266,15 @@ class OrderController extends Controller
             $items->order_id = $order_id;
             $items->product_id = $request->input('product_id');
             $items->product_per_price = $request->input('total_amount');
+            $total_amount = $request->input('total_amount');
+            $quantity = $request->input('quantity');
+            $sub_total = $quantity * $total_amount;
+
             
-            $items->product_qty	 = 1;
+            $items->product_qty	 = $request->input('quantity');
             
             $items->status	 = 1;
-            $items->product_subtotal_price	 = $request->input('total_amount');
+            $items->product_subtotal_price	 = $sub_total;
             $items->save();
         
         
