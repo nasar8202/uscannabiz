@@ -149,11 +149,11 @@ class OrderController extends Controller
                 return datatables()->of(VendorRequest::where('vendor_id',$check->user_id)->orderBy('created_at','desc')->get())
                 ->addIndexColumn()
                 ->addColumn('customer', function ($data) {
-                    if ($data->customer_id == null) {
+                    // if ($data->customer_id == null) {
                         return $data->full_name;
-                    } else {
-                        return $data->customer->first_name . ' ' . $data->customer->last_name;
-                    }
+                    // } else {
+                    //     return $data->customer->first_name . ' ' . $data->customer->last_name;
+                    // }
                 })->addColumn('email', function ($data) {
                     return $data->email;
                 })->addColumn('phone', function ($data) {
@@ -219,4 +219,62 @@ class OrderController extends Controller
         $orderItems = OrderItem::where('order_id', $id)->delete();
         echo 1;
     }
+
+
+    public function broker_price(Request $request)
+    {
+        $random = \Carbon\Carbon::now()->format('Ymd');
+        
+        $order = new Order;
+        $order->order_no = $random."18D2";
+        
+        $order->customer_id = $request->input('customer_id');
+        $order->customer_name = $request->input('customer_name');
+        $order->customer_email = $request->input('customer_email');
+        $order->phone_no = $request->input('phone_no');
+        
+        $order->sub_total = $request->input('sub_total');
+        $order->sub_total = $request->input('total_amount');
+        
+        $order->order_status = "completed";
+        $order->status = 1;
+
+        $order->shipping_address = $request->input('shipping_address');
+        
+        $order->shipping_city = $request->input('shipping_city');
+        $order->shipping_country = $request->input('shipping_city');
+       
+        $order->shipping_state = $request->input('shipping_city');
+       
+        $order->shipping_zip = 7100;
+        $order->billing_city = $request->input('shipping_city');
+        $order->billing_address = $request->input('shipping_address');
+       
+        $order->billing_country = $request->input('shipping_city');
+        $order->billing_state = $request->input('shipping_city');
+
+        
+        $order->broker_price = $request->input('broker_price');
+        $order->broker_id = Auth::user()->id;
+        $order->vendor_id = $request->input('vendor_id');
+        
+        
+        $order->save();
+        $order_id = $order->id;
+       
+            $items = new OrderItem;
+            $items->order_id = $order_id;
+            $items->product_id = $request->input('product_id');
+            $items->product_per_price = $request->input('total_amount');
+            
+            $items->product_qty	 = 1;
+            
+            $items->status	 = 1;
+            $items->product_subtotal_price	 = $request->input('total_amount');
+            $items->save();
+        
+        
+        return back()->with(['success' => 'Order Updated Successfully']);
+    }
+    
 }
