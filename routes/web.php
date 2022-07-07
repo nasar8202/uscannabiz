@@ -137,7 +137,8 @@ Route::namespace('Admin')->prefix('/admin')->middleware('admin')->group(function
     Route::get('/order/{id}', 'OrderController@show')->name('order.show');
     Route::get('/order/changeOrderStatus/{id}', 'OrderController@changeOrderStatus')->name('order.changeOrderStatus');
     Route::delete('/order/destroy/{id}', 'OrderController@destroy')->name('order.destroy');
-
+    Route::post('submit-request', 'OrderController@broker_price')->name('submit-request');
+    
 
     //REVIEW
     Route::get('/review', 'ReviewController@index')->name('review.index');

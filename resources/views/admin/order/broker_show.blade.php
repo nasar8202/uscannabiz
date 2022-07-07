@@ -25,6 +25,20 @@
                             </div> --}}
 
                         </div>
+                        <form method="post" action="{{route('submit-request')}}">
+                            @csrf
+                            
+                            <input type="hidden" name="customer_id" value="{{$vender_request->customer_id}}">
+                            <input type="hidden" name="customer_name" value="{{$vender_request->full_name}}">
+                            <input type="hidden" name="phone_no" value="{{$vender_request->phone_num}}">
+                            <input type="hidden" name="customer_email" value="{{$vender_request->email}}">
+                            <input type="hidden" name="shipping_address" value="{{$vender_request->address}}">
+                            
+                            <input type="hidden" name="vendor_id" value="{{$vender_request->vendor_id}}">
+                            <input type="hidden" name="shipping_city" value="{{$vender_request->city}}">
+                            
+                            <input type="hidden" name="total_amount" value="{{$product->product_current_price}}">
+                            <input type="hidden" name="product_id" value="{{$product->id}}">
                         <div class="card-body">
                             <div class="row">
                                 {{-- <div class="col-md-12">
@@ -60,6 +74,7 @@
                                             <h3 class="panel-title text-center"><i class="fa fa-user"></i> Vendor Details</h3>
                                         </div>
                                         <table class="table table-bordered">
+                                            
                                             <tbody>
                                             <tr>
                                                 <td style="width: 1%;">
@@ -67,7 +82,7 @@
                                                 </td>
                                                 <td>
                                                     {{-- @if($order->customer_id == null) --}}
-                                                        {{$vender_detail->name}}
+                                                    <input type="hidden" name="vender_name" value="{{$vender_detail->name}}"> {{$vender_detail->name}}
                                                     {{-- @else
                                                         {{$order->customer->first_name.''.$order->customer->last_name}}
                                                     @endif --}}
@@ -78,6 +93,7 @@
                                                 <td><button data-toggle="tooltip" title="" class="btn btn-info btn-xs" data-original-title="E-Mail"><i class="fa fa-envelope-o fa-fw"></i></button></td>
                                                 <td>
                                                     {{-- @if($order->customer_id == null) --}}
+                                                    <input type="hidden" name="vender_email" value="{{$vender_detail->email}}">
                                                         <a href="mailto:{{$vender_detail->email}}">{{$vender_detail->email}}</a>
                                                     {{-- @else
                                                         <a href="mailto:{{$order->customer->user->email}}">{{$order->customer->user->email}}</a>
@@ -118,12 +134,12 @@
                                             <td class="text-left">
                                                 <strong>Address</strong> : {{$vender_request->address}}
                                                 <br>
-                                                <strong>City</strong> : {{$vender_request->city}}
+                                                <strong>City</strong> :  {{$vender_request->city}}
                                             </td>
                                             <td class="text-left">
                                                 <strong>Address</strong> : {{$vender_request->address}}
                                                 <br>
-                                                <strong>City</strong> : {{$vender_request->city}}
+                                                <strong>City</strong>  : {{$vender_request->city}}
                                             </td>
                                         </tr>
                                         </tbody>
@@ -157,6 +173,7 @@
                                                     <img src="{{asset('uploads/products/'.$product->product_image)}}" width="50" height="50" alt="">
                                                 </td>
                                                 <td class="left strong">
+                                                    <input type="hidden" name="" value="{{$product->product_name}}">
                                                     {{$product->product_name}}
                                                     {{-- <a href="{{URL::to('/').'/shop/'.$orderItems->product->slug}}" target="_blank">
                                                         {{$orderItems->product->product_name}}
@@ -168,7 +185,8 @@
                                                     @endforelse
                                                     @endif --}}
                                                 </td>
-                                                <td class="right">${{$product->product_current_price}}</td>
+                                                <td class="right">
+                                                    ${{$product->product_current_price}}</td>
                                             </tr>
                                             {{-- @php
                                                 $subTotal += $orderItems->product_per_price;
@@ -179,6 +197,11 @@
 
                                         </tbody>
                                     </table>
+                                    <div class="col-md-4">
+                                    <label for="category">Broker Commission Price</label>
+                                    <input type="text" class="form-control" name="broker_price" id="broker_price"  value="" placeholder="Amount" required >
+                                    </div>    
+                                <br>
                                 </div>
                                 {{-- <div class="row">
                                     <div class="col-lg-4 col-sm-5">
@@ -223,6 +246,9 @@
                                 </div> --}}
                             </div>
                         </div>
+                        
+                        <button type="submit" class="float-right btn btn-primary">Add Request To Vendor</button>
+                    </form>
                     </div>
                 </div>
             </div>
