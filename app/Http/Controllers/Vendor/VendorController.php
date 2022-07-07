@@ -16,18 +16,19 @@ class VendorController extends Controller
     public function dashboard()
     {
 
+        $vendor_id = Auth::user()->id;
         $orderCount =   DB::table('order_items')
                         ->select('order_items.product_id','products.id','products.vender_id')
                         ->join('products','order_items.product_id','=','products.id')
                         ->count();
 
-        $vendor_id = Auth::user()->id;
-
         $productCount = DB::table('products')
                         ->where('vender_id',$vendor_id)
                         ->count();
         // dd($productCount);
-        return view('vendor.dashboard',compact('orderCount',$orderCount,'productCount',$productCount));
+        $productViewed = \DB::table('products')->where('vender_id',$vendor_id)->first();
+
+        return view('vendor.dashboard',compact('orderCount',$orderCount,'productCount',$productCount,'productViewed',$productViewed));
     }
     public function vendorEdit()
     {
