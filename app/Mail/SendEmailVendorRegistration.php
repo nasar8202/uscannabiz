@@ -10,15 +10,15 @@ use Illuminate\Queue\SerializesModels;
 class SendEmailVendorRegistration extends Mailable
 {
     use Queueable, SerializesModels;
-
+    public $details;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($details)
     {
-
+        $this->details = $details;
     }
 
     /**
@@ -28,7 +28,9 @@ class SendEmailVendorRegistration extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.vendorEmailRegistration');
+        //return $this->view('emails.vendorEmailRegistration');
+        return $this->subject('Mail from Uscananbiz')
+                    ->view('emails.vendorEmailRegistration');
     }
 }
 

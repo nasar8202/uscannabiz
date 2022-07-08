@@ -98,8 +98,8 @@ class FrontController extends Controller
             $details['email'] =$request->email;
 
             // dispatch(new App\Jobs\SendEmailJob($details));
-            SendEmailVendorJob::dispatch($details);
-            dd('done');
+            // SendEmailVendorJob::dispatch($details);
+            // dd('done');
 
 
             // Customers::create([$customerData]);

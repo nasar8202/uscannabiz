@@ -8,7 +8,7 @@ use App\Models\Order;
 use App\User;
 use Illuminate\Http\Request;
 use Validator;
-
+use DB;
 use Illuminate\Support\Facades\Hash;
 use Auth;
 class CustomersController extends Controller
@@ -22,21 +22,26 @@ class CustomersController extends Controller
     final public function index()
     {
     //    dd(User::all());
-    
-    
+//     $a = DB::table('users')
+//     ->select('users.id','users.name','users.email','users.role_id','customers.first_name','customers.last_name','customers.email')
+//     ->join('customers','customers.user_id','=','users.id')
+//     ->where('users.role_id', 4)
+//     ->get();
+// return $a;
+//return User::join('Customers','Users.id' ,'=' ,'Customers.user_id')->where('role_id','=',4)->get();
         try {
-            
+
             if (request()->ajax()) {
                 return datatables()->of(Customers::join('Users','Users.id' ,'=' ,'Customers.user_id')->where('role_id','=',4)->get())
                     ->addIndexColumn()
                     ->addColumn('action', function ($data) {
-                        return '<a title="View" href="customers/' . $data->id . '" 
+                        return '<a title="View" href="customers/' . $data->id . '"
                         class="btn btn-dark btn-sm"><i class="fas fa-eye"></i></a>&nbsp;
                         <a title="edit" href="customers/' . $data->id . '/edit" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>&nbsp;
-                        <button title="Delete" type="button" name="delete" id="' . $data->id . '" 
+                        <button title="Delete" type="button" name="delete" id="' . $data->id . '"
                         class="delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>';
                     })->rawColumns(['action'])->make(true);
-                    
+
             }
         } catch (\Exception $ex) {
             return redirect('/')->with('error', $ex->getMessage());
@@ -61,7 +66,8 @@ class CustomersController extends Controller
      */
     public function store(Request $request)
     {
-        
+
+
         $validator = Validator::make($request->all(), array(
             'first_name' => 'required',
             'last_name' => 'required',
@@ -76,21 +82,21 @@ class CustomersController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
         else{
-            
+
 
         $customer = new Customers;
         $customer->first_name = $request->input('first_name');
-        $customer->last_name = $request->input('last_name'); 
-        $customer->email = $request->input('email'); 
-        $customer->phone_no = $request->input('phone'); 
-        $customer->city = $request->input('city'); 
-        $customer->state = $request->input('state'); 
+        $customer->last_name = $request->input('last_name');
+        $customer->email = $request->input('email');
+        $customer->phone_no = $request->input('phone');
+        $customer->city = $request->input('city');
+        $customer->state = $request->input('state');
         $customer->country = $request->input('country');
-        $customer->address = $request->input('address');  
+        $customer->address = $request->input('address');
         $customer->user_id = $request->input('user_id');
         $customer->save();
         $customer_id = $customer->id;
-        
+
         $user = new User;
         $user->name = $request->input('first_name');
         $user->email = $request->input('email');
@@ -105,10 +111,18 @@ class CustomersController extends Controller
         //     'role_id' => 4,
         //     'customer_id'=>$customer_id,
         // ]);
-        
-        return redirect()->back()->with('success',"customer Inserted");
+        $details = [
+            'name'=> $request->first_name." ".$request->last_name,
+            'email' => $request->email,
+            'password'=> $request->first_name
+        ];
 
-        } 
+        \Mail::to($request->input('email'))->send(new \App\Mail\SendEmailVendorRegistration($details));
+
+        //dd("Email is Sent.");
+        return redirect()->back()->with('success',"customer add And Email is Sent.");
+
+        }
     }
 
     /**
@@ -175,20 +189,20 @@ class CustomersController extends Controller
         $id = $request->id;
         $customer = Customers::find($id);
         $customer->first_name = $request->input('first_name');
-        $customer->last_name = $request->input('last_name'); 
-        $customer->email = $request->input('email'); 
-        $customer->phone_no = $request->input('phone'); 
-        $customer->city = $request->input('city'); 
-        $customer->state = $request->input('state'); 
+        $customer->last_name = $request->input('last_name');
+        $customer->email = $request->input('email');
+        $customer->phone_no = $request->input('phone');
+        $customer->city = $request->input('city');
+        $customer->state = $request->input('state');
         $customer->country = $request->input('country');
-        $customer->address = $request->input('address');  
+        $customer->address = $request->input('address');
         $customer->user_id = $request->input('user_id');
         $customer->save();
-        
+
         $customer_id = $customer->id;
 
         $user =  User::where('customers_id','=',$customer_id)->first();
-        
+
         $user->name = $request->input('first_name');
         $user->email = $request->input('email');
         $user->password = Hash::make($request->input('first_name'));
@@ -208,14 +222,14 @@ class CustomersController extends Controller
     public function destroy($id)
     {
         $content=Customers::find($id);
-        
-        
+
+
         $user = User::where('customers_id','=',$id)->delete();
-        
+
         if(!empty($content) ){
-        
+
             $content->delete();
-        
+
             echo 1;
         }else{echo 2;}
     }
