@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
+
     // public function index()
     // {
     //     $users = User::where(['id'=>Auth::user()->id,'email'=>Auth::user()->email])->first();
@@ -145,7 +146,8 @@ class OrderController extends Controller
             else{
                 // $users->customers_id;
                 $check = Customers::where('id', $users->customers_id)->first();
-                // $vendor_request = VendorRequest::where('vendor_id',$check->user_id)->get();
+                // $vendor_request = VendorRequest::where('vendor_id',$check->user_id)->orderBy('created_at','desc')->get();
+                // $order_check = Order::where('id',$vendor_request->order_id)->first();
                 // dd($vendor_request);
                 // return datatables()->of(Order::where(['customer_id'=>$users->customers_id,'status'=>3])->orderBy('created_at','desc')->get())
                 return datatables()->of(VendorRequest::where('vendor_id',$check->user_id)->orderBy('created_at','desc')->get())
@@ -162,13 +164,25 @@ class OrderController extends Controller
                     return $data->phone_num;
                 })->addColumn('order_date', function ($data) {
                     return date('d-M-Y', strtotime($data->created_at)) ?? '';
+                })->addColumn('status', function ($data) {
+                    $order_check = Order::where('id',$data->order_id)->first();
+                    if ($order_check->order_status == 'pending') {
+                        return '<span class="badge badge-secondary">Pending</span>';
+                    } elseif ($order_check->order_status == 'cancelled') {
+                        return '<span class="badge badge-danger">Cancelled</span>';
+                    } elseif ($order_check->order_status == 'completed') {
+                        return '<span class="badge badge-success">Completed</span>';
+                    } elseif ($order_check->order_status == 'shipped') {
+                        return '<span class="badge badge-info">Shipped</span>';
+                    }
                 })
                 ->addColumn('action', function ($data) {
                     // return $data->product_id;
-                    return '<a title="View" href="order/broker/' . $data->product_id . '/' . $data->id . '" class="btn btn-dark btn-sm">
+                    return '<a title="View" href="order/broker/' . $data->product_id . '/' . $data->id . '/' . $data->order_id . '" class="btn btn-dark btn-sm">
                             <i class="fas fa-eye"></i>
                             </a>&nbsp;<button title="Delete" type="button" name="delete" id="' . $data->id . '" class="delete btn btn-danger btn-sm">
                             <i class="fa fa-trash"></i></button>';
+                            
                 })->rawColumns(['order_no', 'customer', 'status', 'total_amount', 'order_date', 'action'])->make(true);
             }
             }
@@ -191,14 +205,15 @@ class OrderController extends Controller
 
     }
 
-    public function brokershow($id,$request_id)
+    public function brokershow($id,$request_id,$order_id)
     {
-        // $order = Order::where('id', $id)->with('orderItems', 'customer', 'orderItems.product')->firstOrFail();
+        // dd($request->all());
+        $order = Order::where('id', $order_id)->first();
         $product = Product::where('id', $id)->first();
         $vender_request = VendorRequest::where('id',$request_id)->first();
         $vender_detail = User::where('id',$vender_request->vendor_id)->first();
         // dd($order,$vender_detail,$vender_request);
-        return view('admin.order.broker_show', compact(['product','vender_request','vender_detail']));
+        return view('admin.order.broker_show', compact(['product','vender_request','vender_detail','order']));
 
     }
 
@@ -226,6 +241,7 @@ class OrderController extends Controller
 
     public function broker_price(Request $request)
     {
+        // dd($request->all());
         $random = \Carbon\Carbon::now()->format('Ymd');
         
         $order = new Order;
@@ -235,11 +251,13 @@ class OrderController extends Controller
         $order->customer_name = $request->input('customer_name');
         $order->customer_email = $request->input('customer_email');
         $order->phone_no = $request->input('phone_no');
-        
-        $order->sub_total = $request->input('sub_total');
+        $total_amount = $request->input('total_amount');
+        $quantity = $request->input('quantity');
+        $grand_total = $quantity * $total_amount;
         $order->sub_total = $request->input('total_amount');
+        $order->total_amount = $grand_total;
         
-        $order->order_status = "completed";
+        $order->order_status = "pending";
         $order->status = 1;
 
         $order->shipping_address = $request->input('shipping_address');
@@ -279,6 +297,10 @@ class OrderController extends Controller
             $items->status	 = 1;
             $items->product_subtotal_price	 = $sub_total;
             $items->save();
+            
+        $vendor_save = VendorRequest::find($request->vendor_request_id);
+        $vendor_save->order_id = $order_id;
+        $vendor_save->save();
         
         
         return back()->with(['success' => 'Order Updated Successfully']);

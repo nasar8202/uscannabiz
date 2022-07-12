@@ -135,7 +135,7 @@ Route::namespace('Admin')->prefix('/admin')->middleware('admin')->group(function
 
     //ORDER
     Route::get('/order', 'OrderController@index')->name('order.index');
-    Route::get('/order/broker/{id}/{request_id}', 'OrderController@brokershow')->name('order.broker.show');
+    Route::get('/order/broker/{id}/{request_id}/{order_id}', 'OrderController@brokershow')->name('order.broker.show');
     Route::get('/order/{id}', 'OrderController@show')->name('order.show');
     Route::get('/order/changeOrderStatus/{id}', 'OrderController@changeOrderStatus')->name('order.changeOrderStatus');
     Route::delete('/order/destroy/{id}', 'OrderController@destroy')->name('order.destroy');
