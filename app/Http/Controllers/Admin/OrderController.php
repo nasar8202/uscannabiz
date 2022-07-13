@@ -166,6 +166,7 @@ class OrderController extends Controller
                     return date('d-M-Y', strtotime($data->created_at)) ?? '';
                 })->addColumn('status', function ($data) {
                     $order_check = Order::where('id',$data->order_id)->first();
+                    if(isset($order_check)){
                     if ($order_check->order_status == 'pending') {
                         return '<span class="badge badge-secondary">Pending</span>';
                     } elseif ($order_check->order_status == 'cancelled') {
@@ -175,13 +176,25 @@ class OrderController extends Controller
                     } elseif ($order_check->order_status == 'shipped') {
                         return '<span class="badge badge-info">Shipped</span>';
                     }
+                    }
+                    else{
+                    return '<span class="badge badge-secondary">Pending</span>';
+                    }
                 })
                 ->addColumn('action', function ($data) {
                     // return $data->product_id;
+                    if(!$data->order_id == ""){
                     return '<a title="View" href="order/broker/' . $data->product_id . '/' . $data->id . '/' . $data->order_id . '" class="btn btn-dark btn-sm">
                             <i class="fas fa-eye"></i>
                             </a>&nbsp;<button title="Delete" type="button" name="delete" id="' . $data->id . '" class="delete btn btn-danger btn-sm">
                             <i class="fa fa-trash"></i></button>';
+                    }
+                    else{
+                        return '<a title="View" href="order/broker/' . $data->product_id . '/' . $data->id . '" class="btn btn-dark btn-sm">
+                        <i class="fas fa-eye"></i>
+                        </a>&nbsp;<button title="Delete" type="button" name="delete" id="' . $data->id . '" class="delete btn btn-danger btn-sm">
+                        <i class="fa fa-trash"></i></button>';
+                    }
                             
                 })->rawColumns(['order_no', 'customer', 'status', 'total_amount', 'order_date', 'action'])->make(true);
             }
@@ -214,6 +227,17 @@ class OrderController extends Controller
         $vender_detail = User::where('id',$vender_request->vendor_id)->first();
         // dd($order,$vender_detail,$vender_request);
         return view('admin.order.broker_show', compact(['product','vender_request','vender_detail','order']));
+
+    }
+    public function brokershow_without_orderid($id,$request_id)
+    {
+        // dd($request->all());
+        // $order = Order::where('id', $order_id)->first();
+        $product = Product::where('id', $id)->first();
+        $vender_request = VendorRequest::where('id',$request_id)->first();
+        $vender_detail = User::where('id',$vender_request->vendor_id)->first();
+        // dd($order,$vender_detail,$vender_request);
+        return view('admin.order.broker_show', compact(['product','vender_request','vender_detail']));
 
     }
 
@@ -257,7 +281,7 @@ class OrderController extends Controller
         $order->sub_total = $request->input('total_amount');
         $order->total_amount = $grand_total;
         
-        $order->order_status = "pending";
+        $order->order_status = "completed";
         $order->status = 1;
 
         $order->shipping_address = $request->input('shipping_address');
@@ -303,7 +327,7 @@ class OrderController extends Controller
         $vendor_save->save();
         
         
-        return back()->with(['success' => 'Order Updated Successfully']);
+        return redirect()->route('order.index')->with(['success' => 'Order Updated Successfully']);
     }
     
 }

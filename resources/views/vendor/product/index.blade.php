@@ -22,8 +22,8 @@
 	                        <div id="dokan-navigation" aria-label="Menu">
 	                           <label id="mobile-menu-icon" for="toggle-mobile-menu" aria-label="Menu">☰</label><input id="toggle-mobile-menu" type="checkbox">
 	                           <ul class="dokan-dashboard-menu">
-	                              <li class="active dashboard"><a href="dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-	                              <li class="products"><a href="product"><i class="fas fa-briefcase"></i> Products</a></li>
+	                              <li class="active dashboard"><a href="{{route('dashboard')}}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+	                              <li class="products"><a href="{{route('product')}}"><i class="fas fa-briefcase"></i> Products</a></li>
 	                              <li class="orders"><a href="{{route('vendor_order')}}"><i class="fas fa-shopping-cart"></i> Orders</a></li>
 	                              <li class="withdraw"><a href="withdraw/"><i class="fas fa-upload"></i> Withdraw</a></li>
 	                              <li class="settings"><a href="settings/store/"><i class="fas fa-cog"></i> Settings <i class="fas fa-angle-right pull-right"></i></a></li>
@@ -57,17 +57,18 @@
 						         </span>
 						      </div>
 						      <div class="dokan-w12">
-						         <form class="dokan-form-inline dokan-w8 dokan-product-date-filter" method="get">
-						            <div class="dokan-form-group">
+						         <form class="dokan-form-inline dokan-w8 dokan-product-date-filter" action="{{route('product_filter')}}" method="get">
+						            {{-- <div class="dokan-form-group">
 						               <select name="date" id="filter-by-date" class="dokan-form-control">
 						                  <option selected="selected" value="0">All dates</option>
 						                  <option value="202205">May 2022</option>
 						                  <option value="202203">March 2022</option>
 						               </select>
-						            </div>
+						            </div> --}}
 						            <div class="dokan-form-group">
 						               <select name="product_cat" id="product_cat" class="product_cat dokan-form-control chosen">
 						                  <option value="-1" selected="selected">– Select a category –</option>
+						                  <option value="all">All</option>
 						                 @foreach ($category as $cat)
 										 <option class="level-0" value="{{$cat->id}}">{{$cat->name}}</option>
 						                 	 
@@ -75,15 +76,15 @@
 										  
 						               </select>
 						            </div>
-						            <div class="dokan-form-group">
+						            {{-- <div class="dokan-form-group">
 						               <select name="product_type" id="filter-by-type" class="dokan-form-control" style="max-width:140px;">
 						                  <option value="">Product type</option>
 						                  <option value="simple">Simple</option>
 						               </select>
-						            </div>
+						            </div> --}}
 						            <button type="submit" name="product_listing_filter" value="ok" class="dokan-btn">Filter</button>
 						         </form>
-						         <form method="get" class="dokan-form-inline dokan-w5 dokan-product-search-form">
+						         <form method="get" action="{{route('product_filter_search')}}" class="dokan-form-inline dokan-w5 dokan-product-search-form">
 						            <button type="submit" name="product_listing_search" value="ok" class="dokan-btn">Search</button>
 						            <input type="hidden" id="dokan_product_search_nonce" name="dokan_product_search_nonce" value="754d5308e1"><input type="hidden" name="_wp_http_referer" value="/wp/uscannabiz/dashboard/products/">
 						            <div class="dokan-form-group">
@@ -92,7 +93,7 @@
 						         </form>
 						      </div>
 						      <div class="dokan-dashboard-product-listing-wrapper">
-						         <form id="product-filter" method="POST" class="dokan-form-inline">
+						         <form id="product-filter" method="get" action="{{route('deleteProductbulk')}}" class="dokan-form-inline">
 						            <div class="dokan-form-group">
 						               <label for="bulk-product-action-selector" class="screen-reader-text">Select bulk action</label>
 						               <select name="status" id="bulk-product-action-selector" class="dokan-form-control chosen">
@@ -123,14 +124,33 @@
 						                  </tr>
 						               </thead>
 						               <tbody>
-										@foreach($product as $pro)
+										{{-- @if($category_filter->isEmpty())
+										<tr class="">
+											<td data-title="empty-data" colspan="11" class="column-thumb">
+											   no data available for this category
+											</td>
+										</tr>
+										@else --}}
+										@if(isset($category_filter))
+										@php
+											$count = count($category_filter);
+											// dd($count);
+										@endphp
+										@if($count == 0)
+										<tr class="">
+											<td data-title="empty-data" colspan="11" class="column-thumb">
+											   no data available for this category
+											</td>
+										</tr>
+										@endif
+										@foreach($category_filter as $pro)
 						                  <tr class="">
 						                     <th class="dokan-product-select check-column">
 						                        <label for="cb-select-432"></label>
-						                        <input class="cb-select-items dokan-checkbox" type="checkbox" data-product-name="Testing Products" name="bulk_products[]" value="432">
+						                        <input class="cb-select-items dokan-checkbox" type="checkbox" data-product-name="Testing Products" name="bulk_products[]" value="{{$pro->id}}">
 						                     </th>
 						                     <td data-title="Image" class="column-thumb">
-						                        <a href="products/?product_id=432&amp;action=edit"><img width="150" height="150" src="assets/uploads/2022/03/banner-150x150.png" class="attachment-thumbnail size-thumbnail" alt=""></a>
+						                        <a href="products/?product_id=432&amp;action=edit"><img width="150" height="150" src="{{asset('uploads/products/'.$pro->product_image)}}" class="attachment-thumbnail size-thumbnail" alt=""></a>
 						                     </td>
 						                     <td data-title="Name" class="column-primary">
 						                        <strong><a href="products/?product_id=432&amp;action=edit">{{$pro->product_name}}</a></strong>
@@ -169,6 +189,55 @@
 						                     <td class="diviader"></td>
 						                  </tr>
 										  @endforeach
+										@else
+										@foreach($product as $pro)
+						                  <tr class="">
+						                     <th class="dokan-product-select check-column">
+						                        <label for="cb-select-432"></label>
+						                        <input class="cb-select-items dokan-checkbox" type="checkbox" data-product-name="Testing Products" name="bulk_products[]" value="{{$pro->id}}">
+						                     </th>
+						                     <td data-title="Image" class="column-thumb">
+						                        <a href="products/?product_id=432&amp;action=edit"><img width="150" height="150" src="{{asset('uploads/products/'.$pro->product_image)}}" class="attachment-thumbnail size-thumbnail" alt=""></a>
+						                     </td>
+						                     <td data-title="Name" class="column-primary">
+						                        <strong><a href="products/?product_id=432&amp;action=edit">{{$pro->product_name}}</a></strong>
+						                        <div class="row-actions">
+						                           <span class="edit"><a href="edit-products/{{$pro->id}}">Edit</a> | </span> 
+												   <span class="delete"><a href="delete-product/{{$pro->id}}" >Delete Permanently</a> | </span>
+												    <span class="view"><a href="product/testing-products/">View</a></span>
+						                        </div>
+						                        <button type="button" class="toggle-row"></button>
+						                     </td>
+						                     <td class="post-status" data-title="Status">
+						                        <label class="dokan-label dokan-label-success">Online</label>
+						                     </td>
+						                     <td data-title="SKU">
+						                        <span class="na">{{$pro->sku}}</span>
+						                     </td>
+						                     <td data-title="Stock">
+						                        <mark class="instock">{{$pro->product_stock}}</mark>
+						                     </td>
+						                     <td data-title="Price">
+						                        <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>{{$pro->product_current_price}}</span>
+						                     </td>
+						                     <td data-title="Earning">
+						                        <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>4.50</span>
+						                     </td>
+						                     <td data-title="Type">
+						                        <span class="product-type tips simple" title="" data-original-title="Simple">{{$pro->product_type}}</span>
+						                     </td>
+						                     <td data-title="Views">
+						                        1
+						                     </td>
+						                     <td class="post-date" data-title="Date">
+						                        <abbr title="May 18, 2022 1:14 am">{{$pro->created_at}}</abbr>
+						                        <div class="status">Published        </div>
+						                     </td>
+						                     <td class="diviader"></td>
+						                  </tr>
+										  @endforeach
+										@endif
+										{{-- @endif --}}
 						               </tbody>
 						            </table>
 						         </form>

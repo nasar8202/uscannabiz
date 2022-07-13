@@ -25,6 +25,30 @@ class ProductController extends Controller
 
         return view('vendor.product.index',compact(['category',$category ,'product',$product]));
     }
+    public function filter(Request $request)
+    {
+        $category = Category::all();
+        $vendor_id = Auth::user()->id;
+        $product = DB::table('products')->where('vender_id',$vendor_id)->get();
+        if($request->product_cat == 'all'){
+            $category_filter = DB::table('products')->where('vender_id',$vendor_id)->get();
+        }
+        else{
+            $category_filter = Product::where(['category_id'=>$request->product_cat,'vender_id'=>$vendor_id])->get();
+        }
+        return view('vendor.product.index',compact(['category',$category ,'product',$product,'category_filter',$category_filter]));
+    }
+    public function search(Request $request)
+    {
+        // dd('abc');
+        $category = Category::all();
+        $vendor_id = Auth::user()->id;
+        $product = DB::table('products')->where('vender_id',$vendor_id)->get();
+        $category_filter = Product::where('product_name', 'like', '%' . $request->product_search_name . '%')->where('vender_id',$vendor_id)->get();
+
+        return view('vendor.product.index',compact(['category',$category ,'product',$product,'category_filter',$category_filter]));
+    }
+    
     public function addProductForm()
     {
         $categories = Category::get();
@@ -193,6 +217,31 @@ class ProductController extends Controller
         }
 
     }
+
+    public function destroyProductBulk(Request $request)
+    {
+        // dd($request->all());
+        if($request->status == 'delete'){
+        foreach($request->bulk_products as $products){
+            $product = DB::table('products')->where('id',$products)->delete();
+            $meta = DB::table('products_meta_data')->where('product_id',$products)->delete();
+        }
+            if($product){
+                
+                
+                return back()->with(['success' => 'Product Deleted Successfully']);
+            }
+            else{
+                
+                return back()->with(['error' => 'Something Error']);
+            }
+        }
+        else{
+            return back();
+        }
+
+    }
+
     public function editProduct($id)
     {
        $product = Product::where('id',$id)->first();

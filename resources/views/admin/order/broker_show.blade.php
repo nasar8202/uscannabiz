@@ -69,7 +69,7 @@
                                         </table>
                                     </div>
                                 </div> --}}
-                                
+                                @if(isset($order))
                                 <div class="col-md-5 float-right">
                                     <label for="">Order Status</label>
                                     <select name="order_status" id="order_status" class="form-control" data-order_id="{{$order->id}}">
@@ -80,6 +80,7 @@
                                     </select>
 
                                 </div>
+                                @endif
                                 <div class="col-md-12">
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
@@ -218,7 +219,12 @@
 
                                         </tbody>
                                     </table>
-                                    @if($order->order_status == 'pending')
+                                    @if(isset($order) && $order->order_status == 'pending')
+                                    <div class="col-md-4">
+                                    <label for="category">Broker Commission Price</label>
+                                    <input type="text" class="form-control" name="broker_price" id="broker_price"  value="" placeholder="Amount" required >
+                                    </div>  
+                                    @elseif(!isset($order))
                                     <div class="col-md-4">
                                     <label for="category">Broker Commission Price</label>
                                     <input type="text" class="form-control" name="broker_price" id="broker_price"  value="" placeholder="Amount" required >
@@ -270,7 +276,9 @@
                                 </div> --}}
                             </div>
                         </div>
-                        @if($order->order_status == 'pending')
+                        @if(isset($order) && $order->order_status == 'pending')
+                        <button type="submit" class="float-right btn btn-primary">Add Request To Vendor</button>
+                        @elseif(!isset($order))
                         <button type="submit" class="float-right btn btn-primary">Add Request To Vendor</button>
                         @endif
                     </form>
@@ -302,6 +310,7 @@
                     }else{
                         toastr.success('Record Status Updated Successfully');
                     }
+                    location.reload();
                 }
             })
         });
