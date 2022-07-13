@@ -72,6 +72,8 @@ Route::get('/faq', 'Front\ContactUsController@faq')->name('faq');
 Route::middleware(['user'])->prefix('user')->group(function () {
     Route::get('/dashboard', 'User\UserController@dashboard')->name('dashboard');
 
+    Route::get('/my-orders', 'User\UserController@MyOrders')->name('MyOrders');
+
     //WishList
     Route::get('/getOrderDetail/{id}', 'User\UserController@getOrderDetail')->name('getOrderDetail');
     Route::post('/add-wishlist', 'User\UserController@add_wishlist')->name('user.wishlist');

@@ -97,6 +97,22 @@
                                              <input type="text" class="input-text form-control" name="phone" id="shop-phone" value="" required="required">
                                           </p>
                                             <div class="for_vender">
+                                                <p class="form-row form-group form-row-wide">
+                                                    <label for="company-name">City <span class="">*</span></label>
+                                                    <input type="text" class="input-text form-control" name="city" id="city" value="" required="">
+                                                  </p>
+                                                  <p class="form-row form-group form-row-wide">
+                                                    <label for="company-name">State <span class="">*</span></label>
+                                                    <input type="text" class="input-text form-control" name="state" id="state" value="" required="">
+                                                  </p>
+                                                  <p class="form-row form-group form-row-wide">
+                                                    <label for="company-name">Country <span class="">*</span></label>
+                                                    <input type="text" class="input-text form-control" name="country" id="country" value="" required="">
+                                                  </p>
+                                                  <p class="form-row form-group form-row-wide">
+                                                    <label for="company-name">Address <span class="">*</span></label>
+                                                    <input type="text" class="input-text form-control" name="address" id="address" value="" required="">
+                                                  </p>
                                                <p class="form-row form-group form-row-wide">
                                                   <label for="company-name">Shop Name <span class="">*</span></label>
                                                   <input type="text" class="input-text form-control" name="store_name" id="company-name" value="" required="">

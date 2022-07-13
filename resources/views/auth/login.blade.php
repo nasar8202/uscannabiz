@@ -32,9 +32,9 @@
                                 <div class="woocommerce-notices-wrapper"></div>
                                 <div class="u-columns col2-set" id="customer_login">
                                    <div class="u-column1 col-1">
-                                    @if (session()->has('success_message'))
+                                    @if (session()->has('success'))
                                         <div class="alert alert-success">
-                                            {{ session()->get('success_message') }}
+                                            {{ session()->get('success') }}
                                         </div>
                                     @endif @if(count($errors) > 0)
                                         <div class="alert alert-danger">
@@ -46,7 +46,7 @@
                                         </div>
                                     @endif
                                       <h2>Login</h2>
-                                      <form action="{{ route('login') }}" method="POST"  class="woocommerce-form woocommerce-form-login login" method="post">
+                                      <form action="{{ route('login') }}" method="POST"  class="woocommerce-form woocommerce-form-login login" >
                                         {{ csrf_field() }}
                                          <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
                                             <label for="username">Username or email address&nbsp;<span class="required">*</span></label>
@@ -70,7 +70,8 @@
                                    </div>
                                    <div class="u-column2 col-2">
                                       <h2>Register</h2>
-                                      <form method="post" class="woocommerce-form woocommerce-form-register register">
+                                      <form method="post" action="{{ route('registerVendorAndCustomer') }}" class="woocommerce-form woocommerce-form-register register">
+                                       {{ csrf_field() }}
                                          <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
                                             <label for="reg_email">Email address&nbsp;<span class="required">*</span></label>
                                             <input type="email" class="woocommerce-Input woocommerce-Input--text input-text" name="email" id="reg_email" autocomplete="email" value="">
@@ -79,7 +80,7 @@
                                             <label for="reg_password">Password&nbsp;<span class="required">*</span></label>
                                             <input type="password" class="woocommerce-Input woocommerce-Input--text input-text" name="password" id="reg_password" autocomplete="new-password">
                                          </p>
-                                         <div class="show_if_seller" style="display:none">
+                                         <div class="show_if_seller">
                                             <div class="split-row form-row-wide">
                                                <p class="form-row form-group">
                                                   <label for="first-name">First Name <span class="required">*</span></label>
@@ -90,35 +91,52 @@
                                                   <input type="text" class="input-text form-control" name="lname" id="last-name" value="" required="required">
                                                </p>
                                             </div>
+
                                             <p class="form-row form-group form-row-wide">
-                                               <label for="company-name">Shop Name <span class="required">*</span></label>
-                                               <input type="text" class="input-text form-control" name="shopname" id="company-name" value="" required="required">
-                                            </p>
-                                            <p class="form-row form-group form-row-wide">
-                                               <label for="seller-url" class="pull-left">Shop URL <span class="required">*</span></label>
-                                               <strong id="url-alart-mgs" class="pull-right"></strong>
-                                               <input type="text" class="input-text form-control" name="shopurl" id="seller-url" value="" required="required">
-                                               <small>/Us-Cannazon/<strong id="url-alart"></strong></small>
-                                            </p>
-                                            <p class="form-row form-group form-row-wide">
-                                               <label for="shop-phone">Phone Number<span class="required">*</span></label>
-                                               <input type="text" class="input-text form-control" name="phone" id="shop-phone" value="" required="required">
-                                            </p>
+                                             <label for="shop-phone">Phone Number<span class="required">*</span></label>
+                                             <input type="text" class="input-text form-control" name="phone" id="shop-phone" value="" required="required">
+                                          </p>
+                                            <div class="for_vender">
+                                                <p class="form-row form-group form-row-wide">
+                                                    <label for="company-name">City <span class="">*</span></label>
+                                                    <input type="text" class="input-text form-control" name="city" id="city" value="" required="">
+                                                  </p>
+                                                  <p class="form-row form-group form-row-wide">
+                                                    <label for="company-name">State <span class="">*</span></label>
+                                                    <input type="text" class="input-text form-control" name="state" id="state" value="" required="">
+                                                  </p>
+                                                  <p class="form-row form-group form-row-wide">
+                                                    <label for="company-name">Country <span class="">*</span></label>
+                                                    <input type="text" class="input-text form-control" name="country" id="country" value="" required="">
+                                                  </p>
+                                                  <p class="form-row form-group form-row-wide">
+                                                    <label for="company-name">Address <span class="">*</span></label>
+                                                    <input type="text" class="input-text form-control" name="address" id="address" value="" required="">
+                                                  </p>
+                                                <p class="form-row form-group form-row-wide">
+                                                   <label for="seller-url" class="pull-left">Shop URL <span class="">*</span></label>
+                                                   <strong id="url-alart-mgs" class="pull-right"></strong>
+                                                   <input type="text" class="input-text form-control" name="store_url" id="seller-url" value="" required="">
+                                                   <small>/Us-Cannazon/<strong id="url-alart"></strong></small>
+                                                </p>
+                                             </div>
                                          </div>
                                          <p class="form-row form-group user-role vendor-customer-registration">
                                             <label class="radio">
-                                            <input type="radio" name="role" value="customer" checked>
+                                            <input type="radio" name="role" value="2" checked>
                                             I am a customer    </label>
                                             <br>
                                             <label class="radio">
-                                            <input type="radio" name="role" value="seller">
+                                            <input type="radio" name="role" value="3">
                                             I am a vendor    </label>
                                          </p>
                                          <div class="woocommerce-privacy-policy-text">
                                             <p>Your personal data will be used to support your experience throughout this website, to manage access to your account, and for other purposes described in our <a href="/?page_id=3" class="woocommerce-privacy-policy-link" target="_blank">privacy policy</a>.</p>
                                          </div>
                                          <p class="woocommerce-form-row form-row">
-                                            <input type="hidden" id="woocommerce-register-nonce" name="woocommerce-register-nonce" value="fee4748166"><input type="hidden" name="_wp_http_referer" value="wp/uscannabiz/my-account/">				<button type="submit" class="woocommerce-Button woocommerce-button button woocommerce-form-register__submit" name="register" value="Register">Register</button>
+                                            <input type="hidden" id="woocommerce-register-nonce" name="woocommerce-register-nonce" value="fee4748166"><input type="hidden" name="_wp_http_referer" value="wp/uscannabiz/my-account/">
+                                            <button type="submit" class="woocommerce-Button woocommerce-button button woocommerce-form-register__submit" name="register" value="Register">Register</button>
+
                                          </p>
                                       </form>
                                    </div>
@@ -141,7 +159,5 @@
     <script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.min.js"></script>
 {{--    <script src="{{ asset('js/algolia.js') }}"></script>--}}
 @endsection
-<script>
 
-</script>
 
