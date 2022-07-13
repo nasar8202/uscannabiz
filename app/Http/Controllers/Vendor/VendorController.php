@@ -39,10 +39,10 @@ class VendorController extends Controller
             // $order_item = OrderItem::where('')
             $orders = Order::
             with('orderItems')->
-             join('order_items','orders.id','=','order_items.order_id')->
+            join('order_items','orders.id','=','order_items.order_id')->
             join('products','order_items.product_id','=','products.id')->
-             where('vendor_id',$check->id)
-            ->get();
+            where('vendor_id',$check->id)->
+            get();
         }
         return view('vendor.order.index',compact('orders'));
     }
