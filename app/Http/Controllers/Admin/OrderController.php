@@ -195,7 +195,7 @@ class OrderController extends Controller
                         </a>&nbsp;<button title="Delete" type="button" name="delete" id="' . $data->id . '" class="delete btn btn-danger btn-sm">
                         <i class="fa fa-trash"></i></button>';
                     }
-                            
+
                 })->rawColumns(['order_no', 'customer', 'status', 'total_amount', 'order_date', 'action'])->make(true);
             }
             }
@@ -267,10 +267,10 @@ class OrderController extends Controller
     {
         // dd($request->all());
         $random = \Carbon\Carbon::now()->format('Ymd');
-        
+
         $order = new Order;
         $order->order_no = $random."18D2";
-        
+
         $order->customer_id = $request->input('customer_id');
         $order->customer_name = $request->input('customer_name');
         $order->customer_email = $request->input('customer_email');
@@ -280,33 +280,33 @@ class OrderController extends Controller
         $grand_total = $quantity * $total_amount;
         $order->sub_total = $request->input('total_amount');
         $order->total_amount = $grand_total;
-        
+
         $order->order_status = "completed";
         $order->status = 1;
 
         $order->shipping_address = $request->input('shipping_address');
-        
+
         $order->shipping_city = $request->input('shipping_city');
         $order->shipping_country = $request->input('shipping_city');
-       
+
         $order->shipping_state = $request->input('shipping_city');
-       
+
         $order->shipping_zip = 7100;
         $order->billing_city = $request->input('shipping_city');
         $order->billing_address = $request->input('shipping_address');
-       
+
         $order->billing_country = $request->input('shipping_city');
         $order->billing_state = $request->input('shipping_city');
 
-        
+
         $order->broker_price = $request->input('broker_price');
         $order->broker_id = Auth::user()->id;
         $order->vendor_id = $request->input('vendor_id');
-        
-        
+
+
         $order->save();
         $order_id = $order->id;
-       
+
             $items = new OrderItem;
             $items->order_id = $order_id;
             $items->product_id = $request->input('product_id');
@@ -315,19 +315,19 @@ class OrderController extends Controller
             $quantity = $request->input('quantity');
             $sub_total = $quantity * $total_amount;
 
-            
+
             $items->product_qty	 = $request->input('quantity');
-            
+
             $items->status	 = 1;
             $items->product_subtotal_price	 = $sub_total;
             $items->save();
-            
+
         $vendor_save = VendorRequest::find($request->vendor_request_id);
         $vendor_save->order_id = $order_id;
         $vendor_save->save();
-        
-        
+
+
         return redirect()->route('order.index')->with(['success' => 'Order Updated Successfully']);
     }
-    
+
 }

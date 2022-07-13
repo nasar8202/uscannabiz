@@ -31,7 +31,13 @@ class UserController extends Controller
 
         return view('user.dashboard',compact('orders','products','recentOrders','addresses','countries'));
     }
+    public function show($id)
+    {
+        $order = Order::where('id', $id)->with('orderItems', 'customer', 'orderItems.product')->firstOrFail();
 
+        return view('user.order', compact(['order']));
+
+    }
     public function MyOrders()
     {
         $orders = Order::where('customer_id',Auth::user()->customers->id)->get();

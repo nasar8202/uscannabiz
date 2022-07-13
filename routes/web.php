@@ -73,7 +73,7 @@ Route::middleware(['user'])->prefix('user')->group(function () {
     Route::get('/dashboard', 'User\UserController@dashboard')->name('dashboard');
 
     Route::get('/my-orders', 'User\UserController@MyOrders')->name('MyOrders');
-
+    Route::get('/order/{id}', 'User\UserController@show')->name('order');
     //WishList
     Route::get('/getOrderDetail/{id}', 'User\UserController@getOrderDetail')->name('getOrderDetail');
     Route::post('/add-wishlist', 'User\UserController@add_wishlist')->name('user.wishlist');
@@ -107,6 +107,8 @@ Route::namespace('Vendor')->prefix('/vendor')->middleware('vendor')->group(funct
     Route::post('updateVendor/{id}', 'VendorController@vendorUpdate')->name('updateVendor');
 
     Route::get('/checkProductSkuVendor', 'ProductController@checkProductSkuVendor')->name('checkProductSkuVendor');
+
+
 
 });
 
