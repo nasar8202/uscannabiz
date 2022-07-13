@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Vendor;
 
+use Validator;
+use Illuminate\Http\Request;
 use App\Models\VendorRequest;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Validator;
+use Illuminate\Support\Facades\Auth;
+
 class VendorRequestController extends Controller
 {
     /**
@@ -62,6 +64,10 @@ class VendorRequestController extends Controller
         $vendor->address = $request->input('address'); 
         $vendor->city = $request->input('city');
         $vendor->quantity = $request->input('quantity');
+        $auth = Auth::user();
+        if($auth->role_id == 2){
+            $vendor->customer_id = $auth->id;
+        }
         $vendor->save();
 
         

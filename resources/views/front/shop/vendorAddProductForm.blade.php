@@ -55,25 +55,25 @@
                   <div class="split-row form-row-wide">
                      <p class="form-row form-group">
                         <label for="first-name">Full Name <span class="required">*</span></label>
-                        <input type="text" class="input-text form-control" name="full_name" id="first-name" value="" required="required">
+                        <input type="text" class="input-text form-control" name="full_name" id="first-name" @if(isset($customer_check)) value="{{$customer_check->first_name}} {{$customer_check->last_name}}" @endif required="required">
                      </p>
                      <p class="form-row form-group">
                         <label for="last-name">Phone Number <span class="required">*</span></label>
-                        <input type="number" class="input-text form-control" name="phone_num" id="last-name" value="" required="required">
+                        <input type="number" class="input-text form-control" name="phone_num" id="last-name" @if(isset($customer_check)) value="{{$customer_check->phone_no}}" @endif  required="required">
                     
                      </p>
                   
                      <p class="form-row form-group">
                         <label for="last-name">Email <span class="required">*</span></label>
-                        <input type="email" class="input-text form-control" name="email" id="last-name" value="" required="required">
+                        <input type="email" class="input-text form-control" name="email" id="last-name" @if(isset($customer_check)) value="{{$customer_check->email}}" @endif  required="required">
                      </p>
                      <p class="form-row form-group">
                         <label for="last-name">Address <span class="required">*</span></label>
-                        <input type="text" class="input-text form-control" name="address" id="last-name" value="" required="required">
+                        <input type="text" class="input-text form-control" name="address" id="last-name" @if(isset($customer_check)) value="{{$customer_check->address}}" @endif  required="required">
                      </p>
                      <p class="form-row form-group">
                         <label for="last-name">City <span class="required">*</span></label>
-                        <input type="text" class="input-text form-control" name="city" id="last-name" value="" required="required">
+                        <input type="text" class="input-text form-control" name="city" id="last-name" @if(isset($customer_check)) value="{{$customer_check->city}}" @endif  required="required">
                      </p>
                   <br>
                      <div class="quantity">
