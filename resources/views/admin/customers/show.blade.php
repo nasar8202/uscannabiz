@@ -68,7 +68,7 @@
                 <!-- /.col -->
             </div>
             <!-- /.row -->
-            <div class="row">
+            {{-- <div class="row">
                 <div class="col-md-12">
                     <!-- /.card -->
                     <div class="card">
@@ -103,7 +103,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
         <!-- /.container-fluid -->
     </section>

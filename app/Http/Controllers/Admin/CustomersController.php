@@ -28,11 +28,14 @@ class CustomersController extends Controller
 //     ->where('users.role_id', 4)
 //     ->get();
 // return $a;
-//return User::join('Customers','Users.id' ,'=' ,'Customers.user_id')->where('role_id','=',4)->get();
+
+    $user = User::join('customers','users.customers_id','=','customers.id')->where(['role_id'=>4])->get();
+    // $customer = Customers::where('user_id',$user->id)->get();
+// dd($user);
         try {
 
             if (request()->ajax()) {
-                return datatables()->of(Customers::join('Users','Users.id' ,'=' ,'Customers.user_id')->where('role_id','=',4)->get())
+                return datatables()->of($user)
                     ->addIndexColumn()
                     ->addColumn('action', function ($data) {
                         return '<a title="View" href="customers/' . $data->id . '"
