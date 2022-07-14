@@ -1,4 +1,4 @@
-<?php include_once('header.php');?>	
+<?php include_once('header.php');?>
 <style type="text/css">
 	.et_pb_section_0_tb_footer.et_pb_section{padding-bottom:20px;background-color:#0D4400!important}.et_pb_row_0_tb_footer.et_pb_row{padding-top:0px!important;padding-bottom:0px!important;padding-top:0px;padding-bottom:0px}.et_pb_image_0_tb_footer{margin-bottom:20px!important;text-align:left;margin-left:0}.et_pb_text_0_tb_footer.et_pb_text,.et_pb_text_5_tb_footer.et_pb_text,.et_pb_text_7_tb_footer.et_pb_text{color:#FFFFFF!important}.et_pb_text_0_tb_footer{font-size:18px;margin-bottom:30px!important}.et_pb_text_1_tb_footer h5{font-family:'Montserrat',Helvetica,Arial,Lucida,sans-serif;font-weight:600;font-size:25px;color:#FFFFFF!important}.et_pb_text_1_tb_footer{margin-bottom:15px!important}.et_pb_social_media_follow_0_tb_footer li a.icon:before{font-size:20px;line-height:40px;height:40px;width:40px}.et_pb_social_media_follow_0_tb_footer li a.icon{height:40px;width:40px}.et_pb_text_4_tb_footer h4,.et_pb_text_2_tb_footer h4,.et_pb_text_3_tb_footer h4{font-weight:600;font-size:25px;color:#FFFFFF!important}.et_pb_text_3_tb_footer,.et_pb_text_2_tb_footer,.et_pb_text_4_tb_footer{margin-bottom:20px!important}.et_pb_sidebar_1_tb_footer.et_pb_widget_area,.et_pb_sidebar_1_tb_footer.et_pb_widget_area li,.et_pb_sidebar_1_tb_footer.et_pb_widget_area li:before,.et_pb_sidebar_1_tb_footer.et_pb_widget_area a,.et_pb_sidebar_0_tb_footer.et_pb_widget_area,.et_pb_sidebar_0_tb_footer.et_pb_widget_area li,.et_pb_sidebar_0_tb_footer.et_pb_widget_area li:before,.et_pb_sidebar_0_tb_footer.et_pb_widget_area a{font-size:18px;color:#FFFFFF!important}.et_pb_sidebar_0_tb_footer.et_pb_widget_area,.et_pb_sidebar_1_tb_footer.et_pb_widget_area{border-right-color:RGBA(255,255,255,0)}.et_pb_text_5_tb_footer{line-height:1.4em;font-size:18px;line-height:1.4em;margin-bottom:30px!important}.et_pb_row_1_tb_footer.et_pb_row{padding-top:0px!important;padding-top:0px}.et_pb_text_7_tb_footer{font-size:18px}@media only screen and (max-width:980px){.et_pb_image_0_tb_footer .et_pb_image_wrap img{width:auto}.et_pb_sidebar_0_tb_footer.et_pb_widget_area,.et_pb_sidebar_1_tb_footer.et_pb_widget_area{border-right-color:RGBA(255,255,255,0)}.et_pb_row_1_tb_footer.et_pb_row{padding-top:20px!important;padding-top:20px!important}}@media only screen and (max-width:767px){.et_pb_image_0_tb_footer .et_pb_image_wrap img{width:auto}.et_pb_sidebar_0_tb_footer.et_pb_widget_area,.et_pb_sidebar_1_tb_footer.et_pb_widget_area{border-right-color:RGBA(255,255,255,0)}.et_pb_row_1_tb_footer.et_pb_row{padding-top:20px!important;padding-top:20px!important}}
 </style>
@@ -14,7 +14,7 @@
 	                     <div class="dokan-dash-sidebar">
 	                        <div id="dokan-navigation" aria-label="Menu">
 	                           <label id="mobile-menu-icon" for="toggle-mobile-menu" aria-label="Menu">☰</label><input id="toggle-mobile-menu" type="checkbox">
-	                           <ul class="dokan-dashboard-menu">
+	                           <!-- <ul class="dokan-dashboard-menu">
 	                              <li class="active dashboard"><a href=""><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
 	                              <li class="products"><a href="products/"><i class="fas fa-briefcase"></i> Products</a></li>
 	                              <li class="orders"><a href="orders/"><i class="fas fa-shopping-cart"></i> Orders</a></li>
@@ -25,6 +25,18 @@
 	                                 <a title="" class="tips" data-placement="top" href="edit-account/" data-original-title="Edit Account"><i class="fas fa-user"></i></a>
 	                                 <a title="" class="tips" data-placement="top" href="wp-login.php?action=logout&amp;redirect_to=https%3A%2F%2Fwebprojectmockup.com%2Fwp%2Fuscannabiz&amp;_wpnonce=776bce81ba" data-original-title="Log out"><i class="fas fa-power-off"></i></a>
 	                              </li>
+	                           </ul> -->
+                               <ul class="dokan-dashboard-menu">
+								<li class="active dashboard"><a href="{{route('dashboard')}}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+								<li class="products"><a href="{{route('product')}}"><i class="fas fa-briefcase"></i> Products</a></li>
+								<li class="orders"><a href="{{route('vendor_order')}}"><i class="fas fa-shopping-cart"></i> Orders</a></li>
+	                              {{-- <li class="withdraw"><a href="withdraw/"><i class="fas fa-upload"></i> Withdraw</a></li> --}}
+	                              <li class="settings"><a href="{{ Route('editVendor') }}"><i class="fas fa-cog"></i> Settings <i class="fas fa-angle-right pull-right"></i></a></li>
+	                              {{-- <li class="dokan-common-links dokan-clearfix">
+	                                 <a title="" class="tips" data-placement="top" href="Us-Cannazon/user_uscannabiz/" target="_blank" data-original-title="Visit Store"><i class="fas fa-external-link-alt"></i></a>
+	                                 <a title="" class="tips" data-placement="top" href="edit-account/" data-original-title="Edit Account"><i class="fas fa-user"></i></a>
+	                                 <a title="" class="tips" data-placement="top" href="wp-login.php?action=logout&amp;redirect_to=https%3A%2F%2Fwebprojectmockup.com%2Fwp%2Fuscannabiz&amp;_wpnonce=776bce81ba" data-original-title="Log out"><i class="fas fa-power-off"></i></a>
+	                              </li> --}}
 	                           </ul>
 	                        </div>
 	                     </div>
@@ -33,42 +45,42 @@
 						      <ul class="list-inline order-statuses-filter">
 						         <li class="active">
 						            <a href="dashboard/orders/">
-						            All (0)                
+						            All (0)
 						            </a>
 						         </li>
 						         <li>
 						            <a href="dashboard/orders/?order_status=wc-completed">
-						            Completed (0)                
+						            Completed (0)
 						            </a>
 						         </li>
 						         <li>
 						            <a href="dashboard/orders/?order_status=wc-processing">
-						            Processing (0)                
+						            Processing (0)
 						            </a>
 						         </li>
 						         <li>
 						            <a href="dashboard/orders/?order_status=wc-on-hold">
-						            On-hold (0)                
+						            On-hold (0)
 						            </a>
 						         </li>
 						         <li>
 						            <a href="dashboard/orders/?order_status=wc-pending">
-						            Pending (0)                
+						            Pending (0)
 						            </a>
 						         </li>
 						         <li>
 						            <a href="dashboard/orders/?order_status=wc-cancelled">
-						            Cancelled (0)                
+						            Cancelled (0)
 						            </a>
 						         </li>
 						         <li>
 						            <a href="dashboard/orders/?order_status=wc-refunded">
-						            Refunded (0)                
+						            Refunded (0)
 						            </a>
 						         </li>
 						         <li>
 						            <a href="dashboard/orders/?order_status=wc-failed">
-						            Failed (0)                
+						            Failed (0)
 						            </a>
 						         </li>
 						      </ul>
@@ -97,7 +109,7 @@
 						         <div class="dokan-clearfix"></div>
 						      </div>
 						      <div class="dokan-error">
-						         No orders found    
+						         No orders found
 						      </div>
 						      <script>
 						         (function($){
@@ -122,4 +134,4 @@
 	   </div>
 	</div>
 </div>
-<?php include_once('footer.php');?>	
+<?php include_once('footer.php');?>

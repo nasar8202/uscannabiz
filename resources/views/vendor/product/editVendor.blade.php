@@ -15,7 +15,7 @@
                            <div class="dokan-dash-sidebar">
                               <div id="dokan-navigation" aria-label="Menu">
                                  <label id="mobile-menu-icon" for="toggle-mobile-menu" aria-label="Menu">☰</label><input id="toggle-mobile-menu" type="checkbox">
-                                 <ul class="dokan-dashboard-menu">
+                                 {{-- <ul class="dokan-dashboard-menu">
                                     <li class="active dashboard"><a href="dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
                                     <li class="products"><a href="product"><i class="fas fa-briefcase"></i> Products</a></li>
                                     <li class="orders"><a href="orders/"><i class="fas fa-shopping-cart"></i> Orders</a></li>
@@ -26,7 +26,19 @@
                                        <a title="" class="tips" data-placement="top" href="edit-account/" data-original-title="Edit Account"><i class="fas fa-user"></i></a>
                                        <a title="" class="tips" data-placement="top" href="https://webprojectmockup.com/wp/uscannabiz/wp-login.php?action=logout&amp;redirect_to=https%3A%2F%2Fwebprojectmockup.com%2Fwp%2Fuscannabiz&amp;_wpnonce=776bce81ba" data-original-title="Log out"><i class="fas fa-power-off"></i></a>
                                     </li>
-                                 </ul>
+                                 </ul> --}}
+                                 <ul class="dokan-dashboard-menu">
+                                    <li class="active dashboard"><a href="{{route('dashboard')}}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                                    <li class="products"><a href="{{route('product')}}"><i class="fas fa-briefcase"></i> Products</a></li>
+                                    <li class="orders"><a href="{{route('vendor_order')}}"><i class="fas fa-shopping-cart"></i> Orders</a></li>
+                                      {{-- <li class="withdraw"><a href="withdraw/"><i class="fas fa-upload"></i> Withdraw</a></li> --}}
+                                      <li class="settings"><a href="{{ Route('editVendor') }}"><i class="fas fa-cog"></i> Settings <i class="fas fa-angle-right pull-right"></i></a></li>
+                                      {{-- <li class="dokan-common-links dokan-clearfix">
+                                         <a title="" class="tips" data-placement="top" href="Us-Cannazon/user_uscannabiz/" target="_blank" data-original-title="Visit Store"><i class="fas fa-external-link-alt"></i></a>
+                                         <a title="" class="tips" data-placement="top" href="edit-account/" data-original-title="Edit Account"><i class="fas fa-user"></i></a>
+                                         <a title="" class="tips" data-placement="top" href="wp-login.php?action=logout&amp;redirect_to=https%3A%2F%2Fwebprojectmockup.com%2Fwp%2Fuscannabiz&amp;_wpnonce=776bce81ba" data-original-title="Log out"><i class="fas fa-power-off"></i></a>
+                                      </li> --}}
+                                   </ul>
                               </div>
                            </div>
                            <div class="dokan-dashboard-content">
@@ -47,16 +59,16 @@
                                     <p class="form-row form-row-first">
                                        <label for="account_first_name">First name <span class="required">*</span></label>
                                        <input type="text" class="input-text" name="first_name" value="{{$customer->first_name}}" id="account_first_name" value="">
-                                     
-                                       
+
+
                                     </p>
                                     <p class="form-row form-row-first">
                                        <label for="account_first_name">Last name <span class="required">*</span></label>
                                        <input type="text" class="input-text" name="last_name" value="{{$customer->last_name}}" id="account_first_name" value="">
-                                     
-                                       
+
+
                                     </p>
-                                    
+
                                     <div class="clear"></div>
                                     <p class="form-row form-row-wide">
                                        <label for="account_email">Email address <span class="required">*</span></label>
@@ -81,8 +93,8 @@
                                     </fieldset>
                                     <div class="clear"></div>
                                     <p>
-                                       <input type="hidden" id="_wpnonce" name="_wpnonce" value="ebd582eb76"><input type="hidden" name="_wp_http_referer" value="/wp/uscannabiz/dashboard/edit-account/">                            
-                                      
+                                       <input type="hidden" id="_wpnonce" name="_wpnonce" value="ebd582eb76"><input type="hidden" name="_wp_http_referer" value="/wp/uscannabiz/dashboard/edit-account/">
+
                                        <button type="submit" class="dokan-btn dokan-btn-danger dokan-btn-theme" name="dokan_save_account_details" >Save Changes</button>
                                        <input type="hidden" name="action" value="dokan_save_account_details">
                                     </p>
