@@ -148,6 +148,7 @@ Route::namespace('Admin')->prefix('/admin')->middleware('admin')->group(function
     Route::get('/order/changeOrderStatus/{id}', 'OrderController@changeOrderStatus')->name('order.changeOrderStatus');
     Route::delete('/order/destroy/{id}', 'OrderController@destroy')->name('order.destroy');
     Route::post('submit-request', 'OrderController@broker_price')->name('submit-request');
+    Route::post('submit-request-update', 'OrderController@broker_price_update')->name('submit-request-update');
 
 
     //REVIEW
