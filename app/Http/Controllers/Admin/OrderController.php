@@ -122,7 +122,7 @@ class OrderController extends Controller
                         //     return $data->customer->first_name . ' ' . $data->customer->last_name;
                         // }
                     })->addColumn('total_amount', function ($data) {
-                        return '$' . ($data->total_amount + $data->shipping_cost) ?? '';
+                        return '$' . ($data->total_amount ?? '' + $data->shipping_cost) ?? '';
                     })->addColumn('order_date', function ($data) {
                         return date('d-M-Y', strtotime($data->created_at)) ?? '';
                     })->addColumn('status', function ($data) {
