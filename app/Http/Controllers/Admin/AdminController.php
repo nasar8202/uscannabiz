@@ -19,7 +19,7 @@ class AdminController extends Controller
         $data['customers'] = Customers::count();
         $data['latestOrders']=Order::with('customer')->orderBy('created_at', 'desc')->take(7)->get();
         $data['latestReviews']=ProductReview::with('product','customer')->orderBy('created_at', 'desc')->take(7)->get();
-       
+
         return view('admin.dashboard',compact('data'));
     }
 
