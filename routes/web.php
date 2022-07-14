@@ -71,6 +71,10 @@ Route::get('/faq', 'Front\ContactUsController@faq')->name('faq');
 
 Route::middleware(['user'])->prefix('user')->group(function () {
     Route::get('/dashboard', 'User\UserController@dashboard')->name('dashboard');
+    
+    Route::get('edit-account/', 'User\UserController@editUserAccount')->name('edit-account');
+    
+    Route::post('update-account/{id}', 'User\UserController@updateUserAccount')->name('update-account');
 
     Route::get('/my-orders', 'User\UserController@MyOrders')->name('MyOrders');
     Route::get('/order/{id}', 'User\UserController@show')->name('order');
