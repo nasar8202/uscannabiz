@@ -2,19 +2,21 @@
 
 namespace App\Http\Controllers\user;
 
-use App\Http\Controllers\Controller;
-use App\Models\Cities;
-use App\Models\Countries;
-use App\Models\CustomerAddress;
-use App\Models\Customers;
-use App\Models\CustomerWishlist;
-use App\Models\Order;
-use App\Models\States;
 use App\User;
+use Validator;
+use App\Models\Order;
+use App\Models\Cities;
+use App\Models\States;
+use App\Models\Product;
+use App\Models\Countries;
+use App\Models\Customers;
 use Illuminate\Http\Request;
+use App\Models\VendorRequest;
+use App\Models\CustomerAddress;
+use App\Models\CustomerWishlist;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Validator;
 
 class UserController extends Controller
 {
@@ -34,8 +36,9 @@ class UserController extends Controller
     public function show($id)
     {
         $order = Order::where('id', $id)->with('orderItems', 'customer', 'orderItems.product')->firstOrFail();
-
-        return view('user.order', compact(['order']));
+        $order_items_first = $order->orderItems->first();
+        $product = Product::where('id', $order_items_first->product_id)->first();
+        return view('user.order', compact(['order','product','order_items_first']));
 
     }
     public function MyOrders()

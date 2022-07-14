@@ -583,7 +583,16 @@
                                                                                 <p>${{$order->total_amount+$order->shipping_cost}}</p>
                                                                             </td>
                                                                             <td>
-                                                                                <p style="text-transform: uppercase;">{{$order->order_status}}</p>
+                                                                                @if ($order->order_status == 'pending')
+                                                                                    <label class="dokan-label dokan-label-secondary">{{$order->order_status}}</label>
+                                                                                    @elseif ($order->order_status == 'cancelled')
+                                                                                    <label class="dokan-label dokan-label-danger">{{$order->order_status}}</label>
+                                                                                    @elseif ($order->order_status == 'completed')
+                                                                                    <label class="dokan-label dokan-label-success">{{$order->order_status}}</label>
+                                                                                    @elseif ($order->order_status == 'shipped')
+                                                                                    <label class="dokan-label dokan-label-info">{{$order->order_status}}</label>
+                                                                                @endif
+                                                                                {{-- <p style="text-transform: uppercase;">{{$order->order_status}}</p> --}}
                                                                             </td>
                                                                             <td>
                                                                                 {{--                                                <a href="#" class="btnStyle btn-block">Track Order</a>--}}

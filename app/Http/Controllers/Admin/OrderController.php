@@ -263,6 +263,14 @@ class OrderController extends Controller
     }
 
 
+    public function broker_price_update(Request $request)
+    {
+        $order = Order::find($request->order_id);
+        $order->broker_price = $request->broker_price;
+        $order->order_status = "completed";
+        $order->save();
+        return redirect()->route('order.index')->with(['success' => 'Order Updated Successfully']);
+    }
     public function broker_price(Request $request)
     {
         // dd($request->all());
