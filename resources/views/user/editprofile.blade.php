@@ -545,7 +545,7 @@
                                                             </li>
                                                             <li
                                                                 class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--edit-account">
-                                                                <a href="edit-account/">Account details</a>
+                                                                <a href="my-account/edit-account/">Account details</a>
                                                             </li>
                                                             <li
                                                                 class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--customer-logout">
@@ -557,24 +557,33 @@
                                                     </nav>
                                                     <div class="woocommerce-MyAccount-content">
                                                         <div class="woocommerce-notices-wrapper"></div>
-
-                                                        <form action = "{{url('user/addCustomerAddress')}}" method="post">
+                                                        @if (session()->has('success'))
+                                                            <div class="alert alert-success">
+                                                                {{ session()->get('success') }}
+                                                            </div>
+                                                            @endif
+                                                            @if (session()->has('error'))
+                                                            <div class="alert alert-success">
+                                                                {{ session()->get('error') }}
+                                                            </div>
+                                                            @endif
+                                                        <form action = "{{Route('update-account',$user->id)}}" method="post">
                                                             @csrf
-                                                            <h3>Shipping address</h3>
+                                                            <h3>Edit Profile</h3>
+                                                            
                                                             <div class="woocommerce-address-fields">
-
+                                                            
                                                                 <div class="woocommerce-address-fields__field-wrapper">
                                                                     <p class="form-row form-row-first validate-required"
                                                                         id="shipping_first_name_field" data-priority="10">
-                                                                        <label for="shipping_first_name"
-                                                                            class="">First name&nbsp;<abbr
+                                                                        <label for="shipping_first_name" class="">First name&nbsp;<abbr
                                                                                 class="required"
                                                                                 title="required">*</abbr></label><span
                                                                             class="woocommerce-input-wrapper"><input
                                                                                 type="text" class="input-text "
                                                                                 id="first_name" placeholder=""
-                                                                                name="first_name"
-                                                                                autocomplete="given-name"></span></p>
+                                                                                name="first_name" value="{{$customer->first_name}}"
+                                                                               ></span></p>
                                                                     <p class="form-row form-row-last validate-required"
                                                                         id="shipping_last_name_field" data-priority="20">
                                                                         <label for="shipping_last_name" class="">Last
@@ -584,8 +593,8 @@
                                                                                 type="text" class="input-text "
                                                                                 name="last_name"
                                                                                 id="last_name" placeholder=""
-
-                                                                                autocomplete="family-name"></span></p>
+                                                                                value="{{$customer->last_name}}"
+                                                                                ></span></p>
 
                                                                                 <p class="form-row form-row-first validate-required"
                                                                         id="shipping_first_name_field" data-priority="10">
@@ -595,193 +604,45 @@
                                                                                 title="required">*</abbr></label><span
                                                                             class="woocommerce-input-wrapper"><input
                                                                                 type="text" class="input-text "
+                                                                                value="{{$customer->phone_no}}"
                                                                                 id="phone_no_code" placeholder=""
-                                                                                name="phone_no_code"
-                                                                                autocomplete="given-name"></span></p>
-                                                                    <p class="form-row form-row-last validate-required"
+                                                                                name="phone_no" 
+                                                                                ></span></p>
+                                                                    
+                                                                    
+                                                                                <p class="form-row form-row-last validate-required"
                                                                         id="shipping_last_name_field" data-priority="20">
                                                                         <label for="shipping_last_name" class="">
-                                                                            Title&nbsp;<abbr class="required"
-                                                                                title="required">*</abbr></label><span
+                                                                            email&nbsp;</label><span
                                                                             class="woocommerce-input-wrapper"><input
                                                                                 type="text" class="input-text "
-                                                                                name="title"
-                                                                                id="title" placeholder=""
+                                                                                name="email"
+                                                                                id="title" placeholder="" value="{{$customer->email}}"
 
-                                                                                autocomplete="family-name"></span></p>
+                                                                            ></span></p>
 
-                                                                    <p class="form-row form-row-wide"
-                                                                        id="shipping_company_field" data-priority="30">
-                                                                        <label for="shipping_company" class="">Company
-                                                                            name&nbsp;<span
-                                                                                class="optional">(optional)</span></label><span
-                                                                            class="woocommerce-input-wrapper"><input
-                                                                                type="text" class="input-text "
-                                                                                name="company_name"
-                                                                                id="company_name" placeholder=""
-
-                                                                                autocomplete="organization"></span></p>
-                                                                    <p class="form-row form-row-wide address-field update_totals_on_change validate-required"
-                                                                        id="shipping_country_field" data-priority="40">
-                                                                        <label for="shipping_country" class="">Country
-                                                                            / Region&nbsp;<abbr class="required"
-                                                                                title="required">*</abbr></label><span
-                                                                            class="woocommerce-input-wrapper"><select
-                                                                            name="country" id="country_e"
-                                                                                class="country_to_state country_select select2-hidden-accessible"
-                                                                                autocomplete="country"
-                                                                                data-placeholder="Select a country / region…"
-                                                                                data-label="Country / Region" tabindex="-1"
-                                                                                aria-hidden="true">
-                                                                                <option value="">Select a country /
-                                                                                    region…</option>
-                                                                                    @foreach($countries as $country)
-                                                                                    <option value="{{$country->id}}">{{$country->name}}</option>
-                                                                                    @endforeach
-
-                                                                            </select><span
-                                                                                class="select2 select2-container select2-container--default"
-                                                                                dir="ltr" style="width: 100%;"><span
-                                                                                    class="selection"><span
-                                                                                        class="select2-selection select2-selection--single"
-                                                                                        aria-haspopup="true"
-                                                                                        aria-expanded="false"
-                                                                                        tabindex="0"
-                                                                                        aria-label="Country / Region"
-                                                                                        role="combobox"><span
-                                                                                            class="select2-selection__rendered"
-                                                                                            id="select2-shipping_country-container"
-                                                                                            role="textbox"
-                                                                                            aria-readonly="true"><span
-                                                                                                class="select2-selection__placeholder">Select
-                                                                                                a country /
-                                                                                                region…</span></span><span
-                                                                                            class="select2-selection__arrow"
-                                                                                            role="presentation"><b
-                                                                                                role="presentation"></b></span></span></span><span
-                                                                                    class="dropdown-wrapper"
-                                                                                    aria-hidden="true"></span></span><noscript><button
-                                                                                    type="submit"
-                                                                                    name="woocommerce_checkout_update_totals"
-                                                                                    value="Update country / region">Update
-                                                                                    country /
-                                                                                    region</button></noscript></span></p>
-                                                                    <p class="form-row form-row-wide address-field validate-required"
-                                                                        id="shipping_address_1_field" data-priority="50">
-                                                                        <label for="shipping_address_1"
-                                                                            class="">Street address&nbsp;<abbr
-                                                                                class="required"
-                                                                                title="required">*</abbr></label><span
-                                                                            class="woocommerce-input-wrapper"><input
-                                                                                type="text" class="input-text "
-                                                                                name="address"
-                                                                                placeholder="House number and street name"
-                                                                                value=""
-                                                                                autocomplete="address-line1"></span></p>
-
-
-                                                                    <p class="form-row form-row-wide address-field validate-required validate-state"
-                                                                        id="shipping_state_field" data-priority="80">
-                                                                        <label for="shipping_state"
-                                                                            class="">State&nbsp;<abbr
-                                                                                class="required"
-                                                                                title="required">*</abbr></label><span
-                                                                            class="woocommerce-input-wrapper"><select
-                                                                            name="state" id="state_e"
-                                                                                class="state_select select2-hidden-accessible"
-                                                                                autocomplete="address-level1"
-                                                                                data-placeholder="Select an option…"
-                                                                                data-input-classes="" data-label="State"
-                                                                                tabindex="-1" aria-hidden="true">
-                                                                                <option value="">Select an option…
-                                                                                </option>
-
-                                                                            </select><span
-                                                                                class="select2 select2-container select2-container--default"
-                                                                                dir="ltr" style="width: 100%;"><span
-                                                                                    class="selection"><span
-                                                                                        class="select2-selection select2-selection--single"
-                                                                                        aria-haspopup="true"
-                                                                                        aria-expanded="false"
-                                                                                        tabindex="0" aria-label="State"
-                                                                                        role="combobox"><span
-                                                                                            class="select2-selection__rendered"
-                                                                                            id="select2-shipping_state-container"
-                                                                                            role="textbox"
-                                                                                            aria-readonly="true"><span
-                                                                                                class="select2-selection__placeholder">Select
-                                                                                                an
-                                                                                                option…</span></span><span
-                                                                                            class="select2-selection__arrow"
-                                                                                            role="presentation"><b
-                                                                                                role="presentation"></b></span></span></span><span
-                                                                                    class="dropdown-wrapper"
-                                                                                    aria-hidden="true"></span></span></span>
-                                                                    </p>
-
-                                                                    <p class="form-row form-row-wide address-field validate-required validate-state"
-                                                                        id="shipping_state_field" data-priority="80">
-                                                                        <label for="shipping_state"
-                                                                            class="">City&nbsp;<abbr
-                                                                                class="required"
-                                                                                title="required">*</abbr></label><span
-                                                                            class="woocommerce-input-wrapper"><select
-                                                                            name="city" id="city_e"
-                                                                                class="state_select select2-hidden-accessible"
-                                                                                autocomplete="address-level1"
-                                                                                data-placeholder="Select an option…"
-                                                                                data-input-classes="" data-label="State"
-                                                                                tabindex="-1" aria-hidden="true">
-                                                                                <option value="">Select an option…
-                                                                                </option>
-
-                                                                            </select><span
-                                                                                class="select2 select2-container select2-container--default"
-                                                                                dir="ltr" style="width: 100%;"><span
-                                                                                    class="selection"><span
-                                                                                        class="select2-selection select2-selection--single"
-                                                                                        aria-haspopup="true"
-                                                                                        aria-expanded="false"
-                                                                                        tabindex="0" aria-label="State"
-                                                                                        role="combobox"><span
-                                                                                            class="select2-selection__rendered"
-                                                                                            id="select2-shipping_state-container"
-                                                                                            role="textbox"
-                                                                                            aria-readonly="true"><span
-                                                                                                class="select2-selection__placeholder">Select
-                                                                                                an
-                                                                                                option…</span></span><span
-                                                                                            class="select2-selection__arrow"
-                                                                                            role="presentation"><b
-                                                                                                role="presentation"></b></span></span></span><span
-                                                                                    class="dropdown-wrapper"
-                                                                                    aria-hidden="true"></span></span></span>
-                                                                    </p>
-
-                                                                    <p class="form-row form-row-wide address-field validate-required validate-postcode"
-                                                                        id="shipping_postcode_field" data-priority="90">
-                                                                        <label for="shipping_postcode" class="">ZIP
-                                                                            Code&nbsp;<abbr class="required"
-                                                                                title="required">*</abbr></label><span
-                                                                            class="woocommerce-input-wrapper"><input
-                                                                                type="text" class="input-text "
-                                                                                name="zip_code" id="zip_code_e" placeholder=""
-                                                                                value=""
-                                                                                autocomplete="postal-code"></span></p>
                                                                 </div>
 
+                                                                <fieldset>
+                                                                <legend>Password Change</legend>
+                                                                <p class="form-row form-row-wide">
+                                                                    <label for="password_current">Current Password (leave blank to leave unchanged)</label>
+                                                                    <input type="password" class="input-text" name="password_current" id="password_current">
+                                                                </p>
+                                                                <p class="form-row form-row-wide">
+                                                                    <label for="password_1">New Password (leave blank to leave unchanged)</label>
+                                                                    <input type="password" class="input-text" name="password_1" id="password_1">
+                                                                </p>
+                                                                <p class="form-row form-row-wide">
+                                                                    <label for="password_2">Confirm New Password</label>
+                                                                    <input type="password" class="input-text" name="password_2" id="password_2">
+                                                                </p>
+                                                                </fieldset>
 
                                                                 <p>
                                                                     <button type="submit" class="button"
-                                                                        name="save_address" value="Save address">Save
-                                                                        address</button>
-                                                                    <input type="hidden"
-                                                                        id="woocommerce-edit-address-nonce"
-                                                                        name="woocommerce-edit-address-nonce"
-                                                                        value="de5e19be99"><input type="hidden"
-                                                                        name="_wp_http_referer" value="shipping"> <input
-                                                                        type="hidden" name="action"
-                                                                        value="edit_address">
+                                                                        name="save_address" value="Save address">Update
+                                                                        User</button>
                                                                 </p>
                                                             </div>
 

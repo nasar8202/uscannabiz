@@ -62,8 +62,10 @@
                                        <label for="account_email">Email address <span class="required">*</span></label>
                                        <input type="email" class="input-text" name="account_email" id="account_email" value="{{$user->email}}">
                                     </p>
+                                    <br>
                                     <fieldset>
                                        <legend>Password Change</legend>
+                                       <br>
                                        <p class="form-row form-row-wide">
                                           <label for="password_current">Current Password (leave blank to leave unchanged)</label>
                                           <input type="password" class="input-text" name="password_current" id="password_current">

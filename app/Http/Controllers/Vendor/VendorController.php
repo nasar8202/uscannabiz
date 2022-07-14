@@ -52,7 +52,7 @@ class VendorController extends Controller
         $user = User::find($user_vendor);
 
         $customer = Customers::where('user_id',$user->id)->first();
-
+        
         return view('vendor.product.editVendor',compact(['user',$user,'customer',$customer]));
     }
 

@@ -247,8 +247,54 @@ class UserController extends Controller
         return $data = array('status'=>'success', 'tp'=>1, 'msg'=>"Countries fetched successfully.", 'result'=>$cities);
     }
 
+    public function editUserAccount()
+    {
+        
+        $login_user = Auth::user()->id;
+        $user = User::find($login_user);
+        $customer = Customers::where('user_id',$user->id)->first();
+       
+        return view('/user/editprofile',compact(['user',$user,'customer',$customer]));
+        
+    }
+
+    public function updateUserAccount(Request $request,$id)
+    {
+        
+        $user = User::find($id);
+        $user->name = $request->input('first_name')." " . $request->input('last_name');;
 
 
+        $user->email = $request->input('email');
+        
+        if($request->input('password_current')){
+            $request->validate([
+                'password_current' => 'required',
 
+              ]);
+
+            if (!Hash::check($request->password_current, $user->password)) {
+                return back()->with(['error'=>'Current password does not match!']);
+            }
+            $user->password = Hash::make($request->password_1);
+        }
+        $user->save();
+
+        $customer = Customers::where('user_id',$id)->first();
+
+        $customer->first_name = $request->input('first_name');
+
+        $customer->last_name = $request->input('last_name');
+        $customer->phone_no = $request->input('phone_no');
+        $customer->email = $request->input('email');
+    
+
+        $customer->save();
+
+        return back()->with(['success' => 'Updated Successfully']);
+        
+    }
+
+    
 
 }
