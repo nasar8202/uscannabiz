@@ -18,20 +18,10 @@ class CustomersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
     final public function index()
     {
-    //    dd(User::all());
-//     $a = DB::table('users')
-//     ->select('users.id','users.name','users.email','users.role_id','customers.first_name','customers.last_name','customers.email')
-//     ->join('customers','customers.user_id','=','users.id')
-//     ->where('users.role_id', 4)
-//     ->get();
-// return $a;
 
     $user = User::join('customers','users.customers_id','=','customers.id')->where(['role_id'=>4])->get();
-    // $customer = Customers::where('user_id',$user->id)->get();
-// dd($user);
         try {
 
             if (request()->ajax()) {
