@@ -54,6 +54,7 @@
                     </div>
                 </div>
                 <!-- ./col -->
+    @if (auth()->user()->role_id == 1)
                 <div class="col-lg-3 col-6">
                     <!-- small box -->
                     <div class="small-box bg-success">
@@ -83,13 +84,14 @@
                                 class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
+                @endif
                 <!-- ./col -->
 
                 <!-- ./col -->
             </div>
             {{-- latest orders --}}
             <div class="row mt-4 mb-3">
-                <div class="col-md-6">
+    <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
                             <i class="nav-icon fa fa-shopping-cart" aria-hidden="true"></i> &nbsp; <span
@@ -130,6 +132,7 @@
             {{-- latest orders end --}}
 
             {{-- latest Reviews --}}
+            {{-- @if (auth()->user()->role_id == 1)
 
                 <div class="col-md-6">
                     <div class="card">
@@ -168,6 +171,7 @@
                         </div>
                     </div>
                 </div>
+            @endif --}}
             </div>
             {{-- latest orders end --}}
             <!-- /.row -->
