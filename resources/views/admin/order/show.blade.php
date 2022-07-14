@@ -163,7 +163,7 @@
                                                     <a href="{{URL::to('/').'/shop/'.$orderItems->product->slug}}" target="_blank">
                                                         {{$orderItems->product->product_name}}
                                                     </a><br>
-                                                   @if($orderItems->orderOptions!==null) 
+                                                   @if($orderItems->orderOptions!==null)
                                                     @forelse($orderItems->orderOptions as $option)
                                                         <p style="margin-bottom: 0 !important;"><b>{{ $option->optionValue['option']['option_name']}}</b> : {{ $option->optionValue['option_value']}}</p>
                                                     @empty
@@ -218,7 +218,7 @@
                                                     <strong>Total</strong>
                                                 </td>
                                                 <td class="right">
-                                                    <strong>${{$order->total_amount+$order->shipping_cost}}</strong>
+                                                    <strong>${{$order->total_amount??''+$order->shipping_cost}}</strong>
                                                 </td>
                                             </tr>
                                             </tbody>

@@ -122,7 +122,7 @@ class OrderController extends Controller
                         //     return $data->customer->first_name . ' ' . $data->customer->last_name;
                         // }
                     })->addColumn('total_amount', function ($data) {
-                        return '$' . ($data->total_amount + $data->shipping_cost) ?? '';
+                        return '$' . ($data->total_amount ?? '' + $data->shipping_cost) ?? '';
                     })->addColumn('order_date', function ($data) {
                         return date('d-M-Y', strtotime($data->created_at)) ?? '';
                     })->addColumn('status', function ($data) {
@@ -263,6 +263,14 @@ class OrderController extends Controller
     }
 
 
+    public function broker_price_update(Request $request)
+    {
+        $order = Order::find($request->order_id);
+        $order->broker_price = $request->broker_price;
+        $order->order_status = "completed";
+        $order->save();
+        return redirect()->route('order.index')->with(['success' => 'Order Updated Successfully']);
+    }
     public function broker_price(Request $request)
     {
         // dd($request->all());

@@ -25,9 +25,11 @@
                             </div> --}}
 
                         </div>
-                        <form method="post" action="{{route('submit-request')}}">
+                        <form method="post" @if(isset($order)) action="{{route('submit-request-update')}}" @else action="{{route('submit-request')}}"  @endif>
                             @csrf
-                            
+                            @if(isset($order))
+                            <input type="hidden" name="order_id" value="{{$order->id}}">
+                            @endif
                             <input type="hidden" name="customer_id" value="{{$vender_request->customer_id}}">
                             <input type="hidden" name="customer_name" value="{{$vender_request->full_name}}">
                             <input type="hidden" name="phone_no" value="{{$vender_request->phone_num}}">
@@ -178,6 +180,9 @@
                                             <th class="right">Quantity</th>
                                             <th class="right">Sub Total</th>
                                             <th class="right">Total</th>
+                                            @if(isset($order))
+                                            <th class="right">Broker Commission</th>
+                                            @endif
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -210,6 +215,9 @@
                                                 @endphp
                                                 <td class="right">${{$product->product_current_price}}</td>
                                                 <td class="right">${{$total_price}}</td>
+                                                @if(isset($order))
+                                                <td class="right">${{$order->broker_price}}</td>
+                                                @endif
                                             </tr>
                                             {{-- @php
                                                 $subTotal += $orderItems->product_per_price;
@@ -221,9 +229,10 @@
                                         </tbody>
                                     </table>
                                     @if(isset($order) && $order->order_status == 'pending')
+                                    {{-- @dd($order) --}}
                                     <div class="col-md-4">
                                     <label for="category">Broker Commission Price</label>
-                                    <input type="text" class="form-control" name="broker_price" id="broker_price"  value="" placeholder="Amount" required >
+                                    <input type="text" class="form-control" name="broker_price" id="broker_price" @if(isset($order)) value="{{$order->broker_price}}" @endif placeholder="Amount" required >
                                     </div>  
                                     @elseif(!isset($order))
                                     <div class="col-md-4">
@@ -278,7 +287,7 @@
                             </div>
                         </div>
                         @if(isset($order) && $order->order_status == 'pending')
-                        <button type="submit" class="float-right btn btn-primary">Add Request To Vendor</button>
+                        <button type="submit" class="float-right btn btn-primary">Update Request To Vendor</button>
                         @elseif(!isset($order))
                         <button type="submit" class="float-right btn btn-primary">Add Request To Vendor</button>
                         @endif

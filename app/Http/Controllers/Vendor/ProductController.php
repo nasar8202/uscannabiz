@@ -205,8 +205,11 @@ class ProductController extends Controller
         $auth = Auth::user();
         if($auth){
             $customer_check = Customers::where('user_id',$auth->id)->first();
+            return view('front.shop.vendorAddProductForm',compact(['data','customer_check']));
         }
-        return view('front.shop.vendorAddProductForm',compact(['data','customer_check']));
+        else{
+            return view('front.shop.vendorAddProductForm',compact(['data']));
+        }
     }
     public function destroyProduct($id)
     {

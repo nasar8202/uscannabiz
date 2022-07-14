@@ -573,7 +573,6 @@
                                                                     </tr>
                                                                     </thead>
                                                                     <tbody>
-
                                                                         <tr>
                                                                             <td>
                                                                                 <p>{{$order->order_no}}</p>
@@ -601,6 +600,104 @@
 
 
                                                     </div>
+                                                
+                                                    <div class="woocommerce-MyAccount-content">
+                                                        <div class="woocommerce-notices-wrapper"></div>
+                                                        <div class="woocommerce-message woocommerce-message--info woocommerce-Message woocommerce-Message--info woocommerce-info">
+                                                            Product Details
+                                                        </div>
+                                                            <div class="noRecord">
+                                                                <table class="table orderTable">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>#</th>
+                                                                            <th>Image</th>
+                                                                            <th>Item</th>
+                                                                            <th>Quantity</th>
+                                                                            <th>Sub Total</th>
+                                                                            <th>Total Name</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                            @php
+                                                                            $counter = 1;
+                                                                            // $subTotal = 0;
+                                                                        @endphp
+                                                                       <tr>
+                                                                        <td class="center">{{$counter++}}</td>
+                                                                        <td class="center">
+                                                                            <img src="{{asset('uploads/products/'.$product->product_image)}}" width="50" height="50" alt="">
+                                                                        </td>
+                                                                        <td class="left strong">
+                                                                            {{-- <input type="hidden" name="" value="{{$product->product_name}}"> --}}
+                                                                            {{-- {{$product->product_name}} --}}
+                                                                            <a href="{{URL::to('/').'/shop/'.$order_items_first->product->slug}}" target="_blank">
+                                                                                {{$order_items_first->product->product_name}}
+                                                                            </a><br>
+                                                                           @if($order_items_first->orderOptions!==null) 
+                                                                            @forelse($order_items_first->orderOptions as $option)
+                                                                                <p style="margin-bottom: 0 !important;"><b>{{ $option->optionValue['option']['option_name']}}</b> : {{ $option->optionValue['option_value']}}</p>
+                                                                            @empty
+                                                                            @endforelse
+                                                                            @endif
+                                                                        </td>
+                                                                        <td class="right">{{$order_items_first->product_qty}}</td>
+                                                                        {{-- @php
+                                                                        $total_price = $vender_request->quantity*$product->product_current_price;
+                                                                        @endphp --}}
+                                                                        <td class="right">${{$order->sub_total}}</td>
+                                                                        <td class="right">${{$order->total_amount}}</td>
+                                                                    </tr>
+
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+
+
+                                                    </div>
+
+
+                                                    <div class="woocommerce-MyAccount-content">
+                                                        <div class="woocommerce-notices-wrapper"></div>
+                                                        <div class="woocommerce-message woocommerce-message--info woocommerce-Message woocommerce-Message--info woocommerce-info">
+                                                            Shipping Details
+                                                        </div>
+                                                            <div class="noRecord">
+                                                                <table class="table orderTable">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <td style="width: 50%;font-weight: bold" class="text-left">Payment Address</td>
+                                                                            <td style="width: 50%;;font-weight: bold" class="text-left">Shipping Address</td>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td class="text-left">
+                                                                                <strong>Address</strong> : {{$order->shipping_address}}
+                                                                                <br>
+                                                                                <strong>Country</strong> :  {{$order->shipping_country}}
+                                                                                <br>
+                                                                                <strong>City</strong> :  {{$order->shipping_city}}
+                                                                                <br>
+                                                                                <strong>State</strong> :  {{$order->shipping_state}}
+                                                                            </td>
+                                                                            <td class="text-left">
+                                                                                <strong>Address</strong> : {{$order->billing_address}}
+                                                                                <br>
+                                                                                <strong>Country</strong> :  {{$order->billing_country}}
+                                                                                <br>
+                                                                                <strong>City</strong> :  {{$order->billing_city}}
+                                                                                <br>
+                                                                                <strong>State</strong> :  {{$order->billing_state}}
+                                                                            </td>
+                                                                        </tr>
+                                                                        </tbody>
+                                                                </table>
+                                                            </div>
+
+
+                                                    </div>
+
 
                                                 </div>
                                             </div>
