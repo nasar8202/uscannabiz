@@ -165,7 +165,9 @@ class OrderController extends Controller
                 })
                 ->addColumn('action', function ($data) {
                     // return $data->product_id;
-                    return '<a title="View" href="order/broker/' . $data->product_id . '/' . $data->id . '" class="btn btn-dark btn-sm">
+                    return '<a title="View" href="order/broker/' . 
+                    $data->product_id . '/' . 
+                    $data->id . '" class="btn btn-dark btn-sm">
                             <i class="fas fa-eye"></i>
                             </a>&nbsp;<button title="Delete" type="button" name="delete" id="' . $data->id . '" class="delete btn btn-danger btn-sm">
                             <i class="fa fa-trash"></i></button>';
@@ -225,7 +227,7 @@ class OrderController extends Controller
 
 
     public function broker_price(Request $request)
-    {
+    {   
         $random = \Carbon\Carbon::now()->format('Ymd');
         
         $order = new Order;
@@ -260,6 +262,7 @@ class OrderController extends Controller
         $order->broker_price = $request->input('broker_price');
         $order->broker_id = Auth::user()->id;
         $order->vendor_id = $request->input('vendor_id');
+        $order->vendor_req_id = $request->input('vendor_req_id');
         
         
         $order->save();
