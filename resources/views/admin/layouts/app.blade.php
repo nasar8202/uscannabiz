@@ -147,7 +147,7 @@
 
                     ?>
 
-                    <li class="nav-item has-treeview {{ request()->IS('admin/settings') ? 'menu-is-opening menu-open' : '' }}">
+                    {{-- <li class="nav-item has-treeview {{ request()->IS('admin/settings') ? 'menu-is-opening menu-open' : '' }}">
                         <a href="#" class="nav-link ">
                             <i class="nav-icon fas fa-tags fw"></i>
                             <p>
@@ -188,7 +188,7 @@
                                 </a>
                             </li>
                         </ul>
-                    </li>
+                    </li> --}}
 
                     <li class="nav-item has-treeview {{ request()->IS('admin/catalog/attribute-groups') || request()->IS('admin/catalog/attributes') || request()->IS('admin/catalog/options') || request()->IS('admin/catalog/option-values') ||  request()->IS('admin/category') || request()->IS('admin/product') || request()->IS('admin/manufacturer') ||  request()->IS('admin/coupons') || request()->IS('admin/collection') || request()->IS('admin/collectionProducts') || request()->IS('admin/newsletter') || request()->IS('admin/shipping') ? 'menu-is-opening menu-open' : '' }}">
                         <a href="#" class="nav-link ">
@@ -204,20 +204,20 @@
                                     <p>Attribute Group</p>
                                 </a>
                             </li> --}}
-                            <li class="nav-item">
-                                {{-- <a href="{{route('catalog.attributes')}}" class="nav-link {{ request()->IS('admin/catalog/attributes') ? 'active' : '' }}"> --}}
+                            {{-- <li class="nav-item">
+
                                 <a href="{{route('attribute.index')}}" class="nav-link {{ request()->IS('admin/catalog/attribute') ? 'active' : '' }}">
                                     <i class="nav-icon fa fa-angle-double-right"></i>
                                     <p>Attributes</p>
                                 </a>
-                            </li>
-                            <li class="nav-item">
-                                {{-- <a href="{{route('catalog.options')}}" class="nav-link {{ request()->IS('admin/catalog/options') ? 'active' : '' }}"> --}}
+                            </li> --}}
+                            {{-- <li class="nav-item">
+
                                 <a href="{{route('option.index')}}" class="nav-link {{ request()->IS('admin/catalog/option') ? 'active' : '' }}">
                                     <i class="nav-icon fa fa-angle-double-right"></i>
                                     <p>Options</p>
                                 </a>
-                            </li>
+                            </li> --}}
                             {{-- <li class="nav-item">
                                 <a href="{{route('catalog.optionValues')}}" class="nav-link {{ request()->IS('admin/catalog/option-values') ? 'active' : '' }}">
                                     <i class="nav-icon fa fa-angle-double-right"></i>
@@ -236,19 +236,19 @@
                                     <p>Product</p>
                                 </a>
                             </li>
-                            <li class="nav-item">
+                            {{-- <li class="nav-item">
                                 <a href="{{route('manufacturer.index')}}" class="nav-link {{ request()->IS('admin/manufacturer') ? 'active' : '' }}">
                                     <i class="nav-icon fa fa-angle-double-right"></i>
                                     <p>Manufacturer</p>
                                 </a>
-                            </li>
+                            </li> --}}
                             <li class="nav-item">
                                 <a href="{{route('coupons.index')}}" class="nav-link {{ request()->IS('admin/coupons') ? 'active' : '' }}">
                                     <i class="nav-icon fa fa-angle-double-right"></i>
                                     <p>Coupons</p>
                                 </a>
                             </li>
-                            <li class="nav-item">
+                            {{-- <li class="nav-item">
                                 <a href="{{route('collection.index')}}" class="nav-link {{ request()->IS('admin/collection') ? 'active' : '' }}">
                                     <i class="nav-icon fa fa-angle-double-right"></i>
                                     <p>Collection</p>
@@ -265,7 +265,7 @@
                                     <i class="nav-icon fa fa-angle-double-right"></i>
                                     <p>Newsletter</p>
                                 </a>
-                            </li>
+                            </li> --}}
                             <li class="nav-item">
                                 <a href="{{route('shipping.index')}}" class="nav-link {{ request()->IS('admin/shipping') ? 'active' : '' }}">
                                     <i class="nav-icon fa fa-angle-double-right"></i>
@@ -293,7 +293,7 @@
                         </a>
                     </li>
 
-                    <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a href="{{route('blog.index')}}" class="nav-link {{ request()->IS('admin/blog') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-tags fw"></i>
                             <p>Blog</p>
@@ -316,7 +316,7 @@
                             <i class="nav-icon fa fa-comments"></i>
                             <p>Testimonial</p>
                         </a>
-                    </li>
+                    </li> --}}
                     <?php  } ?>
                     <li class="nav-item">
                         <a href="{{url('admin/changePassword')}}" class="nav-link {{ request()->IS('admin/changePassword') ? 'active' : '' }}">
