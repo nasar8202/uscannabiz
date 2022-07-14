@@ -256,7 +256,7 @@ class ProductController extends Controller
     {
        $product = Product::where('id',$id)->first();
        $meta = ProductMetaData::where('product_id',$id)->first();
-       $relatedProducts = RelatedProduct::with('products')->where('product_id', $id)->get();
+       $relatedProducts = Product::whereStatus(1)->get();
         $categories = Category::get();
         return view('Vendor.product.editProductForm',compact('categories','product','relatedProducts','meta'));
 
@@ -294,7 +294,7 @@ class ProductController extends Controller
         $product->width = 12;
         $product->height = 12;
         $product->weight = 11;
-        $product->status = 11;
+        
         $product->vender_id = Auth::user()->id;
         $product->save();
 
@@ -310,7 +310,14 @@ class ProductController extends Controller
 
 
 
-
+        if (!empty($request->get('related_prod_id'))) {
+            foreach ($request->get('related_prod_id') as $relatedProduct) {
+                RelatedProduct::updateOrCreate([
+                    'product_id' => $product->id,
+                    'related_id' => $relatedProduct
+                ]);
+            }
+        }
 
     return back()->with(['success' => 'Product Updated Successfully']);
 

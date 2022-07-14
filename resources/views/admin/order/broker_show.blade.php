@@ -37,6 +37,7 @@
                             <input type="hidden" name="vendor_id" value="{{$vender_request->vendor_id}}">
                             <input type="hidden" name="shipping_city" value="{{$vender_request->city}}">
                             <input type="hidden" name="quantity" value="{{$vender_request->quantity}}">
+                            <input type="hidden" name="vendor_req_id" value="{{$vender_request->id}}">
                             
                             <input type="hidden" name="total_amount" value="{{$product->product_current_price}}">
                             <input type="hidden" name="product_id" value="{{$product->id}}">

@@ -18,6 +18,8 @@ class AddBrokerIdToOrdersTable extends Migration
             $table->string('broker_id')->nullable();
             
             $table->string('vendor_id')->nullable();
+            
+            $table->string('vendor_req_id')->nullable();
         });
     }
 
