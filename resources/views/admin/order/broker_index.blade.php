@@ -111,6 +111,7 @@
                                         <th>Email</th>
                                         <th>Phone</th>
                                         <th>Order Date</th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
@@ -189,6 +190,7 @@
                     {data: 'email', name: 'email'},
                     {data: 'phone', name: 'phone'},
                     {data: 'order_date', name: 'order_date'},
+                    {data: 'status', name: 'status'},
                     {data: 'action', name: 'action', orderable: false}
                 ]
 

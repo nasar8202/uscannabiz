@@ -34,6 +34,7 @@ class FrontController extends Controller
 
     public function registerVendorAndCustomer(Request $request)
     {
+        dd($request->all());
             // $userData = new User();
             // $userData['name'] = $request->fname." ".$request->lname;
             // $userData['email'] = $request->email;
@@ -83,6 +84,10 @@ class FrontController extends Controller
                 'last_name' => $request->lname,
                 'phone_no' => $request->phone,
                 'email' => $request->email,
+                'city' => $request->city,
+                'state' => $request->state,
+                'country' => $request->country,
+                'address' => $request->address,
             ]);
 
             $customer_id = $customer->id;
@@ -92,10 +97,10 @@ class FrontController extends Controller
                 'store_name'=>$request->store_name,
                 'store_url'=>$request->store_url
             ]);
-            $userData['role_id'] = 3;
-            $user = User::create([$userData]);
-            $user_id = $user->id;
-            $details['email'] =$request->email;
+            // $userData['role_id'] = 3;
+            // $user = User::create([$userData]);
+            // $user_id = $user->id;
+            // $details['email'] =$request->email;
 
             // dispatch(new App\Jobs\SendEmailJob($details));
             // SendEmailVendorJob::dispatch($details);

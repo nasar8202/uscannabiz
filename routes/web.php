@@ -72,6 +72,8 @@ Route::get('/faq', 'Front\ContactUsController@faq')->name('faq');
 Route::middleware(['user'])->prefix('user')->group(function () {
     Route::get('/dashboard', 'User\UserController@dashboard')->name('dashboard');
 
+    Route::get('/my-orders', 'User\UserController@MyOrders')->name('MyOrders');
+    Route::get('/order/{id}', 'User\UserController@show')->name('order');
     //WishList
     Route::get('/getOrderDetail/{id}', 'User\UserController@getOrderDetail')->name('getOrderDetail');
     Route::post('/add-wishlist', 'User\UserController@add_wishlist')->name('user.wishlist');
@@ -93,15 +95,20 @@ Route::namespace('Vendor')->prefix('/vendor')->middleware('vendor')->group(funct
     Route::get('dashboard', 'VendorController@dashboard')->name('dashboard');
     Route::get('/order', 'VendorController@order')->name('vendor_order');
     Route::get('product', 'ProductController@index')->name('product');
+    Route::get('/product/filter', 'ProductController@filter')->name('product_filter');
+    Route::get('/product/search', 'ProductController@search')->name('product_filter_search');
     Route::get('new-product', 'ProductController@addProductForm')->name('productForm');
     Route::post('new-product/add', 'ProductController@addProduct')->name('add_product');
     Route::get('delete-product/{id}', 'ProductController@destroyProduct')->name('deleteProduct');
+    Route::get('delete-product-bulk', 'ProductController@destroyProductBulk')->name('deleteProductbulk');
     Route::get('edit-products/{id}', 'ProductController@editProduct')->name('editProduct');
     Route::post('update-products/{id}', 'ProductController@updateProduct')->name('updateProduct');
     Route::get('editVendor', 'VendorController@vendorEdit')->name('editVendor');
     Route::post('updateVendor/{id}', 'VendorController@vendorUpdate')->name('updateVendor');
 
     Route::get('/checkProductSkuVendor', 'ProductController@checkProductSkuVendor')->name('checkProductSkuVendor');
+
+
 
 });
 
@@ -135,7 +142,8 @@ Route::namespace('Admin')->prefix('/admin')->middleware('admin')->group(function
 
     //ORDER
     Route::get('/order', 'OrderController@index')->name('order.index');
-    Route::get('/order/broker/{id}/{request_id}', 'OrderController@brokershow')->name('order.broker.show');
+    Route::get('/order/broker/{id}/{request_id}/{order_id}', 'OrderController@brokershow')->name('order.broker.show');
+    Route::get('/order/broker/{id}/{request_id}', 'OrderController@brokershow_without_orderid')->name('order.broker.show.woi');
     Route::get('/order/{id}', 'OrderController@show')->name('order.show');
     Route::get('/order/changeOrderStatus/{id}', 'OrderController@changeOrderStatus')->name('order.changeOrderStatus');
     Route::delete('/order/destroy/{id}', 'OrderController@destroy')->name('order.destroy');

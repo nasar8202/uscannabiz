@@ -1540,6 +1540,17 @@ a.dokan-label:focus {
 .dokan-label-info[href]:focus {
   background-color: #31b0d5;
 }
+.dokan-label-secondary {
+  background-color: #6c757d;
+}
+.dokan-label-secondary[href]:hover,
+.dokan-label-secondary[href]:focus {
+  background-color: #6c757d;
+}
+.dokan-label-secondary[href]:hover,
+.dokan-label-secondary[href]:focus {
+  background-color: #6c757d;
+}
 .dokan-label-warning {
   background-color: #f0ad4e;
 }

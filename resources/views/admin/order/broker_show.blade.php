@@ -70,8 +70,8 @@
                                         </table>
                                     </div>
                                 </div> --}}
-                                
-                                {{-- <div class="col-md-5 float-right">
+                                @if(isset($order))
+                                <div class="col-md-5 float-right">
                                     <label for="">Order Status</label>
                                     <select name="order_status" id="order_status" class="form-control" data-order_id="{{$order->id}}">
                                         <option value="pending" @if($order->order_status == 'pending') selected @endif>Pending</option>
@@ -80,7 +80,8 @@
                                         <option value="cancelled" @if($order->order_status == 'cancelled') selected @endif>Cancelled</option>
                                     </select>
 
-                                </div> --}}
+                                </div>
+                                @endif
                                 <div class="col-md-12">
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
@@ -114,6 +115,9 @@
 
                                                 </td>
                                             </tr>
+
+                                            <input type="hidden" name="vendor_request_id" value="{{$vender_request->id}}">
+
                                             {{-- <tr>
                                                 <td><button data-toggle="tooltip" title="" class="btn btn-info btn-xs" data-original-title="Telephone"><i class="fa fa-phone fa-fw"></i></button></td>
                                                 <td>
@@ -171,6 +175,8 @@
                                             <th class="center">Image</th>
                                             <th>Item</th>
                                             {{-- <th class="right">Unit Cost</th> --}}
+                                            <th class="right">Quantity</th>
+                                            <th class="right">Sub Total</th>
                                             <th class="right">Total</th>
                                         </tr>
                                         </thead>
@@ -198,8 +204,12 @@
                                                     @endforelse
                                                     @endif --}}
                                                 </td>
-                                                <td class="right">
-                                                    ${{$product->product_current_price}}</td>
+                                                <td class="right">{{$vender_request->quantity}}</td>
+                                                @php
+                                                $total_price = $vender_request->quantity*$product->product_current_price;
+                                                @endphp
+                                                <td class="right">${{$product->product_current_price}}</td>
+                                                <td class="right">${{$total_price}}</td>
                                             </tr>
                                             {{-- @php
                                                 $subTotal += $orderItems->product_per_price;
@@ -210,10 +220,18 @@
 
                                         </tbody>
                                     </table>
+                                    @if(isset($order) && $order->order_status == 'pending')
+                                    <div class="col-md-4">
+                                    <label for="category">Broker Commission Price</label>
+                                    <input type="text" class="form-control" name="broker_price" id="broker_price"  value="" placeholder="Amount" required >
+                                    </div>  
+                                    @elseif(!isset($order))
                                     <div class="col-md-4">
                                     <label for="category">Broker Commission Price</label>
                                     <input type="text" class="form-control" name="broker_price" id="broker_price"  value="" placeholder="Amount" required >
                                     </div>    
+                                    @endif
+                                    
                                 <br>
                                 </div>
                                 {{-- <div class="row">
@@ -259,8 +277,11 @@
                                 </div> --}}
                             </div>
                         </div>
-                        
+                        @if(isset($order) && $order->order_status == 'pending')
                         <button type="submit" class="float-right btn btn-primary">Add Request To Vendor</button>
+                        @elseif(!isset($order))
+                        <button type="submit" class="float-right btn btn-primary">Add Request To Vendor</button>
+                        @endif
                     </form>
                     </div>
                 </div>
@@ -290,6 +311,7 @@
                     }else{
                         toastr.success('Record Status Updated Successfully');
                     }
+                    location.reload();
                 }
             })
         });

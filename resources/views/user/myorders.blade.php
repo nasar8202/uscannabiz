@@ -1,5 +1,5 @@
 @extends('front.layout.app')
-@section('title', 'Customer')
+@section('title', 'My Orders')
 @section('content')
     <style id="et-critical-inline-css">
         .woocommerce #respond input#submit,
@@ -511,7 +511,7 @@
                                         <div
                                             class="et_pb_module et_pb_text et_pb_text_0  et_pb_text_align_left et_pb_bg_layout_light">
                                             <div class="et_pb_text_inner">
-                                                <h1>My Account</h1>
+                                                <h1>My Orders</h1>
                                             </div>
                                         </div>
                                     </div>
@@ -557,238 +557,53 @@
                                                     </nav>
                                                     <div class="woocommerce-MyAccount-content">
                                                         <div class="woocommerce-notices-wrapper"></div>
+                                                            @if(count($recentOrders) > 0)
 
-                                                        <form action = "{{url('user/addCustomerAddress')}}" method="post">
-                                                            @csrf
-                                                            <h3>Shipping address</h3>
-                                                            <div class="woocommerce-address-fields">
-
-                                                                <div class="woocommerce-address-fields__field-wrapper">
-                                                                    <p class="form-row form-row-first validate-required"
-                                                                        id="shipping_first_name_field" data-priority="10">
-                                                                        <label for="shipping_first_name"
-                                                                            class="">First name&nbsp;<abbr
-                                                                                class="required"
-                                                                                title="required">*</abbr></label><span
-                                                                            class="woocommerce-input-wrapper"><input
-                                                                                type="text" class="input-text "
-                                                                                id="first_name" placeholder=""
-                                                                                name="first_name"
-                                                                                autocomplete="given-name"></span></p>
-                                                                    <p class="form-row form-row-last validate-required"
-                                                                        id="shipping_last_name_field" data-priority="20">
-                                                                        <label for="shipping_last_name" class="">Last
-                                                                            name&nbsp;<abbr class="required"
-                                                                                title="required">*</abbr></label><span
-                                                                            class="woocommerce-input-wrapper"><input
-                                                                                type="text" class="input-text "
-                                                                                name="last_name"
-                                                                                id="last_name" placeholder=""
-
-                                                                                autocomplete="family-name"></span></p>
-
-                                                                                <p class="form-row form-row-first validate-required"
-                                                                        id="shipping_first_name_field" data-priority="10">
-                                                                        <label for="shipping_first_name"
-                                                                            class="">Phone No.&nbsp;<abbr
-                                                                                class="required"
-                                                                                title="required">*</abbr></label><span
-                                                                            class="woocommerce-input-wrapper"><input
-                                                                                type="text" class="input-text "
-                                                                                id="phone_no_code" placeholder=""
-                                                                                name="phone_no_code"
-                                                                                autocomplete="given-name"></span></p>
-                                                                    <p class="form-row form-row-last validate-required"
-                                                                        id="shipping_last_name_field" data-priority="20">
-                                                                        <label for="shipping_last_name" class="">
-                                                                            Title&nbsp;<abbr class="required"
-                                                                                title="required">*</abbr></label><span
-                                                                            class="woocommerce-input-wrapper"><input
-                                                                                type="text" class="input-text "
-                                                                                name="title"
-                                                                                id="title" placeholder=""
-
-                                                                                autocomplete="family-name"></span></p>
-
-                                                                    <p class="form-row form-row-wide"
-                                                                        id="shipping_company_field" data-priority="30">
-                                                                        <label for="shipping_company" class="">Company
-                                                                            name&nbsp;<span
-                                                                                class="optional">(optional)</span></label><span
-                                                                            class="woocommerce-input-wrapper"><input
-                                                                                type="text" class="input-text "
-                                                                                name="company_name"
-                                                                                id="company_name" placeholder=""
-
-                                                                                autocomplete="organization"></span></p>
-                                                                    <p class="form-row form-row-wide address-field update_totals_on_change validate-required"
-                                                                        id="shipping_country_field" data-priority="40">
-                                                                        <label for="shipping_country" class="">Country
-                                                                            / Region&nbsp;<abbr class="required"
-                                                                                title="required">*</abbr></label><span
-                                                                            class="woocommerce-input-wrapper"><select
-                                                                            name="country" id="country_e"
-                                                                                class="country_to_state country_select select2-hidden-accessible"
-                                                                                autocomplete="country"
-                                                                                data-placeholder="Select a country / region…"
-                                                                                data-label="Country / Region" tabindex="-1"
-                                                                                aria-hidden="true">
-                                                                                <option value="">Select a country /
-                                                                                    region…</option>
-                                                                                    @foreach($countries as $country)
-                                                                                    <option value="{{$country->id}}">{{$country->name}}</option>
-                                                                                    @endforeach
-
-                                                                            </select><span
-                                                                                class="select2 select2-container select2-container--default"
-                                                                                dir="ltr" style="width: 100%;"><span
-                                                                                    class="selection"><span
-                                                                                        class="select2-selection select2-selection--single"
-                                                                                        aria-haspopup="true"
-                                                                                        aria-expanded="false"
-                                                                                        tabindex="0"
-                                                                                        aria-label="Country / Region"
-                                                                                        role="combobox"><span
-                                                                                            class="select2-selection__rendered"
-                                                                                            id="select2-shipping_country-container"
-                                                                                            role="textbox"
-                                                                                            aria-readonly="true"><span
-                                                                                                class="select2-selection__placeholder">Select
-                                                                                                a country /
-                                                                                                region…</span></span><span
-                                                                                            class="select2-selection__arrow"
-                                                                                            role="presentation"><b
-                                                                                                role="presentation"></b></span></span></span><span
-                                                                                    class="dropdown-wrapper"
-                                                                                    aria-hidden="true"></span></span><noscript><button
-                                                                                    type="submit"
-                                                                                    name="woocommerce_checkout_update_totals"
-                                                                                    value="Update country / region">Update
-                                                                                    country /
-                                                                                    region</button></noscript></span></p>
-                                                                    <p class="form-row form-row-wide address-field validate-required"
-                                                                        id="shipping_address_1_field" data-priority="50">
-                                                                        <label for="shipping_address_1"
-                                                                            class="">Street address&nbsp;<abbr
-                                                                                class="required"
-                                                                                title="required">*</abbr></label><span
-                                                                            class="woocommerce-input-wrapper"><input
-                                                                                type="text" class="input-text "
-                                                                                name="address"
-                                                                                placeholder="House number and street name"
-                                                                                value=""
-                                                                                autocomplete="address-line1"></span></p>
-
-
-                                                                    <p class="form-row form-row-wide address-field validate-required validate-state"
-                                                                        id="shipping_state_field" data-priority="80">
-                                                                        <label for="shipping_state"
-                                                                            class="">State&nbsp;<abbr
-                                                                                class="required"
-                                                                                title="required">*</abbr></label><span
-                                                                            class="woocommerce-input-wrapper"><select
-                                                                            name="state" id="state_e"
-                                                                                class="state_select select2-hidden-accessible"
-                                                                                autocomplete="address-level1"
-                                                                                data-placeholder="Select an option…"
-                                                                                data-input-classes="" data-label="State"
-                                                                                tabindex="-1" aria-hidden="true">
-                                                                                <option value="">Select an option…
-                                                                                </option>
-
-                                                                            </select><span
-                                                                                class="select2 select2-container select2-container--default"
-                                                                                dir="ltr" style="width: 100%;"><span
-                                                                                    class="selection"><span
-                                                                                        class="select2-selection select2-selection--single"
-                                                                                        aria-haspopup="true"
-                                                                                        aria-expanded="false"
-                                                                                        tabindex="0" aria-label="State"
-                                                                                        role="combobox"><span
-                                                                                            class="select2-selection__rendered"
-                                                                                            id="select2-shipping_state-container"
-                                                                                            role="textbox"
-                                                                                            aria-readonly="true"><span
-                                                                                                class="select2-selection__placeholder">Select
-                                                                                                an
-                                                                                                option…</span></span><span
-                                                                                            class="select2-selection__arrow"
-                                                                                            role="presentation"><b
-                                                                                                role="presentation"></b></span></span></span><span
-                                                                                    class="dropdown-wrapper"
-                                                                                    aria-hidden="true"></span></span></span>
-                                                                    </p>
-
-                                                                    <p class="form-row form-row-wide address-field validate-required validate-state"
-                                                                        id="shipping_state_field" data-priority="80">
-                                                                        <label for="shipping_state"
-                                                                            class="">City&nbsp;<abbr
-                                                                                class="required"
-                                                                                title="required">*</abbr></label><span
-                                                                            class="woocommerce-input-wrapper"><select
-                                                                            name="city" id="city_e"
-                                                                                class="state_select select2-hidden-accessible"
-                                                                                autocomplete="address-level1"
-                                                                                data-placeholder="Select an option…"
-                                                                                data-input-classes="" data-label="State"
-                                                                                tabindex="-1" aria-hidden="true">
-                                                                                <option value="">Select an option…
-                                                                                </option>
-
-                                                                            </select><span
-                                                                                class="select2 select2-container select2-container--default"
-                                                                                dir="ltr" style="width: 100%;"><span
-                                                                                    class="selection"><span
-                                                                                        class="select2-selection select2-selection--single"
-                                                                                        aria-haspopup="true"
-                                                                                        aria-expanded="false"
-                                                                                        tabindex="0" aria-label="State"
-                                                                                        role="combobox"><span
-                                                                                            class="select2-selection__rendered"
-                                                                                            id="select2-shipping_state-container"
-                                                                                            role="textbox"
-                                                                                            aria-readonly="true"><span
-                                                                                                class="select2-selection__placeholder">Select
-                                                                                                an
-                                                                                                option…</span></span><span
-                                                                                            class="select2-selection__arrow"
-                                                                                            role="presentation"><b
-                                                                                                role="presentation"></b></span></span></span><span
-                                                                                    class="dropdown-wrapper"
-                                                                                    aria-hidden="true"></span></span></span>
-                                                                    </p>
-
-                                                                    <p class="form-row form-row-wide address-field validate-required validate-postcode"
-                                                                        id="shipping_postcode_field" data-priority="90">
-                                                                        <label for="shipping_postcode" class="">ZIP
-                                                                            Code&nbsp;<abbr class="required"
-                                                                                title="required">*</abbr></label><span
-                                                                            class="woocommerce-input-wrapper"><input
-                                                                                type="text" class="input-text "
-                                                                                name="zip_code" id="zip_code_e" placeholder=""
-                                                                                value=""
-                                                                                autocomplete="postal-code"></span></p>
-                                                                </div>
-
-
-                                                                <p>
-                                                                    <button type="submit" class="button"
-                                                                        name="save_address" value="Save address">Save
-                                                                        address</button>
-                                                                    <input type="hidden"
-                                                                        id="woocommerce-edit-address-nonce"
-                                                                        name="woocommerce-edit-address-nonce"
-                                                                        value="de5e19be99"><input type="hidden"
-                                                                        name="_wp_http_referer" value="shipping"> <input
-                                                                        type="hidden" name="action"
-                                                                        value="edit_address">
-                                                                </p>
+                                                            <div class="noRecord">
+                                                                <table class="table orderTable">
+                                                                    <thead>
+                                                                    <tr>
+                                                                        <th>Order#</th>
+                                                                        <th>Date</th>
+                                                                        <th>Order Total</th>
+                                                                        <th>Order Status</th>
+                                                                        <th>Action</th>
+                                                                    </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                    @forelse($recentOrders as $order)
+                                                                        <tr>
+                                                                            <td>
+                                                                                <p>{{$order->order_no}}</p>
+                                                                            </td>
+                                                                            <td>
+                                                                                <p>{{date('d-m-Y',strtotime($order->created_at))}}</p>
+                                                                            </td>
+                                                                            <td>
+                                                                                <p>${{$order->total_amount+$order->shipping_cost}}</p>
+                                                                            </td>
+                                                                            <td>
+                                                                                <p style="text-transform: uppercase;">{{$order->order_status}}</p>
+                                                                            </td>
+                                                                            <td>
+                                                                                {{--                                                <a href="#" class="btnStyle btn-block">Track Order</a>--}}
+                                                                                <a href="/user/order/{{$order->id}}" class="btnStyle orderDetailBtn"  >View Order</a>
+                                                                                {{--                                                <a href="#" class="btnStyle">Reorder</a>--}}
+                                                                            </td>
+                                                                        </tr>
+                                                                    @empty
+                                                                    @endforelse
+                                                                    </tbody>
+                                                                </table>
                                                             </div>
-
-                                                        </form>
-
+                                                            @else
+                                                            <div class="woocommerce-message woocommerce-message--info woocommerce-Message woocommerce-Message--info woocommerce-info">
+                                                                <a class="woocommerce-Button button" href="/">Browse products</a>
+                                                                Recent Orders No order has been made yet.	</div>
+                                                            @endif
 
                                                     </div>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -802,13 +617,14 @@
         </div>
     </div>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{{asset('front/js/location.js')}}"></script>
     <script>
 
         $('document').ready(function () {
-            $(".phone_no").intlTelInput({
-                utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/8.4.6/js/utils.js"
-            });
+
             // $('.country_code').on('click',function () {
             //     $('#country_code').val($(this).data('code'));
             // });
@@ -819,64 +635,7 @@
             // $('.address_country_code_e').on('click',function () {
             //     $('input[name="phone_no_code_e"]').val($(this).data('code'));
             // });
-            $("#phone_no").intlTelInput("setNumber", '{{Auth::user()->customers->country_code.Auth::user()->customers->phone_no}}');
 
-
-            $('.orderDetailBtn').on('click',function () {
-                $order_id = $(this).data('order_id');
-
-                $.ajax({
-                    url: "{{url('user/getOrderDetail')}}/"+$order_id,
-                    method: 'GET',
-                    dataType: 'json',
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    success: function(res){
-                        // console.log(res);
-                        var html = '';
-                        let total_amount = parseInt(res.total_amount)+parseInt(res.shipping_cost);
-                        html += `<div class="alert alert-success" role="alert">
-                            <span>Order# ${res.order_no}</span>
-                            <span>Total: $${total_amount}</span>
-                            <span>Placed on ${new Date(res.created_at).toDateString()}</span>
-                            <span style="text-transform: capitalize" >Payment Method: ${res.payment.pay_method_name}</span>
-                            <span>Ship to: ${res.customer.first_name}</span>
-                        </div>
-                        <table class="table orderTable">
-                            <thead>
-                                <tr>
-                                    <th>Product</th>
-                                    <th>Price</th>
-                                    <th>Quantity</th>
-                                    <th>Subtotal</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>`
-
-                            res.order_items.map(function (item) {
-                               html += `<tr>
-                                    <td><p><img src="images/cart-item1.jpg" alt="">${item.product.product_name}</p></td>
-                                    <td><p>$ ${item.product_per_price}</p></td>
-                                    <td><p>${item.product_qty}</p></td>
-                                    <td><p>$ ${item.product_per_price*item.product_qty}</p></td>
-                                    <td>
-                                    <form action="{{ url('cart/store') }}/${item.product.id}" method="POST" id="cart-form">
-                                        {{ csrf_field() }}
-                                    <button type="submit" href="#" class="btnStyle">Reorder</button>
-                                    </form>
-                                    </td>
-                                   </tr>`
-                            });
-                           html += `</tbody>
-                                    </table>`;
-                        $('#OrderDetailModalBody').html(html);
-                        $('#OrderDetailModal').modal('show');
-
-                    }
-                })
-            });
 
 
             //Edit Address
@@ -897,7 +656,7 @@
                         $('#first_name_e').val(res.customer_address.first_name);
                         $('#last_name_e').val(res.customer_address.last_name);
                         $('#phone_no_e').val(res.customer_address.phone_no);
-                        $("#phone_no_e").intlTelInput("setNumber", res.customer_address.phone_no);
+
                         $('#title_e').val(res.customer_address.title);
                         $('#address_e').val(res.customer_address.address);
                         $("#city_e").append(new Option(res.city.name, res.city.id));
@@ -1020,19 +779,8 @@
                 }
             });
 
-            $(".formStyle").submit(function() {
-                $("#country_code").val($("#phone_no").intlTelInput("getSelectedCountryData").dialCode);
-            });
 
-            $("#addAddressForm").submit(function() {
-                $("input[name='phone_no_code']").val($("input[name='add_phone_no']").intlTelInput("getSelectedCountryData").dialCode);
-            });
-
-            $("#updateAddress").submit(function() {
-                $("input[name='phone_no_code_e']").val($("#phone_no_e").intlTelInput("getSelectedCountryData").dialCode);
-            });
         })
     </script>
-
 
 @endsection

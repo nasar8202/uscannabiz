@@ -31,7 +31,21 @@ class UserController extends Controller
 
         return view('user.dashboard',compact('orders','products','recentOrders','addresses','countries'));
     }
+    public function show($id)
+    {
+        $order = Order::where('id', $id)->with('orderItems', 'customer', 'orderItems.product')->firstOrFail();
 
+        return view('user.order', compact(['order']));
+
+    }
+    public function MyOrders()
+    {
+        $orders = Order::where('customer_id',Auth::user()->customers->id)->get();
+
+        $recentOrders = Order::where('customer_id',Auth::user()->customers->id)->orderBy('id','desc')->take(10)->get();
+
+        return view('user.myorders',compact('orders','recentOrders'));
+    }
     public function getOrderDetail($id)
     {
         $order = Order::where('id',(int)$id)->where('customer_id',Auth::user()->customers->id)->with('customer','orderItems','orderItems.product','payment')->first();
@@ -131,7 +145,7 @@ class UserController extends Controller
     public function addCustomerAddress(Request $request)
     {
         $inputs = $request->all();
-//        dd($inputs);
+        dd($inputs);
 
         $validator = Validator::make($inputs,[
             'first_name' => 'required',
