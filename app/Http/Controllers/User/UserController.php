@@ -34,7 +34,13 @@ class UserController extends Controller
     public function show($id)
     {
         $order = Order::where('id', $id)->with('orderItems', 'customer', 'orderItems.product')->firstOrFail();
-
+        $order = Order::where('id', $order_id)->first();
+        $product = Product::where('id', $id)->first();
+        $vender_request = VendorRequest::where('id',$request_id)->first();
+        $vender_detail = User::where('id',$vender_request->vendor_id)->first();
+        // dd($order,$vender_detail,$vender_request);
+        return view('admin.order.broker_show', compact(['product','vender_request','vender_detail','order']));
+        
         return view('user.order', compact(['order']));
 
     }
