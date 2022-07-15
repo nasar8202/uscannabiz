@@ -34,7 +34,7 @@ class FrontController extends Controller
 
     public function registerVendorAndCustomer(Request $request)
     {
-        dd($request->all());
+        //dd($request->all());
             // $userData = new User();
             // $userData['name'] = $request->fname." ".$request->lname;
             // $userData['email'] = $request->email;
