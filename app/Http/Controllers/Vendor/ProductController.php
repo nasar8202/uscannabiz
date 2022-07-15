@@ -265,6 +265,7 @@ class ProductController extends Controller
     }
     public function updateProduct(Request $request, $id)
     {
+
         $product = Product::where('id', $id)->first();
 
         //image uploading
@@ -294,7 +295,7 @@ class ProductController extends Controller
         $product->width = 12;
         $product->height = 12;
         $product->weight = 11;
-        
+        $product->status = $request->get('status') ?? 0;
         $product->vender_id = Auth::user()->id;
         $product->save();
 

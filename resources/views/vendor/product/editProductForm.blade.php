@@ -124,7 +124,7 @@
                   
                   <p class="form-row form-group form-row-wide">
                      <label for="exampleInputEmail1">Product Sale</label>
-                 <input type="checkbox" name="product_sale" class="form-control" id="product_sale" style="height: 20px;width: 20px;" value="yes" >
+                 <input type="checkbox" name="product_sale" class="form-control" id="product_sale" style="height: 20px;width: 20px;" value="yes" @if(($product->product_sale) == 'yes') {{ 'checked' }} @endif >
                   </p>
                   <p class="form-row form-group">
                         <label for="exampleInputEmail1">Sale(%)</label>
@@ -137,9 +137,7 @@
                      <label for="exampleInputEmail1">Product Stock</label>
 
 
-                     {{--
-                     <input type="checkbox" name="product_stock" class="form-control" id="product_stock" style="height: 20px;width: 20px;" value="yes" > --}}
-                     <input type="checkbox" name="product_stock" class="form-control" id="product_stock" style="height: 20px;width: 20px;" value="yes" @if(old('product_stock') == 'yes') {{ 'checked' }} @endif>
+                     <input type="checkbox" name="product_stock" class="form-control" id="product_stock" style="height: 20px;width: 20px;" value="yes" @if(($product->product_stock) == 'yes') {{ 'checked' }} @endif>
                  
                   <p class="form-row form-group form-row-wide">
                      <label for="exampleInputEmail1">Product Stock Qty</label>
@@ -150,7 +148,7 @@
                   
                   <p class="form-row form-group form-row-wide">
                      <label for="switch">Status</label>
-                     <label class="switch"><input type="checkbox"  data-id="" id="status-switch" name="status" value="1">
+                     <label class="switch"><input type="checkbox"  data-id="" id="status-switch" name="status" value="1" @if(($product->status) == '1') {{ 'checked' }} @endif >
                      <span class="slider round"></span>
                   </label>
 
