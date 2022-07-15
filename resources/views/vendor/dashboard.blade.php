@@ -21,13 +21,13 @@
 								<li class="active dashboard"><a href="{{route('dashboard')}}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
 								<li class="products"><a href="{{route('product')}}"><i class="fas fa-briefcase"></i> Products</a></li>
 								<li class="orders"><a href="{{route('vendor_order')}}"><i class="fas fa-shopping-cart"></i> Orders</a></li>
-	                              <li class="withdraw"><a href="withdraw/"><i class="fas fa-upload"></i> Withdraw</a></li>
-	                              <li class="settings"><a href="settings/store/"><i class="fas fa-cog"></i> Settings <i class="fas fa-angle-right pull-right"></i></a></li>
-	                              <li class="dokan-common-links dokan-clearfix">
+	                              {{-- <li class="withdraw"><a href="withdraw/"><i class="fas fa-upload"></i> Withdraw</a></li> --}}
+	                              <li class="settings"><a href="{{ Route('editVendor') }}"><i class="fas fa-cog"></i> Settings <i class="fas fa-angle-right pull-right"></i></a></li>
+	                              {{-- <li class="dokan-common-links dokan-clearfix">
 	                                 <a title="" class="tips" data-placement="top" href="Us-Cannazon/user_uscannabiz/" target="_blank" data-original-title="Visit Store"><i class="fas fa-external-link-alt"></i></a>
 	                                 <a title="" class="tips" data-placement="top" href="edit-account/" data-original-title="Edit Account"><i class="fas fa-user"></i></a>
 	                                 <a title="" class="tips" data-placement="top" href="wp-login.php?action=logout&amp;redirect_to=https%3A%2F%2Fwebprojectmockup.com%2Fwp%2Fuscannabiz&amp;_wpnonce=776bce81ba" data-original-title="Log out"><i class="fas fa-power-off"></i></a>
-	                              </li>
+	                              </li> --}}
 	                           </ul>
 	                        </div>
 	                     </div>
@@ -63,40 +63,40 @@
 	                                 <div class="content-half-part">
 	                                    <ul class="list-unstyled list-count">
 	                                       <li>
-	                                          <a href="orders/">
+	                                          <a >
 	                                          <span class="title">Total</span> <span class="count">{{ $orderCount ?? 0 }}</span>
 	                                          </a>
 	                                       </li>
 	                                       <li>
-	                                          <a href="orders/?order_status=wc-completed" style="color: #73a724">
-	                                          <span class="title">Completed</span> <span class="count">0</span>
+	                                          <a  style="color: #73a724">
+	                                          <span class="title">Completed</span> <span class="count">{{$orderCompletedCount??0}}</span>
 	                                          </a>
 	                                       </li>
 	                                       <li>
-	                                          <a href="orders/?order_status=wc-pending" style="color: #999">
-	                                          <span class="title">Pending</span> <span class="count">0</span>
+	                                          <a  style="color: #999">
+	                                          <span class="title">Pending</span> <span class="count">{{$orderPendingCount??0}}</span>
 	                                          </a>
 	                                       </li>
-	                                       <li>
+	                                       {{-- <li>
 	                                          <a href="orders/?order_status=wc-processing" style="color: #21759b">
 	                                          <span class="title">Processing</span> <span class="count">0</span>
 	                                          </a>
-	                                       </li>
+	                                       </li> --}}
 	                                       <li>
 	                                          <a href="orders/?order_status=wc-cancelled" style="color: #d54e21">
-	                                          <span class="title">Cancelled</span> <span class="count">0</span>
+	                                          <span class="title">Cancelled</span> <span class="count">{{$orderCancelledCount??0}}</span>
 	                                          </a>
 	                                       </li>
-	                                       <li>
+	                                       {{-- <li>
 	                                          <a href="orders/?order_status=wc-refunded" style="color: #e6db55">
 	                                          <span class="title">Refunded</span> <span class="count">0</span>
 	                                          </a>
-	                                       </li>
-	                                       <li>
+	                                       </li> --}}
+	                                       {{-- <li>
 	                                          <a href="orders/?order_status=wc-on-hold" style="color: #f0ad4e">
 	                                          <span class="title">On hold</span> <span class="count">0</span>
 	                                          </a>
-	                                       </li>
+	                                       </li> --}}
 	                                    </ul>
 	                                 </div>
 	                                 <div class="content-half-part">

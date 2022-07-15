@@ -16,7 +16,7 @@
 						<div class="dokan-dash-sidebar">
 	                        <div id="dokan-navigation" aria-label="Menu">
 	                           <label id="mobile-menu-icon" for="toggle-mobile-menu" aria-label="Menu">☰</label><input id="toggle-mobile-menu" type="checkbox">
-	                           <ul class="dokan-dashboard-menu">
+	                           {{-- <ul class="dokan-dashboard-menu">
 								<li class="active dashboard"><a href="{{route('dashboard')}}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
 								<li class="products"><a href="{{route('product')}}"><i class="fas fa-briefcase"></i> Products</a></li>
 								<li class="orders"><a href="{{route('vendor_order')}}"><i class="fas fa-shopping-cart"></i> Orders</a></li>
@@ -27,6 +27,18 @@
 	                                 <a title="" class="tips" data-placement="top" href="edit-account/" data-original-title="Edit Account"><i class="fas fa-user"></i></a>
 	                                 <a title="" class="tips" data-placement="top" href="wp-login.php?action=logout&amp;redirect_to=https%3A%2F%2Fwebprojectmockup.com%2Fwp%2Fuscannabiz&amp;_wpnonce=776bce81ba" data-original-title="Log out"><i class="fas fa-power-off"></i></a>
 	                              </li>
+	                           </ul> --}}
+                               <ul class="dokan-dashboard-menu">
+								<li class="active dashboard"><a href="{{route('dashboard')}}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+								<li class="products"><a href="{{route('product')}}"><i class="fas fa-briefcase"></i> Products</a></li>
+								<li class="orders"><a href="{{route('vendor_order')}}"><i class="fas fa-shopping-cart"></i> Orders</a></li>
+	                              {{-- <li class="withdraw"><a href="withdraw/"><i class="fas fa-upload"></i> Withdraw</a></li> --}}
+	                              <li class="settings"><a href="{{ Route('editVendor') }}"><i class="fas fa-cog"></i> Settings <i class="fas fa-angle-right pull-right"></i></a></li>
+	                              {{-- <li class="dokan-common-links dokan-clearfix">
+	                                 <a title="" class="tips" data-placement="top" href="Us-Cannazon/user_uscannabiz/" target="_blank" data-original-title="Visit Store"><i class="fas fa-external-link-alt"></i></a>
+	                                 <a title="" class="tips" data-placement="top" href="edit-account/" data-original-title="Edit Account"><i class="fas fa-user"></i></a>
+	                                 <a title="" class="tips" data-placement="top" href="wp-login.php?action=logout&amp;redirect_to=https%3A%2F%2Fwebprojectmockup.com%2Fwp%2Fuscannabiz&amp;_wpnonce=776bce81ba" data-original-title="Log out"><i class="fas fa-power-off"></i></a>
+	                              </li> --}}
 	                           </ul>
 	                        </div>
 	                     </div>
@@ -35,42 +47,42 @@
 						      <ul class="list-inline order-statuses-filter">
 						         <li class="active">
 						            <a href="dashboard/orders/">
-						            All (0)                
+						            All (0)
 						            </a>
 						         </li>
 						         <li>
 						            <a href="dashboard/orders/?order_status=wc-completed">
-						            Completed (0)                
+						            Completed (0)
 						            </a>
 						         </li>
 						         <li>
 						            <a href="dashboard/orders/?order_status=wc-processing">
-						            Processing (0)                
+						            Processing (0)
 						            </a>
 						         </li>
 						         <li>
 						            <a href="dashboard/orders/?order_status=wc-on-hold">
-						            On-hold (0)                
+						            On-hold (0)
 						            </a>
 						         </li>
 						         <li>
 						            <a href="dashboard/orders/?order_status=wc-pending">
-						            Pending (0)                
+						            Pending (0)
 						            </a>
 						         </li>
 						         <li>
 						            <a href="dashboard/orders/?order_status=wc-cancelled">
-						            Cancelled (0)                
+						            Cancelled (0)
 						            </a>
 						         </li>
 						         <li>
 						            <a href="dashboard/orders/?order_status=wc-refunded">
-						            Refunded (0)                
+						            Refunded (0)
 						            </a>
 						         </li>
 						         <li>
 						            <a href="dashboard/orders/?order_status=wc-failed">
-						            Failed (0)                
+						            Failed (0)
 						            </a>
 						         </li>
 						      </ul>
@@ -135,7 +147,7 @@
 										{{-- {{$order}} --}}
 										 {{-- <strong><a href="products/?product_id=432&amp;action=edit">{{$order->product_name}}</a></strong>
 										 <div class="row-actions">
-											<span class="edit"><a href="edit-products/{{$order->id}}">Edit</a> | </span> 
+											<span class="edit"><a href="edit-products/{{$order->id}}">Edit</a> | </span>
 											<span class="delete"><a href="delete-product/{{$order->id}}" >Delete Permanently</a> | </span>
 											 <span class="view"><a href="product/testing-products/">View</a></span>
 										 </div>
@@ -193,7 +205,7 @@
 							 </table>
 							  @else
 						      <div class="dokan-error">
-						         No orders found    
+						         No orders found
 						      </div>
 							  @endif
 						      <script>

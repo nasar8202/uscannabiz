@@ -54,6 +54,7 @@
                     </div>
                 </div>
                 <!-- ./col -->
+    @if (auth()->user()->role_id == 1)
                 <div class="col-lg-3 col-6">
                     <!-- small box -->
                     <div class="small-box bg-success">
@@ -71,10 +72,24 @@
                 <!-- ./col -->
                 <div class="col-lg-3 col-6">
                     <!-- small box -->
+                    <div class="small-box bg-primary">
+                        <div class="inner">
+                            <h3>{{$data['vendors']}}</h3>
+                            <p>Vendors</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-person-add"></i>
+                        </div>
+                        <a href="{{route('Vendor.index')}}" class="small-box-footer">More info <i
+                                class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
                     <div class="small-box bg-warning">
                         <div class="inner">
-                            <h3>{{$data['customers']}}</h3>
-                            <p>Customers</p>
+                            <h3>{{$data['brokers']}}</h3>
+                            <p>Brokers</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-person-add"></i>
@@ -83,13 +98,15 @@
                                 class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
+               
+                @endif
                 <!-- ./col -->
 
                 <!-- ./col -->
             </div>
             {{-- latest orders --}}
             <div class="row mt-4 mb-3">
-                <div class="col-md-6">
+    <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
                             <i class="nav-icon fa fa-shopping-cart" aria-hidden="true"></i> &nbsp; <span
@@ -130,6 +147,7 @@
             {{-- latest orders end --}}
 
             {{-- latest Reviews --}}
+            {{-- @if (auth()->user()->role_id == 1)
 
                 <div class="col-md-6">
                     <div class="card">
@@ -168,6 +186,7 @@
                         </div>
                     </div>
                 </div>
+            @endif --}}
             </div>
             {{-- latest orders end --}}
             <!-- /.row -->

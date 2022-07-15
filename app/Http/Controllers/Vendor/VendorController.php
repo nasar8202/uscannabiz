@@ -19,10 +19,15 @@ class VendorController extends Controller
     {
 
         $vendor_id = Auth::user()->id;
-        $orderCount =   DB::table('order_items')
-                        ->select('order_items.product_id','products.id','products.vender_id')
-                        ->join('products','order_items.product_id','=','products.id')
-                        ->count();
+        // $orderCount =   DB::table('order_items')
+        //                 ->select('order_items.product_id','products.id','products.vender_id')
+        //                 ->join('products','order_items.product_id','=','products.id')
+        //                 ->count();
+        $orderCount = Order::where('vendor_id',$vendor_id)->count();
+        $orderCompletedCount = Order::where('vendor_id',$vendor_id)->where('order_status','completed')->count();
+
+        $orderPendingCount = Order::where('vendor_id',$vendor_id)->where('order_status','pending')->count();
+        $orderCancelledCount = Order::where('vendor_id',$vendor_id)->where('order_status','cancelled')->count();
 
         $productCount = DB::table('products')
                         ->where('vender_id',$vendor_id)
@@ -30,7 +35,7 @@ class VendorController extends Controller
         // dd($productCount);
         $productViewed = \DB::table('products')->where('vender_id',$vendor_id)->first();
 
-        return view('vendor.dashboard',compact('orderCount',$orderCount,'productCount',$productCount,'productViewed',$productViewed));
+        return view('vendor.dashboard',compact('orderCount','productCount','productViewed','orderPendingCount','orderCompletedCount','orderCancelledCount'));
     }
     public function order(Type $var = null)
     {
@@ -52,7 +57,7 @@ class VendorController extends Controller
         $user = User::find($user_vendor);
 
         $customer = Customers::where('user_id',$user->id)->first();
-        
+
         return view('vendor.product.editVendor',compact(['user',$user,'customer',$customer]));
     }
 

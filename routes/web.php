@@ -188,6 +188,7 @@ Route::namespace('Admin')->prefix('/admin')->middleware('admin')->group(function
 
 
     Route::resource('/customers', 'CustomersController');
+    // Route::get('/customers/vendor', 'CustomersController@vendor')->name('customers.vendor');
     Route::delete('/customers/destroy/{id}', 'CustomersController@destroy')->name('customers.destroy');
     Route::post('/updatecustomers', 'CustomersController@update')->name('customers.update');
     Route::view('Addbroker','admin.customers.add' );

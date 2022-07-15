@@ -545,7 +545,7 @@
                                                             </li>
                                                             <li
                                                                 class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--edit-account">
-                                                                <a href="my-account/edit-account/">Account details</a>
+                                                                <a href="{{route('edit-account')}}">Account details</a>
                                                             </li>
                                                             <li
                                                                 class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--customer-logout">
@@ -570,9 +570,9 @@
                                                         <form action = "{{Route('update-account',$user->id)}}" method="post">
                                                             @csrf
                                                             <h3>Edit Profile</h3>
-                                                            
+
                                                             <div class="woocommerce-address-fields">
-                                                            
+
                                                                 <div class="woocommerce-address-fields__field-wrapper">
                                                                     <p class="form-row form-row-first validate-required"
                                                                         id="shipping_first_name_field" data-priority="10">
@@ -606,10 +606,10 @@
                                                                                 type="text" class="input-text "
                                                                                 value="{{$customer->phone_no}}"
                                                                                 id="phone_no_code" placeholder=""
-                                                                                name="phone_no" 
+                                                                                name="phone_no"
                                                                                 ></span></p>
-                                                                    
-                                                                    
+
+
                                                                                 <p class="form-row form-row-last validate-required"
                                                                         id="shipping_last_name_field" data-priority="20">
                                                                         <label for="shipping_last_name" class="">

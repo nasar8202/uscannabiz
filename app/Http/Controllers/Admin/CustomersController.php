@@ -18,21 +18,14 @@ class CustomersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
     final public function index()
     {
-    //    dd(User::all());
-//     $a = DB::table('users')
-//     ->select('users.id','users.name','users.email','users.role_id','customers.first_name','customers.last_name','customers.email')
-//     ->join('customers','customers.user_id','=','users.id')
-//     ->where('users.role_id', 4)
-//     ->get();
-// return $a;
-//return User::join('Customers','Users.id' ,'=' ,'Customers.user_id')->where('role_id','=',4)->get();
+
+    $user = User::join('customers','users.customers_id','=','customers.id')->where(['role_id'=>4])->get();
         try {
 
             if (request()->ajax()) {
-                return datatables()->of(Customers::join('Users','Users.id' ,'=' ,'Customers.user_id')->where('role_id','=',4)->get())
+                return datatables()->of($user)
                     ->addIndexColumn()
                     ->addColumn('action', function ($data) {
                         return '<a title="View" href="customers/' . $data->id . '"

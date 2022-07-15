@@ -545,7 +545,7 @@
                                                             </li>
                                                             <li
                                                                 class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--edit-account">
-                                                                <a href="edit-account/">Account details</a>
+                                                                <a href="{{route('edit-account')}}">Account details</a>
                                                             </li>
                                                             <li
                                                                 class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--customer-logout">
