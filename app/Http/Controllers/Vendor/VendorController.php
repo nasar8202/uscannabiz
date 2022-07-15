@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use App\Rules\MatchOldPassword;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class VendorController extends Controller
 {
@@ -32,6 +33,7 @@ class VendorController extends Controller
         $productCount = DB::table('products')
                         ->where('vender_id',$vendor_id)
                         ->count();
+
         // dd($productCount);
         $productViewed = \DB::table('products')->where('vender_id',$vendor_id)->first();
 
@@ -72,13 +74,17 @@ class VendorController extends Controller
         $user->email = $request->input('account_email');
 
         if($request->input('password_current')){
-            $request->validate([
+            $validator = Validator::make($request->all(), [
                 'password_current' => 'required',
-
-              ]);
-
+                'password_1' => 'required|min:8',
+                'password_2' => 'required|min:8|same:password_1',
+            ]);
+            
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator);
+            }
             if (!Hash::check($request->password_current, $user->password)) {
-                return ('Current password does not match!');
+                return back()->with(['error'=>'Current password does not match!']);
             }
             $user->password = Hash::make($request->password_1);
         }

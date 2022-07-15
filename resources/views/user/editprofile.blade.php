@@ -563,9 +563,16 @@
                                                             </div>
                                                             @endif
                                                             @if (session()->has('error'))
-                                                            <div class="alert alert-success">
+                                                            <div class="alert alert-danger">
                                                                 {{ session()->get('error') }}
                                                             </div>
+                                                            @endif
+                                                            @if ($errors->any())
+                                                                <div class="alert alert-danger alert-block">
+                                                                    @foreach ($errors->all() as $error)
+                                                                        <strong>{{ $error }}</strong>
+                                                                    @endforeach
+                                                                </div>
                                                             @endif
                                                         <form action = "{{Route('update-account',$user->id)}}" method="post">
                                                             @csrf

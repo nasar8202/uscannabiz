@@ -1,13 +1,14 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-use App\Http\Controllers\Controller;
+use App\User;
 use App\Models\Settings;
 use App\Models\ShippingRate;
-use App\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class SettingController extends Controller
 {
@@ -65,14 +66,25 @@ class SettingController extends Controller
 
     public function updateAdminPassword(Request $request)
     {
+        // dd($request->all());
         $id = Auth::user()->id;
 
         if ($request->input('password')) {
 
-            $this->validate($request, [
+            // $this->validate($request, [
+            //     'current_password' => 'required',
+            //     'password' => 'required|min:8',
+            //     'password_confirmation' => 'required|min:8|same:password',
+            // ]);
+
+            $validator = Validator::make($request->all(), [
                 'current_password' => 'required',
-                'password' => 'min:8|required_with:password_confirmation|same:password_confirmation',
+                'password' => 'required|min:8',
+                'password_confirmation' => 'required|min:8|same:password',
             ]);
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator);
+            }
 
             if (Hash::check($request->current_password, Auth::User()->password)) {
                 $content = User::find($id);

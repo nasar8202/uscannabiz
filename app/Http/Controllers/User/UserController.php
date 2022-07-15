@@ -266,12 +266,17 @@ class UserController extends Controller
 
 
         $user->email = $request->input('email');
+   
         
         if($request->input('password_current')){
-            $request->validate([
+            $validator = Validator::make($request->all(), [
                 'password_current' => 'required',
-
-              ]);
+                'password_1' => 'required|min:8',
+                'password_2' => 'required|min:8|same:password_1',
+            ]);
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator);
+            }
 
             if (!Hash::check($request->password_current, $user->password)) {
                 return back()->with(['error'=>'Current password does not match!']);

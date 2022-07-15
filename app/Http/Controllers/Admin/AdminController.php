@@ -27,7 +27,7 @@ class AdminController extends Controller
             $data['vendors']= User::where('role_id',3)->count();
         }elseif($check_user->role_id == 4){
             $data['orders'] = Order::where('broker_id',$check_user->id)->count();
-            $data['latestOrders']=Order::with('customer')->where('broker_id',$check_user->id)->orderBy('created_at', 'desc')->take(7)->get();
+            $data['latestOrders']= Order::with('customer')->where('broker_id',$check_user->id)->orderBy('created_at', 'desc')->take(7)->get();
         }
 
         return view('admin.dashboard',compact('data'));
