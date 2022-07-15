@@ -44,7 +44,7 @@
                     <div class="small-box bg-info">
                         <div class="inner">
                             <h3>{{$data['orders']}}</h3>
-                            <p>New Orders</p>
+                            <p>Total Orders</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-bag"></i>
@@ -124,12 +124,32 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-
+                                    {{-- @php
+                                        $data['latestOrdersItems'] = App\Models\OrderItem::where('order_id',$latestOrders->id)->get();
+                                        $users = App\User::where(['id'=>Auth::user()->id,'email'=>Auth::user()->email])->get();
+                                        $check = App\Models\Customers::where('id', $users->customers_id)->get();
+                                        $vendor_request = App\Models\VendorRequest::where('vendor_id',$check->user_id)->get();
+                                    @endphp --}}
                                     @forelse($data['latestOrders'] as $latestOrders)
-                                    <tr onclick="window.location='order/{{$latestOrders->id}}'; " style='cursor: pointer;'>
+                                    @if(Auth::user()->role_id == 4)
+                                    <tr>
+                                    @else
+                                    <tr onclick="window.location='order/{{$latestOrders->id}}'" style='cursor: pointer;'>
+                                    @endif
                                         <td> {{$latestOrders->order_no}} </td>
                                         <td> {{$latestOrders->customer->first_name??''}} </td>
-                                        <td> {{ucfirst($latestOrders->order_status)}} </td>
+                                        <td> 
+                                            @if ($latestOrders->order_status == 'pending')
+                                            <span class="badge badge-secondary">Pending</span>
+                                            @elseif ($latestOrders->order_status == 'cancelled')
+                                            <span class="badge badge-danger">Cancelled</span>
+                                            @elseif ($latestOrders->order_status == 'completed')
+                                            <span class="badge badge-success">Completed</span>
+                                            @elseif ($latestOrders->order_status == 'shipped')
+                                            <span class="badge badge-info">Shipped</span>
+                                            @endif
+                                            {{-- {{ucfirst($latestOrders->order_status)}}  --}}
+                                        </td>
                                         <td> {{date('d-M-Y',strtotime($latestOrders->created_at))}} </td>
                                         <td> ${{$latestOrders->total_amount}} </td>
                                     </tr>

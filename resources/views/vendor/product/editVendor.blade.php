@@ -50,10 +50,17 @@
                                         </div>
                                         @endif
                                         @if (session()->has('error'))
-                                        <div class="alert alert-success">
-                                            {{ session()->get('success') }}
+                                        <div class="alert alert-danger">
+                                            {{ session()->get('error') }}
                                         </div>
                                         @endif
+                                        @if ($errors->any())
+                                        <div class="alert alert-danger alert-block">
+                                            @foreach ($errors->all() as $error)
+                                                <strong>{{ $error }}</strong>
+                                            @endforeach
+                                        </div>
+                                    @endif
                                  <form class="edit-account" action="{{route('updateVendor',$user->id)}}" method="post">
                                     {{ csrf_field() }}
                                     <p class="form-row form-row-first">
