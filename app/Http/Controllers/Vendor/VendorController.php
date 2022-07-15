@@ -33,6 +33,7 @@ class VendorController extends Controller
         $productCount = DB::table('products')
                         ->where('vender_id',$vendor_id)
                         ->count();
+
         // dd($productCount);
         $productViewed = \DB::table('products')->where('vender_id',$vendor_id)->first();
 
