@@ -78,27 +78,22 @@
 	         <div id="left-area">
 	            <article id="post-7" class="post-7 page type-page status-publish hentry">
 	               <h1 class="entry-title main_title">Dashboard</h1>
-				   @if (session()->has('success'))
-                                        <div class="alert alert-success">
-                                            {{ session()->get('success') }}
-                                        </div>
-										@endif
 	               <div class="entry-content">
 	                  <div class="dokan-dashboard-wrap">
 	                     <div class="dokan-dash-sidebar">
 	                        <div id="dokan-navigation" aria-label="Menu">
 	                           <label id="mobile-menu-icon" for="toggle-mobile-menu" aria-label="Menu">☰</label><input id="toggle-mobile-menu" type="checkbox">
-	                           <ul class="dokan-dashboard-menu">
-	                              <li class="active dashboard"><a href="{{route('dashboard')}}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-	                              <li class="products"><a href="{{route('product')}}"><i class="fas fa-briefcase"></i> Products</a></li>
-	                              <li class="orders"><a href="{{route('vendor_order')}}"><i class="fas fa-shopping-cart"></i> Orders</a></li>
-	                              <li class="withdraw"><a href="withdraw/"><i class="fas fa-upload"></i> Withdraw</a></li>
-	                              <li class="settings"><a href="settings/store/"><i class="fas fa-cog"></i> Settings <i class="fas fa-angle-right pull-right"></i></a></li>
-	                              <li class="dokan-common-links dokan-clearfix">
+                               <ul class="dokan-dashboard-menu">
+								<li class="active dashboard"><a href="{{route('dashboard')}}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+								<li class="products"><a href="{{route('product')}}"><i class="fas fa-briefcase"></i> Products</a></li>
+								<li class="orders"><a href="{{route('vendor_order')}}"><i class="fas fa-shopping-cart"></i> Orders</a></li>
+	                              {{-- <li class="withdraw"><a href="withdraw/"><i class="fas fa-upload"></i> Withdraw</a></li> --}}
+	                              <li class="settings"><a href="{{ Route('editVendor') }}"><i class="fas fa-cog"></i> Settings <i class="fas fa-angle-right pull-right"></i></a></li>
+	                              {{-- <li class="dokan-common-links dokan-clearfix">
 	                                 <a title="" class="tips" data-placement="top" href="Us-Cannazon/user_uscannabiz/" target="_blank" data-original-title="Visit Store"><i class="fas fa-external-link-alt"></i></a>
 	                                 <a title="" class="tips" data-placement="top" href="edit-account/" data-original-title="Edit Account"><i class="fas fa-user"></i></a>
 	                                 <a title="" class="tips" data-placement="top" href="wp-login.php?action=logout&amp;redirect_to=https%3A%2F%2Fwebprojectmockup.com%2Fwp%2Fuscannabiz&amp;_wpnonce=776bce81ba" data-original-title="Log out"><i class="fas fa-power-off"></i></a>
-	                              </li>
+	                              </li> --}}
 	                           </ul>
 	                        </div>
 	                     </div>
@@ -184,7 +179,7 @@
                   </p>
                   <p class="form-row form-group form-row-wide">
                      <label for="category">Description</label>
-                  <textarea class="form-control {{ $errors->has('main_category') ? 'has-error' : ''}}" name="description" id="description" placeholder="Description" required>{{old('description')}}</textarea>
+                  <textarea class="form-control {{ $errors->has('main_category') ? 'has-error' : ''}}" name="description" id="description" placeholder="Description" required>{{ old('description') }}</textarea>
                   {!! $errors->first('description', '<p class="help-block">:message</p>') !!}
 
                   </p>
