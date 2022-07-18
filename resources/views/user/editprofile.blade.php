@@ -529,7 +529,7 @@
                                                         <ul>
                                                             <li
                                                                 class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--dashboard is-active">
-                                                                <a href="/user/dashboard">Dashboard</a>
+                                                                <a href="{{route('edit-account')}}">Dashboard</a>
                                                             </li>
                                                             <li
                                                                 class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--orders">

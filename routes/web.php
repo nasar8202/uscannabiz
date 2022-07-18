@@ -101,6 +101,9 @@ Route::namespace('Vendor')->prefix('/vendor')->middleware('vendor')->group(funct
     Route::get('export', 'VendorController@export')->name('export');
     Route::get('dashboard', 'VendorController@dashboard')->name('dashboard');
     Route::get('/order', 'VendorController@order')->name('vendor_order');
+    Route::get('/brokers', 'VendorController@show_broker')->name('show_brokers');
+    Route::get('/assign_brokers/{id}', 'VendorController@assigned_broker')->name('assigned_broker');
+    Route::get('/assign_brokers/cancle/{id}', 'VendorController@assigned_broker_cancle')->name('assigned_broker.cancle');
     Route::get('product', 'ProductController@index')->name('product');
     Route::get('/product/filter', 'ProductController@filter')->name('product_filter');
     Route::get('/product/search', 'ProductController@search')->name('product_filter_search');

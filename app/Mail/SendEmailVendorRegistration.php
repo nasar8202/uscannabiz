@@ -9,6 +9,7 @@ use Illuminate\Queue\SerializesModels;
 
 class SendEmailVendorRegistration extends Mailable
 {
+
     use Queueable, SerializesModels;
     public $details;
     /**

@@ -135,13 +135,13 @@ class UserController extends Controller
                 $content = User::find($id);
                 $content->password = Hash::make($inputs['password']);
                 if ($content->save()) {
-                    return redirect('/user/dashboard')->with('success', 'Information Updated Successfully.');
+                    return redirect('/user/edit-account/')->with('success', 'Information Updated Successfully.');
                 }
             } else {
                 return redirect()->back()->withErrors(['Sorry, your current Password not recognized. Please try again.']);
             }
         }else{
-            return redirect('/user/dashboard')->with('success', 'Information Updated Successfully.');
+            return redirect('/user/edit-account')->with('success', 'Information Updated Successfully.');
         }
     }
 
@@ -177,7 +177,7 @@ class UserController extends Controller
             'shipping_billing' => $request->shipping_billing
         ],$inputs);
 
-        return redirect('/user/dashboard')->with('success', 'Address Saved Successfully.');
+        return redirect('/user/edit-account')->with('success', 'Address Saved Successfully.');
 
     }
 
@@ -224,7 +224,7 @@ class UserController extends Controller
             'shipping_billing' => $request->shipping_billing_e
         ],$inputs);
 
-        return redirect('/user/dashboard')->with('success', 'Address Saved Successfully.');
+        return redirect('/user/edit-account')->with('success', 'Address Saved Successfully.');
 
     }
 

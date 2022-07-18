@@ -58,9 +58,10 @@
                                     
                                     @csrf
                                     <?php 
-                                    use App\Models\Customers;
-                                    $users = Customers::join('Users','Users.id' ,'=' ,'Customers.user_id')->where('role_id','=',3)->get()?>
-                                    <div class="form-group">
+                                    // use App\Models\Customers;
+                                    //$users = Customers::join('Users','Users.id' ,'=' ,'Customers.user_id')->where('role_id','=',3)->get()
+                                    ?>
+                                   {{--  <div class="form-group">
                                         <select name="user_id" class="form-control" aria-label="Default select example">
                                             <option selected>Select Vendor For This Broker</option>
                                             @foreach($users as $user)
@@ -68,7 +69,7 @@
                                             @endforeach
                                           </select>
                                     
-                                    </div>
+                                    </div> --}}
                                     <div class="form-group">
                                         
                                         <h5>First Name</h5>
