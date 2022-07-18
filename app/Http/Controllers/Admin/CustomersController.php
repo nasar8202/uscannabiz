@@ -86,7 +86,8 @@ class CustomersController extends Controller
         $customer->state = $request->input('state');
         $customer->country = $request->input('country');
         $customer->address = $request->input('address');
-        $customer->user_id = $request->input('user_id');
+        // $customer->user_id = $request->input('user_id');
+        // $customer->user_id = $request->input('user_id');
         $customer->save();
         $customer_id = $customer->id;
 
@@ -97,6 +98,11 @@ class CustomersController extends Controller
         $user->role_id = 4;
         $user->customers_id = $customer_id;
         $user->save();
+
+        // $customer_user = Customers::find($customer_id);
+        // $customer_user->user_id = $user->id;
+        // $customer_user->save();
+
         // $user =  User::create([
         //     'name' => $request->input('first_name'),
         //     'email' => $request->input('email'),

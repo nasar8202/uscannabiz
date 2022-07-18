@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Vendor;
 use DB;
 use Auth;
 use App\User;
+use Stripe\Customer;
 use App\Models\Order;
 use App\Models\Customers;
 use App\Models\OrderItem;
@@ -103,6 +104,34 @@ class VendorController extends Controller
         $customer->save();
 
         return back()->with(['success' => 'Updated Successfully']);
+    }
+    public function show_broker()
+    {
+        $brokers = User::join('customers','users.customers_id','=','customers.id')->where(["role_id"=>4])
+        ->select('customers.*','users.id as user_id_from_users')
+        ->get();
+        // dd($brokers);
+        return view('vendor.brokers.index',compact(['brokers',$brokers]));
+    }
+    public function assigned_broker($id)
+    {
+        $assigned_broker = Customers::find($id);
+        $check_user_id = Customers::where('user_id',Auth::user()->id)->get();
+        if(!$check_user_id->isEmpty()){
+            return back()->with('error','You Have Already Assigned Broker');
+        }
+        else{
+            $assigned_broker->user_id = Auth::user()->id;
+            $assigned_broker->save();
+            return back()->with('success','Broker Assigned Successfully');
+        }
+    }
+    public function assigned_broker_cancle($id)
+    {
+        $assigned_broker = Customers::find($id);
+        $assigned_broker->user_id = NULL;
+        $assigned_broker->save();
+        return back()->with('success','Broker Assigned Cancle');
     }
     public function export() 
     {

@@ -87,117 +87,74 @@
 						            </a>
 						         </li>
 						      </ul>
-						      <div class="dokan-order-filter-serach">
-						         {{-- <form action="" method="GET" class="dokan-left">
-						            <div class="dokan-form-group">
-						               <input type="text" autocomplete="off" class="datepicker hasDatepicker" style="width:120px; padding-bottom:7px" name="order_date" id="order_date_filter" placeholder="Filter by Date" value="">
-						               <select name="customer_id" id="dokan-filter-customer" style="width:220px" class="dokan-form-control select2-hidden-accessible enhanced" data-allow_clear="true" data-placeholder="Filter by registered customer" tabindex="-1" aria-hidden="true">
-						                  <option value="" selected="selected"></option>
-						                  <option>
-						                  </option>
-						               </select>
-						               <span class="select2 select2-container select2-container--default" dir="ltr" style="width: 220px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-dokan-filter-customer-container"><span class="select2-selection__rendered" id="select2-dokan-filter-customer-container"><span class="select2-selection__placeholder">Filter by registered customer</span></span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
-						               <input type="submit" name="dokan_order_filter" class="dokan-btn dokan-btn-sm dokan-btn-danger dokan-btn-theme" value="Filter">
-						               <input type="hidden" name="order_status" value="all">
-						            </div>
-						         </form> --}} 
-						         <form action="" method="POST" class="dokan-right">
-						            <div class="dokan-form-group">
-										<input type="hidden" id="dokan_vendor_order_export_nonce" name="dokan_vendor_order_export_nonce" value="f17801938d"><input type="hidden" name="_wp_http_referer" value="/wp/uscannabiz/dashboard/orders/">                <a href="export" name="dokan_order_export_all" class="dokan-btn dokan-btn-sm dokan-btn-danger dokan-btn-theme" value="Export All">Export All</a>
-										{{-- <input type="submit" name="dokan_order_export_filtered" class="dokan-btn dokan-btn-sm dokan-btn-danger dokan-btn-theme" value="Export Filtered"> --}}
-										<input type="hidden" name="order_date" value="">
-										<input type="hidden" name="order_status" value="all">
-									 </div>
-						         </form>
-						         <div class="dokan-clearfix"></div>
-						      </div>
-							  @if(!$orders->isEmpty())
+							  @if(!$brokers->isEmpty())
+							  @if(Session::has('success'))
+									<div class="alert alert-success text-center"><span class="glyphicon glyphicon-ok"></span><em> {!! session('success') !!}</em></div>
+								@endif
+							  @if(Session::has('error'))
+									<div class="alert alert-success text-center"><span class="glyphicon glyphicon-ok"></span><em> {!! session('error') !!}</em></div>
+								@endif
 							  <table class="dokan-table dokan-table-striped product-listing-table dokan-inline-editable-table" id="dokan-product-list-table">
 								<thead>
 								   <tr>
-									  <th id="cb" class="manage-column column-cb check-column">
-										 <label for="cb-select-all"></label>
-										 <input id="cb-select-all" class="dokan-checkbox" type="checkbox">
-									  </th>
-									  <th>Image</th>
+									  <th>S.No</th>
 									  <th>Name</th>
-									  <th>Status</th>
-									  <th>SKU</th>
-									  {{-- <th>Stock</th> --}}
-									  <th>Price</th>
-									  <th>Quantity</th>
-									  <th>Total</th>
-									  {{-- <th>Earning<span class="tips earning-info" title="" data-original-title="Earning could be greater than or less than the calculated value based on different criteria like tax and shipping fee receiver"></span></th> --}}
-									  {{-- <th>Type</th>
-									  <th>Views</th> --}}
-									  <th>Date</th>
+									  <th>Email</th>
+									  {{-- <th>Status</th> --}}
+									  <th>Phone Number</th>
+									  <th>City</th>
+									  <th>State</th>
+									  <th>Country</th>
+									  <th>Address</th>
+									  <th>Action</th>
 								   </tr>
 								</thead>
 								<tbody>
-								 @foreach($orders as $order)
+									@php
+										$counter = 1;
+									@endphp
+								 @foreach($brokers as $broker)
+								 {{-- @dd($broker) --}}
 								   <tr class="">
-									  <th class="dokan-product-select check-column">
-										 <label for="cb-select-432"></label>
-										 <input class="cb-select-items dokan-checkbox" type="checkbox" data-product-name="Testing Products" name="bulk_products[]" value="432">
-									  </th>
-									  <td data-title="Image" class="column-thumb">
-										 <a href="products/?product_id=432&amp;action=edit"><img width="150" height="150" src="{{asset('uploads/products/'.$order->product_image)}}" class="attachment-thumbnail size-thumbnail" alt=""></a>
+									  <td data-title="S.no" class="column-thumb">
+										 {{$counter++}}
 									  </td>
-									  <td data-title="Name" class="column-primary">
-										{{$order->product_name}}
-										{{-- {{$order}} --}}
-										 {{-- <strong><a href="products/?product_id=432&amp;action=edit">{{$order->product_name}}</a></strong>
-										 <div class="row-actions">
-											<span class="edit"><a href="edit-products/{{$order->id}}">Edit</a> | </span>
-											<span class="delete"><a href="delete-product/{{$order->id}}" >Delete Permanently</a> | </span>
-											 <span class="view"><a href="product/testing-products/">View</a></span>
-										 </div>
-										 <button type="button" class="toggle-row"></button> --}}
+									  <td data-title="name" class="column-primary">
+										{{$broker->first_name}} {{$broker->last_name}}
 									  </td>
-									  <td class="post-status" data-title="Status">
-										@if ($order->order_status == 'pending')
-											<label class="dokan-label dokan-label-secondary">{{$order->order_status}}</label>
-											@elseif ($order->order_status == 'cancelled')
-											<label class="dokan-label dokan-label-danger">{{$order->order_status}}</label>
-											@elseif ($order->order_status == 'completed')
-											<label class="dokan-label dokan-label-success">{{$order->order_status}}</label>
-											@elseif ($order->order_status == 'shipped')
-											<label class="dokan-label dokan-label-info">{{$order->order_status}}</label>
+									  <td data-title="email" class="column-primary">
+										{{$broker->email}}
+									  </td>
+									  {{-- <td data-title="email" class="column-primary">
+										already assigned
+									  </td> --}}
+									  <td data-title="phone" class="column-primary">
+										{{$broker->phone_no}}
+									  </td>
+									  <td data-title="city" class="column-primary">
+										{{$broker->city}}
+									  </td>
+									  <td data-title="state" class="column-primary">
+										{{$broker->state}}
+									  </td>
+									  <td data-title="country" class="column-primary">
+										{{$broker->country}}
+									  </td>
+									  <td data-title="address" class="column-primary">
+										{{$broker->address}}
+									  </td>
+									  <td data-title="address" class="column-primary">
+										{{-- @dd(!is_null($broker->user_id) && $broker->user_id == Auth::user()->id) --}}
+										@if(!is_null($broker->user_id) && $broker->user_id != Auth::user()->id)
+										<label class="dokan-label dokan-label-secondary">Already Assigned</label>
+										@else
+										{{-- @dd($broker,Auth::user()) --}}
+											@if($broker->user_id == Auth::user()->id)
+											<a href="{{route('assigned_broker.cancle',['id'=>$broker->id])}}" class="dokan-btn dokan-btn-theme dokan-add-new-product">Cancel</a>
+											@else
+											<a href="{{route('assigned_broker',['id'=>$broker->id])}}" class="dokan-btn dokan-btn-theme dokan-add-new-product">Accept</a>
+											@endif
 										@endif
-									  </td>
-									  <td data-title="SKU">
-										 <span class="na">{{$order->sku}}</span>
-									  </td>
-									  {{-- <td data-title="Stock">
-										 <mark class="instock">{{$order->product_stock}}</mark>
-									  </td> --}}
-									  <td data-title="Price">
-										 <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>{{$order->product_current_price}}</span>
-									  </td>
-									  {{-- <td data-title="Earning">
-										 <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>4.50</span>
-									  </td> --}}
-									  {{-- <td data-title="Type">
-										 <span class="product-type tips simple" title="" data-original-title="Simple">{{$order->product_type}}</span>
-									  </td>
-									  <td data-title="Views">
-										 1
-									  </td> --}}
-									  @php
-									//   $check_qty = App\Models\VendorRequest::where('order_id',$order->id)->first();
-									//   if($check_qty != null){
-										  $check_qty = $order->order_product_qty;
-										  $total_price = $check_qty*$order->product_current_price;
-										// }
-									  @endphp
-									  <td data-title="Quantity">
-										 {{$check_qty}}
-									  </td>
-									  <td data-title="Total">
-										${{$total_price}}
-									  </td>
-									  <td class="post-date" data-title="Date">
-										 <abbr title="May 18, 2022 1:14 am">{{date_format($order->created_at,"d-M-Y")}}</abbr>
 									  </td>
 									  <td class="diviader"></td>
 								   </tr>
@@ -205,24 +162,16 @@
 								</tbody>
 							 </table>
 							  @else
+							  @php
+								$counter;
+							@endphp
 						      <div class="dokan-error">
 						         No orders found
 						      </div>
 							  @endif
-						      <script>
-						         (function($){
-						             $(document).ready(function(){
-						                 $('.datepicker').datepicker({
-						                     dateFormat: 'yy-m-d'
-						                 });
-						             });
-						         })(jQuery);
-						      </script>
 						   </article>
 						</div>
-	                     <!-- .dokan-dashboard-content -->
 	                  </div>
-	                  <!-- .dokan-dashboard-wrap -->
 	               </div>
 	            </article>
 	         </div>
