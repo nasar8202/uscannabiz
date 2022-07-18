@@ -63,7 +63,7 @@
                                             <input type="hidden" id="woocommerce-login-nonce" name="woocommerce-login-nonce" value="44e0230480"><input type="hidden" name="_wp_http_referer" value="wp/uscannabiz/my-account/">				<button type="submit" class="woocommerce-button button woocommerce-form-login__submit" name="login" value="Log in">Log in</button>
                                          </p>
                                          <p class="woocommerce-LostPassword lost_password">
-                                            <a href="{{ route('password.request') }}">Lost your password?</a>
+                                            <a href="{{ route('resetPasswordLink') }}">Lost your password?</a>
                                             {{-- <a href="/my-account/lost-password/">Lost your password?</a> --}}
                                          </p>
                                       </form>

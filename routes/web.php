@@ -22,6 +22,7 @@ Route::get('/', 'Front\FrontController@index')->name('homepage');
 // login register front
 Route::post('/register', 'Front\FrontController@Register')->name('register');
 Route::get('/my-account', 'Front\FrontController@loginRegisterVendor')->name('myAccount');
+Route::get('/reset', 'Front\FrontController@resetPasswordLink')->name('resetPasswordLink');
 Route::post('/registerVendorAndCustomer', 'Front\FrontController@registerVendorAndCustomer')->name('registerVendorAndCustomer');
 Route::get('vendor-add-product-form/{id}', 'Vendor\ProductController@vendorAddProductForm')->name('vendorAddProductForm');
 
@@ -71,9 +72,9 @@ Route::get('/faq', 'Front\ContactUsController@faq')->name('faq');
 
 Route::middleware(['user'])->prefix('user')->group(function () {
     Route::get('/dashboard', 'User\UserController@dashboard')->name('dashboard');
-    
+
     Route::get('edit-account/', 'User\UserController@editUserAccount')->name('edit-account');
-    
+
     Route::post('update-account/{id}', 'User\UserController@updateUserAccount')->name('update-account');
 
     Route::get('/my-orders', 'User\UserController@MyOrders')->name('MyOrders');

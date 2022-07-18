@@ -32,6 +32,10 @@ class FrontController extends Controller
         return view('front.loginRegisterVendor');
     }
 
+    public function resetPasswordLink()
+    {
+        return view('front.email');
+    }
     public function registerVendorAndCustomer(Request $request)
     {
         //dd($request->all());

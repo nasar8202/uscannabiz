@@ -35,6 +35,9 @@ class ResetPasswordController extends Controller
             case '2':
                 return 'user/dashboard';
                 break;
+            case '3':
+                return 'vendor/dashboard';
+                break;
             default:
                 return '/home';
                 break;

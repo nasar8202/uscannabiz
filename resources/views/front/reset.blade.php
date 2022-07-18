@@ -1,6 +1,3 @@
-
-
-
 @extends('front.layout.app')
 @section('title', 'Reset password link')
 @section('content')
@@ -28,40 +25,20 @@
                               <div class="et_pb_text_inner">
                                  <div class="woocommerce">
                                     <div class="woocommerce-notices-wrapper"></div>
-                                    <form method="POST" action="{{ route('password.update') }}" class="woocommerce-ResetPassword lost_reset_password">
+                                    <form method="POST" action="{{ route('password.email') }}" class="woocommerce-ResetPassword lost_reset_password">
                                         @csrf
-
-                                        <input type="hidden" name="token" value="{{ $token }}">
-
                                         <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
                                             <label for="username">email address&nbsp;<span class="required">*</span></label>
-                                            <input  id="email" type="email"  name="email" value="{{ $email ?? old('email') }}" class="woocommerce-Input woocommerce-Input--text input-text @error('email') is-invalid @enderror"  autocomplete="email" >
+                                            <input type="email" value="{{ old('email') }}" class="woocommerce-Input woocommerce-Input--text input-text" name="email" id="email" autocomplete="email" >
                                          </p>
-                                         @error('email')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
                                          <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
                                             <label for="password">Password&nbsp;<span class="required">*</span></label>
-                                            <input class="woocommerce-Input woocommerce-Input--text input-text @error('password') is-invalid @enderror" id="password" type="password"  name="password" autocomplete="current-password">
+                                            <input class="woocommerce-Input woocommerce-Input--text input-text" type="password" value="{{ old('password') }}" name="password" id="password" autocomplete="current-password">
                                          </p>
-                                         @error('password')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-
-                                        <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-                                            <label for="password">Confirm Password&nbsp;<span class="required">*</span></label>
-                                            <input class="woocommerce-Input woocommerce-Input--text input-text" id="password-confirm" type="password" name="password_confirmation" autocomplete="current-password">
-                                         </p>
-
-
                                        <div class="clear"></div>
                                        <p class="woocommerce-form-row form-row">
                                           <input type="hidden" name="wc_reset_password" value="true">
-                                          <button type="submit" class="woocommerce-Button button" value="Reset password">Reset Password</button>
+                                          <button type="submit" class="woocommerce-Button button" value="Reset password">Send Password Reset Link</button>
                                        </p>
                                        <input type="hidden" id="woocommerce-lost-password-nonce" name="woocommerce-lost-password-nonce" value="7a54f49387"><input type="hidden" name="_wp_http_referer" value="wp/uscannabiz/my-account/lost-password/">
                                     </form>
