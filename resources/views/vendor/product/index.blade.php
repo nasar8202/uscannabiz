@@ -168,8 +168,8 @@
 						                        <strong><a href="products/?product_id=432&amp;action=edit">{{$pro->product_name}}</a></strong>
 						                        <div class="row-actions">
 						                           <span class="edit"><a href="edit-products/{{$pro->id}}">Edit</a> | </span>
-												   <span class="delete"><a href="delete-product/{{$pro->id}}" >Delete Permanently</a> | </span>
-												    <span class="view"><a href="product/testing-products/">View</a></span>
+												   <span class="delete"><a href="delete-product/{{$pro->id}}" >Delete Permanently</a> </span>
+												    {{-- <span class="view"><a href="product/testing-products/">View</a></span> --}}
 						                        </div>
 						                        <button type="button" class="toggle-row"></button>
 						                     </td>
@@ -215,8 +215,8 @@
 						                        <strong><a href="products/?product_id=432&amp;action=edit">{{$pro->product_name}}</a></strong>
 						                        <div class="row-actions">
 						                           <span class="edit"><a href="edit-products/{{$pro->id}}">Edit</a> | </span>
-												   <span class="delete"><a href="delete-product/{{$pro->id}}" >Delete Permanently</a> | </span>
-												    <span class="view"><a href="product/testing-products/">View</a></span>
+												   <span class="delete"><a href="delete-product/{{$pro->id}}" >Delete Permanently</a></span>
+												    {{-- <span class="view"><a href="product/testing-products/">View</a></span> --}}
 						                        </div>
 						                        <button type="button" class="toggle-row"></button>
 						                     </td>

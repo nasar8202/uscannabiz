@@ -65,7 +65,7 @@ class VendorRequestController extends Controller
         $vendor->city = $request->input('city');
         $vendor->quantity = $request->input('quantity');
         $auth = Auth::user();
-        if($auth->role_id == 2){
+        if(isset($auth) && $auth->role_id == 2){
             $vendor->customer_id = $auth->id;
         }
         $vendor->save();

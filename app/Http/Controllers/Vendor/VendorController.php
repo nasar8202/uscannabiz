@@ -45,11 +45,13 @@ class VendorController extends Controller
         if($check->role_id == 3){
             // $order_item = OrderItem::where('')
             $orders = Order::
-            with('orderItems')->
+            // with('orderItems')->
             join('order_items','orders.id','=','order_items.order_id')->
             join('products','order_items.product_id','=','products.id')->
             where('vendor_id',$check->id)->
+            select('order_items.product_qty as order_product_qty','products.*','orders.order_status as order_status')->
             get();
+            // dd($orders);
         }
         return view('vendor.order.index',compact('orders'));
     }

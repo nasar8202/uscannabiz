@@ -137,11 +137,11 @@
 	                                 </div>
 	                                 <ul class="list-unstyled list-count">
 	                                    <li>
-	                                       <a href="products/">
+	                                       {{-- <a href="products/"> --}}
 	                                       <span class="title">Total</span> <span class="count">{{ $productCount ?? 0 }}</span>
-	                                       </a>
+	                                       {{-- </a> --}}
 	                                    </li>
-	                                    <li>
+	                                    {{-- <li>
 	                                       <a href="products/?post_status=publish">
 	                                       <span class="title">Live</span> <span class="count">7</span>
 	                                       </a>
@@ -155,13 +155,13 @@
 	                                       <a href="products/?post_status=pending">
 	                                       <span class="title">Pending Review</span> <span class="count">0</span>
 	                                       </a>
-	                                    </li>
+	                                    </li> --}}
 	                                 </ul>
 	                              </div>
 	                              <!-- .products -->
 	                           </div>
 	                           <!-- .col-md-6 -->
-	                           <div class="dokan-w6 dokan-dash-right">
+	                           {{-- <div class="dokan-w6 dokan-dash-right">
 	                              <div class="dashboard-widget sells-graph">
 	                                 <div class="widget-title"><i class="far fa-credit-card"></i> Sales this Month</div>
 	                                 <div class="chart-container">
@@ -302,7 +302,7 @@
 	                                 </script>
 	                              </div>
 	                              <!-- .sells-graph -->
-	                           </div>
+	                           </div> --}}
 	                        </article>
 	                        <!-- .dashboard-content-area -->
 	                     </div>

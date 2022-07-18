@@ -86,7 +86,7 @@
 						            </a>
 						         </li>
 						      </ul>
-						      <div class="dokan-order-filter-serach">
+						      {{-- <div class="dokan-order-filter-serach">
 						         <form action="" method="GET" class="dokan-left">
 						            <div class="dokan-form-group">
 						               <input type="text" autocomplete="off" class="datepicker hasDatepicker" style="width:120px; padding-bottom:7px" name="order_date" id="order_date_filter" placeholder="Filter by Date" value="">
@@ -109,7 +109,7 @@
 						            </div>
 						         </form>
 						         <div class="dokan-clearfix"></div>
-						      </div>
+						      </div> --}}
 							  @if(!$orders->isEmpty())
 							  <table class="dokan-table dokan-table-striped product-listing-table dokan-inline-editable-table" id="dokan-product-list-table">
 								<thead>
@@ -185,12 +185,12 @@
 									  @php
 									//   $check_qty = App\Models\VendorRequest::where('order_id',$order->id)->first();
 									//   if($check_qty != null){
-										  $check_qty = $order->orderItems->first();
-										  $total_price = $check_qty->product_qty*$order->product_current_price;
+										  $check_qty = $order->order_product_qty;
+										  $total_price = $check_qty*$order->product_current_price;
 										// }
 									  @endphp
 									  <td data-title="Quantity">
-										 {{$check_qty->product_qty}}
+										 {{$check_qty}}
 									  </td>
 									  <td data-title="Total">
 										${{$total_price}}

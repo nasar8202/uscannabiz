@@ -155,7 +155,7 @@
                                     </tr>
                                     @empty
                                     <tr>
-                                        <td colspan="3" class="text-center"> Not Yet Latest Orders </td>
+                                        <td colspan="5" class="text-center"> Not Yet Latest Orders </td>
                                     </tr>
                                     @endforelse
                                 </tbody>
