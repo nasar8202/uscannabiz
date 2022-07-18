@@ -36,7 +36,7 @@
                                     @if(Session::has('msg'))
                                         <div class="alert alert-success">{{Session::get('msg')}}</div>
                                     @endif
-                                    <div class="form-group">
+                                    {{-- <div class="form-group">
                                         <label for="exampleInputEmail1">Main Category</label>
                                         <select class="form-control @if(Session::has('err')) is-invalid @endif" name="main-category" id="main-category">
                                             <option value="0">Select Category</option>
@@ -49,7 +49,7 @@
                                             <strong>{{ Session::get('err') }}</strong>
                                         </span>
                                         @endif
-                                    </div>
+                                    </div> --}}
                                     <div class="form-group">
                                         <label for="name">Category Name</label>
                                         <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" value="{{$content->name?? old('name')}}" placeholder="Category" required>
