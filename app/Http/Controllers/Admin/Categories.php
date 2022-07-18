@@ -56,7 +56,7 @@ class Categories extends Controller
             $slugStr = Str::of($request->input('name'))->slug('-');
             $category = Category::create([
                 'name' => $request->input('name'),
-                'parent_id' => $request->input('main-category'),
+                //'parent_id' => $request->input('main-category'),
                 'category_slug' => $this->createSlug($slugStr),
                 'description' => $request->input('description'),
                 'meta_tag_title' => $request->input('meta-title'),
@@ -116,7 +116,7 @@ class Categories extends Controller
             }
 
             $category->name = $request->input('name');
-            $category->parent_id = $request->input('main-category');
+            //$category->parent_id = $request->input('main-category');
             $category->description = $request->input('description');
             $category->meta_tag_title = $request->input('meta-title');
             $category->meta_tag_description = $request->input('meta-description');
