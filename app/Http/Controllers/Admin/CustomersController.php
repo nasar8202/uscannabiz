@@ -87,6 +87,7 @@ class CustomersController extends Controller
         $customer->country = $request->input('country');
         $customer->address = $request->input('address');
         $customer->user_id = $request->input('user_id');
+        $customer->broker_percentage = $request->input('broker_percentage');
         $customer->save();
         $customer_id = $customer->id;
 

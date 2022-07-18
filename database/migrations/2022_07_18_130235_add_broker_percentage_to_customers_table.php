@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddOrderIdToVendorRequestsTable extends Migration
+class AddBrokerPercentageToCustomersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddOrderIdToVendorRequestsTable extends Migration
      */
     public function up()
     {
-        Schema::table('vendor_requests', function (Blueprint $table) {
-            $table->string('order_id')->nullable();
+        Schema::table('customers', function (Blueprint $table) {
+            $table->string('broker_percentage')->nullable();
         });
     }
 
@@ -25,8 +25,8 @@ class AddOrderIdToVendorRequestsTable extends Migration
      */
     public function down()
     {
-        Schema::table('vendor_requests', function (Blueprint $table) {
-            $table->dropColumn('order_id');
+        Schema::table('customers', function (Blueprint $table) {
+            $table->dropColumn('broker_percentage');
         });
     }
 }
