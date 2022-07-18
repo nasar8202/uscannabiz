@@ -86,8 +86,8 @@
 						            </a>
 						         </li>
 						      </ul>
-						      {{-- <div class="dokan-order-filter-serach">
-						         <form action="" method="GET" class="dokan-left">
+						      <div class="dokan-order-filter-serach">
+						         {{-- <form action="" method="GET" class="dokan-left">
 						            <div class="dokan-form-group">
 						               <input type="text" autocomplete="off" class="datepicker hasDatepicker" style="width:120px; padding-bottom:7px" name="order_date" id="order_date_filter" placeholder="Filter by Date" value="">
 						               <select name="customer_id" id="dokan-filter-customer" style="width:220px" class="dokan-form-control select2-hidden-accessible enhanced" data-allow_clear="true" data-placeholder="Filter by registered customer" tabindex="-1" aria-hidden="true">
@@ -99,17 +99,17 @@
 						               <input type="submit" name="dokan_order_filter" class="dokan-btn dokan-btn-sm dokan-btn-danger dokan-btn-theme" value="Filter">
 						               <input type="hidden" name="order_status" value="all">
 						            </div>
-						         </form>
+						         </form> --}} 
 						         <form action="" method="POST" class="dokan-right">
 						            <div class="dokan-form-group">
-						               <input type="hidden" id="dokan_vendor_order_export_nonce" name="dokan_vendor_order_export_nonce" value="f17801938d"><input type="hidden" name="_wp_http_referer" value="/wp/uscannabiz/dashboard/orders/">                <input type="submit" name="dokan_order_export_all" class="dokan-btn dokan-btn-sm dokan-btn-danger dokan-btn-theme" value="Export All">
-						               <input type="submit" name="dokan_order_export_filtered" class="dokan-btn dokan-btn-sm dokan-btn-danger dokan-btn-theme" value="Export Filtered">
-						               <input type="hidden" name="order_date" value="">
-						               <input type="hidden" name="order_status" value="all">
-						            </div>
+										<input type="hidden" id="dokan_vendor_order_export_nonce" name="dokan_vendor_order_export_nonce" value="f17801938d"><input type="hidden" name="_wp_http_referer" value="/wp/uscannabiz/dashboard/orders/">                <a href="export" name="dokan_order_export_all" class="dokan-btn dokan-btn-sm dokan-btn-danger dokan-btn-theme" value="Export All">Export All</a>
+										{{-- <input type="submit" name="dokan_order_export_filtered" class="dokan-btn dokan-btn-sm dokan-btn-danger dokan-btn-theme" value="Export Filtered"> --}}
+										<input type="hidden" name="order_date" value="">
+										<input type="hidden" name="order_status" value="all">
+									 </div>
 						         </form>
 						         <div class="dokan-clearfix"></div>
-						      </div> --}}
+						      </div>
 							  @if(!$orders->isEmpty())
 							  <table class="dokan-table dokan-table-striped product-listing-table dokan-inline-editable-table" id="dokan-product-list-table">
 								<thead>

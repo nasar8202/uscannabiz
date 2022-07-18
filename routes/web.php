@@ -97,6 +97,8 @@ Route::middleware(['user'])->prefix('user')->group(function () {
 });
 Route::namespace('Vendor')->prefix('/vendor')->middleware('vendor')->group(function () {
     //Dashboard
+    
+    Route::get('export', 'VendorController@export')->name('export');
     Route::get('dashboard', 'VendorController@dashboard')->name('dashboard');
     Route::get('/order', 'VendorController@order')->name('vendor_order');
     Route::get('product', 'ProductController@index')->name('product');
