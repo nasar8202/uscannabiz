@@ -76,17 +76,17 @@ class VendorController extends Controller
         if($request->input('password_current')){
             $validator = Validator::make($request->all(), [
                 'password_current' => 'required',
-                'password_1' => 'required|min:8',
-                'password_2' => 'required|min:8|same:password_1',
+                'password' => 'required|min:8',
+                'confirm_password' => 'required|min:8|same:password',
             ]);
-            
+
             if ($validator->fails()) {
                 return redirect()->back()->withErrors($validator);
             }
             if (!Hash::check($request->password_current, $user->password)) {
                 return back()->with(['error'=>'Current password does not match!']);
             }
-            $user->password = Hash::make($request->password_1);
+            $user->password = Hash::make($request->password);
         }
         $user->save();
 

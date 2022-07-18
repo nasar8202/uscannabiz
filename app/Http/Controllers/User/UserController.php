@@ -249,30 +249,30 @@ class UserController extends Controller
 
     public function editUserAccount()
     {
-        
+
         $login_user = Auth::user()->id;
         $user = User::find($login_user);
         $customer = Customers::where('user_id',$user->id)->first();
-       
+
         return view('/user/editprofile',compact(['user',$user,'customer',$customer]));
-        
+
     }
 
     public function updateUserAccount(Request $request,$id)
     {
-        
+
         $user = User::find($id);
         $user->name = $request->input('first_name')." " . $request->input('last_name');;
 
 
         $user->email = $request->input('email');
-   
-        
+
+
         if($request->input('password_current')){
             $validator = Validator::make($request->all(), [
                 'password_current' => 'required',
-                'password_1' => 'required|min:8',
-                'password_2' => 'required|min:8|same:password_1',
+                'password' => 'required|min:8',
+                'confirm_password' => 'required|min:8|same:password',
             ]);
             if ($validator->fails()) {
                 return redirect()->back()->withErrors($validator);
@@ -281,7 +281,7 @@ class UserController extends Controller
             if (!Hash::check($request->password_current, $user->password)) {
                 return back()->with(['error'=>'Current password does not match!']);
             }
-            $user->password = Hash::make($request->password_1);
+            $user->password = Hash::make($request->password);
         }
         $user->save();
 
@@ -292,14 +292,14 @@ class UserController extends Controller
         $customer->last_name = $request->input('last_name');
         $customer->phone_no = $request->input('phone_no');
         $customer->email = $request->input('email');
-    
+
 
         $customer->save();
 
         return back()->with(['success' => 'Updated Successfully']);
-        
+
     }
 
-    
+
 
 }

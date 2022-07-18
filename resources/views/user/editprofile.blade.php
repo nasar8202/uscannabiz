@@ -638,11 +638,11 @@
                                                                 </p>
                                                                 <p class="form-row form-row-wide">
                                                                     <label for="password_1">New Password (leave blank to leave unchanged)</label>
-                                                                    <input type="password" class="input-text" name="password_1" id="password_1">
+                                                                    <input type="password" class="input-text" name="password" id="password">
                                                                 </p>
                                                                 <p class="form-row form-row-wide">
                                                                     <label for="password_2">Confirm New Password</label>
-                                                                    <input type="password" class="input-text" name="password_2" id="password_2">
+                                                                    <input type="password" class="input-text" name="confirm_password" id="confirm_password">
                                                                 </p>
                                                                 </fieldset>
 
