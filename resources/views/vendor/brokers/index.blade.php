@@ -166,7 +166,7 @@
 								$counter;
 							@endphp
 						      <div class="dokan-error">
-						         No orders found
+						         No Brokers found
 						      </div>
 							  @endif
 						   </article>
