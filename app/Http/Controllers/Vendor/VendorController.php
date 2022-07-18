@@ -13,7 +13,8 @@ use App\Rules\MatchOldPassword;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-
+use App\Exports\OrdersExport;
+use Maatwebsite\Excel\Facades\Excel;
 class VendorController extends Controller
 {
     public function dashboard()
@@ -102,5 +103,23 @@ class VendorController extends Controller
         $customer->save();
 
         return back()->with(['success' => 'Updated Successfully']);
+    }
+    public function export() 
+    {
+        $check = Auth::user();
+        if($check->role_id == 3){
+            // $order_item = OrderItem::where('')
+            $order = Order::
+            // with('orderItems')->
+            join('order_items','orders.id','=','order_items.order_id')->
+            join('products','order_items.product_id','=','products.id')->
+            where('vendor_id',$check->id)->
+            selectRaw('products.product_name,orders.order_status as order_status,products.sku,products.product_current_price,order_items.product_qty as order_product_qty,order_items.product_subtotal_price,DATE_FORMAT(order_items.created_at, "%d-%M-%Y") ')->
+            get();
+            // dd($orders);
+        }
+
+        
+        return Excel::download(new OrdersExport($order), 'orders.xlsx');
     }
 }
