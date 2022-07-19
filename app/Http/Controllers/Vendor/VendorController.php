@@ -282,7 +282,7 @@ class VendorController extends Controller
      $groups_update->broker_request = implode('|',$id);
      $groups_update->save();
     
-     return "done";
+     return back()->with(['success' => 'Broker Request Sent Successfully']);
     
     }
 
