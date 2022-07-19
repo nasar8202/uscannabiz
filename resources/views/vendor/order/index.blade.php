@@ -2,6 +2,82 @@
 @section('title', 'Product')
 @section('content')
 <style type="text/css">
+.addBtn{
+            float: right;
+            /*margin-top: 10px;*/
+        }
+        td{
+            text-align: center;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        input:checked + .slider {
+            background-color: #2196F3;
+        }
+
+        input:focus + .slider {
+            box-shadow: 0 0 1px #2196F3;
+        }
+
+        input:checked + .slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
+
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: 34px;
+        }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+
+
+        .addBtn{
+            float: right;
+            /*margin-top: 10px;*/
+        }
+        td{
+            text-align: center;
+        }
 	.et_pb_section_0_tb_footer.et_pb_section{padding-bottom:20px;background-color:#0D4400!important}.et_pb_row_0_tb_footer.et_pb_row{padding-top:0px!important;padding-bottom:0px!important;padding-top:0px;padding-bottom:0px}.et_pb_image_0_tb_footer{margin-bottom:20px!important;text-align:left;margin-left:0}.et_pb_text_0_tb_footer.et_pb_text,.et_pb_text_5_tb_footer.et_pb_text,.et_pb_text_7_tb_footer.et_pb_text{color:#FFFFFF!important}.et_pb_text_0_tb_footer{font-size:18px;margin-bottom:30px!important}.et_pb_text_1_tb_footer h5{font-family:'Montserrat',Helvetica,Arial,Lucida,sans-serif;font-weight:600;font-size:25px;color:#FFFFFF!important}.et_pb_text_1_tb_footer{margin-bottom:15px!important}.et_pb_social_media_follow_0_tb_footer li a.icon:before{font-size:20px;line-height:40px;height:40px;width:40px}.et_pb_social_media_follow_0_tb_footer li a.icon{height:40px;width:40px}.et_pb_text_4_tb_footer h4,.et_pb_text_2_tb_footer h4,.et_pb_text_3_tb_footer h4{font-weight:600;font-size:25px;color:#FFFFFF!important}.et_pb_text_3_tb_footer,.et_pb_text_2_tb_footer,.et_pb_text_4_tb_footer{margin-bottom:20px!important}.et_pb_sidebar_1_tb_footer.et_pb_widget_area,.et_pb_sidebar_1_tb_footer.et_pb_widget_area li,.et_pb_sidebar_1_tb_footer.et_pb_widget_area li:before,.et_pb_sidebar_1_tb_footer.et_pb_widget_area a,.et_pb_sidebar_0_tb_footer.et_pb_widget_area,.et_pb_sidebar_0_tb_footer.et_pb_widget_area li,.et_pb_sidebar_0_tb_footer.et_pb_widget_area li:before,.et_pb_sidebar_0_tb_footer.et_pb_widget_area a{font-size:18px;color:#FFFFFF!important}.et_pb_sidebar_0_tb_footer.et_pb_widget_area,.et_pb_sidebar_1_tb_footer.et_pb_widget_area{border-right-color:RGBA(255,255,255,0)}.et_pb_text_5_tb_footer{line-height:1.4em;font-size:18px;line-height:1.4em;margin-bottom:30px!important}.et_pb_row_1_tb_footer.et_pb_row{padding-top:0px!important;padding-top:0px}.et_pb_text_7_tb_footer{font-size:18px}@media only screen and (max-width:980px){.et_pb_image_0_tb_footer .et_pb_image_wrap img{width:auto}.et_pb_sidebar_0_tb_footer.et_pb_widget_area,.et_pb_sidebar_1_tb_footer.et_pb_widget_area{border-right-color:RGBA(255,255,255,0)}.et_pb_row_1_tb_footer.et_pb_row{padding-top:20px!important;padding-top:20px!important}}@media only screen and (max-width:767px){.et_pb_image_0_tb_footer .et_pb_image_wrap img{width:auto}.et_pb_sidebar_0_tb_footer.et_pb_widget_area,.et_pb_sidebar_1_tb_footer.et_pb_widget_area{border-right-color:RGBA(255,255,255,0)}.et_pb_row_1_tb_footer.et_pb_row{padding-top:20px!important;padding-top:20px!important}}
 </style>
 <div class="page-template-default page theme-Divi et-tb-has-template et-tb-has-footer woocommerce-js et_button_no_icon et_pb_button_helper_class et_fixed_nav et_show_nav et_secondary_nav_enabled et_primary_nav_dropdown_animation_fade et_secondary_nav_dropdown_animation_fade et_header_style_left et_cover_background et_pb_gutter windows et_pb_gutters3 et_right_sidebar et_divi_theme et-db et_full_width_page et_no_sidebar dokan-dashboard dokan-theme-Divi customize-support chrome">
@@ -16,30 +92,12 @@
 						<div class="dokan-dash-sidebar">
 	                        <div id="dokan-navigation" aria-label="Menu">
 	                           <label id="mobile-menu-icon" for="toggle-mobile-menu" aria-label="Menu">☰</label><input id="toggle-mobile-menu" type="checkbox">
-	                           {{-- <ul class="dokan-dashboard-menu">
-								<li class="active dashboard"><a href="{{route('dashboard')}}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-								<li class="products"><a href="{{route('product')}}"><i class="fas fa-briefcase"></i> Products</a></li>
-								<li class="orders"><a href="{{route('vendor_order')}}"><i class="fas fa-shopping-cart"></i> Orders</a></li>
-	                              <li class="withdraw"><a href="withdraw/"><i class="fas fa-upload"></i> Withdraw</a></li>
-	                              <li class="settings"><a href="settings/store/"><i class="fas fa-cog"></i> Settings <i class="fas fa-angle-right pull-right"></i></a></li>
-	                              <li class="dokan-common-links dokan-clearfix">
-	                                 <a title="" class="tips" data-placement="top" href="Us-Cannazon/user_uscannabiz/" target="_blank" data-original-title="Visit Store"><i class="fas fa-external-link-alt"></i></a>
-	                                 <a title="" class="tips" data-placement="top" href="edit-account/" data-original-title="Edit Account"><i class="fas fa-user"></i></a>
-	                                 <a title="" class="tips" data-placement="top" href="wp-login.php?action=logout&amp;redirect_to=https%3A%2F%2Fwebprojectmockup.com%2Fwp%2Fuscannabiz&amp;_wpnonce=776bce81ba" data-original-title="Log out"><i class="fas fa-power-off"></i></a>
-	                              </li>
-	                           </ul> --}}
                                <ul class="dokan-dashboard-menu">
 								<li class="active dashboard"><a href="{{route('dashboard')}}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
 								<li class="products"><a href="{{route('product')}}"><i class="fas fa-briefcase"></i> Products</a></li>
 								<li class="orders"><a href="{{route('vendor_order')}}"><i class="fas fa-shopping-cart"></i> Orders</a></li>
 								<li class="orders"><a href="{{route('show_brokers')}}"><i class="fas fa-shopping-cart"></i> Broker</a></li>
-	                              {{-- <li class="withdraw"><a href="withdraw/"><i class="fas fa-upload"></i> Withdraw</a></li> --}}
 	                              <li class="settings"><a href="{{ Route('editVendor') }}"><i class="fas fa-cog"></i> Settings <i class="fas fa-angle-right pull-right"></i></a></li>
-	                              {{-- <li class="dokan-common-links dokan-clearfix">
-	                                 <a title="" class="tips" data-placement="top" href="Us-Cannazon/user_uscannabiz/" target="_blank" data-original-title="Visit Store"><i class="fas fa-external-link-alt"></i></a>
-	                                 <a title="" class="tips" data-placement="top" href="edit-account/" data-original-title="Edit Account"><i class="fas fa-user"></i></a>
-	                                 <a title="" class="tips" data-placement="top" href="wp-login.php?action=logout&amp;redirect_to=https%3A%2F%2Fwebprojectmockup.com%2Fwp%2Fuscannabiz&amp;_wpnonce=776bce81ba" data-original-title="Log out"><i class="fas fa-power-off"></i></a>
-	                              </li> --}}
 	                           </ul>
 	                        </div>
 	                     </div>
@@ -48,15 +106,15 @@
 						      <ul class="list-inline order-statuses-filter">
 						         <li class="active">
 						            <a href="dashboard/orders/">
-						            All (0)
+						            All ({{$orderCount??0}})
 						            </a>
 						         </li>
 						         <li>
 						            <a href="dashboard/orders/?order_status=wc-completed">
-						            Completed (0)
+						            Completed ({{$orderCompletedCount??0}})
 						            </a>
 						         </li>
-						         <li>
+						         {{-- <li>
 						            <a href="dashboard/orders/?order_status=wc-processing">
 						            Processing (0)
 						            </a>
@@ -65,18 +123,18 @@
 						            <a href="dashboard/orders/?order_status=wc-on-hold">
 						            On-hold (0)
 						            </a>
-						         </li>
+						         </li> --}}
 						         <li>
 						            <a href="dashboard/orders/?order_status=wc-pending">
-						            Pending (0)
+						            Pending ({{$orderPendingCount??0}})
 						            </a>
 						         </li>
 						         <li>
 						            <a href="dashboard/orders/?order_status=wc-cancelled">
-						            Cancelled (0)
+						            Cancelled ({{$orderCancelledCount??0}})
 						            </a>
 						         </li>
-						         <li>
+						         {{-- <li>
 						            <a href="dashboard/orders/?order_status=wc-refunded">
 						            Refunded (0)
 						            </a>
@@ -85,22 +143,9 @@
 						            <a href="dashboard/orders/?order_status=wc-failed">
 						            Failed (0)
 						            </a>
-						         </li>
+						         </li> --}}
 						      </ul>
 						      <div class="dokan-order-filter-serach">
-						         {{-- <form action="" method="GET" class="dokan-left">
-						            <div class="dokan-form-group">
-						               <input type="text" autocomplete="off" class="datepicker hasDatepicker" style="width:120px; padding-bottom:7px" name="order_date" id="order_date_filter" placeholder="Filter by Date" value="">
-						               <select name="customer_id" id="dokan-filter-customer" style="width:220px" class="dokan-form-control select2-hidden-accessible enhanced" data-allow_clear="true" data-placeholder="Filter by registered customer" tabindex="-1" aria-hidden="true">
-						                  <option value="" selected="selected"></option>
-						                  <option>
-						                  </option>
-						               </select>
-						               <span class="select2 select2-container select2-container--default" dir="ltr" style="width: 220px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-dokan-filter-customer-container"><span class="select2-selection__rendered" id="select2-dokan-filter-customer-container"><span class="select2-selection__placeholder">Filter by registered customer</span></span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
-						               <input type="submit" name="dokan_order_filter" class="dokan-btn dokan-btn-sm dokan-btn-danger dokan-btn-theme" value="Filter">
-						               <input type="hidden" name="order_status" value="all">
-						            </div>
-						         </form> --}} 
 						         <form action="" method="POST" class="dokan-right">
 						            <div class="dokan-form-group">
 										<input type="hidden" id="dokan_vendor_order_export_nonce" name="dokan_vendor_order_export_nonce" value="f17801938d"><input type="hidden" name="_wp_http_referer" value="/wp/uscannabiz/dashboard/orders/">                <a href="export" name="dokan_order_export_all" class="dokan-btn dokan-btn-sm dokan-btn-danger dokan-btn-theme" value="Export All">Export All</a>
@@ -111,113 +156,27 @@
 						         </form>
 						         <div class="dokan-clearfix"></div>
 						      </div>
-							  @if(!$orders->isEmpty())
-							  <table class="dokan-table dokan-table-striped product-listing-table dokan-inline-editable-table" id="dokan-product-list-table">
+
+							  <table class="dokan-table dokan-table-striped product-listing-table dokan-inline-editable-table" id="example1">
 								<thead>
-								   <tr>
-									  <th id="cb" class="manage-column column-cb check-column">
-										 <label for="cb-select-all"></label>
-										 <input id="cb-select-all" class="dokan-checkbox" type="checkbox">
-									  </th>
+								   <tr style="text-align: center">
+                                    <th>S.No</th>
 									  <th>Image</th>
 									  <th>Name</th>
 									  <th>Status</th>
 									  <th>SKU</th>
-									  {{-- <th>Stock</th> --}}
 									  <th>Price</th>
 									  <th>Quantity</th>
 									  <th>Total</th>
-									  {{-- <th>Earning<span class="tips earning-info" title="" data-original-title="Earning could be greater than or less than the calculated value based on different criteria like tax and shipping fee receiver"></span></th> --}}
-									  {{-- <th>Type</th>
-									  <th>Views</th> --}}
 									  <th>Date</th>
+                                      <th></th>
 								   </tr>
 								</thead>
 								<tbody>
-								 @foreach($orders as $order)
-								   <tr class="">
-									  <th class="dokan-product-select check-column">
-										 <label for="cb-select-432"></label>
-										 <input class="cb-select-items dokan-checkbox" type="checkbox" data-product-name="Testing Products" name="bulk_products[]" value="432">
-									  </th>
-									  <td data-title="Image" class="column-thumb">
-										 <a href="products/?product_id=432&amp;action=edit"><img width="150" height="150" src="{{asset('uploads/products/'.$order->product_image)}}" class="attachment-thumbnail size-thumbnail" alt=""></a>
-									  </td>
-									  <td data-title="Name" class="column-primary">
-										{{$order->product_name}}
-										{{-- {{$order}} --}}
-										 {{-- <strong><a href="products/?product_id=432&amp;action=edit">{{$order->product_name}}</a></strong>
-										 <div class="row-actions">
-											<span class="edit"><a href="edit-products/{{$order->id}}">Edit</a> | </span>
-											<span class="delete"><a href="delete-product/{{$order->id}}" >Delete Permanently</a> | </span>
-											 <span class="view"><a href="product/testing-products/">View</a></span>
-										 </div>
-										 <button type="button" class="toggle-row"></button> --}}
-									  </td>
-									  <td class="post-status" data-title="Status">
-										@if ($order->order_status == 'pending')
-											<label class="dokan-label dokan-label-secondary">{{$order->order_status}}</label>
-											@elseif ($order->order_status == 'cancelled')
-											<label class="dokan-label dokan-label-danger">{{$order->order_status}}</label>
-											@elseif ($order->order_status == 'completed')
-											<label class="dokan-label dokan-label-success">{{$order->order_status}}</label>
-											@elseif ($order->order_status == 'shipped')
-											<label class="dokan-label dokan-label-info">{{$order->order_status}}</label>
-										@endif
-									  </td>
-									  <td data-title="SKU">
-										 <span class="na">{{$order->sku}}</span>
-									  </td>
-									  {{-- <td data-title="Stock">
-										 <mark class="instock">{{$order->product_stock}}</mark>
-									  </td> --}}
-									  <td data-title="Price">
-										 <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>{{$order->product_current_price}}</span>
-									  </td>
-									  {{-- <td data-title="Earning">
-										 <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>4.50</span>
-									  </td> --}}
-									  {{-- <td data-title="Type">
-										 <span class="product-type tips simple" title="" data-original-title="Simple">{{$order->product_type}}</span>
-									  </td>
-									  <td data-title="Views">
-										 1
-									  </td> --}}
-									  @php
-									//   $check_qty = App\Models\VendorRequest::where('order_id',$order->id)->first();
-									//   if($check_qty != null){
-										  $check_qty = $order->order_product_qty;
-										  $total_price = $check_qty*$order->product_current_price;
-										// }
-									  @endphp
-									  <td data-title="Quantity">
-										 {{$check_qty}}
-									  </td>
-									  <td data-title="Total">
-										${{$total_price}}
-									  </td>
-									  <td class="post-date" data-title="Date">
-										 <abbr title="May 18, 2022 1:14 am">{{date_format($order->created_at,"d-M-Y")}}</abbr>
-									  </td>
-									  <td class="diviader"></td>
-								   </tr>
-								   @endforeach
+
 								</tbody>
 							 </table>
-							  @else
-						      <div class="dokan-error">
-						         No orders found
-						      </div>
-							  @endif
-						      <script>
-						         (function($){
-						             $(document).ready(function(){
-						                 $('.datepicker').datepicker({
-						                     dateFormat: 'yy-m-d'
-						                 });
-						             });
-						         })(jQuery);
-						      </script>
+
 						   </article>
 						</div>
 	                     <!-- .dokan-dashboard-content -->
@@ -226,10 +185,71 @@
 	               </div>
 	            </article>
 	         </div>
-	         <div id="sidebar">
-	         </div>
+
 	      </div>
 	   </div>
 	</div>
 </div>
+
+<link href="{{ asset('admin/datatables/datatables.net-bs/css/dataTables.bootstrap.min.css') }}" rel="stylesheet">
+<link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+<script src="{{asset('admin/datatables/datatables.net/js/jquery.dataTables.min.js')}}"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <script src="{{asset('admin/datatables/datatables.net/js/jquery.dataTables.min.js')}}"></script>
+
+
+    <script>
+        $(document).ready(function () {
+            var DataTable = $("#example1").DataTable({
+                dom: "Blfrtip",
+                buttons: [{
+                    extend: "copy",
+                    className: "btn-sm"
+                }, {
+                    extend: "csv",
+                    className: "btn-sm"
+                }, {
+                    extend: "excel",
+                    className: "btn-sm"
+                }, {
+                    extend: "pdfHtml5",
+                    className: "btn-sm"
+                }, {
+                    extend: "print",
+                    className: "btn-sm"
+                }],
+                responsive: true,
+                processing: true,
+                serverSide: true,
+                pageLength: 10,
+                ajax: {
+                    url: `{{route('vendor_order')}}`,
+                },
+                columns: [
+
+                    { data: 'DT_RowIndex', name: 'DT_RowIndex' },
+                    //{data: 'id', name: 'id'},
+                    {data: 'product_image', name: 'product_image'},
+                    {data: 'product_name', name: 'product_name'},
+                    {data: 'order_status', name: 'order_status'},
+                    {data: 'sku', name: 'sku'},
+                    {data: 'product_current_price', name: 'product_current_price'},
+                    {data: 'order_product_qty', name: 'order_product_qty'},
+                    {data: 'total', name: 'total'},
+                    {data: 'date', name: 'date'},
+                    {data: 'action', name: 'action', orderable: false}
+                ]
+
+            });
+
+
+
+        })
+
+
+
+    </script>
+
+
 @endsection

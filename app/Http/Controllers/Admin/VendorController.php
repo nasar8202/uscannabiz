@@ -21,12 +21,12 @@ class VendorController extends Controller
     public function index()
     {
         // $data = Customers::join('Users','Users.id' ,'=' ,'Customers.user_id')->where('role_id','=',3)
-        
+
         // ->get();
         // dd($data);
         // // foreach($data as $item){
-        
-        // //     $role_id = $item->role_id; 
+
+        // //     $role_id = $item->role_id;
         // // }
         // // echo $role_id;
         // die();
@@ -34,7 +34,7 @@ class VendorController extends Controller
         // // ->join('Users','Users.email','=','Customers.email')
         // ->where('role_id','=',3)->get());
         try {
-            
+
             if (request()->ajax()) {
                 // return datatables()->of(Customers::join('Users','Users.id' ,'=' ,'Customers.user_id')->where('role_id','=',3)->get())
                 return datatables()->of(Customers::join('Users','Users.email','=','Customers.email')->where('role_id','=',3)->get())
@@ -47,12 +47,12 @@ class VendorController extends Controller
                         }
                     })
                     ->addColumn('action', function ($data) {
-                        return '<a title="View" href="customers/' . $data->id . '" 
+                        return '<a title="View" href="customers/' . $data->id . '"
                         class="btn btn-dark btn-sm"><i class="fas fa-eye"></i></a>&nbsp;
-                        <button title="Delete" type="button" name="delete" id="' . $data->id . '" 
+                        <button title="Delete" type="button" name="delete" id="' . $data->id . '"
                         class="delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>';
                     })->rawColumns(['status','action'])->make(true);
-                    
+
             }
         } catch (\Exception $ex) {
             return redirect('/')->with('error', $ex->getMessage());
@@ -132,9 +132,9 @@ class VendorController extends Controller
             'status'=>$request->val
            );
         $status = Customers::where('user_id',$request->id)->update($data);
-       
+
         return response()->json(['success'=>'Status Updated Successfully']);
- 
+
         // $product = Customers::where('id',$request->id);
         // $product->status = $request->val;
         // $product->save();
