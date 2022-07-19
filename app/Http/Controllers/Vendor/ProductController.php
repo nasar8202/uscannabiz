@@ -51,7 +51,7 @@ class ProductController extends Controller
 
         return view('vendor.product.index',compact(['category',$category ,'product',$product,'category_filter',$category_filter]));
     }
-    
+
     public function addProductForm()
     {
         $categories = Category::get();
@@ -237,12 +237,12 @@ class ProductController extends Controller
             $meta = DB::table('products_meta_data')->where('product_id',$products)->delete();
         }
             if($product){
-                
-                
+
+
                 return back()->with(['success' => 'Product Deleted Successfully']);
             }
             else{
-                
+
                 return back()->with(['error' => 'Something Error']);
             }
         }

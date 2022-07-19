@@ -46,16 +46,91 @@ class VendorController extends Controller
         $check = Auth::user();
         if($check->role_id == 3){
             // $order_item = OrderItem::where('')
-            $orders = Order::
-            // with('orderItems')->
-            join('order_items','orders.id','=','order_items.order_id')->
-            join('products','order_items.product_id','=','products.id')->
-            where('vendor_id',$check->id)->
-            select('order_items.product_qty as order_product_qty','products.*','orders.order_status as order_status')->
-            get();
+            // $orders = Order::
+            // // with('orderItems')->
+            // join('order_items','orders.id','=','order_items.order_id')->
+            // join('products','order_items.product_id','=','products.id')->
+            // where('vendor_id',$check->id)->
+            // select('order_items.product_qty as order_product_qty','products.*','orders.order_status as order_status')->
+            // get();
             // dd($orders);
+            $vendor_id = Auth::user()->id;
+            $orderCount = Order::where('vendor_id',$vendor_id)->count();
+            $orderCompletedCount = Order::where('vendor_id',$vendor_id)->where('order_status','completed')->count();
+
+            $orderPendingCount = Order::where('vendor_id',$vendor_id)->where('order_status','pending')->count();
+            $orderCancelledCount = Order::where('vendor_id',$vendor_id)->where('order_status','cancelled')->count();
+
+            try {
+
+                if (request()->ajax()) {
+                    // return "ss";
+                    // return Order::
+                    // // with('orderItems')->
+                    // join('order_items','orders.id','=','order_items.order_id')->
+                    // join('products','order_items.product_id','=','products.id')->
+                    // where('vendor_id',$check->id)->
+                    // select('order_items.product_qty as order_product_qty','products.*','orders.order_status as order_status')->
+                    // get();
+                     //return datatables()->of(Customers::join('Users','Users.id' ,'=' ,'Customers.user_id')->where('role_id','=',3)->get());
+                    return datatables()->of(Order::
+                    // with('orderItems')->
+                    join('order_items','orders.id','=','order_items.order_id')->
+                    join('products','order_items.product_id','=','products.id')->
+                    where('vendor_id',$check->id)->
+                    select('order_items.product_qty as order_product_qty','products.*','orders.order_status as order_status')->
+                    get())
+                        ->addIndexColumn()
+                        ->addColumn('product_image', function ($data) {
+                                $url= asset('uploads/products/'.$data->product_image);
+                                return '<img src="'.$url.'" border="0" width="40" class="img-rounded" align="center" />';
+                        })
+                        ->addIndexColumn()
+                        ->addColumn('total', function ($data) {
+                                $check_qty = $data->order_product_qty;
+                                $total_price = $check_qty*$data->product_current_price;
+                                return $total_price;
+
+
+                        })
+                        ->addIndexColumn()
+                        ->addColumn('order_status', function ($data) {
+
+                                if($data->order_status == 'pending')
+                                {
+                                    return '<label class="dokan-label dokan-label-secondary">'.$data->order_status.'</label>';
+                                }
+
+                                elseif ($data->order_status == 'cancelled')
+                                {
+                                    return '<label class="dokan-label dokan-label-danger">'.$data->order_status.'</label>';
+                                }
+                                elseif ($data->order_status == 'completed')
+                                {
+                                    return '<label class="dokan-label dokan-label-success">'.$data->order_status.'</label>';
+                                }
+                                elseif ($order->order_status == 'shipped')
+                                {
+                                   return  '<label class="dokan-label dokan-label-info">'.$data->order_status.'</label>';
+                                }
+
+
+                        })
+                        ->addColumn('date', function ($data) {
+                            $date = date_format($data->created_at,"d-M-Y");
+                            return $date;
+                        })
+                        ->addColumn('action', function ($data) {
+                            return '';
+                        })->rawColumns(['product_image','order_status','date','action'])->make(true);
+
+                }
+            } catch (\Exception $ex) {
+                return redirect('/')->with('error', $ex->getMessage());
+            }
+
         }
-        return view('vendor.order.index',compact('orders'));
+        return view('vendor.order.index',compact('orderCount','orderCompletedCount','orderPendingCount','orderCancelledCount'));
     }
     public function vendorEdit()
     {
@@ -111,7 +186,42 @@ class VendorController extends Controller
         ->select('customers.*','users.id as user_id_from_users')
         ->get();
         // dd($brokers);
-        return view('vendor.brokers.index',compact(['brokers',$brokers]));
+        $countBroker = User::where('role_id',4)->count();
+        return view('vendor.brokers.index',compact(['brokers',$brokers,'countBroker',$countBroker]));
+    }
+
+    public function show_brokers_yajra()
+    {
+
+        try {
+
+            if (request()->ajax()) {
+                //return "ssss";
+                 //return datatables()->of(Customers::join('Users','Users.id' ,'=' ,'Customers.user_id')->where('role_id','=',3)->get());
+                return datatables()->of(User::join('customers','users.customers_id','=','customers.id')->where(["role_id"=>4])
+                ->select('customers.*','users.id as user_id_from_users')
+                ->get())
+                    ->addIndexColumn()
+                    ->addColumn('status', function ($data) {
+                        if($data->status == 0){
+                            return '<label class="switch"><input type="checkbox"  data-id="'.$data->user_id.'" data-val="1"  id="status-switch"><span class="slider round"></span></label>';
+                        }else{
+                            return '<label class="switch"><input type="checkbox" checked data-id="'.$data->user_id.'" data-val="0"  id="status-switch"><span class="slider round"></span></label>';
+                        }
+                    })
+                    ->addColumn('action', function ($data) {
+                        return '<a title="View" href="customers/' . $data->id . '"
+                        class="btn btn-dark btn-sm"><i class="fas fa-eye"></i></a>&nbsp;
+                        <button title="Delete" type="button" name="delete" id="' . $data->id . '"
+                        class="delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>';
+                    })->rawColumns(['status','action'])->make(true);
+
+            }
+        } catch (\Exception $ex) {
+            return redirect('/')->with('error', $ex->getMessage());
+        }
+
+        return view('vendor.brokers.show_brokers_yajra');
     }
     public function assigned_broker($id)
     {
@@ -133,7 +243,7 @@ class VendorController extends Controller
         $assigned_broker->save();
         return back()->with('success','Broker Assigned Cancle');
     }
-    public function export() 
+    public function export()
     {
         $check = Auth::user();
         if($check->role_id == 3){
@@ -148,7 +258,7 @@ class VendorController extends Controller
             // dd($orders);
         }
 
-        
+
         return Excel::download(new OrdersExport($order), 'orders.xlsx');
     }
     public function assignbroker(Request $request) 

@@ -1,14 +1,14 @@
 <?php
-  
+
 namespace App\Exports;
-  
+
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
-  
+
 class OrdersExport implements FromCollection
 {
     protected $data;
-  
+
     /**
      * Write code on Method
      *
@@ -18,7 +18,7 @@ class OrdersExport implements FromCollection
     {
         $this->data = $data;
     }
-  
+
     /**
      * Write code on Method
      *
@@ -28,7 +28,7 @@ class OrdersExport implements FromCollection
     {
         return collect($this->data);
     }
-  
+
     /**
      * Write code on Method
      *
@@ -37,7 +37,7 @@ class OrdersExport implements FromCollection
     public function headings() :array
     {
         return [
-            
+
             'Name',
             'Status',
             'SKU',
@@ -45,10 +45,6 @@ class OrdersExport implements FromCollection
             'Quantity',
             'Total',
             'Date',
-            
-            
-            
-            
         ];
     }
 }

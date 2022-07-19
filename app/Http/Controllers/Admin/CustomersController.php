@@ -121,7 +121,7 @@ class CustomersController extends Controller
         \Mail::to($request->input('email'))->send(new \App\Mail\SendEmailVendorRegistration($details));
 
         //dd("Email is Sent.");
-        return redirect()->back()->with('success',"customer add And Email is Sent.");
+        return redirect()->back()->with('success',"customer added We have Sent you password on email");
 
         }
     }

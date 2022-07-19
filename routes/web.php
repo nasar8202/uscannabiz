@@ -102,6 +102,9 @@ Route::namespace('Vendor')->prefix('/vendor')->middleware('vendor')->group(funct
     Route::get('dashboard', 'VendorController@dashboard')->name('dashboard');
     Route::get('/order', 'VendorController@order')->name('vendor_order');
     Route::get('/brokers', 'VendorController@show_broker')->name('show_brokers');
+
+    Route::get('/show_brokers_yajra', 'VendorController@show_brokers_yajra')->name('show_brokers_yajra');
+
     Route::get('/assign_brokers/{id}', 'VendorController@assigned_broker')->name('assigned_broker');
     Route::get('/assign_brokers/cancle/{id}', 'VendorController@assigned_broker_cancle')->name('assigned_broker.cancle');
     Route::get('product', 'ProductController@index')->name('product');
@@ -125,10 +128,10 @@ Route::namespace('Vendor')->prefix('/vendor')->middleware('vendor')->group(funct
 Route::namespace('Admin')->prefix('/admin')->middleware('admin')->group(function () {
     //Dashboard
     Route::get('/dashboard', 'AdminController@dashboard')->name('dashboard');
-    //vendor request 
+    //vendor request
 
     Route::get('vendorRequest', 'VendorController@vendorRequest')->name('vendorRequest');
-    
+
     //category
     Route::get('/category', 'Categories@index')->name('category');
     Route::match(['get', 'post'], '/add-category', 'Categories@addCategory')->name('admin.add-category');

@@ -66,7 +66,7 @@
                                         <td colspan="2">{{$product->product_sale_percentage??''}}</td>
                                         <th>Product Stock</th>
                                         <td colspan="2">{{$product->product_stock??''}}</td>
-                                       
+
                                     </tr>
                                     <tr>
                                         <th>Meta Tag Title</th>
@@ -82,7 +82,7 @@
                                     <tr>
                                         <th>Meta Tag Keywords</th>
                                         <td colspan="5">{{$product->product_meta_data->meta_tag_keywords??''}}</td>
-                                    
+
                                     </tr>
                                     <tr>
                                         <th>Meta Tag Description</th>
