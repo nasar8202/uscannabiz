@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddBrokerPercentageToCustomersTable extends Migration
+class AddBrokerRequestIdToCustomersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,6 +15,8 @@ class AddBrokerPercentageToCustomersTable extends Migration
     {
         Schema::table('customers', function (Blueprint $table) {
             $table->string('broker_percentage')->nullable();
+            $table->string('broker_request')->nullable();
+            $table->string('broker_request_id')->nullable();
         });
     }
 
@@ -26,7 +28,7 @@ class AddBrokerPercentageToCustomersTable extends Migration
     public function down()
     {
         Schema::table('customers', function (Blueprint $table) {
-            $table->dropColumn('broker_percentage');
+            //
         });
     }
 }

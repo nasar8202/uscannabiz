@@ -292,6 +292,12 @@
                             <p>Vendor</p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{route('vendorRequest')}}" class="nav-link {{ request()->IS('admin/vendor') ? 'active' : '' }}">
+                            <i class="nav-icon  fas fa-user"></i>
+                            <p>Vendor Request</p>
+                        </a>
+                    </li>
 
                     {{-- <li class="nav-item">
                         <a href="{{route('blog.index')}}" class="nav-link {{ request()->IS('admin/blog') ? 'active' : '' }}">

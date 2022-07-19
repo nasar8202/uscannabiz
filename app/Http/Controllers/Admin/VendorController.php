@@ -41,12 +41,14 @@ class VendorController extends Controller
                     ->addIndexColumn()
                     ->addColumn('status', function ($data) {
                         if($data->status == 0){
+                            // return $data->user_id;
                             return '<label class="switch"><input type="checkbox"  data-id="'.$data->user_id.'" data-val="1"  id="status-switch"><span class="slider round"></span></label>';
                         }else{
                             return '<label class="switch"><input type="checkbox" checked data-id="'.$data->user_id.'" data-val="0"  id="status-switch"><span class="slider round"></span></label>';
                         }
                     })
                     ->addColumn('action', function ($data) {
+                        // return $data->user_id;
                         return '<a title="View" href="customers/' . $data->id . '" 
                         class="btn btn-dark btn-sm"><i class="fas fa-eye"></i></a>&nbsp;
                         <button title="Delete" type="button" name="delete" id="' . $data->id . '" 
@@ -143,4 +145,38 @@ class VendorController extends Controller
             // return 1;
         // }
     }
+    public function vendorRequest()
+    {
+
+        try {
+            
+            if (request()->ajax()) {
+                // return datatables()->of(Customers::join('Users','Users.id' ,'=' ,'Customers.user_id')->where('role_id','=',3)->get())
+                return datatables()->of(Customers::join('Users','Users.email','=','Customers.email')->where('role_id','=',3)->get())
+                    ->addIndexColumn()
+                    ->addColumn('status', function ($data) {
+                        if($data->status == 0){
+                            // return $data->user_id;
+                            return '<label class="switch"><input type="checkbox"  data-id="'.$data->user_id.'" data-val="1"  id="status-switch"><span class="slider round"></span></label>';
+                        }else{
+                            return '<label class="switch"><input type="checkbox" checked data-id="'.$data->user_id.'" data-val="0"  id="status-switch"><span class="slider round"></span></label>';
+                        }
+                    })
+                    ->addColumn('action', function ($data) {
+                        // return $data->user_id;
+                        return '<a title="View" href="customers/' . $data->id . '" 
+                        class="btn btn-dark btn-sm"><i class="fas fa-eye"></i></a>&nbsp;<a title="View" href="customers/' . $data->id . '" 
+                        class="btn btn-danger btn-sm"><i class="fa fa-times" aria-hidden="true"></i></a>&nbsp;<a title="View" href="customers/' . $data->id . '" 
+                        class="btn btn-success btn-sm"><i class="fa fa-check"></i></a>&nbsp;';
+                    })->rawColumns(['status','action'])->make(true);
+                    
+            }
+        } catch (\Exception $ex) {
+            return redirect('/')->with('error', $ex->getMessage());
+        }
+        return view('admin.vendorRequest.vendorRequest');
+    }
+
 }
+
+

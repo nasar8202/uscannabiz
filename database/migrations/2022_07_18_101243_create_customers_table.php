@@ -26,6 +26,7 @@ class CreateCustomersTable extends Migration
             $table->string('country')->nullable();
             $table->text('address')->nullable();
             $table->tinyInteger('status')->default('1');
+            
             $table->timestamps();
         });
     }
