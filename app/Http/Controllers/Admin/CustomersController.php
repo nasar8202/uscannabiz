@@ -30,8 +30,8 @@ class CustomersController extends Controller
                     ->addColumn('action', function ($data) {
                         return '<a title="View" href="customers/' . $data->id . '"
                         class="btn btn-dark btn-sm"><i class="fas fa-eye"></i></a>&nbsp;
-                        <a title="edit" href="customers/' . $data->id . '/edit" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>&nbsp;
-                        <button title="Delete" type="button" name="delete" id="' . $data->id . '"
+                        <a title="edit" href="customers/' . $data->id . '/edit" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
+                        &nbsp;<button title="Delete" type="button" name="delete" id="' . $data->id . '"
                         class="delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>';
                     })->rawColumns(['action'])->make(true);
 
@@ -198,6 +198,8 @@ class CustomersController extends Controller
         $customer->country = $request->input('country');
         $customer->address = $request->input('address');
         $customer->user_id = $request->input('user_id');
+        
+        $customer->broker_percentage = $request->input('broker_percentage');
         $customer->save();
 
         $customer_id = $customer->id;
@@ -222,14 +224,14 @@ class CustomersController extends Controller
      */
     public function destroy($id)
     {
-        $content=Customers::find($id);
+        $users=User::find($id);
+        
 
+        $customers = Customers::where('email','=',$users->email)->delete();
 
-        $user = User::where('customers_id','=',$id)->delete();
+        if(!empty($users) ){
 
-        if(!empty($content) ){
-
-            $content->delete();
+            $users->delete();
 
             echo 1;
         }else{echo 2;}

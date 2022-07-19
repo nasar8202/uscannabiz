@@ -40,7 +40,7 @@
                             <input type="hidden" name="shipping_city" value="{{$vender_request->city}}">
                             <input type="hidden" name="quantity" value="{{$vender_request->quantity}}">
                             <input type="hidden" name="vendor_req_id" value="{{$vender_request->id}}">
-                            
+                            <input type="hidden" name="broker_price" id="broker_price" value="">
                             <input type="hidden" name="total_amount" value="{{$product->product_current_price}}">
                             <input type="hidden" name="product_id" value="{{$product->id}}">
                         <div class="card-body">
@@ -228,8 +228,8 @@
 
                                         </tbody>
                                     </table>
-                                    @if(isset($order) && $order->order_status == 'pending')
-                                    {{-- @dd($order) --}}
+                                    {{-- @if(isset($order) && $order->order_status == 'pending')
+                                    @dd($order)
                                     <div class="col-md-4">
                                     <label for="category">Broker Commission Price</label>
                                     <input type="text" class="form-control" name="broker_price" id="broker_price" @if(isset($order)) value="{{$order->broker_price}}" @endif placeholder="Amount" required >
@@ -239,7 +239,7 @@
                                     <label for="category">Broker Commission Price</label>
                                     <input type="text" class="form-control" name="broker_price" id="broker_price"  value="" placeholder="Amount" required >
                                     </div>    
-                                    @endif
+                                    @endif --}}
                                     
                                 <br>
                                 </div>
@@ -286,10 +286,13 @@
                                 </div> --}}
                             </div>
                         </div>
-                        @if(isset($order) && $order->order_status == 'pending')
+                        {{-- @if(isset($order) && $order->order_status == 'pending')
                         <button type="submit" class="float-right btn btn-primary">Update Request To Vendor</button>
                         @elseif(!isset($order))
                         <button type="submit" class="float-right btn btn-primary">Add Request To Vendor</button>
+                        @endif --}}
+                        @if(!isset($order))
+                        <button type="submit" class="float-right btn btn-primary">Accept Order</button>
                         @endif
                     </form>
                     </div>
@@ -324,6 +327,9 @@
                 }
             })
         });
-
+        $(document).ready(function(){
+        var a  = $('#broker_price').val();
+        console.log(a);
+        });
 </script>
 @endsection

@@ -97,7 +97,7 @@ Route::middleware(['user'])->prefix('user')->group(function () {
 });
 Route::namespace('Vendor')->prefix('/vendor')->middleware('vendor')->group(function () {
     //Dashboard
-
+    Route::get('assignbroker', 'VendorController@assignbroker')->name('assignbroker');
     Route::get('export', 'VendorController@export')->name('export');
     Route::get('dashboard', 'VendorController@dashboard')->name('dashboard');
     Route::get('/order', 'VendorController@order')->name('vendor_order');
@@ -128,6 +128,9 @@ Route::namespace('Vendor')->prefix('/vendor')->middleware('vendor')->group(funct
 Route::namespace('Admin')->prefix('/admin')->middleware('admin')->group(function () {
     //Dashboard
     Route::get('/dashboard', 'AdminController@dashboard')->name('dashboard');
+    //vendor request
+
+    Route::get('vendorRequest', 'VendorController@vendorRequest')->name('vendorRequest');
 
     //category
     Route::get('/category', 'Categories@index')->name('category');

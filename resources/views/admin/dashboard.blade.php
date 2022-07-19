@@ -136,8 +136,8 @@
                                     @else
                                     <tr onclick="window.location='order/{{$latestOrders->id}}'" style='cursor: pointer;'>
                                     @endif
-                                        <td> {{$latestOrders->order_no}} </td>
-                                        <td> {{$latestOrders->customer->first_name??''}} </td>
+                                        <td> {{$latestOrders->id}} </td>
+                                        <td> {{$latestOrders->full_name??''}} </td>
                                         <td> 
                                             @if ($latestOrders->order_status == 'pending')
                                             <span class="badge badge-secondary">Pending</span>

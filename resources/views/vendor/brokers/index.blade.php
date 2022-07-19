@@ -95,9 +95,12 @@
 							  @if(Session::has('error'))
 									<div class="alert alert-success text-center"><span class="glyphicon glyphicon-ok"></span><em> {!! session('error') !!}</em></div>
 								@endif
-							  <table class="dokan-table dokan-table-striped product-listing-table dokan-inline-editable-table" id="dokan-product-list-table">
+								<form method="GET" action="{{Route('assignbroker')}}">
+								<table class="dokan-table dokan-table-striped product-listing-table dokan-inline-editable-table" id="dokan-product-list-table">
 								<thead>
+									
 								   <tr>
+									  <th>Select</th>
 									  <th>S.No</th>
 									  <th>Name</th>
 									  <th>Email</th>
@@ -107,7 +110,7 @@
 									  <th>State</th>
 									  <th>Country</th>
 									  <th>Address</th>
-									  <th>Action</th>
+									  
 								   </tr>
 								</thead>
 								<tbody>
@@ -117,6 +120,10 @@
 								 @foreach($brokers as $broker)
 								 {{-- @dd($broker) --}}
 								   <tr class="">
+									<th class="dokan-product-select check-column">
+										<label for="cb-select-432"></label>
+										<input class="cb-select-items dokan-checkbox" type="checkbox" data-product-name="Testing Products" name="id[]" value="{{$broker->id}}">
+									 </th>
 									  <td data-title="S.no" class="column-thumb">
 										 {{$counter++}}
 									  </td>
@@ -145,18 +152,7 @@
 										{{$broker->address}}
 									  </td>
 									  <td data-title="address" class="column-primary">
-										{{-- @dd(!is_null($broker->user_id) && $broker->user_id == Auth::user()->id) --}}
-										@if(!is_null($broker->user_id) && $broker->user_id != Auth::user()->id)
-										<label class="dokan-label dokan-label-secondary">Already Assigned</label>
-										@else
-										{{-- @dd($broker,Auth::user()) --}}
-											@if($broker->user_id == Auth::user()->id)
-											<a href="{{route('assigned_broker.cancle',['id'=>$broker->id])}}" class="dokan-btn dokan-btn-theme dokan-add-new-product">Cancel</a>
-											@else
-											<a href="{{route('assigned_broker',['id'=>$broker->id])}}" class="dokan-btn dokan-btn-theme dokan-add-new-product">Accept</a>
-											@endif
-										@endif
-									  </td>
+										
 									  <td class="diviader"></td>
 								   </tr>
 								   @endforeach
@@ -170,7 +166,14 @@
 						         No Brokers found
 						      </div>
 							  @endif
+							  
 						   </article>
+						   <span class="dokan-add-product-link">
+							<button type="submit" class="dokan-btn dokan-btn-theme dokan-add-new-product float-right">Send Request</button>
+							
+							</span>
+						</form>
+							<br>
 						</div>
 	                  </div>
 	               </div>
