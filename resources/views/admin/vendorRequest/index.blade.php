@@ -71,7 +71,6 @@
                                     <thead>
                                     <tr style="text-align: center">
                                         <th>Id</th>
-                                        <th>Vendor Name</th>
                                         <th>Broker Name</th>
                                         <th>Email</th>
                                         <th>Phone No</th>
@@ -84,6 +83,29 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+                                        @php
+                                            $counter = 1;    
+                                        @endphp
+                                        @foreach($users as $user)
+                                        {{-- @dd($user->customers_id) --}}
+                                        @php
+                                            $customer_id = App\Models\Customers::where('id',$user->first()->customers_id)->get();
+                                        @endphp
+                                        <tr>
+                                            <td>{{$counter}}</td>
+                                            <td>{{$user->first()->name}}</td>
+                                            <td>{{$user->first()->email}}</td>
+                                            <td>{{$customer_id->first()->phone_no}}</td>
+                                            <td>{{$customer_id->first()->city}}</td>
+                                            <td>{{$customer_id->first()->state}}</td>
+                                            <td>{{$customer_id->first()->country}}</td>
+                                            <td>{{$customer_id->first()->address}}</td>
+                                            <td><button>Accept</button></td>
+                                        </tr>
+                                            @php
+                                            $counter++;    
+                                            @endphp
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -138,51 +160,6 @@
 
 
     <script>
-        $(document).ready(function () {
-            var DataTable = $("#example1").DataTable({
-                dom: "Blfrtip",
-                buttons: [{
-                    extend: "copy",
-                    className: "btn-sm"
-                }, {
-                    extend: "csv",
-                    className: "btn-sm"
-                }, {
-                    extend: "excel",
-                    className: "btn-sm"
-                }, {
-                    extend: "pdfHtml5",
-                    className: "btn-sm"
-                }, {
-                    extend: "print",
-                    className: "btn-sm"
-                }],
-                responsive: true,
-                processing: true,
-                serverSide: true,
-                pageLength: 10,
-                ajax: {
-                    url: `{{route('vendorRequest')}}`,
-                },
-                columns: [
-
-                    { data: 'DT_RowIndex', name: 'DT_RowIndex' },
-                    // {data: 'id', name: 'id'},
-                    {data: 'first_name', name: 'First Name'},
-                    {data: 'last_name', name: 'Last Name'},
-                    {data: 'email', name: 'Email'},
-                    {data: 'phone_no', name: 'Phone No'},
-                    {data: 'city', name: 'City'},
-                    {data: 'state', name: 'State'},
-                    {data: 'country', name: 'Country'},
-                    {data: 'address', name: 'Address'},
-                    
-
-
-                    {data: 'action', name: 'action', orderable: false}
-                ]
-
-            });
             var delete_id;
             $(document,this).on('click','.delete',function(){
                 delete_id = $(this).attr('id');

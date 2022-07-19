@@ -131,6 +131,7 @@ Route::namespace('Admin')->prefix('/admin')->middleware('admin')->group(function
     //vendor request
 
     Route::get('vendorRequest', 'VendorController@vendorRequest')->name('vendorRequest');
+    Route::get('/show_vendor_request/{id}', 'VendorController@show_vendor_request')->name('show_vendor_request');
 
     //category
     Route::get('/category', 'Categories@index')->name('category');

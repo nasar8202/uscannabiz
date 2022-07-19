@@ -148,7 +148,8 @@ class VendorController extends Controller
     {
 
         try {
-            
+            $check =Customers::join('Users','Users.email','=','Customers.email')->where('role_id','=',3)->where('broker_request','!=',null)->get();
+            // dd($check);
             if (request()->ajax()) {
                 // return datatables()->of(Customers::join('Users','Users.id' ,'=' ,'Customers.user_id')->where('role_id','=',3)->get())
                 return datatables()->of(Customers::join('Users','Users.email','=','Customers.email')->where('role_id','=',3)->where('broker_request','!=',null)->get())
@@ -163,7 +164,7 @@ class VendorController extends Controller
                     })
                     ->addColumn('action', function ($data) {
                         // return $data->user_id;
-                        return '<a title="View" href="customers/' . $data->id . '" 
+                        return '<a title="View" href="show_vendor_request/' . $data->id . '" 
                         class="btn btn-dark btn-sm"><i class="fas fa-eye"></i></a>&nbsp;<a title="View" href="customers/' . $data->id . '" 
                         class="btn btn-danger btn-sm"><i class="fa fa-times" aria-hidden="true"></i></a>&nbsp;<a title="View" href="customers/' . $data->id . '" 
                         class="btn btn-success btn-sm"><i class="fa fa-check"></i></a>&nbsp;';
@@ -174,6 +175,19 @@ class VendorController extends Controller
             return redirect('/')->with('error', $ex->getMessage());
         }
         return view('admin.vendorRequest.vendorRequest');
+    }
+    
+    public function show_vendor_request($id)
+    {
+        $customer = Customers::where('user_id',$id)->first();
+        foreach($customer as $customers){
+            $data_item = explode('|', $customer->broker_request);
+            foreach($data_item as $data_items){
+                $user_check[] = User::where('id',$data_items)->get();
+            }
+        }
+        $users = array_unique($user_check);
+        return view('admin.vendorRequest.index',compact('users'));
     }
 
 }
