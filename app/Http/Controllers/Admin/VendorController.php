@@ -48,12 +48,7 @@ class VendorController extends Controller
                         }
                     })
                     ->addColumn('action', function ($data) {
-<<<<<<< HEAD
                         return '<a title="View" href="customers/' . $data->id . '"
-=======
-                        // return $data->user_id;
-                        return '<a title="View" href="customers/' . $data->id . '" 
->>>>>>> a5c02a27d7c408e7f114104940669af140d794b4
                         class="btn btn-dark btn-sm"><i class="fas fa-eye"></i></a>&nbsp;
                         <button title="Delete" type="button" name="delete" id="' . $data->id . '"
                         class="delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>';
@@ -153,10 +148,11 @@ class VendorController extends Controller
     {
 
         try {
-            
+            $check =Customers::join('Users','Users.email','=','Customers.email')->where('role_id','=',3)->where('broker_request','!=',null)->get();
+            // dd($check);
             if (request()->ajax()) {
                 // return datatables()->of(Customers::join('Users','Users.id' ,'=' ,'Customers.user_id')->where('role_id','=',3)->get())
-                return datatables()->of(Customers::join('Users','Users.email','=','Customers.email')->where('role_id','=',3)->get())
+                return datatables()->of(Customers::join('Users','Users.email','=','Customers.email')->where('role_id','=',3)->where('broker_request','!=',null)->get())
                     ->addIndexColumn()
                     ->addColumn('status', function ($data) {
                         if($data->status == 0){
@@ -168,7 +164,7 @@ class VendorController extends Controller
                     })
                     ->addColumn('action', function ($data) {
                         // return $data->user_id;
-                        return '<a title="View" href="customers/' . $data->id . '" 
+                        return '<a title="View" href="show_vendor_request/' . $data->id . '" 
                         class="btn btn-dark btn-sm"><i class="fas fa-eye"></i></a>&nbsp;<a title="View" href="customers/' . $data->id . '" 
                         class="btn btn-danger btn-sm"><i class="fa fa-times" aria-hidden="true"></i></a>&nbsp;<a title="View" href="customers/' . $data->id . '" 
                         class="btn btn-success btn-sm"><i class="fa fa-check"></i></a>&nbsp;';
@@ -179,6 +175,52 @@ class VendorController extends Controller
             return redirect('/')->with('error', $ex->getMessage());
         }
         return view('admin.vendorRequest.vendorRequest');
+    }
+    
+    public function show_vendor_request($id)
+    {
+        $vendor_id = $id;
+        
+        $customer_search = Customers::where('user_id',$id)->first();
+        foreach($customer_search as $customers){
+            $data_item = explode('|', $customer_search->broker_request);
+            foreach($data_item as $data_items){
+                $user_check[] = User::where('customers_id',$data_items)->get();
+            }
+        }
+        $users = array_unique($user_check);
+
+   
+        return view('admin.vendorRequest.index',compact('users','vendor_id','customer_search'));
+    }
+
+    public function brokerAssignToVendor($id,$vendor_id)
+    {
+        $assigned_broker = Customers::find($id);
+        $check_user_id = Customers::where('user_id',$vendor_id)->first();
+        if($check_user_id->broker_request_id != null){
+            return back()->with('error','You Have Already Assigned Broker');
+        }
+        else{
+            // dd($check_user_id->broker_request_id,$id);
+            $check_user_id->broker_request_id = $id;
+            $check_user_id->save();
+            return back()->with('success','Broker Assigned Successfully');
+        }
+        // $customer = Customers::where('user_id',$vendor_id)->first();
+        // // dd($customer);
+        // $customer->broker_request_id = $id;
+        // $customer->save();
+        
+        // return back()->with('success','Broker Assigned Successfully');
+    }
+    public function brokerCancleToVendor($id,$vendor_id)
+    {
+        $customer = Customers::where('user_id',$vendor_id)->first();
+        $customer->broker_request_id = null;
+        $customer->save();
+        
+        return back()->with('success','Broker Cancle Successfully');
     }
 
 }

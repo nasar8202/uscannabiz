@@ -26,7 +26,7 @@ Route::get('/reset', 'Front\FrontController@resetPasswordLink')->name('resetPass
 Route::post('/registerVendorAndCustomer', 'Front\FrontController@registerVendorAndCustomer')->name('registerVendorAndCustomer');
 Route::get('vendor-add-product-form/{id}', 'Vendor\ProductController@vendorAddProductForm')->name('vendorAddProductForm');
 
-Route::post('/vendor-request', 'Vendor\VendorRequestController@store')->name('vendorRequest');
+Route::post('/vendor-request', 'Vendor\VendorRequestController@store')->name('vendorRequest_shop');
 Route::get('/wishlist', 'Front\ShopController@view_wishlist')->name('shop.view_wishlist');
 Route::get('/shop', 'Front\ShopController@index')->name('shop.index');
 Route::get('/shop/{slug}', 'Front\ShopController@show')->name('shop.show');
@@ -130,7 +130,10 @@ Route::namespace('Admin')->prefix('/admin')->middleware('admin')->group(function
     Route::get('/dashboard', 'AdminController@dashboard')->name('dashboard');
     //vendor request
 
+    Route::get('brokerAssignToVendor/{id}/{vendor_id}', 'VendorController@brokerAssignToVendor')->name('brokerAssignToVendor');
+    Route::get('brokerCancleToVendor/{id}/{vendor_id}', 'VendorController@brokerCancleToVendor')->name('brokerCancleToVendor');
     Route::get('vendorRequest', 'VendorController@vendorRequest')->name('vendorRequest');
+    Route::get('/show_vendor_request/{id}', 'VendorController@show_vendor_request')->name('show_vendor_request');
 
     //category
     Route::get('/category', 'Categories@index')->name('category');

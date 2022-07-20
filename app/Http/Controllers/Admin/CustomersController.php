@@ -101,9 +101,9 @@ class CustomersController extends Controller
         $user->customers_id = $customer_id;
         $user->save();
 
-        // $customer_user = Customers::find($customer_id);
-        // $customer_user->user_id = $user->id;
-        // $customer_user->save();
+        $customer_user = Customers::find($customer_id);
+        $customer_user->user_id = $user->id;
+        $customer_user->save();
 
         // $user =  User::create([
         //     'name' => $request->input('first_name'),

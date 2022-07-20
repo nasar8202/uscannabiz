@@ -159,7 +159,7 @@ class ProductController extends Controller
             }
             DB::commit();
 
-        return back()->with(['success' => 'Product Added Successfully']);
+        return redirect('/vendor/product')->with(['success' => 'Product Added Successfully']);
 
 
 
@@ -219,7 +219,7 @@ class ProductController extends Controller
         if($product){
 
 
-        return back()->with(['success' => 'Product Deleted Successfully']);
+            return redirect('/vendor/product')->with(['success' => 'Product Deleted Successfully']);
         }
         else{
 
@@ -320,7 +320,7 @@ class ProductController extends Controller
             }
         }
 
-    return back()->with(['success' => 'Product Updated Successfully']);
+        return redirect('/vendor/product')->with(['success' => 'Product Updated Successfully']);
 
 
     }

@@ -11,6 +11,11 @@
 	         <div id="left-area">
 	            <article id="post-7" class="post-7 page type-page status-publish hentry">
 	               <h1 class="entry-title main_title">Dashboard</h1>
+				   @if (session()->has('success'))
+                                        <div class="alert alert-success">
+                                            {{ session()->get('success') }}
+                                        </div>
+										@endif
 	               <div class="entry-content">
 	                  <div class="dokan-dashboard-wrap">
 						<div class="dokan-dash-sidebar">
@@ -87,7 +92,11 @@
 						            </a>
 						         </li> --}}
 						      </ul>
-
+							  @if(isset($show_data))
+							  <td data-title="S.no" class="column-thumb">
+								 {{$show_data}}
+							  </td>
+							  @else
 							  @if(!$brokers->isEmpty())
 							  @if(Session::has('success'))
 									<div class="alert alert-success text-center"><span class="glyphicon glyphicon-ok"></span><em> {!! session('success') !!}</em></div>
@@ -100,7 +109,10 @@
 								<thead>
 									
 								   <tr>
-									  <th>Select</th>
+									@if(isset($brokers) && isset($customer_condition) && $customer_condition == $brokers->first()->id)
+									@else
+									<th>Select</th>
+									@endif
 									  <th>S.No</th>
 									  <th>Name</th>
 									  <th>Email</th>
@@ -110,6 +122,11 @@
 									  <th>State</th>
 									  <th>Country</th>
 									  <th>Address</th>
+									  @if(isset($brokers) && isset($customer_condition) && $customer_condition == $brokers->first()->id)
+									  <th>Status</th>
+									  <th>Broker Percentage</th>
+									  @else
+										@endif
 									  
 								   </tr>
 								</thead>
@@ -118,12 +135,14 @@
 										$counter = 1;
 									@endphp
 								 @foreach($brokers as $broker)
-								 {{-- @dd($broker) --}}
 								   <tr class="">
+									@if(isset($customer_condition) && $customer_condition == $broker->id)
+									@else
 									<th class="dokan-product-select check-column">
 										<label for="cb-select-432"></label>
 										<input class="cb-select-items dokan-checkbox" type="checkbox" data-product-name="Testing Products" name="id[]" value="{{$broker->id}}">
-									 </th>
+									</th>
+									@endif
 									  <td data-title="S.no" class="column-thumb">
 										 {{$counter++}}
 									  </td>
@@ -133,9 +152,6 @@
 									  <td data-title="email" class="column-primary">
 										{{$broker->email}}
 									  </td>
-									  {{-- <td data-title="email" class="column-primary">
-										already assigned
-									  </td> --}}
 									  <td data-title="phone" class="column-primary">
 										{{$broker->phone_no}}
 									  </td>
@@ -151,6 +167,15 @@
 									  <td data-title="address" class="column-primary">
 										{{$broker->address}}
 									  </td>
+									  @if(isset($customer_condition) && $customer_condition == $broker->id)
+									  <td data-title="address" class="column-primary">
+										  This Broker Assigned by admin
+										</td>
+										<td data-title="address" class="column-primary">
+											{{$broker->broker_percentage}}%
+										</td>
+										@else
+									  @endif
 									  <td data-title="address" class="column-primary">
 										
 									  <td class="diviader"></td>
@@ -168,11 +193,15 @@
 							  @endif
 							  
 						   </article>
+						   @if(isset($customer_condition) && $customer_condition == $broker->id)
+						   @else
 						   <span class="dokan-add-product-link">
-							<button type="submit" class="dokan-btn dokan-btn-theme dokan-add-new-product float-right">Send Request</button>
-							
+							   <button type="submit" class="dokan-btn dokan-btn-theme dokan-add-new-product float-right">Send Request</button>
+							   
 							</span>
+							@endif
 						</form>
+						@endif
 							<br>
 						</div>
 	                  </div>

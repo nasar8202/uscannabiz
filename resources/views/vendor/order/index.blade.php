@@ -105,12 +105,12 @@
 						   <article class="dokan-orders-area">
 						      <ul class="list-inline order-statuses-filter">
 						         <li class="active">
-						            <a href="dashboard/orders/">
+						            <a href="#">
 						            All ({{$orderCount??0}})
 						            </a>
 						         </li>
 						         <li>
-						            <a href="dashboard/orders/?order_status=wc-completed">
+						            <a href="#">
 						            Completed ({{$orderCompletedCount??0}})
 						            </a>
 						         </li>
@@ -125,12 +125,12 @@
 						            </a>
 						         </li> --}}
 						         <li>
-						            <a href="dashboard/orders/?order_status=wc-pending">
+						            <a href="#">
 						            Pending ({{$orderPendingCount??0}})
 						            </a>
 						         </li>
 						         <li>
-						            <a href="dashboard/orders/?order_status=wc-cancelled">
+						            <a href="#">
 						            Cancelled ({{$orderCancelledCount??0}})
 						            </a>
 						         </li>

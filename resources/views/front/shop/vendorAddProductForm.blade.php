@@ -15,7 +15,7 @@
            
          <div class="u-column2 col-2">
             <h2>Add To Request</h2>
-            <form method="Post" action="{{ route('vendorRequest') }}" class="woocommerce-form woocommerce-form-register register">
+            <form method="Post" action="{{ route('vendorRequest_shop') }}" class="woocommerce-form woocommerce-form-register register">
              {{ csrf_field() }}
               
              

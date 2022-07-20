@@ -11,11 +11,7 @@
 	         <div id="left-area">
 	            <article id="post-7" class="post-7 page type-page status-publish hentry">
 	               <h1 class="entry-title main_title">Dashboard</h1>
-				   @if (session()->has('success'))
-                                        <div class="alert alert-success">
-                                            {{ session()->get('success') }}
-                                        </div>
-										@endif
+				  
 	               <div class="entry-content">
 	                  <div class="dokan-dashboard-wrap">
 	                     <div class="dokan-dash-sidebar">
@@ -49,19 +45,25 @@
 	                        </div>
 	                     </div>
 	                     <div class="dokan-dashboard-content dokan-product-listing">
+							@if (session()->has('success'))
+								 <div class="alert alert-success">
+									 {{ session()->get('success') }}
+								 </div>
+								 @endif
 						   <article class="dokan-product-listing-area">
 						      <div class="product-listing-top dokan-clearfix">
 						         <ul class="dokan-listing-filter dokan-left subsubsub">
 						            <li class="active">
-						               <a href="products/">All (7)</a>
+						               <a href="#">All (7)</a>
 						            </li>
 						            <li>
-						               <a href="products/?post_status=publish">Online (7)</a>
+						               <a href="#">Online (7)</a>
 						            </li>
 						            <li>
-						               <a href="products/?post_status=instock">In stock (7)</a>
+						               <a href="#">In stock (7)</a>
 						            </li>
 						         </ul>
+								 
 						         <!-- .post-statuses-filter -->
 						         <span class="dokan-add-product-link">
 						         <a href="{{Route('productForm')}}" class="dokan-btn dokan-btn-theme dokan-add-new-product">
