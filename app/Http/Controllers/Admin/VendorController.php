@@ -48,12 +48,7 @@ class VendorController extends Controller
                         }
                     })
                     ->addColumn('action', function ($data) {
-<<<<<<< HEAD
                         return '<a title="View" href="customers/' . $data->id . '"
-=======
-                        // return $data->user_id;
-                        return '<a title="View" href="customers/' . $data->id . '" 
->>>>>>> a5c02a27d7c408e7f114104940669af140d794b4
                         class="btn btn-dark btn-sm"><i class="fas fa-eye"></i></a>&nbsp;
                         <button title="Delete" type="button" name="delete" id="' . $data->id . '"
                         class="delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>';
