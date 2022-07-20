@@ -131,6 +131,7 @@ Route::namespace('Admin')->prefix('/admin')->middleware('admin')->group(function
     //vendor request
 
     Route::get('brokerAssignToVendor/{id}/{vendor_id}', 'VendorController@brokerAssignToVendor')->name('brokerAssignToVendor');
+    Route::get('brokerCancleToVendor/{id}/{vendor_id}', 'VendorController@brokerCancleToVendor')->name('brokerCancleToVendor');
     Route::get('vendorRequest', 'VendorController@vendorRequest')->name('vendorRequest');
     Route::get('/show_vendor_request/{id}', 'VendorController@show_vendor_request')->name('show_vendor_request');
 

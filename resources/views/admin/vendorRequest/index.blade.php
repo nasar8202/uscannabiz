@@ -84,13 +84,16 @@
                                     </thead>
                                     <tbody>
                                         @php
-                                            $counter = 1;    
+                                            $counter = 1;
+                                            $i=0;
+                                            $farh=[];    
                                         @endphp
                                         @foreach($users as $user)
-                                        {{-- @dd($user) --}}
+                                            @php $farh[]=$user @endphp  
                                         @php
                                             $customer_id = App\Models\Customers::where('id',$user->first()->customers_id)->get();
                                         @endphp
+                                                               {{-- {{$customer_id}} --}}
                                         <tr>
                                             <td>{{$counter}}</td>
                                             <td>{{$user->first()->name}}</td>
@@ -100,12 +103,22 @@
                                             <td>{{$customer_id->first()->state}}</td>
                                             <td>{{$customer_id->first()->country}}</td>
                                             <td>{{$customer_id->first()->address}}</td>
-                                            <td><a class="btn btn-primary" href="/admin/brokerAssignToVendor/{{$customer_id->first()->id}}/{{$vendor_id}}">Accept</a></td>
+                                            <td>
+                    {{-- {{$customer_search->broker_request_id}} {{$customer_id->first()->id}} --}}
+                                                @if($customer_search->broker_request_id == $customer_id->first()->id)
+                                                <a class="btn btn-secondary" href="/admin/brokerCancleToVendor/{{$customer_id->first()->id}}/{{$vendor_id}}">Cancel</a>
+                                                 @else
+                                                <a class="btn btn-primary" href="/admin/brokerAssignToVendor/{{$customer_id->first()->id}}/{{$vendor_id}}">Accept</a>
+                                                @endif
+                                            </td>
                                         </tr>
                                             @php
                                             $counter++;    
                                             @endphp
+                                            
                                         @endforeach
+                                       
+                                        
                                     </tbody>
                                 </table>
                             </div>

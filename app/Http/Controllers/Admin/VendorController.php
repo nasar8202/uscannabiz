@@ -181,25 +181,46 @@ class VendorController extends Controller
     {
         $vendor_id = $id;
         
-        $customer = Customers::where('user_id',$id)->first();
-        foreach($customer as $customers){
-            $data_item = explode('|', $customer->broker_request);
+        $customer_search = Customers::where('user_id',$id)->first();
+        foreach($customer_search as $customers){
+            $data_item = explode('|', $customer_search->broker_request);
             foreach($data_item as $data_items){
                 $user_check[] = User::where('customers_id',$data_items)->get();
             }
         }
         $users = array_unique($user_check);
-        return view('admin.vendorRequest.index',compact('users','vendor_id'));
+
+   
+        return view('admin.vendorRequest.index',compact('users','vendor_id','customer_search'));
     }
 
     public function brokerAssignToVendor($id,$vendor_id)
     {
+        $assigned_broker = Customers::find($id);
+        $check_user_id = Customers::where('user_id',$vendor_id)->first();
+        if($check_user_id->broker_request_id != null){
+            return back()->with('error','You Have Already Assigned Broker');
+        }
+        else{
+            // dd($check_user_id->broker_request_id,$id);
+            $check_user_id->broker_request_id = $id;
+            $check_user_id->save();
+            return back()->with('success','Broker Assigned Successfully');
+        }
+        // $customer = Customers::where('user_id',$vendor_id)->first();
+        // // dd($customer);
+        // $customer->broker_request_id = $id;
+        // $customer->save();
+        
+        // return back()->with('success','Broker Assigned Successfully');
+    }
+    public function brokerCancleToVendor($id,$vendor_id)
+    {
         $customer = Customers::where('user_id',$vendor_id)->first();
-        // dd($customer);
-        $customer->broker_request_id = $id;
+        $customer->broker_request_id = null;
         $customer->save();
         
-        return back()->with('success','Broker Assigned Successfully');
+        return back()->with('success','Broker Cancle Successfully');
     }
 
 }
