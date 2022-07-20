@@ -26,7 +26,7 @@ Route::get('/reset', 'Front\FrontController@resetPasswordLink')->name('resetPass
 Route::post('/registerVendorAndCustomer', 'Front\FrontController@registerVendorAndCustomer')->name('registerVendorAndCustomer');
 Route::get('vendor-add-product-form/{id}', 'Vendor\ProductController@vendorAddProductForm')->name('vendorAddProductForm');
 
-Route::post('/vendor-request', 'Vendor\VendorRequestController@store')->name('vendorRequest');
+Route::post('/vendor-request', 'Vendor\VendorRequestController@store')->name('vendorRequest_shop');
 Route::get('/wishlist', 'Front\ShopController@view_wishlist')->name('shop.view_wishlist');
 Route::get('/shop', 'Front\ShopController@index')->name('shop.index');
 Route::get('/shop/{slug}', 'Front\ShopController@show')->name('shop.show');
