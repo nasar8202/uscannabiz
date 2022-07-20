@@ -87,7 +87,7 @@
                                             $counter = 1;    
                                         @endphp
                                         @foreach($users as $user)
-                                        {{-- @dd($user->customers_id) --}}
+                                        {{-- @dd($user) --}}
                                         @php
                                             $customer_id = App\Models\Customers::where('id',$user->first()->customers_id)->get();
                                         @endphp
@@ -100,7 +100,7 @@
                                             <td>{{$customer_id->first()->state}}</td>
                                             <td>{{$customer_id->first()->country}}</td>
                                             <td>{{$customer_id->first()->address}}</td>
-                                            <td><button>Accept</button></td>
+                                            <td><a class="btn btn-primary" href="/admin/brokerAssignToVendor/{{$customer_id->first()->id}}/{{$vendor_id}}">Accept</a></td>
                                         </tr>
                                             @php
                                             $counter++;    
