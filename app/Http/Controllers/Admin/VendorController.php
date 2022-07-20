@@ -179,15 +179,27 @@ class VendorController extends Controller
     
     public function show_vendor_request($id)
     {
+        $vendor_id = $id;
+        
         $customer = Customers::where('user_id',$id)->first();
         foreach($customer as $customers){
             $data_item = explode('|', $customer->broker_request);
             foreach($data_item as $data_items){
-                $user_check[] = User::where('id',$data_items)->get();
+                $user_check[] = User::where('customers_id',$data_items)->get();
             }
         }
         $users = array_unique($user_check);
-        return view('admin.vendorRequest.index',compact('users'));
+        return view('admin.vendorRequest.index',compact('users','vendor_id'));
+    }
+
+    public function brokerAssignToVendor($id,$vendor_id)
+    {
+        $customer = Customers::where('user_id',$vendor_id)->first();
+        // dd($customer);
+        $customer->broker_request_id = $id;
+        $customer->save();
+        
+        return back()->with('success','Broker Assigned Successfully');
     }
 
 }
