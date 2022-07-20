@@ -261,10 +261,12 @@ class VendorController extends Controller
 
         return Excel::download(new OrdersExport($order), 'orders.xlsx');
     }
-    public function assignbroker(Request $request) 
+
+
+    public function assignbroker(Request $request)
     {
         // $broker_request_id = $request->id;
-        
+
         // $vendor_email = Auth::user()->email;
         // dd($vendor_email);
 
@@ -273,18 +275,17 @@ class VendorController extends Controller
         //         'broker_request'=>$id,
         //     ]);
         // }
-    
+
      $id = $request->id;
-     
+
      $vendor_email = Auth::user()->email;
      $groups_update = customers::where("email",$vendor_email)->first();
     //  dd($groups_update);
      $groups_update->broker_request = implode('|',$id);
      $groups_update->save();
-    
-     return "done";
-    
+
+     return back()->with(['success' => 'Broker Request Sent Successfully']);
+
     }
-
-
 }
+
