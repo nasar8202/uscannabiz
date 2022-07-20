@@ -93,7 +93,6 @@
                                         @php
                                             $customer_id = App\Models\Customers::where('id',$user->first()->customers_id)->get();
                                         @endphp
-                                                               {{-- {{$customer_id}} --}}
                                         <tr>
                                             <td>{{$counter}}</td>
                                             <td>{{$user->first()->name}}</td>
@@ -104,7 +103,6 @@
                                             <td>{{$customer_id->first()->country}}</td>
                                             <td>{{$customer_id->first()->address}}</td>
                                             <td>
-                    {{-- {{$customer_search->broker_request_id}} {{$customer_id->first()->id}} --}}
                                                 @if($customer_search->broker_request_id == $customer_id->first()->id)
                                                 <a class="btn btn-secondary" href="/admin/brokerCancleToVendor/{{$customer_id->first()->id}}/{{$vendor_id}}">Cancel</a>
                                                  @else

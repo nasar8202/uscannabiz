@@ -46,13 +46,13 @@ class VendorController extends Controller
         $check = Auth::user();
         if($check->role_id == 3){
             // $order_item = OrderItem::where('')
-            // $orders = Order::
-            // // with('orderItems')->
-            // join('order_items','orders.id','=','order_items.order_id')->
-            // join('products','order_items.product_id','=','products.id')->
-            // where('vendor_id',$check->id)->
-            // select('order_items.product_qty as order_product_qty','products.*','orders.order_status as order_status')->
-            // get();
+            $orders = Order::
+            // with('orderItems')->
+            join('order_items','orders.id','=','order_items.order_id')->
+            join('products','order_items.product_id','=','products.id')->
+            where('vendor_id',$check->id)->
+            select('order_items.product_qty as order_product_qty','products.*','orders.order_status as order_status')->
+            get();
             // dd($orders);
             $vendor_id = Auth::user()->id;
             $orderCount = Order::where('vendor_id',$vendor_id)->count();
@@ -182,12 +182,28 @@ class VendorController extends Controller
     }
     public function show_broker()
     {
-        $brokers = User::join('customers','users.customers_id','=','customers.id')->where(["role_id"=>4])
-        ->select('customers.*','users.id as user_id_from_users')
-        ->get();
-        // dd($brokers);
+        $check = Customers::where('user_id',Auth::user()->id)->first();
+        // dd($check);
         $countBroker = User::where('role_id',4)->count();
-        return view('vendor.brokers.index',compact(['brokers',$brokers,'countBroker',$countBroker]));
+        if($check->broker_request != null && $check->broker_request_id == null){
+            $show_data = "Your Request Send Successfully";
+            return view('vendor.brokers.index',compact(['countBroker','show_data']));
+        }
+        elseif($check->broker_request != null && $check->broker_request_id != null){
+            // $brokers = User::join('customers','users.customers_id','=','customers.id')->where(["role_id"=>4])
+            // ->select('customers.*','users.id as user_id_from_users')
+            // ->get();
+            $brokers = Customers::where('id',$check->broker_request_id)->get();
+            // $customer_condition = Customers::where();
+            $customer_condition = $check->broker_request_id;
+            return view('vendor.brokers.index',compact('brokers','countBroker','customer_condition'));
+        }
+        else{
+            $brokers = User::join('customers','users.customers_id','=','customers.id')->where(["role_id"=>4])
+            ->select('customers.*','users.id as user_id_from_users')
+            ->get();
+            return view('vendor.brokers.index',compact(['brokers',$brokers,'countBroker',$countBroker]));
+        }
     }
 
     public function show_brokers_yajra()

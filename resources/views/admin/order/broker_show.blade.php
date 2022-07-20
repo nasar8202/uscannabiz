@@ -179,10 +179,10 @@
                                             {{-- <th class="right">Unit Cost</th> --}}
                                             <th class="right">Quantity</th>
                                             <th class="right">Sub Total</th>
-                                            <th class="right">Total</th>
                                             @if(isset($order))
                                             <th class="right">Broker Commission</th>
                                             @endif
+                                            <th class="right">Total</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -214,10 +214,10 @@
                                                 $total_price = $vender_request->quantity*$product->product_current_price;
                                                 @endphp
                                                 <td class="right">${{$product->product_current_price}}</td>
-                                                <td class="right">${{$total_price}}</td>
                                                 @if(isset($order))
                                                 <td class="right">${{$order->broker_price}}</td>
                                                 @endif
+                                                <td class="right">${{$total_price}}</td>
                                             </tr>
                                             {{-- @php
                                                 $subTotal += $orderItems->product_per_price;

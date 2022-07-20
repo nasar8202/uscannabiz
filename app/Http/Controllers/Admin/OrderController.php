@@ -144,13 +144,18 @@ class OrderController extends Controller
                     })->rawColumns(['order_no', 'customer', 'status', 'total_amount', 'order_date', 'action'])->make(true);
             }
             else{
-                // $users->customers_id;
-                $check = Customers::where('id', $users->customers_id)->first();
+                $check = Customers::where('broker_request_id', $users->id)->first();
+                $vendor_request = VendorRequest::where('vendor_id',$check->user_id)->orderBy('created_at','desc')->get();
+                foreach($vendor_request as $items){
+                    $products = Product::where('id',$items->product_id)->first();
+                }
+                $check_vendor = Customers::where('user_id', $products->vender_id)->first();
+                // $vendor_request_customer = VendorRequest::where('vendor_id',$check_vendor->user_id)->orderBy('created_at','desc')->get();
                 // $vendor_request = VendorRequest::where('vendor_id',$check->user_id)->orderBy('created_at','desc')->get();
                 // $order_check = Order::where('id',$vendor_request->order_id)->first();
                 // dd($vendor_request);
                 // return datatables()->of(Order::where(['customer_id'=>$users->customers_id,'status'=>3])->orderBy('created_at','desc')->get())
-                return datatables()->of(VendorRequest::where('vendor_id',$check->user_id)->orderBy('created_at','desc')->get())
+                return datatables()->of(VendorRequest::where('vendor_id',$check_vendor->user_id)->orderBy('created_at','desc')->get())
                 ->addIndexColumn()
                 ->addColumn('customer', function ($data) {
                     // if ($data->customer_id == null) {
@@ -236,7 +241,7 @@ class OrderController extends Controller
         $vender_request = VendorRequest::where('id',$request_id)->first();
         $vender_detail = User::where('id',$vender_request->vendor_id)->first();
         $login_vendor = Customers::where('user_id',Auth::user()->id)->first();
-        dd($login_vendor);
+        // dd($login_vendor);
         // dd($order,$vender_detail,$vender_request);
         return view('admin.order.broker_show', compact(['product','vender_request','vender_detail']));
 
@@ -274,6 +279,8 @@ class OrderController extends Controller
     }
     public function broker_price(Request $request)
     {
+        // dd(Auth::user());
+        $customer_check = Customers::where('user_id',Auth::user()->id)->first();
         // dd($request->all());
         $random = \Carbon\Carbon::now()->format('Ymd');
 
@@ -308,7 +315,6 @@ class OrderController extends Controller
         $order->billing_state = $request->input('shipping_city');
 
 
-        $order->broker_price = $request->input('broker_price');
         $order->broker_id = Auth::user()->id;
         $order->vendor_id = $request->input('vendor_id');
 
@@ -330,6 +336,10 @@ class OrderController extends Controller
             $items->status	 = 1;
             $items->product_subtotal_price	 = $sub_total;
             $items->save();
+            $calculate_broker_price = $sub_total/100*$customer_check->broker_percentage;
+            $order_set_broker_price = Order::find($order_id);
+            $order_set_broker_price->broker_price = $calculate_broker_price;
+            $order_set_broker_price->save();
 
         $vendor_save = VendorRequest::find($request->vendor_request_id);
         $vendor_save->order_id = $order_id;
