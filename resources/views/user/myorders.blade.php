@@ -535,14 +535,14 @@
                                                                 class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--orders">
                                                                 <a href="/user/my-orders">Orders</a>
                                                             </li>
-                                                            <li
+                                                            {{-- <li
                                                                 class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--downloads">
                                                                 <a href="my-account/downloads/">Downloads</a>
                                                             </li>
                                                             <li
                                                                 class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--edit-address">
                                                                 <a href="my-account/edit-address/">Addresses</a>
-                                                            </li>
+                                                            </li> --}}
                                                             <li
                                                                 class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--edit-account">
                                                                 <a href="{{route('edit-account')}}">Account details</a>
