@@ -165,9 +165,11 @@ class VendorController extends Controller
                     ->addColumn('action', function ($data) {
                         // return $data->user_id;
                         return '<a title="View" href="show_vendor_request/' . $data->id . '" 
-                        class="btn btn-dark btn-sm"><i class="fas fa-eye"></i></a>&nbsp;<a title="View" href="customers/' . $data->id . '" 
-                        class="btn btn-danger btn-sm"><i class="fa fa-times" aria-hidden="true"></i></a>&nbsp;<a title="View" href="customers/' . $data->id . '" 
-                        class="btn btn-success btn-sm"><i class="fa fa-check"></i></a>&nbsp;';
+                        class="btn btn-dark btn-sm"><i class="fas fa-eye"></i></a>';
+                        // return '<a title="View" href="show_vendor_request/' . $data->id . '" 
+                        // class="btn btn-dark btn-sm"><i class="fas fa-eye"></i></a>&nbsp;<a title="View" href="customers/' . $data->id . '" 
+                        // class="btn btn-danger btn-sm"><i class="fa fa-times" aria-hidden="true"></i></a>&nbsp;<a title="View" href="customers/' . $data->id . '" 
+                        // class="btn btn-success btn-sm"><i class="fa fa-check"></i></a>&nbsp;';
                     })->rawColumns(['status','action'])->make(true);
                     
             }
