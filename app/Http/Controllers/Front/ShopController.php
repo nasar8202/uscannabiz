@@ -46,11 +46,11 @@ class ShopController extends Controller
     }
     public function productCategory($slug,$id)
     {
-
+        $title = $slug;
         $products = Product::where('category_id',$id)->get();
         $productCount = Product::where('category_id',$id)->count();
         $categories = Category::where('status',1)->with('products')->first();
-        return view('front.shop.show',compact('products','categories','productCount'));
+        return view('front.shop.show',compact('products','categories','productCount','title'));
     }
     public function show($slug)
     {

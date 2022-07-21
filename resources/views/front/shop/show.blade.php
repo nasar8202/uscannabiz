@@ -27,9 +27,9 @@
   <div class="container">
      <div id="content-area" class="clearfix">
         <div id="left-area">
-           <nav class="woocommerce-breadcrumb"><a href="">Home</a>&nbsp;&#47;&nbsp;{{$categories->name}} &amp; {{$categories->category_slug}}</nav>
+           <nav class="woocommerce-breadcrumb"><a href="">Home</a>&nbsp;&#47;&nbsp;{{$title}}</nav>
            <header class="woocommerce-products-header">
-              <h1 class="woocommerce-products-header__title page-title">{{$categories->name}} &amp; {{$categories->category_slug}}</h1>
+              <h1 class="woocommerce-products-header__title page-title">{{$title}}</h1>
            </header>
            <div class="woocommerce-notices-wrapper"></div>
            <p class="woocommerce-result-count">
@@ -62,7 +62,7 @@
                                                     @endif
             </li>
                 @empty
-                    <div style="text-align: left">This Category has No Products found</div>
+                    <div style="text-align: left">Category has No Products found</div>
                 @endforelse
            </ul>
         </div>

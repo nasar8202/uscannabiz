@@ -338,10 +338,23 @@
                                     <div
                                         class="et_pb_module et_pb_text et_pb_text_2  et_pb_text_align_left et_pb_bg_layout_light">
                                         <div class="et_pb_text_inner">
-                                            <h3>Recently Viewed Products</h3>
+                                            <h3>Featured Products</h3>
                                         </div>
                                     </div>
                                     <div class="et_pb_module et_pb_code et_pb_code_1 recent-pro">
+                                        <ul class="products columns-4" style="display:flex;flex-wrap:wrap;">
+                                            @forelse ($producttype as $type)
+
+                                                    <li class="product-category product first">
+                                                        <a href="{{ route('shop.showProduct', $type->slug) }}" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
+                                                            <span class="et_shop_image"><img width="51" height="53" src="{{asset('uploads/products').'/'.$type->product_image}}" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="" loading="lazy"><span class="et_overlay"></span></span>
+                                                            <h2 class="woocommerce-loop-product__title">{{$type->product_name}}</h2>
+                                                        </a>
+                                                    </li>
+                                            @empty
+                                                <div style="text-align: left">No items found</div>
+                                            @endforelse
+                                        </ul>
                                     </div>
                                 </div>
                             </div>

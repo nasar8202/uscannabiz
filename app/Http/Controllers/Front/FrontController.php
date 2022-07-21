@@ -160,7 +160,8 @@ class FrontController extends Controller
             //     });
 
             // }
-
+                $producttype = Product::where('product_type',"feature")->get();
+                // dd($producttype);
           if (request()->sort == 'low_high') {
               $products = $products->orderBy('product_current_price');
           } elseif (request()->sort == 'high_low') {
@@ -173,7 +174,7 @@ class FrontController extends Controller
         $categories = Category::where('status',1)->with('products')->get();
         // return $categories;
         // die;
-        return view('front.shop.index',compact('products','categories','categories_for_div'));
+        return view('front.shop.index',compact('products','categories','categories_for_div','producttype'));
     }
     /*
      * Newsletter Subscription */
