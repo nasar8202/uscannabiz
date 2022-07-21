@@ -99,7 +99,7 @@
                                 class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
-               
+
                 @endif
                 <!-- ./col -->
 
@@ -147,7 +147,7 @@
                                         <td> {{$latestOrders->full_name??''}} </td>
                                         @if(Auth::user()->role_id == 4)
                                         @else
-                                        <td> 
+                                        <td>
                                             @if ($latestOrders->order_status == 'pending')
                                             <span class="badge badge-secondary">Pending</span>
                                             @elseif ($latestOrders->order_status == 'cancelled')
@@ -162,9 +162,9 @@
                                         @endif
                                         <td> {{date('d-M-Y',strtotime($latestOrders->created_at))}} </td>
                                         @if(Auth::user()->role_id == 4)
-                                        <td> ${{$latestOrders_data->total_amount}} </td>
+                                        <td> ${{$latestOrders_data->total_amount??''}} </td>
                                         @else
-                                        <td> ${{$latestOrders->total_amount}} </td>
+                                        <td> ${{$latestOrders->total_amount??''}} </td>
                                         @endif
                                     </tr>
                                     @empty
