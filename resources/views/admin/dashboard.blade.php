@@ -43,6 +43,7 @@
                     <!-- small box -->
                     <div class="small-box bg-info">
                         <div class="inner">
+                            {{-- @dd($data['orders']) --}}
                             <h3>{{$data['orders']}}</h3>
                             <p>Total Orders</p>
                         </div>
@@ -98,7 +99,7 @@
                                 class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
-               
+
                 @endif
                 <!-- ./col -->
 
@@ -118,7 +119,10 @@
                                     <tr>
                                         <th>Order Id</th>
                                         <th>Customer</th>
+                                        @if(Auth::user()->role_id == 4)
+                                        @else
                                         <th>Status</th>
+                                        @endif
                                         <th>Order Date</th>
                                         <th>Total</th>
                                     </tr>
@@ -131,6 +135,9 @@
                                         $vendor_request = App\Models\VendorRequest::where('vendor_id',$check->user_id)->get();
                                     @endphp --}}
                                     @forelse($data['latestOrders'] as $latestOrders)
+                                    @php
+                                        $latestOrders_data= App\Models\Order::where('id',$latestOrders->order_id)->first();
+                                    @endphp
                                     @if(Auth::user()->role_id == 4)
                                     <tr>
                                     @else
@@ -138,7 +145,9 @@
                                     @endif
                                         <td> {{$latestOrders->id}} </td>
                                         <td> {{$latestOrders->full_name??''}} </td>
-                                        <td> 
+                                        @if(Auth::user()->role_id == 4)
+                                        @else
+                                        <td>
                                             @if ($latestOrders->order_status == 'pending')
                                             <span class="badge badge-secondary">Pending</span>
                                             @elseif ($latestOrders->order_status == 'cancelled')
@@ -150,8 +159,13 @@
                                             @endif
                                             {{-- {{ucfirst($latestOrders->order_status)}}  --}}
                                         </td>
+                                        @endif
                                         <td> {{date('d-M-Y',strtotime($latestOrders->created_at))}} </td>
-                                        <td> ${{$latestOrders->total_amount}} </td>
+                                        @if(Auth::user()->role_id == 4)
+                                        <td> ${{$latestOrders_data->total_amount??''}} </td>
+                                        @else
+                                        <td> ${{$latestOrders->total_amount??''}} </td>
+                                        @endif
                                     </tr>
                                     @empty
                                     <tr>

@@ -80,6 +80,10 @@
                                             <label for="reg_password">Password&nbsp;<span class="required">*</span></label>
                                             <input type="password" class="woocommerce-Input woocommerce-Input--text input-text" name="password" id="reg_password" autocomplete="new-password">
                                          </p>
+                                         <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+                                          <label for="password">Confirm Password&nbsp;<span class="required">*</span></label>
+                                          <input class="woocommerce-Input woocommerce-Input--text input-text" type="password" value="{{ old('password') }}" name="confirm_password" id="password" autocomplete="current-password">
+                                       </p>
                                          <div class="show_if_seller">
                                             <div class="split-row form-row-wide">
                                                <p class="form-row form-group">
