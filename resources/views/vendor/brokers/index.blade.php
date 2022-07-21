@@ -122,11 +122,12 @@
 									  <th>State</th>
 									  <th>Country</th>
 									  <th>Address</th>
-									  {{-- @if(isset($brokers) && isset($customer_condition) && $customer_condition == $brokers->first()->id)
+									  @if(isset($brokers) && isset($customer_condition) && $customer_condition == $brokers->first()->id)
 									  <th>Status</th>
-									  <th>Broker Percentage</th>
+									  <th>Action</th>
+									  {{-- <th>Broker Percentage</th> --}}
 									  @else
-										@endif --}}
+										@endif
 									  
 								   </tr>
 								</thead>
@@ -167,15 +168,23 @@
 									  <td data-title="address" class="column-primary">
 										{{$broker->address}}
 									  </td>
-									  {{-- @if(isset($customer_condition) && $customer_condition == $broker->id)
+									  @if(isset($customer_condition) && $customer_condition == $broker->id)
 									  <td data-title="address" class="column-primary">
 										  This Broker Assigned by admin
 										</td>
 										<td data-title="address" class="column-primary">
-											{{$broker->broker_percentage}}%
+											<a href="{{route('vendor_remove_broker',['id'=>$broker->id])}}" class="dokan-btn dokan-btn-theme dokan-add-new-product">Cancle</a>
 										</td>
+										
 										@else
-									  @endif --}}
+									  @endif
+									{{-- @if(isset($customer_condition) && $customer_condition == $broker->id)
+									@else
+									<th class="dokan-product-select check-column">
+										<label for="cb-select-432"></label>
+										<input class="cb-select-items dokan-checkbox" type="checkbox" data-product-name="Testing Products" name="id[]" value="{{$broker->id}}">
+									</th>
+									@endif --}}
 									  <td data-title="address" class="column-primary">
 										
 									  <td class="diviader"></td>

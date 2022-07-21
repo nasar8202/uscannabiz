@@ -98,6 +98,7 @@ Route::middleware(['user'])->prefix('user')->group(function () {
 Route::namespace('Vendor')->prefix('/vendor')->middleware('vendor')->group(function () {
     //Dashboard
     Route::get('assignbroker', 'VendorController@assignbroker')->name('assignbroker');
+    Route::get('vendor_remove_broker/{id}', 'VendorController@vendor_remove_broker')->name('vendor_remove_broker');
     Route::get('export', 'VendorController@export')->name('export');
     Route::get('dashboard', 'VendorController@dashboard')->name('dashboard');
     Route::get('/order', 'VendorController@order')->name('vendor_order');
