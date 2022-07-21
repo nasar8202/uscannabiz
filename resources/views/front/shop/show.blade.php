@@ -35,7 +35,7 @@
            <p class="woocommerce-result-count">
               Showing all {{$productCount?? 0}} results
            </p>
-           <form class="woocommerce-ordering" method="get">
+           {{-- <form class="woocommerce-ordering" method="get">
               <select name="orderby" class="orderby" aria-label="Shop order">
                  <option value="menu_order" selected>Default sorting</option>
                  <option value="popularity">Sort by popularity</option>
@@ -45,7 +45,7 @@
                  <option value="price-desc">Sort by price: high to low</option>
               </select>
               <input type="hidden" name="paged" value="1">
-           </form>
+           </form> --}}
            <ul class="products columns-3" style="display:flex;flex-wrap:wrap;">
             @forelse ($products as $product)
 

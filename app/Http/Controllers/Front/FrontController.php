@@ -129,7 +129,12 @@ class FrontController extends Controller
 
             // Customers::create([$customerData]);
             // return $user;
-            
+            $details = [
+                'name'=> $request->fname." ".$request->lname,
+                'email' => $request->email,
+                'password'=> $request->password
+            ];
+            \Mail::to($request->input('email'))->send(new \App\Mail\SendEmailCustomerRegistration($details));
             return redirect()->back()->with(['success' => 'Register Successfully']);
         }
 
