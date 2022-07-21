@@ -37,7 +37,7 @@ class VendorController extends Controller
 
             if (request()->ajax()) {
                 // return datatables()->of(Customers::join('Users','Users.id' ,'=' ,'Customers.user_id')->where('role_id','=',3)->get())
-                return datatables()->of(Customers::join('Users','Users.email','=','Customers.email')->where('role_id','=',3)->get())
+                return datatables()->of(Customers::join('users','users.email','=','customers.email')->where('role_id','=',3)->get())
                     ->addIndexColumn()
                     ->addColumn('status', function ($data) {
                         if($data->status == 0){

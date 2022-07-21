@@ -144,7 +144,7 @@ class OrderController extends Controller
                     })->rawColumns(['order_no', 'customer', 'status', 'total_amount', 'order_date', 'action'])->make(true);
             }
             else{
-                $check = Customers::where('broker_request_id', $users->customers_id)->first();
+                $check = Customers::where('broker_request_id', $users->id)->first();
                 $vendor_request = VendorRequest::where('vendor_id',$check->user_id)->orderBy('created_at','desc')->get();
                 foreach($vendor_request as $items){
                     $products = Product::where('id',$items->product_id)->first();

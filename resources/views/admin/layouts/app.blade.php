@@ -299,6 +299,13 @@
                         </a>
                     </li>
 
+                    <li class="nav-item">
+                        <a href="{{route('customerRequest')}}" class="nav-link {{ request()->IS('admin/vendor') ? 'active' : '' }}">
+                            <i class="nav-icon  fas fa-user"></i>
+                            <p>Customer Request</p>
+                        </a>
+                    </li>
+
                     {{-- <li class="nav-item">
                         <a href="{{route('blog.index')}}" class="nav-link {{ request()->IS('admin/blog') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-tags fw"></i>
