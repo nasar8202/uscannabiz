@@ -22,7 +22,7 @@ class User
         // }
        // return $response;
         $response = $next($request);
-        if((Auth::check()==true && Auth::user()->role_id==2) && Auth::user()->status != 1){
+        if((Auth::check()==true && Auth::user()->role_id==2) && Auth::user()->approvel_status != 1){
             Auth::logout();
             return redirect('my-account')->with('success', 'Please Wait for Admin Approvel');
 
