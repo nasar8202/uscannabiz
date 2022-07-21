@@ -97,28 +97,7 @@
                                              <input type="text" class="input-text form-control" name="phone" id="shop-phone" value="" required="required">
                                           </p>
                                             <div class="for_vender">
-                                                <p class="form-row form-group form-row-wide">
-                                                    <label for="company-name">City <span class="">*</span></label>
-                                                    <input type="text" class="input-text form-control" name="city" id="city" value="" required="">
-                                                  </p>
-                                                  <p class="form-row form-group form-row-wide">
-                                                    <label for="company-name">State <span class="">*</span></label>
-                                                    <input type="text" class="input-text form-control" name="state" id="state" value="" required="">
-                                                  </p>
-                                                  <p class="form-row form-group form-row-wide">
-                                                    <label for="company-name">Country <span class="">*</span></label>
-                                                    <input type="text" class="input-text form-control" name="country" id="country" value="" required="">
-                                                  </p>
-                                                  <p class="form-row form-group form-row-wide">
-                                                    <label for="company-name">Address <span class="">*</span></label>
-                                                    <input type="text" class="input-text form-control" name="address" id="address" value="" required="">
-                                                  </p>
-                                                <p class="form-row form-group form-row-wide">
-                                                   <label for="seller-url" class="pull-left">Shop URL <span class="">*</span></label>
-                                                   <strong id="url-alart-mgs" class="pull-right"></strong>
-                                                   <input type="text" class="input-text form-control" name="store_url" id="seller-url" value="" required="">
-                                                   <small>/Us-Cannazon/<strong id="url-alart"></strong></small>
-                                                </p>
+
                                              </div>
                                          </div>
                                          <p class="form-row form-group user-role vendor-customer-registration">
@@ -127,7 +106,7 @@
                                             I am a customer    </label>
                                             <br>
                                             <label class="radio">
-                                            <input type="radio" name="role" value="3">
+                                            <input type="radio" name="role" id="vendor_add_fields" value="3">
                                             I am a vendor    </label>
                                          </p>
                                          <div class="woocommerce-privacy-policy-text">
@@ -152,6 +131,21 @@
      </div>
   </article>
 </div>
+
+
+<script>
+
+    $(document).ready(function() {
+
+
+
+                  $('#vendor_add_fields').click(function() {
+                    $(".for_vender").html('<p class="form-row form-group form-row-wide"><label for="company-name">City <span class="">*</span></label><input type="text" class="input-text form-control" name="city" id="city" value="" required=""></p><p class="form-row form-group form-row-wide"><label for="company-name">State <span class="">*</span></label><input type="text" class="input-text form-control" name="state" id="state" value="" required=""></p><p class="form-row form-group form-row-wide"><label for="company-name">Country <span class="">*</span></label><input type="text" class="input-text form-control" name="country" id="country" value="" required=""></p><p class="form-row form-group form-row-wide"><label for="company-name">Address <span class="">*</span></label><input type="text" class="input-text form-control" name="address" id="address" value="" required=""></p><p class="form-row form-group form-row-wide"><label for="company-name">Shop Name <span class="">*</span></label><input type="text" class="input-text form-control" name="store_name" id="company-name" value="" required=""></p><p class="form-row form-group form-row-wide"><label for="seller-url" class="pull-left">Shop URL <span class="">*</span></label><strong id="url-alart-mgs" class="pull-right"></strong><input type="text" class="input-text form-control" name="store_url" id="seller-url" value="" required=""><small>/Us-Cannazon/<strong id="url-alart"></strong></small></p>')
+                  });
+
+
+              });
+    </script>
 @endsection
 @section('extra-js')
     <!-- Include AlgoliaSearch JS Client and autocomplete.js library -->

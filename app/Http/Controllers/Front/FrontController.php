@@ -65,12 +65,15 @@ class FrontController extends Controller
                 'last_name' => $request->lname,
                 'phone_no' => $request->phone,
                 'email' => $request->email,
+                'status'=>0
             ]);
-            // $userData['role_id'] = 2;
-            // $user = User::create([$userData]);
-            // $user_id = $user->id;
+            $details = [
+                'name'=> $request->fname." ".$request->lname,
+                'email' => $request->email,
+                'password'=> $request->password
+            ];
 
-            // Customers::create([$customerData]);
+            \Mail::to($request->input('email'))->send(new \App\Mail\SendEmailCustomerRegistration($details));
             return redirect()->back()->with(['success' => 'Register Successfully']);
 
         }
@@ -92,6 +95,7 @@ class FrontController extends Controller
                 'state' => $request->state,
                 'country' => $request->country,
                 'address' => $request->address,
+
             ]);
 
             $customer_id = $customer->id;
