@@ -122,11 +122,11 @@
 									  <th>State</th>
 									  <th>Country</th>
 									  <th>Address</th>
-									  @if(isset($brokers) && isset($customer_condition) && $customer_condition == $brokers->first()->id)
+									  {{-- @if(isset($brokers) && isset($customer_condition) && $customer_condition == $brokers->first()->id)
 									  <th>Status</th>
 									  <th>Broker Percentage</th>
 									  @else
-										@endif
+										@endif --}}
 									  
 								   </tr>
 								</thead>
@@ -167,7 +167,7 @@
 									  <td data-title="address" class="column-primary">
 										{{$broker->address}}
 									  </td>
-									  @if(isset($customer_condition) && $customer_condition == $broker->id)
+									  {{-- @if(isset($customer_condition) && $customer_condition == $broker->id)
 									  <td data-title="address" class="column-primary">
 										  This Broker Assigned by admin
 										</td>
@@ -175,7 +175,7 @@
 											{{$broker->broker_percentage}}%
 										</td>
 										@else
-									  @endif
+									  @endif --}}
 									  <td data-title="address" class="column-primary">
 										
 									  <td class="diviader"></td>

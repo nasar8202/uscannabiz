@@ -103,10 +103,10 @@
                                         <h5>Address</h5> 
                                         <input type="text" class="form-control" required name="address" placeholder="Enter Address">
                                       </div>
-                                      <div class="form-group">
+                                      {{-- <div class="form-group">
                                         <h5>Broker Percentage</h5> 
                                         <input type="number" class="form-control" required name="broker_percentage" placeholder="Enter broker Percentage">
-                                      </div>
+                                      </div> --}}
                                       <button type="submit" class="btn btn-primary">Save Broker</button>
                                 
                           </div>

@@ -16,10 +16,18 @@ class User
      */
     public function handle($request, Closure $next)
     {
-        if(Auth::check()==true && Auth::user()->role_id==2){
-            return $next($request);
+        // if(Auth::check() && Auth::user()->status_field != 'approved'){
+        //     Auth::logout();
+        //     return redirect('/login')->with('erro_login', 'Your error text');
+        // }
+       // return $response;
+        $response = $next($request);
+        if((Auth::check()==true && Auth::user()->role_id==2) && Auth::user()->approvel_status != 1){
+            Auth::logout();
+            return redirect('my-account')->with('success', 'Please Wait for Admin Approvel');
 
         }
-        return redirect('login');
+        return $response;
+
     }
 }
