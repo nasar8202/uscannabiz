@@ -133,6 +133,7 @@ Route::namespace('Admin')->prefix('/admin')->middleware('admin')->group(function
     Route::get('brokerAssignToVendor/{id}/{vendor_id}', 'VendorController@brokerAssignToVendor')->name('brokerAssignToVendor');
     Route::get('brokerCancleToVendor/{id}/{vendor_id}', 'VendorController@brokerCancleToVendor')->name('brokerCancleToVendor');
     Route::get('vendorRequest', 'VendorController@vendorRequest')->name('vendorRequest');
+    Route::get('vendorshow/{id}', 'VendorController@show')->name('vendorshow');
     Route::get('customerRequest', 'CustomersController@customerRequest')->name('customerRequest');
     Route::get('customerStatusAccept/{id}', 'CustomersController@customerStatusAccept')->name('customerStatusAccept');
     Route::get('customerStatusReject/{id}', 'CustomersController@customerStatusReject')->name('customerStatusReject');
