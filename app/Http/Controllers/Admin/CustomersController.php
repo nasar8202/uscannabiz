@@ -121,7 +121,7 @@ class CustomersController extends Controller
         \Mail::to($request->input('email'))->send(new \App\Mail\SendEmailVendorRegistration($details));
 
         //dd("Email is Sent.");
-        return redirect()->back()->with('success',"customer added We have Sent you password on email");
+        return redirect('/admin/customers')->with('success',"Broker added We have Sent you password on email");
 
         }
     }
@@ -212,7 +212,7 @@ class CustomersController extends Controller
         $user->role_id = 4;
         $user->customers_id = $customer_id;
         $user->save();
-        return back()->with('success','Customer Updated Successfully');
+        return redirect('/admin/customers')->with('success','Broker Updated Successfully');
         }
     }
 
@@ -241,7 +241,7 @@ class CustomersController extends Controller
     {
         try {
             if (request()->ajax()) {
-                return datatables()->of(User::where('role_id','=',2)->where('status',0)->get())
+                return datatables()->of(User::where('role_id','=',2)->where('approvel_status',0)->get())
                     ->addIndexColumn()
                     
                     ->addColumn('status', function ($data) {
@@ -300,7 +300,7 @@ class CustomersController extends Controller
         $customer =Customers::where('user_id',$id)->first();
            
          $data_status = array(
-            'status'=>1
+            'approvel_status'=>1
          );
          
             $customer->update($data_status);
@@ -316,7 +316,7 @@ class CustomersController extends Controller
         $customer =Customers::where('user_id',$id)->first();
            
          $data_status = array(
-            'status'=>2
+            'approvel_status'=>2
          );
          
             $customer->update($data_status);

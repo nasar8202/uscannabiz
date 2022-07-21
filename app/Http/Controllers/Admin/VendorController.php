@@ -48,7 +48,7 @@ class VendorController extends Controller
                         }
                     })
                     ->addColumn('action', function ($data) {
-                        return '<a title="View" href="customers/' . $data->id . '"
+                        return '<a title="View" href="vendorshow/' . $data->id . '"
                         class="btn btn-dark btn-sm"><i class="fas fa-eye"></i></a>&nbsp;
                         <button title="Delete" type="button" name="delete" id="' . $data->id . '"
                         class="delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>';
@@ -90,7 +90,17 @@ class VendorController extends Controller
      */
     public function show($id)
     {
-        //
+     
+       try{
+        
+           $content=Customers::where('user_id',$id)->first();
+           
+            return view('admin.vendor.show',compact(['content']));
+       }
+       catch(\Exception $ex){
+           return redirect ('admin/customers')->with('error',$ex->getMessage());
+       }
+    
     }
 
     /**

@@ -103,7 +103,15 @@
                            <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-47"><a href="{{ route('myAccount') }}">Login/Sign Up</a></li>
                            @else
                            <li>
-                            <a href="{{ Route('edit-account') }}">My Account</a>
+                            
+                           @php
+                              $role = Auth::user()->role_id;
+                              @endphp
+                              @if($role == 3)
+                              <a href="{{ Route('editVendor') }}">My Account</a>
+                              @elseif($role == 2)
+                              <a href="{{ Route('edit-account') }}">My Account</a>
+                              @endif
                             </li>
                             <li>
                                 <a href="{{ route('logout') }}"
