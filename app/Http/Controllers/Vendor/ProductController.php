@@ -69,6 +69,7 @@ class ProductController extends Controller
             'current_price' => 'required|numeric',
             'description' => 'required',
             'product_image_first' => 'required',
+
             // 'manufacturer' => 'required',
         ));
         if ($validator->fails()) {
