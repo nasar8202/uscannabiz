@@ -76,7 +76,7 @@
                <div class="container clearfix et_menu_container">
                   <div class="logo_container">
                      <span class="logo_helper"></span>
-                     <a href="/">
+                     <a href="https://webprojectmockup.com/custom/uscannabiz/public">
                      <img src="{{asset('assets/uploads/2022/03/Uscannazon4.png')}}" width="149" height="104" alt="Us Cannazon" id="logo" data-height-percentage="54">
                      </a>
                   </div>
@@ -86,7 +86,7 @@
 
                         <ul id="top-menu" class="nav">
 
-                           <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-34 current_page_item menu-item-43"><a href="/" aria-current="page">Home</a></li>
+                           <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-34 current_page_item menu-item-43"><a href="https://webprojectmockup.com/custom/uscannabiz/public" aria-current="page">Home</a></li>
                            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-44"><a href="{{ route('aboutUs') }}">About Us</a></li>
                            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-46"><a href="{{ route('faq') }}">FAQ Page</a></li>
                            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-45"><a href="{{ route('contactUs') }}">Contact Us</a></li>
