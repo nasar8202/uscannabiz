@@ -224,9 +224,8 @@ class CustomersController extends Controller
      */
     public function destroy($id)
     {
-        $users=User::find($id);
+        $users=User::where('customers_id','=',$id)->first();
         
-
         $customers = Customers::where('email','=',$users->email)->delete();
 
         if(!empty($users) ){

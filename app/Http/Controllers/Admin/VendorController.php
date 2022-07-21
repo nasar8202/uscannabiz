@@ -158,11 +158,11 @@ class VendorController extends Controller
     {
 
         try {
-            $check =Customers::join('Users','Users.email','=','Customers.email')->where('role_id','=',3)->where('broker_request','!=',null)->get();
+            $check =Customers::join('users','users.email','=','customers.email')->where('role_id','=',3)->where('broker_request','!=',null)->get();
             // dd($check);
             if (request()->ajax()) {
                 // return datatables()->of(Customers::join('Users','Users.id' ,'=' ,'Customers.user_id')->where('role_id','=',3)->get())
-                return datatables()->of(Customers::join('Users','Users.email','=','Customers.email')->where('role_id','=',3)->where('broker_request','!=',null)->get())
+                return datatables()->of(Customers::join('users','users.email','=','customers.email')->where('role_id','=',3)->where('broker_request','!=',null)->get())
                     ->addIndexColumn()
                     ->addColumn('status', function ($data) {
                         if($data->status == 0){

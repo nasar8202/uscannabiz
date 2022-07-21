@@ -69,6 +69,7 @@ class ProductController extends Controller
             'current_price' => 'required|numeric',
             'description' => 'required',
             'product_image_first' => 'required',
+
             // 'manufacturer' => 'required',
         ));
         if ($validator->fails()) {
@@ -259,7 +260,7 @@ class ProductController extends Controller
        $meta = ProductMetaData::where('product_id',$id)->first();
        $relatedProducts = Product::whereStatus(1)->get();
         $categories = Category::get();
-        return view('Vendor.product.editProductForm',compact('categories','product','relatedProducts','meta'));
+        return view('vendor.product.editProductForm',compact('categories','product','relatedProducts','meta'));
 
 
 
