@@ -104,9 +104,9 @@
                                             <td>{{$customer_id->first()->address}}</td>
                                             <td>
                                                 @if($customer_search->broker_request_id == $customer_id->first()->id)
-                                                <a class="btn btn-secondary" href="/admin/brokerCancleToVendor/{{$customer_id->first()->id}}/{{$vendor_id}}">Cancel</a>
+                                                <a class="btn btn-secondary" href="{{route('brokerCancleToVendor',['id'=>$customer_id->first()->id,'vendor_id'=>$vendor_id])}}">Cancel</a>
                                                  @else
-                                                <a class="btn btn-primary" href="/admin/brokerAssignToVendor/{{$customer_id->first()->id}}/{{$vendor_id}}">Accept</a>
+                                                <a class="btn btn-primary" href="{{route('brokerAssignToVendor',['id'=>$customer_id->first()->id,'vendor_id'=>$vendor_id])}}">Accept</a>
                                                 @endif
                                             </td>
                                         </tr>

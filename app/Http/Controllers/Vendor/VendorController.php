@@ -186,7 +186,7 @@ class VendorController extends Controller
         // dd($check);
         $countBroker = User::where('role_id',4)->count();
         if($check->broker_request != null && $check->broker_request_id == null){
-            $show_data = "Your Request Send Successfully";
+            $show_data = "Your Request Send To Admin Successfully Wait For Admin Approval !";
             return view('vendor.brokers.index',compact(['countBroker','show_data']));
         }
         elseif($check->broker_request != null && $check->broker_request_id != null){
@@ -302,6 +302,14 @@ class VendorController extends Controller
 
      return back()->with(['success' => 'Broker Request Sent Successfully']);
 
+    }
+    public function vendor_remove_broker($id)
+    {
+        $customer = Customers::where(['user_id'=>Auth::user()->id,'broker_request_id'=>$id])->first();
+        $customer->broker_request_id = Null;
+        $customer->broker_request = Null;
+        $customer->save();
+        return back()->with(['success' => 'Broker Cancle Successfully']);
     }
 }
 
