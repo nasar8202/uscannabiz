@@ -231,7 +231,7 @@ class OrderController extends Controller
         $vender_request = VendorRequest::where('id',$request_id)->first();
         $vender_detail = User::where('id',$vender_request->vendor_id)->first();
         return view('admin.order.broker_show', compact(['product','vender_request','vender_detail','order']));
-        
+
     }
     public function brokershow_without_orderid($id,$request_id)
     {
