@@ -71,14 +71,10 @@
                                     <thead>
                                     <tr style="text-align: center">
                                         <th>Id</th>
-                                        <th>Customer Name</th>
-                                        <th>Last Name</th>
+                                        <th>Full Name</th>
+                                        
                                         <th>Email</th>
-                                        <th>Phone No</th>
-                                        <th>City</th>
-                                        <th>State</th>
-                                        <th>Country</th>
-                                        <th>Address</th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                         
                                     </tr>
@@ -168,14 +164,9 @@
 
                     { data: 'DT_RowIndex', name: 'DT_RowIndex' },
                     // {data: 'id', name: 'id'},
-                    {data: 'first_name', name: 'First Name'},
-                    {data: 'last_name', name: 'Last Name'},
+                    {data: 'name', name: 'Full Name'},
                     {data: 'email', name: 'Email'},
-                    {data: 'phone_no', name: 'Phone No'},
-                    {data: 'city', name: 'City'},
-                    {data: 'state', name: 'State'},
-                    {data: 'country', name: 'Country'},
-                    {data: 'address', name: 'Address'},
+                    {data: 'status', name: 'status'},
                     
 
 
