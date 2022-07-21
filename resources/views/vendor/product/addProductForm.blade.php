@@ -121,7 +121,13 @@
                       @endforeach
                   </select>
                 </p>
-
+                <p class="form-row form-group">
+                    <label for="exampleInputEmail1">Product Featured/New</label>
+                    <select name="product_featured" id="" class="woocommerce-Input woocommerce-Input--text input-text" required>
+                        <option value="Feature" @if(old('product_featured') == "Feature") {{ 'selected' }} @endif>Featured</option>
+                        <option value="New"  @if(old('product_featured') == "New") {{ 'selected' }} @endif>New</option>
+                    </select>
+                </p>
              <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
                   <label for="reg_email">Product Name<span class="required">*</span></label>
                   <input type="text" class="woocommerce-Input woocommerce-Input--text input-text"

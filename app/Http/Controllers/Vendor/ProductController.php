@@ -54,9 +54,10 @@ class ProductController extends Controller
 
     public function addProductForm()
     {
+        
         $categories = Category::get();
         $products = Product::whereStatus(1)->get();
-        return view('Vendor.product.addProductForm',compact('categories','products'));
+        return view('vendor.product.addProductForm',compact('categories','products'));
     }
     public function addProduct(Request $request)
     {
@@ -68,6 +69,7 @@ class ProductController extends Controller
             'current_price' => 'required|numeric',
             'description' => 'required',
             'product_image_first' => 'required',
+
             // 'manufacturer' => 'required',
         ));
         if ($validator->fails()) {
@@ -258,7 +260,7 @@ class ProductController extends Controller
        $meta = ProductMetaData::where('product_id',$id)->first();
        $relatedProducts = Product::whereStatus(1)->get();
         $categories = Category::get();
-        return view('Vendor.product.editProductForm',compact('categories','product','relatedProducts','meta'));
+        return view('vendor.product.editProductForm',compact('categories','product','relatedProducts','meta'));
 
 
 

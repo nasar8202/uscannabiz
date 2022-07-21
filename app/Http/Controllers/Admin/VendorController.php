@@ -48,7 +48,7 @@ class VendorController extends Controller
                         }
                     })
                     ->addColumn('action', function ($data) {
-                        return '<a title="View" href="customers/' . $data->id . '"
+                        return '<a title="View" href="vendorshow/' . $data->id . '"
                         class="btn btn-dark btn-sm"><i class="fas fa-eye"></i></a>&nbsp;
                         <button title="Delete" type="button" name="delete" id="' . $data->id . '"
                         class="delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>';
@@ -90,7 +90,17 @@ class VendorController extends Controller
      */
     public function show($id)
     {
-        //
+     
+       try{
+        
+           $content=Customers::where('user_id',$id)->first();
+           
+            return view('admin.vendor.show',compact(['content']));
+       }
+       catch(\Exception $ex){
+           return redirect ('admin/customers')->with('error',$ex->getMessage());
+       }
+    
     }
 
     /**
@@ -148,11 +158,11 @@ class VendorController extends Controller
     {
 
         try {
-            $check =Customers::join('Users','Users.email','=','Customers.email')->where('role_id','=',3)->where('broker_request','!=',null)->get();
+            $check =Customers::join('users','users.email','=','customers.email')->where('role_id','=',3)->where('broker_request','!=',null)->get();
             // dd($check);
             if (request()->ajax()) {
                 // return datatables()->of(Customers::join('Users','Users.id' ,'=' ,'Customers.user_id')->where('role_id','=',3)->get())
-                return datatables()->of(Customers::join('Users','Users.email','=','Customers.email')->where('role_id','=',3)->where('broker_request','!=',null)->get())
+                return datatables()->of(Customers::join('users','users.email','=','customers.email')->where('role_id','=',3)->where('broker_request','!=',null)->get())
                     ->addIndexColumn()
                     ->addColumn('status', function ($data) {
                         if($data->status == 0){

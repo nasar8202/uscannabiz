@@ -99,7 +99,7 @@
                                 class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
-               
+
                 @endif
                 <!-- ./col -->
 
@@ -147,7 +147,7 @@
                                         <td> {{$latestOrders->full_name??''}} </td>
                                         @if(Auth::user()->role_id == 4)
                                         @else
-                                        <td> 
+                                        <td>
                                             @if ($latestOrders->order_status == 'pending')
                                             <span class="badge badge-secondary">Pending</span>
                                             @elseif ($latestOrders->order_status == 'cancelled')
