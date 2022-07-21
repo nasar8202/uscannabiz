@@ -54,9 +54,10 @@ class ProductController extends Controller
 
     public function addProductForm()
     {
+        
         $categories = Category::get();
         $products = Product::whereStatus(1)->get();
-        return view('Vendor.product.addProductForm',compact('categories','products'));
+        return view('vendor.product.addProductForm',compact('categories','products'));
     }
     public function addProduct(Request $request)
     {
