@@ -236,4 +236,78 @@ class CustomersController extends Controller
             echo 1;
         }else{echo 2;}
     }
+
+    public function customerRequest()
+    {
+        
+        
+        try {
+            $check =Customers::join('Users','Users.email','=','Customers.email')->where('role_id','=',2)->where('status',0)->get();
+            //  dd($check);
+            if (request()->ajax()) {
+                // return datatables()->of(Customers::join('Users','Users.id' ,'=' ,'Customers.user_id')->where('role_id','=',3)->get())
+                return datatables()->of(Customers::join('Users','Users.email','=','Customers.email')->where('role_id','=',2)->where('status',0)->get()
+                )
+                    ->addIndexColumn()
+                    ->addColumn('status', function ($data) {
+                        if($data->status == 0){
+                            // return $data->user_id;
+                            return '<label class="switch"><input type="checkbox"  data-id="'.$data->user_id.'" data-val="1"  id="status-switch"><span class="slider round"></span></label>';
+                        }else{
+                            return '<label class="switch"><input type="checkbox" checked data-id="'.$data->user_id.'" data-val="0"  id="status-switch"><span class="slider round"></span></label>';
+                        }
+                    })
+                    ->addColumn('action', function ($data) {
+                        // return $data->user_id;
+                        return '
+                        <a title="Approve" href="customerStatusAccept/' . $data->id . '" 
+                        class="btn btn-success btn-sm">Approve &nbsp;<i class="fa fa-check"></i></a>&nbsp;';
+
+
+                    })->rawColumns(['status','action'])->make(true);
+                    // return '<a title="View" href="customerStatusReject/'  . $data->id . '" 
+                    //     class="btn btn-danger btn-sm"><i class="fa fa-times" aria-hidden="true"></i></a>&nbsp;
+                    //     <a title="View" href="customerStatusAccept/' . $data->id . '" 
+                    //     class="btn btn-success btn-sm"><i class="fa fa-check"></i></a>&nbsp;';
+            }
+        } catch (\Exception $ex) {
+            return redirect('/')->with('error', $ex->getMessage());
+        }
+        return view('admin.customerRequest.customerRequest');
+    }
+
+
+    public function customerStatus($id)
+    {
+            
+        // $customer =Customers::join('Users','Users.email','=','Customers.email')->where('role_id','=',2)->where('Customers.user_id',$id)->first();
+        
+        $customer =Customers::where('user_id',$id)->first();
+           
+         $data_status = array(
+            'status'=>1
+         );
+         
+            $customer->update($data_status);
+        
+        
+            return back()->with('success','Customer Approved Successfully');
+    }
+    public function customerStatusReject($id)
+    {
+            
+        // $customer =Customers::join('Users','Users.email','=','Customers.email')->where('role_id','=',2)->where('Customers.user_id',$id)->first();
+        
+        $customer =Customers::where('user_id',$id)->first();
+           
+         $data_status = array(
+            'status'=>2
+         );
+         
+            $customer->update($data_status);
+        
+        
+            return back()->with('success','Customer Rejected Successfully');
+    }
+
 }
