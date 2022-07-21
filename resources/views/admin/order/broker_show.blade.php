@@ -177,8 +177,8 @@
                                             <th class="center">Image</th>
                                             <th>Item</th>
                                             {{-- <th class="right">Unit Cost</th> --}}
+                                            <th class="right">Unit Cost</th>
                                             <th class="right">Quantity</th>
-                                            <th class="right">Sub Total</th>
                                             <th class="right">Total</th>
                                             @if(isset($order))
                                             <th class="right">Broker Commission</th>
@@ -209,11 +209,11 @@
                                                     @endforelse
                                                     @endif --}}
                                                 </td>
+                                                <td class="right">${{$product->product_current_price}}</td>
                                                 <td class="right">{{$vender_request->quantity}}</td>
                                                 @php
                                                 $total_price = $vender_request->quantity*$product->product_current_price;
                                                 @endphp
-                                                <td class="right">${{$product->product_current_price}}</td>
                                                 <td class="right">${{$total_price}}</td>
                                                 @if(isset($order))
                                                 <td class="right">${{$order->broker_price}}</td>
@@ -243,7 +243,7 @@
                                     
                                 <br>
                                 </div>
-                                {{-- <div class="row">
+                                <div class="row">
                                     <div class="col-lg-4 col-sm-5">
                                     </div>
                                     <div class="col-lg-4 col-sm-5 ml-auto">
@@ -254,7 +254,7 @@
                                                 <td class="left">
                                                     <strong>Subtotal</strong>
                                                 </td>
-                                                <td class="right">${{$order->sub_total}}</td>
+                                                <td class="right">${{$product->product_current_price}}</td>
                                             </tr>
                                             @if($order->discount > 0)
                                                 <tr>
@@ -276,14 +276,15 @@
                                                 <td class="left">
                                                     <strong>Total</strong>
                                                 </td>
-                                                <td class="right">
+                                                <td class="right">${{$total_price}}</td>
+                                                {{-- <td class="right">
                                                     <strong>${{$order->total_amount+$order->shipping_cost}}</strong>
-                                                </td>
+                                                </td> --}}
                                             </tr>
                                             </tbody>
                                         </table>
                                     </div>
-                                </div> --}}
+                                </div>
                             </div>
                         </div>
                         @if(isset($order) && $order->order_status == 'pending')

@@ -53,7 +53,7 @@
                 <a href="{{ route('shop.showProduct', $product->slug) }}" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
                     <span class="et_shop_image"><img width="51" height="53" src="{{ productImage($product->product_image) }}" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="" loading="lazy"><span class="et_overlay"></span></span>
                     <h2 class="woocommerce-loop-product__title">{{$product->product_name}}</h2>
-                    <span class="price"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">&#36;</span>{{$product->product_current_price}}</bdi></span></span>
+                    {{-- <span class="price"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">&#36;</span>{{$product->product_current_price}}</bdi></span></span> --}}
                 </a>
                 @if(Auth::check())
                         <a href="javascript:void(0)" data-product="{{ $product->id }}" @if(isset($product->whishlist)) data-wishlist='{{ $product->whishlist->id }}' @endif data-customer="{{ Auth::id() ?? 0 }}" class="grey @if(!isset($product->whishlist)) add_to_wishlist @else remove_to_wishlist wishlist-added @endif">

@@ -30,9 +30,10 @@ class AdminController extends Controller
         }elseif($check_user->role_id == 4){
             
             $check = Customers::where('id', $check_user->customers_id)->first();
-            $data['orders'] = VendorRequest::where('vendor_id',$check->user_id)->count();
-            $data['latestOrders']= VendorRequest::where('vendor_id',$check->user_id)->orderBy('created_at', 'desc')->take(7)->get();
-            
+            $check_broker = Customers::where('broker_request_id', $check->id)->first();
+            $data['orders'] = VendorRequest::where('vendor_id',$check_broker->user_id)->count();
+            // dd($data['orders'],$check_broker);
+            $data['latestOrders']= VendorRequest::where('vendor_id',$check_broker->user_id)->take(7)->get();
             
             }
 

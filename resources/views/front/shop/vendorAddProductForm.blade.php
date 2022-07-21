@@ -39,9 +39,9 @@
                                  <input type="hidden" value="{{$data->vender_id}}" name="vendor_id">
                                  </h3> 
                                   
-                                  <label>Product Price</label>
+                                  {{-- <label>Product Price</label>
                                   <h3>{{$data->product_current_price}}
-                                    </h3> 
+                                    </h3>  --}}
                                  </div>
                                    {!! $errors->first('product_image_first', '<p class="help-block">:message</p>') !!}
                                </div>

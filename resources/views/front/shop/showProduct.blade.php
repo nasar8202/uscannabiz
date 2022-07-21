@@ -119,11 +119,11 @@ ul.et_pb_social_media_follow{list-style-type:none!important;margin:0 0 22px;padd
 	                   <h1>{{ $product->product_name }}</h1>
 	                </div>
 	             </div>
-	             <div class="et_pb_module et_pb_wc_price et_pb_wc_price_0_tb_body">
+	             {{-- <div class="et_pb_module et_pb_wc_price et_pb_wc_price_0_tb_body">
 	                <div class="et_pb_module_inner">
 	                   <p class="price"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">&#36;</span>{{ $product->product_current_price }}</bdi></span></p>
 	                </div>
-	             </div>
+	             </div> --}}
 	             <div class="et_pb_module et_pb_wc_description et_pb_wc_description_0_tb_body et_pb_bg_layout_light  et_pb_text_align_left">
 	                <div class="et_pb_module_inner">
 	                   <p>{!! $product->description !!}</p>

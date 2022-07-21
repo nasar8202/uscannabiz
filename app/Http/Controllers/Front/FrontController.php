@@ -2,23 +2,25 @@
 
 namespace App\Http\Controllers\Front;
 
-use App\Http\Controllers\Controller;
-use App\Models\Blog;
-use App\Models\Manufacturer;
-use App\Models\Product;
-use App\Models\NewsLetter;
-use App\Models\Collection;
-use Illuminate\Http\Request;
 use App\User;
-use App\Models\Customers;
-use App\Models\VendorStore;
-
+use App\Models\Blog;
+use App\Models\Product;
 use App\Models\Category;
-use App\Models\CustomerWishlist;
+use App\Models\Customers;
+use App\Models\Collection;
+use App\Models\NewsLetter;
+use App\Models\VendorStore;
+use App\Models\Manufacturer;
+use Illuminate\Http\Request;
+
 use App\Models\OptionProduct;
 use App\Jobs\SendEmailVendorJob;
+use App\Models\CustomerWishlist;
+use App\Http\Controllers\Controller;
 
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+
 class FrontController extends Controller
 {
     // public function Register()
@@ -49,6 +51,16 @@ class FrontController extends Controller
             // $customerData['last_name'] = $request->lname;
             // $customerData['phone_no'] = $request->phone;
             // $customerData['email'] = $request->email;
+
+            $validator = Validator::make($request->all(), [
+                'email' => 'required',
+                'password' => 'required',
+                'confirm_password' => 'required|same:password',
+            ]);
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator);
+            }
+
 
         if($request->role == 2)
         {
@@ -117,6 +129,7 @@ class FrontController extends Controller
 
             // Customers::create([$customerData]);
             // return $user;
+            
             return redirect()->back()->with(['success' => 'Register Successfully']);
         }
 
