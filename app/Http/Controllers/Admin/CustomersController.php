@@ -292,18 +292,19 @@ class CustomersController extends Controller
     }
 
 
-    public function customerStatus($id)
+    public function customerStatusAccept($id)
     {
-            
+        
         // $customer =Customers::join('Users','Users.email','=','Customers.email')->where('role_id','=',2)->where('Customers.user_id',$id)->first();
         
-        $customer =Customers::where('user_id',$id)->first();
+        $customer =User::where('id',$id)->first();
+        $customer->approvel_status = 1;
+        $customer->save();
            
-         $data_status = array(
-            'approvel_status'=>1
-         );
+        //  $data_status = array(
+        //     'approvel_status'=>1
+        //  );
          
-            $customer->update($data_status);
         
         
             return back()->with('success','Customer Approved Successfully');

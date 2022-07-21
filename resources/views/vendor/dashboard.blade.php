@@ -84,7 +84,7 @@
 	                                          </a>
 	                                       </li> --}}
 	                                       <li>
-	                                          <a href="orders/?order_status=wc-cancelled" style="color: #d54e21">
+	                                          <a href="#" style="color: #d54e21">
 	                                          <span class="title">Cancelled</span> <span class="count">{{$orderCancelledCount??0}}</span>
 	                                          </a>
 	                                       </li>

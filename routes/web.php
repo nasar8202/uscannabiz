@@ -25,7 +25,7 @@ Route::get('/my-account', 'Front\FrontController@loginRegisterVendor')->name('my
 Route::get('/reset', 'Front\FrontController@resetPasswordLink')->name('resetPasswordLink');
 Route::post('/registerVendorAndCustomer', 'Front\FrontController@registerVendorAndCustomer')->name('registerVendorAndCustomer');
 Route::get('vendor-add-product-form/{id}', 'Vendor\ProductController@vendorAddProductForm')->name('vendorAddProductForm');
-
+Route::view('/thanks', 'front.thanks')->name('order_thanks');
 Route::post('/vendor-request', 'Vendor\VendorRequestController@store')->name('vendorRequest_shop');
 Route::get('/wishlist', 'Front\ShopController@view_wishlist')->name('shop.view_wishlist');
 Route::get('/shop', 'Front\ShopController@index')->name('shop.index');
@@ -132,7 +132,7 @@ Route::namespace('Admin')->prefix('/admin')->middleware('admin')->group(function
 
     Route::get('brokerAssignToVendor/{id}/{vendor_id}', 'VendorController@brokerAssignToVendor')->name('brokerAssignToVendor');
     Route::get('brokerCancleToVendor/{id}/{vendor_id}', 'VendorController@brokerCancleToVendor')->name('brokerCancleToVendor');
-    Route::get('vendorRequest', 'VendorController@vendorRequest')->name('vendorRequest');
+    Route::get('/vendorRequest', 'VendorController@vendorRequest')->name('vendorRequest');
     Route::get('vendorshow/{id}', 'VendorController@show')->name('vendorshow');
     Route::get('customerRequest', 'CustomersController@customerRequest')->name('customerRequest');
     Route::get('customerStatusAccept/{id}', 'CustomersController@customerStatusAccept')->name('customerStatusAccept');

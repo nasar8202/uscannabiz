@@ -10,7 +10,7 @@
 	      <div id="content-area" class="clearfix">
 	         <div id="left-area">
 	            <article id="post-7" class="post-7 page type-page status-publish hentry">
-	               <h1 class="entry-title main_title">Dashboard</h1>
+	               <h1 class="entry-title main_title">Products</h1>
 				  
 	               <div class="entry-content">
 	                  <div class="dokan-dashboard-wrap">
@@ -212,7 +212,7 @@
 						                        <input class="cb-select-items dokan-checkbox" type="checkbox" data-product-name="Testing Products" name="bulk_products[]" value="{{$pro->id}}">
 						                     </th>
 						                     <td data-title="Image" class="column-thumb">
-						                        <a href="products/?product_id=432&amp;action=edit"><img width="150" height="150" src="{{asset('uploads/products/'.$pro->product_image)}}" class="attachment-thumbnail size-thumbnail" alt=""></a>
+						                        <a href="#"><img width="150" height="150" src="{{asset('uploads/products/'.$pro->product_image)}}" class="attachment-thumbnail size-thumbnail" alt=""></a>
 						                     </td>
 						                     <td data-title="Name" class="column-primary">
 						                        <strong><a href="products/?product_id=432&amp;action=edit">{{$pro->product_name}}</a></strong>

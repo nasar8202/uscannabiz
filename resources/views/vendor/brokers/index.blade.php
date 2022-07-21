@@ -10,7 +10,7 @@
 	      <div id="content-area" class="clearfix">
 	         <div id="left-area">
 	            <article id="post-7" class="post-7 page type-page status-publish hentry">
-	               <h1 class="entry-title main_title">Dashboard</h1>
+	               <h1 class="entry-title main_title">Broker</h1>
 				   @if (session()->has('success'))
                                         <div class="alert alert-success">
                                             {{ session()->get('success') }}
