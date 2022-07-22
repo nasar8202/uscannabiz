@@ -51,8 +51,8 @@
                   <div id="nav_menu-3" class="fwidget et_pb_widget widget_nav_menu">
                      <div class="menu-returns-container">
                         <ul id="menu-returns" class="menu">
-                           <li id="menu-item-52" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="{{ route('faq') }}">FAQs</a></li> 
-                           <!-- <li id="menu-item-318" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-318"><a href="size-guide/">Size Guide</a></li> -->
+                           <li id="menu-item-52" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="{{ route('faq') }}">FAQs</a></li>
+                           
                            <li id="menu-item-431" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-431"><a href="dashboard/">Sell With Us</a></li>
                            <li id="menu-item-426" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-426"><a href="site-map/">Site map</a></li>
                         </ul>
@@ -99,7 +99,7 @@
 {{-- product modal popup --}}
 
 {{-- <button class="trigger">Click the modal!</button> --}}
-<div class="modal modalTn" >
+<div class="modal modalTn">
     <div class="modal-content">
         <span class="close-button">×</span>
         <div class="u-column2 col-2">

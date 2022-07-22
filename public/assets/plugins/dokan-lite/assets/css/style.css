@@ -6193,3 +6193,59 @@ body li:hover.woocommerce-MyAccount-navigation-link a {
     font-size: 15px;
     opacity: .7;
 }
+
+
+.modal.modalTn {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,.7);
+    z-index: 111111;
+}
+.modal.modalTn .modal-content {
+    background: #fff;
+    width: 600px;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    padding: 40px 30px;
+}
+.modal.modalTn span.close-button {
+    position: absolute;
+    right: 0;
+    top: 0;
+    background: red;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffff;
+}
+.modal.modalTn .modal-content  h2 {
+    margin-bottom: 30px;
+}
+.modal.modalTn .modal-content p.form-row.form-group label {
+    display: none;
+}
+.modal.modalTn .modal-content p.form-row.form-group input,.modal.modalTn .modal-content p.form-row.form-group select {
+    width: 100%;
+    border-radius: 50px;
+    height: 42px;
+    border: 1px solid #e3e3e3;
+}
+.modal.modalTn .modal-content button.woocommerce-Button.woocommerce-button.button.woocommerce-form-register__submit {
+    border: 1px solid #0D4400;
+    border-radius: 30px;
+    transition: all .5s ease;
+    background: #0D4400;
+    color: #fff;
+    padding: 10px 30px;
+    float: right;
+}
+.modal.modalTn .modal-content button.woocommerce-Button.woocommerce-button.button.woocommerce-form-register__submit:hover {
+    opacity: .8;
+}
