@@ -84,26 +84,51 @@
                                           <label for="password">Confirm Password&nbsp;<span class="required">*</span></label>
                                           <input class="woocommerce-Input woocommerce-Input--text input-text" type="password" value="{{ old('password') }}" name="confirm_password" id="password" autocomplete="current-password">
                                        </p>
-                                         <div class="show_if_seller">
-                                            <div class="split-row form-row-wide">
-                                               <p class="form-row form-group">
-                                                  <label for="first-name">First Name <span class="required">*</span></label>
-                                                  <input type="text" class="input-text form-control" name="fname" id="first-name" value="" required="required">
-                                               </p>
-                                               <p class="form-row form-group">
-                                                  <label for="last-name">Last Name <span class="required">*</span></label>
-                                                  <input type="text" class="input-text form-control" name="lname" id="last-name" value="" required="required">
-                                               </p>
-                                            </div>
+                                       <div class="show_if_seller">
+                                          <div class="split-row form-row-wide">
+                                             <p class="form-row form-group">
+                                                <label for="first-name">First Name <span class="required">*</span></label>
+                                                <input type="text" class="input-text form-control" name="fname" id="first-name" value="" required="required">
+                                             </p>
+                                             <p class="form-row form-group">
+                                                <label for="last-name">Last Name <span class="required">*</span></label>
+                                                <input type="text" class="input-text form-control" name="lname" id="last-name" value="" required="required">
+                                             </p>
+                                          </div>
 
-                                            <p class="form-row form-group form-row-wide">
-                                             <label for="shop-phone">Phone Number<span class="required">*</span></label>
-                                             <input type="text" class="input-text form-control" name="phone" id="shop-phone" value="" required="required">
-                                          </p>
-                                            <div class="for_vender">
-
-                                             </div>
-                                         </div>
+                                          <p class="form-row form-group form-row-wide">
+                                           <label for="shop-phone">Phone Number<span class="required">*</span></label>
+                                           <input type="text" class="input-text form-control" name="phone" id="shop-phone" value="" required="required">
+                                        </p>
+                                          <div class="for_vender">
+                                              <p class="form-row form-group form-row-wide">
+                                                  <label for="company-name">City <span class="">*</span></label>
+                                                  <input type="text" class="input-text form-control" name="city" id="city" value="" required="">
+                                                </p>
+                                                <p class="form-row form-group form-row-wide">
+                                                  <label for="company-name">State <span class="">*</span></label>
+                                                  <input type="text" class="input-text form-control" name="state" id="state" value="" required="">
+                                                </p>
+                                                <p class="form-row form-group form-row-wide">
+                                                  <label for="company-name">Country <span class="">*</span></label>
+                                                  <input type="text" class="input-text form-control" name="country" id="country" value="" required="">
+                                                </p>
+                                                <p class="form-row form-group form-row-wide">
+                                                  <label for="company-name">Address <span class="">*</span></label>
+                                                  <input type="text" class="input-text form-control" name="address" id="address" value="" required="">
+                                                </p>
+                                             <p class="form-row form-group form-row-wide">
+                                                <label for="company-name">Shop Name <span class="">*</span></label>
+                                                <input type="text" class="input-text form-control" name="store_name" id="company-name" value="" required="">
+                                              </p>
+                                              <p class="form-row form-group form-row-wide">
+                                                 <label for="seller-url" class="pull-left">Shop URL <span class="">*</span></label>
+                                                 <strong id="url-alart-mgs" class="pull-right"></strong>
+                                                 <input type="text" class="input-text form-control" name="store_url" id="seller-url" value="" required="">
+                                                 <small>/Us-Cannazon/<strong id="url-alart"></strong></small>
+                                              </p>
+                                           </div>
+                                       </div>
                                          <p class="form-row form-group user-role vendor-customer-registration">
                                             <label class="radio">
                                             <input type="radio" name="role" value="2" checked>
@@ -142,9 +167,9 @@ $(document).ready(function() {
 
 
 
-              $('#vendor_add_fields').click(function() {
-                $(".for_vender").html('<p class="form-row form-group form-row-wide"><label for="company-name">City <span class="">*</span></label><input type="text" class="input-text form-control" name="city" id="city" value="" required=""></p><p class="form-row form-group form-row-wide"><label for="company-name">State <span class="">*</span></label><input type="text" class="input-text form-control" name="state" id="state" value="" required=""></p><p class="form-row form-group form-row-wide"><label for="company-name">Country <span class="">*</span></label><input type="text" class="input-text form-control" name="country" id="country" value="" required=""></p><p class="form-row form-group form-row-wide"><label for="company-name">Address <span class="">*</span></label><input type="text" class="input-text form-control" name="address" id="address" value="" required=""></p><p class="form-row form-group form-row-wide"><label for="company-name">Shop Name <span class="">*</span></label><input type="text" class="input-text form-control" name="store_name" id="company-name" value="" required=""></p><p class="form-row form-group form-row-wide"><label for="seller-url" class="pull-left">Shop URL <span class="">*</span></label><strong id="url-alart-mgs" class="pull-right"></strong><input type="text" class="input-text form-control" name="store_url" id="seller-url" value="" required=""><small>/Us-Cannazon/<strong id="url-alart"></strong></small></p>')
-              });
+            //   $('#vendor_add_fields').click(function() {
+            //     $(".for_vender").html('<p class="form-row form-group form-row-wide"><label for="company-name">City <span class="">*</span></label><input type="text" class="input-text form-control" name="city" id="city" value="" required=""></p><p class="form-row form-group form-row-wide"><label for="company-name">State <span class="">*</span></label><input type="text" class="input-text form-control" name="state" id="state" value="" required=""></p><p class="form-row form-group form-row-wide"><label for="company-name">Country <span class="">*</span></label><input type="text" class="input-text form-control" name="country" id="country" value="" required=""></p><p class="form-row form-group form-row-wide"><label for="company-name">Address <span class="">*</span></label><input type="text" class="input-text form-control" name="address" id="address" value="" required=""></p><p class="form-row form-group form-row-wide"><label for="company-name">Shop Name <span class="">*</span></label><input type="text" class="input-text form-control" name="store_name" id="company-name" value="" required=""></p><p class="form-row form-group form-row-wide"><label for="seller-url" class="pull-left">Shop URL <span class="">*</span></label><strong id="url-alart-mgs" class="pull-right"></strong><input type="text" class="input-text form-control" name="store_url" id="seller-url" value="" required=""><small>/Us-Cannazon/<strong id="url-alart"></strong></small></p>')
+            //   });
 
 
           });
