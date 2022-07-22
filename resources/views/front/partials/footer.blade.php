@@ -125,7 +125,7 @@ jQuery(this).toggleClass('active') ;
 });
 });
 </script><script type="text/javascript" src="{{ URL::asset('assets/plugins/woocommerce/assets/js/jquery-blockui/jquery.blockUI.min.js?ver=2.7.0-wc.6.3.1" id="jquery-blockui-js')}}"></script>
-<script type="text/javascript" src="{{ URL::asset('assets/plugins/dokan-lite/assets/js/vendor-registeration.js')}}"></script>
+<script type="text/javascript" src="{{ URL::asset('assets/plugins/dokan-lite/assets/js/vendor-registration.js')}}"></script>
 <script type="text/javascript" id="wc-add-to-cart-js-extra">
 /* <![CDATA[ */
 var wc_add_to_cart_params = {"ajax_url":"\/wp\/uscannabiz\/wp-admin\/admin-ajax.php","wc_ajax_url":"\/wp\/uscannabiz\/?wc-ajax=%%endpoint%%","i18n_view_cart":"View cart","cart_url":"https:\/\/webprojectmockup.com\/wp\/uscannabizhtml\/cart\/","is_cart":"","cart_redirect_after_add":"no"};

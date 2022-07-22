@@ -5,6 +5,22 @@
  * in this less file which compile to style.css
  * file in assets/css directoryS
  */
+ 
+ 
+ /*Zeveloper*/
+ 
+    .dokan-dashboard .container {
+        max-width: 100%;
+        width: 100%;
+    }
+    
+    .dokan-dashboard h1.entry-title.main_title {
+        text-align: center;
+    }
+ 
+ /*Zeveloper*/
+ 
+ 
 .dokan-spinner {
   position: absolute;
   width: 20px;
@@ -13,6 +29,7 @@
   z-index: 99;
   background-size: 20px;
 }
+
 .dokan-close {
   float: right;
   font-weight: bold;
@@ -22,6 +39,7 @@
   opacity: 0.2;
   filter: alpha(opacity=20);
 }
+
 .dokan-close:hover,
 .dokan-close:focus {
   color: #000;
@@ -30,6 +48,7 @@
   opacity: 0.5;
   filter: alpha(opacity=50);
 }
+
 button.dokan-close {
   padding: 0;
   cursor: pointer;
@@ -37,19 +56,23 @@ button.dokan-close {
   border: 0;
   -webkit-appearance: none;
 }
+
 .dokan-alert {
   padding: 15px;
   margin-bottom: 20px;
   border: 1px solid transparent;
   border-radius: 4px;
 }
+
 .dokan-alert h4 {
   margin-top: 0;
   color: inherit;
 }
+
 .dokan-alert .dokan-alert-link {
   font-weight: bold;
 }
+
 .dokan-alert > p,
 .dokan-alert > ul {
   margin-bottom: 0 !important;
@@ -620,8 +643,8 @@ input[type='submit'].dokan-btn-theme,
 a.dokan-btn-theme,
 .dokan-btn-theme {
   color: #fff;
-  background-color: #f05025;
-  border-color: #f05025;
+  background-color: #0d4400;
+  border-color: #0d4400;
 }
 input[type='submit'].dokan-btn-theme:hover,
 a.dokan-btn-theme:hover,
@@ -704,7 +727,7 @@ fieldset[disabled] .dokan-btn-theme.active {
 input[type='submit'].dokan-btn-theme .badge,
 a.dokan-btn-theme .badge,
 .dokan-btn-theme .badge {
-  color: #f05025;
+  color: #0d4400;
   background-color: #fff;
 }
 input[type='submit'].dokan-btn-success,
@@ -1775,7 +1798,7 @@ table.dokan-table .toggle-row {
 }
 table.dokan-table .toggle-row::before {
   content: '\f0d7';
-  font-family: "Font Awesome\ 5 Free";
+  font-family: "FontAwesome";
   font-weight: 900;
   font: normal normal normal 14px/1 FontAwesome;
   display: inline-block;
@@ -1785,6 +1808,19 @@ table.dokan-table .toggle-row::before {
 table.dokan-table .is-expanded .toggle-row::before {
   content: '\f0d8';
 }
+
+.dokan-product-listing .dokan-product-listing-area table.product-listing-table span.product-type.simple:before,
+.dokan-product-listing .dokan-product-listing-area table.product-listing-table span.earning-info:before,
+.fas{
+    /*font-family:"FontAwesome";*/
+    /*font: normal normal normal 14px/1 FontAwesome !important;*/
+    font-weight:400 !important;
+}
+
+.fa-tachometer-alt:before {
+    content: "\f0e4" !important;
+}
+
 @media (max-width: 430px) {
   table.dokan-table thead {
     display: none;
@@ -2051,13 +2087,13 @@ article.dokan-notice-single-notice-area span.dokan-single-announcement-date {
   margin-bottom: 10px;
 }
 .dokan-announcement-uread {
-  border: 1px solid #f05025 !important;
+  border: 1px solid #0d4400 !important;
 }
 .dokan-announcement-uread .dokan-annnouncement-date {
-  background-color: #f05025 !important;
+  background-color: #0d4400 !important;
 }
 .dokan-announcement-bg-uread {
-  background-color: #f05025;
+  background-color: #0d4400;
 }
 .dokan-dashboard .dokan-dash-sidebar {
   width: 17%;
@@ -2066,18 +2102,18 @@ article.dokan-notice-single-notice-area span.dokan-single-announcement-date {
   overflow: hidden;
   background-color: #242424;
 }
-.dokan-dashboard .dokan-dash-sidebar ul.dokan-dashboard-menu {
+.dokan-dashboard #left-area .dokan-dash-sidebar ul.dokan-dashboard-menu {
   background: #242424;
   list-style: none;
   margin: 0 0 20px 0;
   padding: 0;
 }
-.dokan-dashboard .dokan-dash-sidebar ul.dokan-dashboard-menu li {
+.dokan-dashboard #left-area .dokan-dash-sidebar ul.dokan-dashboard-menu li {
   margin: 0;
   border-bottom: 1px solid #454545;
   position: relative;
 }
-.dokan-dashboard .dokan-dash-sidebar ul.dokan-dashboard-menu li a {
+.dokan-dashboard #left-area .dokan-dash-sidebar ul.dokan-dashboard-menu li a {
   padding: 10px 0 10px 18px;
   display: block;
   color: #fff;
@@ -2085,37 +2121,37 @@ article.dokan-notice-single-notice-area span.dokan-single-announcement-date {
   font-weight: normal;
   text-decoration: none;
 }
-.dokan-dashboard .dokan-dash-sidebar ul.dokan-dashboard-menu li a i {
+.dokan-dashboard #left-area .dokan-dash-sidebar ul.dokan-dashboard-menu li a i {
   font-size: 17px;
   padding-right: 15px;
 }
-.dokan-dashboard .dokan-dash-sidebar ul.dokan-dashboard-menu li:hover {
-  background: #f05025;
+.dokan-dashboard #left-area .dokan-dash-sidebar ul.dokan-dashboard-menu li:hover {
+  background: #0d4400;
   color: #fff;
 }
-.dokan-dashboard .dokan-dash-sidebar ul.dokan-dashboard-menu li.dokan-common-links:hover {
+.dokan-dashboard #left-area .dokan-dash-sidebar ul.dokan-dashboard-menu li.dokan-common-links:hover {
   background: none !important;
 }
-.dokan-dashboard .dokan-dash-sidebar ul.dokan-dashboard-menu li.dokan-common-links a {
+.dokan-dashboard #left-area .dokan-dash-sidebar ul.dokan-dashboard-menu li.dokan-common-links a {
   display: inline-block !important;
   width: 33.333333%;
   padding: 6% 13%;
   float: left;
   border-right: 1px solid #454545;
 }
-.dokan-dashboard .dokan-dash-sidebar ul.dokan-dashboard-menu li.dokan-common-links a:hover {
-  background: #f05025;
+.dokan-dashboard #left-area .dokan-dash-sidebar ul.dokan-dashboard-menu li.dokan-common-links a:hover {
+  background: #0d4400;
   color: #fff;
 }
-.dokan-dashboard .dokan-dash-sidebar ul.dokan-dashboard-menu li.dokan-common-links a:last-child {
+.dokan-dashboard #left-area .dokan-dash-sidebar ul.dokan-dashboard-menu li.dokan-common-links a:last-child {
   border-right: none;
 }
-.dokan-dashboard .dokan-dash-sidebar ul.dokan-dashboard-menu li.active {
+.dokan-dashboard #left-area .dokan-dash-sidebar ul.dokan-dashboard-menu li.active {
   position: relative;
-  background: #f05025;
+  background: #0d4400;
 }
-.dokan-dashboard .dokan-dash-sidebar ul.dokan-dashboard-menu li.active:after {
-  left: 93%;
+.dokan-dashboard #left-area .dokan-dash-sidebar ul.dokan-dashboard-menu li.active:after {
+  left: calc(100% - 16px);
   top: 50%;
   border: transparent solid;
   content: ' ';
@@ -2128,7 +2164,7 @@ article.dokan-notice-single-notice-area span.dokan-single-announcement-date {
   border-width: 16px 16px 16px 0;
   margin-top: -16px;
 }
-.dokan-dashboard .dokan-dash-sidebar ul.dokan-dashboard-menu li ul.sub-menu {
+.dokan-dashboard #left-area .dokan-dash-sidebar ul.dokan-dashboard-menu li ul.sub-menu {
   background: #fff;
   margin: 0;
   list-style: none;
@@ -2143,23 +2179,23 @@ article.dokan-notice-single-notice-area span.dokan-single-announcement-date {
   border-right: 1px solid #ececec;
   border-bottom: 1px solid #ececec;
 }
-.dokan-dashboard .dokan-dash-sidebar ul.dokan-dashboard-menu li ul.sub-menu a {
+.dokan-dashboard #left-area .dokan-dash-sidebar ul.dokan-dashboard-menu li ul.sub-menu a {
   padding: 2px 0 2px 10px;
   font-size: 13px;
   color: #333;
   font-weight: normal;
 }
-.dokan-dashboard .dokan-dash-sidebar ul.dokan-dashboard-menu li ul.sub-menu a:hover {
+.dokan-dashboard #left-area .dokan-dash-sidebar ul.dokan-dashboard-menu li ul.sub-menu a:hover {
   background: #f37655;
   color: #fff;
 }
-.dokan-dashboard .dokan-dash-sidebar ul.dokan-dashboard-menu li ul.sub-menu li {
+.dokan-dashboard #left-area .dokan-dash-sidebar ul.dokan-dashboard-menu li ul.sub-menu li {
   border-bottom: 1px solid #ccc;
 }
-.dokan-dashboard .dokan-dash-sidebar ul.dokan-dashboard-menu li ul.sub-menu li:last-child {
+.dokan-dashboard #left-area .dokan-dash-sidebar ul.dokan-dashboard-menu li ul.sub-menu li:last-child {
   border-bottom: none;
 }
-.dokan-dashboard .dokan-dash-sidebar ul.dokan-dashboard-menu li.settings i.pull-right {
+.dokan-dashboard #left-area .dokan-dash-sidebar ul.dokan-dashboard-menu li.settings i.pull-right {
   padding-top: 5px;
 }
 .dokan-dashboard .dokan-dash-sidebar #dokan-navigation #toggle-mobile-menu {
@@ -2291,12 +2327,16 @@ div.media-sidebar a.edit-attachment {
   color: #ccc;
   padding-right: 5px;
 }
+
 .dokan-dashboard .dokan-dashboard-content article.dashboard-content-area .dashboard-widget.big-counter {
   text-align: center;
 }
-.dokan-dashboard .dokan-dashboard-content article.dashboard-content-area .dashboard-widget.big-counter ul {
+
+.dokan-dashboard #left-area .dokan-dashboard-content article.dashboard-content-area .dashboard-widget.big-counter ul {
   margin: 0px;
+  padding:0px;
 }
+
 .dokan-dashboard .dokan-dashboard-content article.dashboard-content-area .dashboard-widget.big-counter li {
   width: 100%;
   display: block;
@@ -2579,42 +2619,42 @@ div.media-sidebar a.edit-attachment {
   float: right;
 }
 .dokan-product-listing .dokan-product-listing-area table.product-listing-table span.product-type:before {
-  font-family: "Font Awesome\ 5 Free";
+  font-family: "FontAwesome";
   font-weight: 900;
   content: '\f133';
   display: block;
   text-align: center;
 }
 .dokan-product-listing .dokan-product-listing-area table.product-listing-table span.product-type.downloadable:before {
-  font-family: "Font Awesome\ 5 Free";
+  font-family: "FontAwesome";
   font-weight: 900;
   content: '\f019';
   display: block;
   text-align: center;
 }
 .dokan-product-listing .dokan-product-listing-area table.product-listing-table span.product-type.variable:before {
-  font-family: "Font Awesome\ 5 Free";
+  font-family: "FontAwesome";
   font-weight: 900;
   content: '\f02d';
   display: block;
   text-align: center;
 }
 .dokan-product-listing .dokan-product-listing-area table.product-listing-table span.product-type.simple:before {
-  font-family: "Font Awesome\ 5 Free";
+  font-family: "FontAwesome";
   font-weight: 900;
   content: '\f0c9';
   display: block;
   text-align: center;
 }
 .dokan-product-listing .dokan-product-listing-area table.product-listing-table span.product-type.virtual:before {
-  font-family: "Font Awesome\ 5 Free";
+  font-family: "FontAwesome";
   font-weight: 900;
   content: '\f0c2';
   display: block;
   text-align: center;
 }
 .dokan-product-listing .dokan-product-listing-area table.product-listing-table span.earning-info:before {
-  font-family: "Font Awesome\ 5 Free";
+  font-family: "FontAwesome";
   font-weight: 900;
   content: '\f05a';
   display: inline;
@@ -2639,7 +2679,7 @@ div.media-sidebar a.edit-attachment {
   background: #65c265;
 }
 .dokan-product-listing .dokan-product-listing-area table.product-listing-table td.post-status label.pending {
-  background: #f05025;
+  background: #0d4400;
 }
 .dokan-product-listing .dokan-product-listing-area table.product-listing-table td.post-date {
   font-size: 13px;
@@ -3170,12 +3210,12 @@ div.media-sidebar a.edit-attachment {
 }
 .product-edit-container .dokan-product-title-alert,
 .product-edit-container .dokan-product-cat-alert {
-  color: #f05025;
+  color: #0d4400;
   font-style: italic;
   margin-top: 5px;
 }
 .product-edit-container .dokan-product-less-price-alert {
-  color: #f05025;
+  color: #0d4400;
   font-style: italic;
   margin-top: 5px;
 }
@@ -5753,15 +5793,15 @@ p.vendor-customer-registration .radio:hover {
     float: none;
     width: auto;
   }
-  .dokan-dashboard .dokan-dash-sidebar ul.dokan-dashboard-menu li {
+  .dokan-dashboard #left-area .dokan-dash-sidebar ul.dokan-dashboard-menu li {
     display: inline-block;
     border-right: 1px solid #454545;
   }
-  .dokan-dashboard .dokan-dash-sidebar ul.dokan-dashboard-menu li.active:after {
+  .dokan-dashboard #left-area .dokan-dash-sidebar ul.dokan-dashboard-menu li.active:after {
     content: '';
     display: none;
   }
-  .dokan-dashboard .dokan-dash-sidebar ul.dokan-dashboard-menu li a {
+  .dokan-dashboard #left-area .dokan-dash-sidebar ul.dokan-dashboard-menu li a {
     padding: 12px 24px;
   }
   .dokan-dashboard .dokan-dashboard-content {
@@ -5814,19 +5854,19 @@ p.vendor-customer-registration .radio:hover {
   .dokan-dashboard .dashboard-content-area .dokan-dash-left {
     padding-right: 0 !important;
   }
-  .dokan-dashboard .dokan-dash-sidebar ul.dokan-dashboard-menu:before,
-  .dokan-dashboard .dokan-dash-sidebar ul.dokan-dashboard-menu:after {
+  .dokan-dashboard #left-area .dokan-dash-sidebar ul.dokan-dashboard-menu:before,
+  .dokan-dashboard #left-area .dokan-dash-sidebar ul.dokan-dashboard-menu:after {
     content: " ";
     display: table;
   }
-  .dokan-dashboard .dokan-dash-sidebar ul.dokan-dashboard-menu:after {
+  .dokan-dashboard #left-area .dokan-dash-sidebar ul.dokan-dashboard-menu:after {
     clear: both;
   }
-  .dokan-dashboard .dokan-dash-sidebar ul.dokan-dashboard-menu li {
+  .dokan-dashboard #left-area .dokan-dash-sidebar ul.dokan-dashboard-menu li {
     float: left;
     width: 100%;
   }
-  .dokan-dashboard .dokan-dash-sidebar ul.dokan-dashboard-menu li a {
+  .dokan-dashboard #left-area .dokan-dash-sidebar ul.dokan-dashboard-menu li a {
     padding: 12px 18px;
   }
   .dokan-dashboard .dokan-orders-area .dokan-order-filter-serach {

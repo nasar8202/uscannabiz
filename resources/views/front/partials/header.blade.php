@@ -3,11 +3,14 @@
    <head>
       <meta charset="UTF-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta content="width=device-width, initial-scale=1" name="viewport" />
+      
       <link rel="pingback" href="xmlrpc.php">
       <script type="text/javascript">
          document.documentElement.className = 'js';
       </script>
-
+      <link rel="icon" href="https://webprojectmockup.com/wp/uscannabiz/wp-content/uploads/2022/03/cropped-Uscannazon4-1-192x192.png" sizes="192x192" />
+      
       <title>Us Cannazon | Market Place | @yield('title', '')</title>
       <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
       <meta name="robots" content="max-image-preview:large">
@@ -29,8 +32,13 @@
       <link rel="stylesheet" id="woocommerce-general-css"href="{{ URL::asset('assets/plugins/woocommerce/assets/css/woocommerce.css?ver=6.3.1') }}" type="text/css" media="all">
       <style id="woocommerce-inline-inline-css" type="text/css">.woocommerce form .form-row .required { visibility: visible; }</style>
       <link rel="stylesheet" id="dokan-style-css"href="{{ URL::asset('assets/plugins/dokan-lite/assets/css/style.css?ver=1647983870') }}" type="text/css" media="all">
+      <!--Zeveloper-->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" defer />
+      <!--Zeveloper-->
       <link rel="stylesheet" id="dokan-fontawesome-css"href="{{ URL::asset('assets/plugins/dokan-lite/assets/vendors/font-awesome/font-awesome.min.css?ver=3.4.1') }}" type="text/css" media="all">
+      
       <link rel="stylesheet" id="divi-style-css"href="{{ URL::asset('assets/themes/Divi-child/style.css?ver=4.15.1') }}" type="text/css" media="all">
+      <link rel="stylesheet" id="divi-style-css"href="{{ URL::asset('assets/style/style.css') }}" type="text/css" media="all">
       <script type="text/javascript" src="{{ URL::asset('assets/wp-includes/js/jquery/jquery.min.js?ver=3.6.0" id="jquery-core-js')}}"></script>
       <script type="text/javascript" src="{{ URL::asset('assets/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2')}}" id="jquery-migrate-js"></script>
       <script type="text/javascript" id="jquery-js-after">
@@ -53,6 +61,7 @@
          <style>.woocommerce-product-gallery{ opacity: 1 !important; }</style>
       </noscript>
       <link rel="stylesheet" id="et-core-unified-34-cached-inline-styles"href="{{ URL::asset('assets/et-cache/34/et-core-unified-34.min.css?ver=1655922750') }}">
+      
    </head>
    <body class="home page-template-default page page-id-34 theme-Divi et-tb-has-template et-tb-has-footer woocommerce-no-js et_button_no_icon et_pb_button_helper_class et_fixed_nav et_show_nav et_secondary_nav_enabled et_primary_nav_dropdown_animation_fade et_secondary_nav_dropdown_animation_fade et_header_style_left et_cover_background et_pb_gutter et_pb_gutters3 et_pb_pagebuilder_layout et_no_sidebar et_divi_theme et-db dokan-theme-Divi">
       <div id="page-container">
@@ -64,7 +73,7 @@
                      <a href="mailto:Emailinfo@uscannazon.com"><span id="et-info-email">Emailinfo@uscannazon.com</span></a>
                   </div>
                   <div id="et-secondary-menu">
-                    <a href="{{ route('cart.index') }}">Cart
+                    <a href="{{ route('cart.index') }}">Items
                         @if (Cart::instance('default')->count() > 0)
                             <span class="cart-count"><span>{{ Cart::instance('default')->count() }}</span></span>
                         @endif
