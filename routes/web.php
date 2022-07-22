@@ -77,6 +77,7 @@ Route::middleware(['user'])->prefix('user')->group(function () {
 
     Route::post('update-account/{id}', 'User\UserController@updateUserAccount')->name('update-account');
 
+    Route::get('/getVendor', 'User\UserController@getVendor')->name('getVendor');
     Route::get('/my-orders', 'User\UserController@MyOrders')->name('MyOrders');
     Route::get('/order/{id}', 'User\UserController@show')->name('order');
     //WishList

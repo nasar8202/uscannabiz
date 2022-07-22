@@ -1,6 +1,7 @@
 <?php
 
 use Carbon\Carbon;
+use App\Models\Product;
 
 function presentPrice($price)
 {
@@ -17,6 +18,11 @@ function presentDate($date)
     return Carbon::parse($date)->format('M d, Y');
 }
 
+function GetProducts()
+{
+    $products = Product::where('status',1)->get();
+    return $products;
+}
 function setActiveCategory($category, $output = 'active')
 {
     return request()->category == $category ? $output : '';
