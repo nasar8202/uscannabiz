@@ -84,7 +84,7 @@
                                           <label for="password">Confirm Password&nbsp;<span class="required">*</span></label>
                                           <input class="woocommerce-Input woocommerce-Input--text input-text" type="password" value="{{ old('password') }}" name="confirm_password" id="password" autocomplete="current-password">
                                        </p>
-                                         <div class="show_if_seller">
+
                                             <div class="split-row form-row-wide">
                                                <p class="form-row form-group">
                                                   <label for="first-name">First Name <span class="required">*</span></label>
@@ -100,10 +100,10 @@
                                              <label for="shop-phone">Phone Number<span class="required">*</span></label>
                                              <input type="text" class="input-text form-control" name="phone" id="shop-phone" value="" required="required">
                                           </p>
-                                            <div class="for_vender">
 
-                                             </div>
-                                         </div>
+                                         <div class="for_vender">
+
+                                        </div>
                                          <p class="form-row form-group user-role vendor-customer-registration">
                                             <label class="radio">
                                             <input type="radio" name="role" value="2" checked>
