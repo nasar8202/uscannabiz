@@ -57,7 +57,40 @@ class ProductController extends Controller
         }
         return view('admin.product.index');
     }
+    public function requestProduct()
+    {
+        try {
+            if (request()->ajax()) {
+                return datatables()->of(Product::with('category')->where('approvel_admin_status',0)->orderBy('created_at','desc')->get())
+                ->addIndexColumn()
+                    ->addColumn('action', function ($data) {
+                        return '<a title="Approve" href="productStatusAccept/' . $data->id . '"
+                        class="btn btn-success btn-sm">Approve &nbsp;<i class="fa fa-check"></i></a>&nbsp;';
+                    })->rawColumns([ 'action'])->make(true);
+            }
+        } catch (\Exception $ex) {
+            return redirect('/')->with('error', 'SomeThing Went Wrong baby');
+        }
+        return view('admin.product.product-request');
+    }
 
+    public function productStatusAccept($id)
+    {
+
+        // $customer =Customers::join('Users','Users.email','=','Customers.email')->where('role_id','=',2)->where('Customers.user_id',$id)->first();
+
+        $customer =Product::where('id',$id)->first();
+        $customer->approvel_admin_status = 1;
+        $customer->save();
+
+        //  $data_status = array(
+        //     'approvel_status'=>1
+        //  );
+
+
+
+            return back()->with('success','Customer Approved Successfully');
+    }
     /**
      * Show the form for creating a new resource.
      *

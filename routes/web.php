@@ -142,6 +142,10 @@ Route::namespace('Admin')->prefix('/admin')->middleware('admin')->group(function
 
     //category
     Route::get('/category', 'Categories@index')->name('category');
+
+    Route::get('/requestProduct', 'ProductController@requestProduct')->name('product.requestProduct');
+    Route::get('productStatusAccept/{id}', 'ProductController@productStatusAccept')->name('productStatusAccept');
+
     Route::match(['get', 'post'], '/add-category', 'Categories@addCategory')->name('admin.add-category');
     Route::match(['get', 'post'], '/category-edit/{id}', 'Categories@edit')->name('admin.edit-category');
     Route::get('/category-view/{id}', 'Categories@show')->name('category-view');

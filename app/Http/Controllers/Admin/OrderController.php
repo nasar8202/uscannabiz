@@ -154,6 +154,7 @@ class OrderController extends Controller
                 // $vendor_request = VendorRequest::where('vendor_id',$check->user_id)->orderBy('created_at','desc')->get();
                 // $order_check = Order::where('id',$vendor_request->order_id)->first();
                  //dd($vendor_request);
+                 dd(VendorRequest::where('vendor_id',$check_vendor->user_id)->orderBy('created_at','desc')->get());
                 // return datatables()->of(Order::where(['customer_id'=>$users->customers_id,'status'=>3])->orderBy('created_at','desc')->get())
                 return datatables()->of(VendorRequest::where('vendor_id',$check_vendor->user_id)->orderBy('created_at','desc')->get())
                 ->addIndexColumn()
@@ -166,7 +167,7 @@ class OrderController extends Controller
                 })->addColumn('email', function ($data) {
                     return $data->email??'';
                 })->addColumn('phone', function ($data) {
-                    return $data->phone_num;
+                    return $data->phone_num??'';
                 })->addColumn('order_date', function ($data) {
                     return date('d-M-Y', strtotime($data->created_at)) ?? '';
                 })->addColumn('status', function ($data) {

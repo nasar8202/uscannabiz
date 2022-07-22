@@ -54,7 +54,7 @@ class ProductController extends Controller
 
     public function addProductForm()
     {
-        
+
         $categories = Category::get();
         $products = Product::whereStatus(1)->get();
         return view('vendor.product.addProductForm',compact('categories','products'));
@@ -188,6 +188,7 @@ class ProductController extends Controller
         // }
 
     }
+
 
     public function checkProductSkuVendor(Request $request)
     {

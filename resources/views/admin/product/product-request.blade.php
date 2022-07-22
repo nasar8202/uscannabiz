@@ -116,7 +116,6 @@
                                             <th>Category</th>
                                             <th>Price</th>
                                             <th>Quantity</th>
-                                            <th>Status</th>
 
                                             <th>Action</th>
                                         </tr>
@@ -185,7 +184,7 @@
                 serverSide: true,
                 pageLength: 10,
                 ajax: {
-                    url: `{{ route('product.index') }}`,
+                    url: `{{ route('product.requestProduct') }}`,
                 },
                 columns: [
                     {data: 'DT_RowIndex', name: 'DT_RowIndex'},
@@ -210,10 +209,7 @@
                         data: 'product_qty',
                         name: 'product_qty'
                     },
-                    {
-                        data: 'status',
-                        name: 'status'
-                    },
+
 
                     {
                         data: 'action',
