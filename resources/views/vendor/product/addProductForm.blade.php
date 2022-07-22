@@ -88,7 +88,7 @@
 								<li class="products {{ Request::route()->getName() == 'product' ? 'active' : '' }}"><a href="{{route('product')}}"><i class="fas fa-briefcase"></i> Products</a></li>
 								<li class="orders {{ Request::route()->getName() == 'vendor_order' ? 'active' : '' }}"><a href="{{route('vendor_order')}}"><i class="fas fa-shopping-cart"></i> Orders</a></li>
 								<li class="orders {{ Request::route()->getName() == 'show_brokers' ? 'active' : '' }}"><a href="{{route('show_brokers')}}"><i class="fas fa-shopping-cart"></i> Broker</a></li>
-	                            <li class="orders {{ Request::route()->getName() == 'show_inventory' ? 'active' : '' }}"><a href="{{route('show_inventory')}}"><i class="fas fa-shopping-cart"></i> Inventory</a></li>  
+	                            <li class="orders {{ Request::route()->getName() == 'show_inventory' ? 'active' : '' }}"><a href="{{route('show_inventory')}}"><i class="fas fa-shopping-cart"></i> Inventory</a></li>
                                 {{-- <li class="withdraw"><a href="{{route('show_brokers_yajra')}}""><i class="fas fa-upload"></i> Broker Yajra</a></li> --}}
 	                              <li class="settings {{ Request::route()->getName() == 'editVendor' ? 'active' : '' }}"><a href="{{ Route('editVendor') }}"><i class="fas fa-cog"></i> Settings <i class="fas fa-angle-right pull-right"></i></a></li>
 	                              {{-- <li class="dokan-common-links dokan-clearfix">
@@ -150,6 +150,10 @@
                      <p class="form-row form-group">
                         <label for="last-name">Product Slug <span class="required">*</span></label>
                         <input type="text" class="input-text form-control" name="product_slug" id="last-name" value="" required="required">
+                     </p>
+                     <p class="form-row form-group">
+                        <label for="last-name">Weight <span class="required">*</span></label>
+                        <input type="text" class="input-text form-control" name="weight" id="weight" value="" required="required">
                      </p>
                      <p class="form-row form-group form-row-wide">
                         <label for="exampleInputEmail1">Product Sale</label>

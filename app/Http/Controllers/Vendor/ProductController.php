@@ -61,7 +61,7 @@ class ProductController extends Controller
     }
     public function addProduct(Request $request)
     {
-        
+
         $validator = Validator::make($request->all(), array(
 
             'product_name' => 'required',
@@ -85,9 +85,9 @@ class ProductController extends Controller
                 } else {
                     $product_image_first = null;
                 }
-                
+
                 $timestamp = mt_rand(1, time());
-               
+
                 $product = Product::create([
                     'category_id' => $request->get('main_category'),
                     'product_name' => $request->get('product_name'),
@@ -102,7 +102,7 @@ class ProductController extends Controller
                     'length' => 11,
                     'width' => 11,
                     'height' => 1,
-                    'weight' => 2,
+                    'weight' =>$request->get('weight'),
                     'description' => $request->get('description'),
                     'status' => $request->get('status') ?? 0,
                     'product_image' => $product_image_first,
@@ -299,7 +299,7 @@ class ProductController extends Controller
         $product->length = 145;
         $product->width = 12;
         $product->height = 12;
-        $product->weight = 11;
+        $product->weight =$request->get('weight');
         $product->status = $request->get('status') ?? 0;
         $product->vender_id = Auth::user()->id;
         $product->save();

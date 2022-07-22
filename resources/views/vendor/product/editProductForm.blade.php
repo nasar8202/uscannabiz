@@ -111,7 +111,7 @@
                                         @endif
             <form method="post" action="{{ route('updateProduct', ['id' => $product->id])}}" class="woocommerce-form woocommerce-form-register register" enctype="multipart/form-data">
              {{ csrf_field() }}
-              
+
              <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
                <div class="col">
                   <label for="exampleInputEmail1">Main Category</label>
@@ -125,15 +125,15 @@
             </p>
              <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
                   <label for="reg_email">Product Name<span class="required">*</span></label>
-                  <input type="text" class="woocommerce-Input woocommerce-Input--text input-text" 
+                  <input type="text" class="woocommerce-Input woocommerce-Input--text input-text"
                   name="product_name" id="reg_email" autocomplete="email" value="{{$product->product_name}}">
                </p>
-              
+
                <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
                   <label for="reg_password">Current Price<span class="required">*</span></label>
                   <input type="number" class="woocommerce-Input woocommerce-Input--text input-text" value="{{$product->product_current_price}}" name="current_price" id="reg_password" autocomplete="new-password">
                </p>
-               
+
                   <div class="split-row form-row-wide">
                      <p class="form-row form-group">
                         <label for="first-name">Product Sku <span class="required">*</span></label>
@@ -143,8 +143,12 @@
                         <label for="last-name">Product Slug <span class="required">*</span></label>
                         <input type="text" class="input-text form-control" name="product_slug" id="last-name" value="{{$product->slug}}" required="required">
                      </p>
-                  
-                  
+
+                     <p class="form-row form-group">
+                        <label for="last-name">Weight <span class="required">*</span></label>
+                        <input type="text" class="input-text form-control" name="weight" id="last-name" value="{{$product->weight}}" required="required">
+                     </p>
+
                   <p class="form-row form-group form-row-wide">
                      <label for="exampleInputEmail1">Product Sale</label>
                  <input type="checkbox" name="product_sale" class="form-control" id="product_sale" style="height: 20px;width: 20px;" value="yes" @if(($product->product_sale) == 'yes') {{ 'checked' }} @endif >
@@ -154,21 +158,21 @@
                         <input type="text" class="input-text form-control" readonly name="product_sale_percentage" id="product_sale_percentage" value="{{$product->product_sale_percentage}}" required="required">
 
                         </p>
-                 
+
                </div>
                <p class="form-row form-group form-row-wide">
                      <label for="exampleInputEmail1">Product Stock</label>
 
 
                      <input type="checkbox" name="product_stock" class="form-control" id="product_stock" style="height: 20px;width: 20px;" value="yes" @if(($product->product_stock) == 'yes') {{ 'checked' }} @endif>
-                 
+
                   <p class="form-row form-group form-row-wide">
                      <label for="exampleInputEmail1">Product Stock Qty</label>
                      <input type="text" class="input-text form-control" name="product_stock_qty" id="product_stock_qty" value="{{$product->product_qty}}" required="required">
 
                   </p>
-                  
-                  
+
+
                   <p class="form-row form-group form-row-wide">
                      <label for="switch">Status</label>
                      <label class="switch"><input type="checkbox"  data-id="" id="status-switch" name="status" value="1" @if(($product->status) == '1') {{ 'checked' }} @endif >
@@ -180,7 +184,7 @@
                      <label for="category">Description</label>
                   <textarea class="form-control {{ $errors->has('main_category') ? 'has-error' : ''}}"  name="description" id="description" placeholder="Description" required>{{strip_tags($product->description)}}</textarea>
                   {!! $errors->first('description', '<p class="help-block">:message</p>') !!}
-                                                
+
                   </p>
                   <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
                     <label for="reg_email">Meta Title</label>
@@ -192,13 +196,13 @@
                      <label for="category">Meta Description</label>
                    <textarea class="form-control " name="meta-description" id="meta-description" placeholder="Meta Description" required>{{$meta->meta_tag_description}}</textarea>
                      {!! $errors->first('meta-description', '<p class="help-block">:message</p>') !!}
-                                                
+
                   </p>
                   <p class="form-row form-group form-row-wide">
                      <label for="category">Meta Keywords</label>
                      <textarea class="form-control" name="meta-keywords" id="meta-keywords"  placeholder="Meta Keywords" required>{{$meta->meta_tag_keywords}}</textarea>
                     {!! $errors->first('meta-keywords', '<p class="help-block">:message</p>') !!}
-                                                
+
                   </p>
                   <div class="row">
                      <table class="table">
@@ -224,7 +228,7 @@
                          </tbody>
                      </table>
                  </div>
-                  
+
                  <hr>
                  {{-- <div class="row" id="related_products">
                     <div class="col">
@@ -281,13 +285,13 @@
         $('#gallery_0').on('change',function(e) {
            var oFReader = new FileReader();
         oFReader.readAsDataURL(document.getElementById('gallery_0').files[0]);
-    
+
         oFReader.onload = function (oFREvent) {
             document.getElementById('img_0').src = oFREvent.target.result;
         };
         });
      });
-    
+
      $('#product_sale').on('click',function (e){
                     if($('#product_sale').prop('checked') == true){
                         $('#product_sale_percentage').prop('readonly', false);
@@ -302,10 +306,10 @@
                     $('#product_stock_qty').prop('readonly', true);
                 }
             });
-    
+
             var counter2 = 1;
             function addMoreRelatedProducts(){
-    
+
                 $("#add_more_related").append(`<tr id="row_related_${counter2}" class="row_related_prod"><td>
                     <select id="related_prod_id_${counter2}" class="woocommerce-Input woocommerce-Input--text input-text form-control related_prod" name="related_prod_id[]" required>
                        <option value="">Select Product</option>
@@ -346,7 +350,6 @@
                 }
                 $('#row_related_'+counter).remove();
             }
-            
+
     </script>
     @endsection
-    
