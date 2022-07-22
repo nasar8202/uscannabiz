@@ -31,4 +31,33 @@ body, input, textarea, select {
     font-weight: 400;
     font-style: normal
 }
-
+/*22-7-22*/
+.page-id-34 .et_full_width_page #left-area, .et_no_sidebar #left-area {
+    width: 79.125% !important;
+    margin:0 auto;
+}
+.page-id-34 .et_full_width_page .woocommerce form .form-row {
+    width: 50%;
+}
+.page-id-34 .et_full_width_page .woocommerce form p.form-row.form-row-wide {
+    width: 100%;
+}
+input[type='submit'].dokan-btn-danger, a.dokan-btn-danger, .dokan-btn-danger {
+    background-color: #0d4400;
+    border-color: #0d4400;
+}
+.woocommerce #respond input#submit, .woocommerce a.button, .woocommerce button.button, .woocommerce input.button {
+    border-radius: 50px;
+    padding: 10px 30px;
+    border-width: 2px;
+}
+.woocommerce a.button.alt:hover, .woocommerce-page a.button.alt:hover, .woocommerce button.button.alt:hover, .woocommerce button.button.alt.disabled:hover, .woocommerce-page button.button.alt:hover, .woocommerce-page button.button.alt.disabled:hover, .woocommerce input.button.alt:hover, .woocommerce-page input.button.alt:hover, .woocommerce #respond input#submit.alt:hover, .woocommerce-page #respond input#submit.alt:hover, .woocommerce #content input.button.alt:hover, .woocommerce-page #content input.button.alt:hover, .woocommerce a.button:hover, .woocommerce-page a.button:hover, .woocommerce button.button:hover, .woocommerce-page button.button:hover, .woocommerce input.button:hover, .woocommerce-page input.button:hover, .woocommerce #respond input#submit:hover, .woocommerce-page #respond input#submit:hover, .woocommerce #content input.button:hover, .woocommerce-page #content input.button:hover, .woocommerce button.button:disabled:hover, .woocommerce-page button.button:disabled:hover{
+    border-radius: 50px;
+    padding: 10px 30px;
+}
+.woocommerce a.button.alt:after, .woocommerce-page a.button.alt:after, .woocommerce button.button.alt:after, .woocommerce-page button.button.alt:after, .woocommerce input.button.alt:after, .woocommerce-page input.button.alt:after, .woocommerce #respond input#submit.alt:after, .woocommerce-page #respond input#submit.alt:after, .woocommerce #content input.button.alt:after, .woocommerce-page #content input.button.alt:after, .woocommerce a.button:after, .woocommerce-page a.button:after, .woocommerce button.button:not(.button-confirm):after, .woocommerce-page button.button:not(.button-confirm):after, .woocommerce input.button:after, .woocommerce-page input.button:after, .woocommerce #respond input#submit:after, .woocommerce-page #respond input#submit:after, .woocommerce #content input.button:after, .woocommerce-page #content input.button:after, .woocommerce a.button:before, .woocommerce-page a.button:before, .woocommerce button.button:before, .woocommerce-page button.button:before, .woocommerce input.button:before, .woocommerce-page input.button:before, .woocommerce #respond input#submit:before, .woocommerce-page #respond input#submit:before, .woocommerce #content input.button:before, .woocommerce-page #content input.button:before{
+    display:none;
+}
+.woocommerce #respond input#submit, .woocommerce a.button, .woocommerce button.button, .woocommerce input.button {
+    border: 2px solid #0d4400;
+}
