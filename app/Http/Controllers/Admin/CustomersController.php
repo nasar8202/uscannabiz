@@ -92,7 +92,7 @@ class CustomersController extends Controller
         // $customer->user_id = $request->input('user_id');
         $customer->save();
         $customer_id = $customer->id;
-        
+
         $user = new User;
         $user->name = $request->input('first_name');
         $user->email = $request->input('email');
@@ -100,7 +100,7 @@ class CustomersController extends Controller
         $user->role_id = 4;
         $user->customers_id = $customer_id;
         $user->save();
-        
+
         $user_id = $user->id;
         $customer_user = Customers::find($customer_id);
         $customer_user->user_id = $user_id;
@@ -199,7 +199,7 @@ class CustomersController extends Controller
         $customer->country = $request->input('country');
         $customer->address = $request->input('address');
         $customer->user_id = $request->input('user_id');
-        
+
         $customer->broker_percentage = $request->input('broker_percentage');
         $customer->save();
 
@@ -226,7 +226,7 @@ class CustomersController extends Controller
     public function destroy($id)
     {
         $users=User::where('customers_id','=',$id)->first();
-        
+
         $customers = Customers::where('email','=',$users->email)->delete();
 
         if(!empty($users) ){
@@ -243,7 +243,7 @@ class CustomersController extends Controller
             if (request()->ajax()) {
                 return datatables()->of(User::where('role_id','=',2)->where('approvel_status',0)->get())
                     ->addIndexColumn()
-                    
+
                     ->addColumn('status', function ($data) {
                         if ($data->status == 0) {
                             return '<label>Pending</label>';
@@ -252,18 +252,18 @@ class CustomersController extends Controller
                         }
                     })
                     ->addColumn('action', function ($data) {
-                        return '<a title="Approve" href="customerStatusAccept/' . $data->id . '" 
+                        return '<a title="Approve" href="customerStatusAccept/' . $data->id . '"
                          class="btn btn-success btn-sm">Approve &nbsp;<i class="fa fa-check"></i></a>&nbsp;';
-                
+
                     })->rawColumns(['status',  'action'])->make(true);
             }
         } catch (\Exception $ex) {
             return redirect('/')->with('error', 'SomeThing Went Wrong baby');
         }
-       
-        
+
+
         // try {
-            
+
         //     // $check =Customers::join('Users','Users.email','=','Customers.email')->where('role_id','=',2)->where('status',0)->get();
         //     //  dd($check);
         //     if (request()->ajax()) {
@@ -271,18 +271,18 @@ class CustomersController extends Controller
         //         // return datatables()->of(Customers::join('Users','Users.id' ,'=' ,'Customers.user_id')->where('role_id','=',3)->get())
         //         return datatables()->of(User::where('role_id','=',2)->where('status',0)->get()
         //         )
-                    
+
         //             ->addColumn('action', function ($data) {
         //                 // return $data->user_id;
         //                 return '
-        //                 <a title="Approve" href="customerStatusAccept/' . $data->id . '" 
+        //                 <a title="Approve" href="customerStatusAccept/' . $data->id . '"
         //                 class="btn btn-success btn-sm">Approve &nbsp;<i class="fa fa-check"></i></a>&nbsp;';
 
 
         //             })->rawColumns(['status','action'])->make(true);
-        //             // return '<a title="View" href="customerStatusReject/'  . $data->id . '" 
+        //             // return '<a title="View" href="customerStatusReject/'  . $data->id . '"
         //             //     class="btn btn-danger btn-sm"><i class="fa fa-times" aria-hidden="true"></i></a>&nbsp;
-        //             //     <a title="View" href="customerStatusAccept/' . $data->id . '" 
+        //             //     <a title="View" href="customerStatusAccept/' . $data->id . '"
         //             //     class="btn btn-success btn-sm"><i class="fa fa-check"></i></a>&nbsp;';
         //     }
         // } catch (\Exception $ex) {
@@ -294,35 +294,35 @@ class CustomersController extends Controller
 
     public function customerStatusAccept($id)
     {
-        
+
         // $customer =Customers::join('Users','Users.email','=','Customers.email')->where('role_id','=',2)->where('Customers.user_id',$id)->first();
-        
+
         $customer =User::where('id',$id)->first();
         $customer->approvel_status = 1;
         $customer->save();
-           
+
         //  $data_status = array(
         //     'approvel_status'=>1
         //  );
-         
-        
-        
+
+
+
             return back()->with('success','Customer Approved Successfully');
     }
     public function customerStatusReject($id)
     {
-            
+
         // $customer =Customers::join('Users','Users.email','=','Customers.email')->where('role_id','=',2)->where('Customers.user_id',$id)->first();
-        
+
         $customer =Customers::where('user_id',$id)->first();
-           
+
          $data_status = array(
             'approvel_status'=>2
          );
-         
+
             $customer->update($data_status);
-        
-        
+
+
             return back()->with('success','Customer Rejected Successfully');
     }
 

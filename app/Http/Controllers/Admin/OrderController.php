@@ -153,18 +153,18 @@ class OrderController extends Controller
                 // $vendor_request_customer = VendorRequest::where('vendor_id',$check_vendor->user_id)->orderBy('created_at','desc')->get();
                 // $vendor_request = VendorRequest::where('vendor_id',$check->user_id)->orderBy('created_at','desc')->get();
                 // $order_check = Order::where('id',$vendor_request->order_id)->first();
-                // dd($vendor_request);
+                 //dd($vendor_request);
                 // return datatables()->of(Order::where(['customer_id'=>$users->customers_id,'status'=>3])->orderBy('created_at','desc')->get())
                 return datatables()->of(VendorRequest::where('vendor_id',$check_vendor->user_id)->orderBy('created_at','desc')->get())
                 ->addIndexColumn()
                 ->addColumn('customer', function ($data) {
                     // if ($data->customer_id == null) {
-                        return $data->full_name;
+                        return $data->full_name??'';
                     // } else {
                     //     return $data->customer->first_name . ' ' . $data->customer->last_name;
                     // }
                 })->addColumn('email', function ($data) {
-                    return $data->email;
+                    return $data->email??'';
                 })->addColumn('phone', function ($data) {
                     return $data->phone_num;
                 })->addColumn('order_date', function ($data) {
@@ -343,8 +343,25 @@ class OrderController extends Controller
         $vendor_save = VendorRequest::find($request->vendor_request_id);
         $vendor_save->order_id = $order_id;
         $vendor_save->save();
+        $product = Product::where('id', $request->input('product_id'))->first();
+        $details = [
+            'customer_name'=> $request->customer_name,
+            'customer_email' => $request->input('customer_email'),
+            'phone_num' => $request->input('phone_num'),
+            'city' => $request->input('shipping_city'),
+            'quantity' => $request->input('quantity'),
+            'address'=>  $request->input('shipping_address'),
+            'product_name'=>$product->product_name,
+            'total'=>$sub_total
+        ];
+        $vendor = Customers::where('id',$request->input('vendor_id'))->first();
+// dd($vendor);
+        $usersArray = [$request->input('customer_email'), $vendor->email];
+        foreach($usersArray as $user){
+            //echo $user;
+            \Mail::to($user)->send(new \App\Mail\SendEmailCustomerBroker($details));
 
-
+        }
         return redirect()->route('order.index')->with(['success' => 'Order Updated Successfully']);
     }
 
