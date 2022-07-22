@@ -125,7 +125,7 @@ Route::namespace('Vendor')->prefix('/vendor')->middleware('vendor')->group(funct
 
 
 });
-
+Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::namespace('Admin')->prefix('/admin')->middleware('admin')->group(function () {
     //Dashboard
     Route::get('/dashboard', 'AdminController@dashboard')->name('dashboard');
