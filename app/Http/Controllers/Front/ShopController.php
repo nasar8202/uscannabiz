@@ -47,8 +47,8 @@ class ShopController extends Controller
     public function productCategory($slug,$id)
     {
         $title = $slug;
-        $products = Product::where('category_id',$id)->get();
-        $productCount = Product::where('category_id',$id)->count();
+        $products = Product::where('category_id',$id)->where('approvel_admin_status',1)->get();
+        $productCount = Product::where('category_id',$id)->where('approvel_admin_status',1)->count();
         $categories = Category::where('status',1)->with('products')->first();
         return view('front.shop.show',compact('products','categories','productCount','title'));
     }

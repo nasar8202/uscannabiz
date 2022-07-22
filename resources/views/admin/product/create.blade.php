@@ -171,12 +171,12 @@
                                                     <input type="number" name="current_price" placeholder="Current Price" class="form-control {{ $errors->has('current_price') ? 'has-error' : ''}}" value="{{old('current_price')}}"  required>
                                                     {!! $errors->first('current_price', '<p class="help-block">:message</p>') !!}
                                                 </div>
-                                                <div class="col">
+                                                {{-- <div class="col">
                                                     <label for="exampleInputEmail1">Product SKU*</label>
                                                     <input type="text" name="product_sku" placeholder="Product SKU" class="form-control {{ $errors->has('product_sku') ? 'has-error' : ''}}" id="product_sku" value="{{old('product_sku')}}"  required>
                                                     <span id="sku_span"></span>
                                                     {!! $errors->first('product_sku', '<p class="help-block">:message</p>') !!}
-                                                </div>
+                                                </div> --}}
                                                 <div class="col">
                                                     <label for="exampleInputEmail1">Product Slug*</label>
                                                     <input type="text" name="product_slug" class="form-control {{ $errors->has('product_slug') ? 'has-error' : ''}}" placeholder="Product Slug" id="product_slug" value="{{old('product_slug')}}"  required>
@@ -410,17 +410,17 @@
                                     <table class="table table-bordered">
                                         <thead>
                                         <tr>
-                                                                                       <th>Product ID</th>
-                                            <th>Product Name</th>
-                                                                                       <th>Price</th>
-                                                                                       <th>Qty</th>
-                                            <th>Action</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody id="add_more_related">
-                                        </tbody>
-                                    </table>
-                                </div> --}}
+                                                                                       {{-- <th>Product ID</th> --}}
+                                            {{-- <th>Product Name</th> --}}
+                                                                                       {{-- <th>Price</th> --}}
+                                                                                       {{-- <th>Qty</th> --}}
+                                            {{-- <th>Action</th> --}}
+                                        {{-- </tr> --}}
+                                        {{-- </thead> --}}
+                                        {{-- <tbody id="add_more_related"> --}}
+                                        {{-- </tbody> --}}
+                                    {{-- </table> --}}
+                                {{-- </div> --}} 
                             </div>
                                 <div class="card-footer text-right">
                                     <button type="submit" class="btn btn-primary" id="submit_btn" style="">Submit</button>

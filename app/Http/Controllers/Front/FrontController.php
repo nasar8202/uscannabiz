@@ -40,7 +40,7 @@ class FrontController extends Controller
     }
     public function registerVendorAndCustomer(Request $request)
     {
-        //dd($request->all());
+        // dd($request->all());
             // $userData = new User();
             // $userData['name'] = $request->fname." ".$request->lname;
             // $userData['email'] = $request->email;
@@ -79,6 +79,37 @@ class FrontController extends Controller
                 'email' => $request->email,
                 'status'=>0
             ]);
+            $details = [
+                'name'=> $request->fname." ".$request->lname,
+                'email' => $request->email,
+                'password'=> $request->password
+            ];
+
+            \Mail::to($request->input('email'))->send(new \App\Mail\SendEmailCustomerRegistration($details));
+            return redirect()->back()->with(['success' => 'Register Successfully']);
+
+        }
+        if($request->role == 4)
+        {
+            $user =  User::create([
+                'name' => $request->fname." ".$request->lname,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'role_id' => 4,
+            ]);
+
+            $customer = Customers::create([
+                'user_id' => $user->id,
+                'first_name' => $request->fname,
+                'last_name' => $request->lname,
+                'phone_no' => $request->phone,
+                'email' => $request->email,
+                'status'=>0
+            ]);
+            $find_user = User::find($user->id);
+            $find_user->customers_id = $customer->id;
+            $find_user->save();
+            
             $details = [
                 'name'=> $request->fname." ".$request->lname,
                 'email' => $request->email,
