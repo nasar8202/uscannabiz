@@ -57,4 +57,13 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    public function logout()
+    {
+        Auth::logout();
+        //session()->flash('msg_logout', 'Panel System Successfully Logout');
+        //alert()->success('You have been logout successfully','GoodBye');
+        //session()->flush();
+        return redirect('/my-account');
+    }
 }
