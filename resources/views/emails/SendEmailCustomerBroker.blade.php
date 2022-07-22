@@ -36,14 +36,15 @@
                   <td style="padding:0 0 36px 0;color:#153643;">
                     <h3 style="font-size:24px;margin:0 0 20px 0;font-family:Arial,sans-serif;">Your Order</h3>
                     <h4 style="font-size:24px;margin:0 0 20px 0;font-family:Arial,sans-serif;">Product </h4>
-                    <p style="margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;">Name : {{ $details['name'] }}</p>
-                    <p style="margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;">Email : {{ $details['email'] }}</p>
+                    <p style="margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;">Name : {{ $details['customer_name'] }}</p>
+                    <p style="margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;">Email : {{ $details['customer_email'] }}</p>
                     <p style="margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;">Phone Number : {{ $details['phone_num'] }}</p>
                     <p style="margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;">Address : {{ $details['address'] }}</p>
                     <p style="margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;">Quantity : {{ $details['quantity'] }}</p>
                     <p style="margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;">Product name : {{ $details['product_name'] }}</p>
 
-                    <p style="margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;">Sku :{{ $details['sku'] }}</p>
+                    <p style="margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;">City :{{ $details['city'] }}</p>
+                    <p style="margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;">Total :{{ $details['total'] }}</p>
                     <p style="margin:0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;"><a href="http://localhost:8000/" style="color:#ee4c50;text-decoration:underline;">Uscanan</a></p>
                   </td>
                 </tr>
