@@ -61,3 +61,18 @@ input[type='submit'].dokan-btn-danger, a.dokan-btn-danger, .dokan-btn-danger {
 .woocommerce #respond input#submit, .woocommerce a.button, .woocommerce button.button, .woocommerce input.button {
     border: 2px solid #0d4400;
 }
+.woocommerce form .show-password-input::after, .woocommerce-page form .show-password-input::after {
+    speak: never;
+    font-weight: 400;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    margin-left: 0.618em;
+    text-decoration: none;
+    content: "\e000";
+    position: relative;
+    top: 2px;
+    margin-right: 2px;
+    font-family: ETmodules;
+}
