@@ -39,50 +39,7 @@ use Illuminate\Support\Facades\Request;
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" defer />
       <!--Zeveloper-->
       <link rel="stylesheet" id="dokan-fontawesome-css"href="{{ URL::asset('assets/plugins/dokan-lite/assets/vendors/font-awesome/font-awesome.min.css?ver=3.4.1') }}" type="text/css" media="all">
-      <style>
-
-.modal {
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    opacity: 0;
-    visibility: hidden;
-    transform: scale(1.1);
-    transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
-    z-index: 100;
-}
-.modal-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    padding: 1rem 1.5rem;
-    width: 24rem;
-    border-radius: 0.5rem;
-}
-.close-button {
-    float: right;
-    width: 1.5rem;
-    line-height: 1.5rem;
-    text-align: center;
-    cursor: pointer;
-    border-radius: 0.25rem;
-    background-color: lightgray;
-}
-.close-button:hover {
-    background-color: darkgray;
-}
-.show-modal {
-    opacity: 1;
-    visibility: visible;
-    transform: scale(1.0);
-    transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
-}
-      </style>
+      
       <link rel="stylesheet" id="divi-style-css"href="{{ URL::asset('assets/themes/Divi-child/style.css?ver=4.15.1') }}" type="text/css" media="all">
       <link rel="stylesheet" id="divi-style-css"href="{{ URL::asset('assets/style/style.css') }}" type="text/css" media="all">
       <script type="text/javascript" src="{{ URL::asset('assets/wp-includes/js/jquery/jquery.min.js?ver=3.6.0" id="jquery-core-js')}}"></script>
@@ -118,13 +75,13 @@ use Illuminate\Support\Facades\Request;
                      <span id="et-info-phone"><a href="tel:1800-824-4749">Call Us : +1 (800) 824 4749</a></span>
                      <a href="mailto:Emailinfo@uscannazon.com"><span id="et-info-email">Emailinfo@uscannazon.com</span></a>
                   </div>
-                  {{-- <div id="et-secondary-menu">
+                  <div id="et-secondary-menu">
                     <a href="{{ route('cart.index') }}">Items
                         @if (Cart::instance('default')->count() > 0)
                             <span class="cart-count"><span>{{ Cart::instance('default')->count() }}</span></span>
                         @endif
                     </a>
-                  </div> --}}
+                  </div>
                </div>
             </div>
             <header id="main-header" data-height-onload="66">
@@ -143,6 +100,7 @@ use Illuminate\Support\Facades\Request;
 
                            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home page_item page-item-34 current_page_item menu-item-43 {{ Request::route()->getName() == 'homepage' ? 'current-menu-item' : '' }}"><a href="{{ route('homepage') }}" aria-current="page">Home</a></li>
                            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-44 {{ Request::route()->getName() == 'aboutUs' ? 'current-menu-item' : '' }}"><a href="{{ route('aboutUs') }}">About Us</a></li>
+<<<<<<< HEAD
                            @php
                            $role = Auth::user();
                            @endphp
@@ -150,6 +108,8 @@ use Illuminate\Support\Facades\Request;
                            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-44"><a href="javascript:void(0)" class="trigger">Product Request</a></li>
                            @endif
                             </li>
+=======
+>>>>>>> 17cdf3d77f7d6eb02a448b0976317893b18a74b8
                            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-46 {{ Request::route()->getName() == 'faq' ? 'current-menu-item' : '' }}"><a href="{{ route('faq') }}">FAQ Page</a></li>
                            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-45 {{ Request::route()->getName() == 'contactUs' ? 'current-menu-item' : '' }}"><a href="{{ route('contactUs') }}">Contact Us</a></li>
                            {{-- @if(Auth::check())
