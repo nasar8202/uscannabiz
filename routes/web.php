@@ -29,7 +29,7 @@ Route::view('/thanks', 'front.thanks')->name('order_thanks');
 Route::post('/vendor-request', 'Vendor\VendorRequestController@store')->name('vendorRequest_shop');
 Route::get('/wishlist', 'Front\ShopController@view_wishlist')->name('shop.view_wishlist');
 Route::get('/shop', 'Front\ShopController@index')->name('shop.index');
-// Route::get('/shop/{slug}', 'Front\ShopController@show')->name('shop.show');
+Route::get('/shop/{slug}', 'Front\ShopController@show')->name('shop.show');
 Route::get('/shop/{slug}', 'Front\ShopController@show')->name('shop.showProduct');
 Route::post('shop/add-wishlist', 'Front\ShopController@add_wishlist')->name('shop.wishlist');
 
@@ -125,7 +125,7 @@ Route::namespace('Vendor')->prefix('/vendor')->middleware('vendor')->group(funct
 
 
 });
-Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
+
 Route::namespace('Admin')->prefix('/admin')->middleware('admin')->group(function () {
     //Dashboard
     Route::get('/dashboard', 'AdminController@dashboard')->name('dashboard');

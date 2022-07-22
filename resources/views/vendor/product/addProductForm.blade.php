@@ -140,12 +140,12 @@
                </p>
 
                   <div class="split-row form-row-wide">
-                     <p class="form-row form-group">
+                     {{-- <p class="form-row form-group">
                         <label for="first-name">Product Sku <span class="required">*</span></label>
                         <input type="text" class="input-text form-control {{ $errors->has('product_sku') ? 'has-error' : ''}}" name="product_sku" id="product_sku" value="{{old('product_sku')}}" required="required">
                         <span id="sku_span"></span>
                         {!! $errors->first('product_sku', '<p class="help-block">:message</p>') !!}
-                     </p>
+                     </p> --}}
                      <p class="form-row form-group">
                         <label for="last-name">Product Slug <span class="required">*</span></label>
                         <input type="text" class="input-text form-control" name="product_slug" id="last-name" value="" required="required">

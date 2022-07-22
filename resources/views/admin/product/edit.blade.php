@@ -175,12 +175,12 @@
                                                     <input type="number" name="current_price" placeholder="Current Price" class="form-control {{ $errors->has('current_price') ? 'has-error' : ''}}" value="{{$product->product_current_price}}" required>
                                                     {!! $errors->first('current_price', '<p class="help-block">:message</p>') !!}
                                                 </div>
-                                                <div class="col">
+                                                {{-- <div class="col">
                                                     <label for="exampleInputEmail1">Product SKU*</label>
                                                     <input type="text" name="product_sku" placeholder="Product SKU" class="form-control {{ $errors->has('product_sku') ? 'has-error' : ''}}" value="{{$product->sku}}" id="product_sku" required>
                                                     <span id="sku_span"></span>
                                                     {!! $errors->first('product_sku', '<p class="help-block">:message</p>') !!}
-                                                </div>
+                                                </div> --}}
                                                 <div class="col">
                                                     <label for="exampleInputEmail1">Product Slug*</label>
                                                     <input type="text" name="product_slug" class="form-control {{ $errors->has('product_slug') ? 'has-error' : ''}}" placeholder="Product Slug" id="product_slug" value="{{$product->slug}}" required>
