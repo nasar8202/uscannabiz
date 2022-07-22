@@ -6,6 +6,7 @@
     {{-- <title>Us Cannazon | Dashboard</title>--}}
     <title>Us Cannazon</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="icon" href="{{URL::asset('assets/uploads/2022/03/Uscannazon4.png')}}" sizes="192x192" />
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
@@ -52,7 +53,7 @@
 <div class="wrapper">
     <!-- Preloader -->
     <div class="preloader flex-column justify-content-center align-items-center">
-        <img class="animation__shake" src="{{isset($setting->logo) ? URL::asset('uploads/settings/'.$setting->logo) : URL::asset('admin/dist/img/AdminLTELogo.png')}}" alt="AdminLTELogo" height="60" width="60">
+        <img class="animation__shake" src="{{isset($setting->logo) ? URL::asset('uploads/settings/'.$setting->logo) : URL::asset('assets/uploads/2022/03/Uscannazon4.png')}}" alt="AdminLTELogo" height="60" width="60">
     </div>
     <!-- Navbar -->
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -94,7 +95,7 @@
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
         <a href="{{url('admin/dashboard')}}" class="brand-link" style="text-align: center">
-            <img class="animation__shake" src="{{isset($setting->logo) ? URL::asset('uploads/settings/'.$setting->logo) : URL::asset('admin/dist/img/AdminLTELogo.png')}}" alt="Viva Unlimited LLC" style="max-width: 155px;width: 100%;height: auto;">
+            <img class="animation__shake" src="{{isset($setting->logo) ? URL::asset('uploads/settings/'.$setting->logo) : URL::asset('assets/uploads/2022/03/Uscannazon4.png')}}" alt="Viva Unlimited LLC" style="max-width: 155px;width: 100%;height: auto;">
             {{--            <span class="brand-text font-weight-light">Dashboard</span>--}}
             <p style="color: #fff;text-align: center;padding-top: 10px;font-size: 25px;margin-bottom: 0px;">
                    {{Auth::user()->name}}

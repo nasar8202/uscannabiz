@@ -43,9 +43,8 @@ class UserController extends Controller
     }
     public function MyOrders()
     {
-        $orders = Order::where('customer_id',Auth::user()->customers->id)->get();
-
-        $recentOrders = Order::where('customer_id',Auth::user()->customers->id)->orderBy('id','desc')->take(10)->get();
+        $orders = Order::where('customer_id',Auth::user()->id)->get();
+        $recentOrders = Order::where('customer_id',Auth::user()->id)->orderBy('id','desc')->take(10)->get();
 
         return view('user.myorders',compact('orders','recentOrders'));
     }

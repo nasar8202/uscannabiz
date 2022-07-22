@@ -533,7 +533,7 @@
                                                             </li>
                                                             <li
                                                                 class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--orders">
-                                                                <a href="/user/my-orders">Orders</a>
+                                                                <a href="{{route('MyOrders')}}">Orders</a>
                                                             </li>
                                                             {{-- <li
                                                                 class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--downloads">
@@ -670,7 +670,6 @@
         </div>
     </div>
 
-    <script src="{{asset('front/js/location.js')}}"></script>
     <script>
 
         $('document').ready(function () {
