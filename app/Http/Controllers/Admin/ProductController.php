@@ -115,11 +115,10 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-
+        // dd($request->all());
         $validator = Validator::make($request->all(), array(
             'main_category' => 'required',
             'product_name' => 'required',
-            'product_sku' => 'required|unique:products,sku,',
             'product_slug' => 'required|unique:products,slug,',
             'current_price' => 'required|numeric',
             'description' => 'required',
@@ -139,12 +138,12 @@ class ProductController extends Controller
                 } else {
                     $product_image_first = null;
                 }
-
+                $timestamp = mt_rand(1, time());
                 $product = Product::create([
                     'category_id' => $request->get('main_category'),
                     'sub_category_id' => $request->get('sub_category'),
                     'product_name' => $request->get('product_name'),
-                    'sku' => $request->get('product_sku'),
+                    'sku' => $timestamp." ".$request->get('product_name'),
                     'slug' => $request->get('product_slug'),
                     'product_current_price' => $request->get('current_price'),
                     'product_sale' => $request->get('product_sale') ?? 'no',
@@ -290,7 +289,6 @@ class ProductController extends Controller
         $this->validate($request, array(
             'main_category' => 'required',
             'product_name' => 'required',
-            'product_sku' => 'required|unique:products,sku,' . $id,
             'product_slug' => 'required|unique:products,slug,' . $id,
             'current_price' => 'required|numeric',
             'description' => 'required',
@@ -314,14 +312,17 @@ class ProductController extends Controller
             $request->file('product_image_first')->move(public_path() . '/uploads/products/', $product_image_first);
             $product->product_image = $product_image_first;
         } else {
+            
             $product_image_first = null;
+            
+            $timestamp = mt_rand(1, time());
         }
 
         $product->category_id  = $request->get('main_category');
         $product->sub_category_id = $request->get('sub_category');
         $product->product_name = $request->get('product_name');
         $product->description = $request->get('description');
-        $product->sku = $request->get('product_sku');
+        $product->sku = $timestamp." ".$request->get('product_name');
         $product->slug = $request->get('product_slug');
         $product->product_current_price = $request->get('current_price');
         $product->product_sale = $request->get('product_sale') ?? 'no';

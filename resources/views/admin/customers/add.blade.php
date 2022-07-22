@@ -104,6 +104,14 @@
                                         <h5>Address</h5> 
                                         <input type="text" class="form-control" required name="address" placeholder="Enter Address">
                                       </div>
+                                      <div class="form-group">
+                                        <h5>Password</h5> 
+                                        <input type="password" class="form-control" required name="password" placeholder="Enter Password">
+                                      </div>
+                                      <div class="form-group">
+                                        <h5>Confirm Password</h5> 
+                                        <input type="password" class="form-control" required name="confirm_password" placeholder="Confirm Password">
+                                      </div>
                                       {{-- <div class="form-group">
                                         <h5>Broker Percentage</h5> 
                                         <input type="number" class="form-control" required name="broker_percentage" placeholder="Enter broker Percentage">

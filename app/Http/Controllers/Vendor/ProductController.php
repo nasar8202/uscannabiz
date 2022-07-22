@@ -61,10 +61,10 @@ class ProductController extends Controller
     }
     public function addProduct(Request $request)
     {
+        
         $validator = Validator::make($request->all(), array(
 
             'product_name' => 'required',
-            'product_sku' => 'required|unique:products,sku,',
             'product_slug' => 'required|unique:products,slug,',
             'current_price' => 'required|numeric',
             'description' => 'required',
@@ -85,11 +85,13 @@ class ProductController extends Controller
                 } else {
                     $product_image_first = null;
                 }
-
+                
+                $timestamp = mt_rand(1, time());
+               
                 $product = Product::create([
                     'category_id' => $request->get('main_category'),
                     'product_name' => $request->get('product_name'),
-                    'sku' => $request->get('product_sku'),
+                    'sku' => $timestamp." ".$request->get('product_name'),
                     'slug' => $request->get('product_slug'),
                     'product_current_price' => $request->get('current_price'),
                     'product_sale' => $request->get('product_sale') ?? 'no',
