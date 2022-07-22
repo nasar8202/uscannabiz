@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\VendorRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-
+use App\Models\Product;
+use App\Models\Customers;
 class VendorRequestController extends Controller
 {
     /**
@@ -55,13 +56,15 @@ class VendorRequestController extends Controller
             //     'password' => Hash::make($request->input('first_name')),
             //     'role_id' => 4,
             // ]);
+
+
         $vendor = new VendorRequest;
         $vendor->product_id = $request->input('product_id');
-        $vendor->vendor_id = $request->input('vendor_id'); 
-        $vendor->full_name = $request->input('full_name'); 
-        $vendor->phone_num = $request->input('phone_num'); 
-        $vendor->email = $request->input('email'); 
-        $vendor->address = $request->input('address'); 
+        $vendor->vendor_id = $request->input('vendor_id');
+        $vendor->full_name = $request->input('full_name');
+        $vendor->phone_num = $request->input('phone_num');
+        $vendor->email = $request->input('email');
+        $vendor->address = $request->input('address');
         $vendor->city = $request->input('city');
         $vendor->quantity = $request->input('quantity');
         $auth = Auth::user();
@@ -69,9 +72,29 @@ class VendorRequestController extends Controller
             $vendor->customer_id = $auth->id;
         }
         $vendor->save();
+        $product = Product::where('id',$request->input('product_id'))->first();
+        //$vendor = Customer::where('id',$request->input('vendor_id'))->first();
+        $details = [
+            'name'=> $request->full_name,
+            'email' => $request->input('email'),
+            'phone_num' => $request->input('phone_num'),
+            'city' => $request->input('city'),
+            'quantity' => $request->input('quantity'),
+            'address'=>  $request->input('address'),
+            'product_name'=>$product->product_name,
+            'sku'=>$product->sku
+        ];
+        $vendor = Customers::where('id',$request->input('vendor_id'))->first();
 
-        
+        $usersArray = [$request->input('email'), $vendor->email];
+        foreach($usersArray as $user){
+            //echo $user;
+            \Mail::to($user)->send(new \App\Mail\SendEmailAdminCustomerBroker($details));
+
+        }
         return redirect()->route('order_thanks')->with('success',"Request Has Been Submited");
+        // \Mail::to($request->input('email'))->send(new \App\Mail\SendEmailAdminCustomerBroker($details));
+        // return redirect()->route('order_thanks')->with('success',"Request Has Been Submited");
         }
     }
 
