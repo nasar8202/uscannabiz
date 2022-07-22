@@ -64,7 +64,7 @@ class CustomersController extends Controller
         $validator = Validator::make($request->all(), array(
             'first_name' => 'required',
             'last_name' => 'required',
-            'email' => 'required',
+            'email' => 'unique:users|required',
             'phone' => 'required',
             'city' => 'required',
             'state' => 'required',
@@ -92,7 +92,7 @@ class CustomersController extends Controller
         // $customer->user_id = $request->input('user_id');
         $customer->save();
         $customer_id = $customer->id;
-
+        
         $user = new User;
         $user->name = $request->input('first_name');
         $user->email = $request->input('email');
@@ -100,9 +100,10 @@ class CustomersController extends Controller
         $user->role_id = 4;
         $user->customers_id = $customer_id;
         $user->save();
-
+        
+        $user_id = $user->id;
         $customer_user = Customers::find($customer_id);
-        $customer_user->user_id = $user->id;
+        $customer_user->user_id = $user_id;
         $customer_user->save();
 
         // $user =  User::create([

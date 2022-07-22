@@ -279,9 +279,8 @@ class OrderController extends Controller
     }
     public function broker_price(Request $request)
     {
-        // dd(Auth::user());
-        $customer_check = Customers::where('user_id',Auth::user()->id)->first();
         // dd($request->all());
+        // $customer_check = Customers::where('user_id',Auth::user()->id)->first();
         $random = \Carbon\Carbon::now()->format('Ymd');
 
         $order = new Order;
@@ -336,9 +335,9 @@ class OrderController extends Controller
             $items->status	 = 1;
             $items->product_subtotal_price	 = $sub_total;
             $items->save();
-            $calculate_broker_price = $sub_total/100*$customer_check->broker_percentage;
+            // $calculate_broker_price = $sub_total/100*$customer_check->broker_percentage;
             $order_set_broker_price = Order::find($order_id);
-            $order_set_broker_price->broker_price = $calculate_broker_price;
+            $order_set_broker_price->broker_price = $request->broker_price;
             $order_set_broker_price->save();
 
         $vendor_save = VendorRequest::find($request->vendor_request_id);

@@ -31,9 +31,17 @@ class AdminController extends Controller
             
             $check = Customers::where('id', $check_user->customers_id)->first();
             $check_broker = Customers::where('broker_request_id', $check->id)->first();
+            //  dd($check_broker);
+            if($check_broker != null){
             $data['orders'] = VendorRequest::where('vendor_id',$check_broker->user_id)->count();
-            // dd($data['orders'],$check_broker);
+            // dd($data['orders']);
             $data['latestOrders']= VendorRequest::where('vendor_id',$check_broker->user_id)->take(7)->get();
+            }else{
+            // dd($check);
+            $data['latestOrders']= VendorRequest::where('vendor_id',$check->user_id)->take(7)->get();
+            $data['orders'] = VendorRequest::where('vendor_id',$check->user_id)->count();
+            }
+            // dd($data['orders'],$check_broker);
             
             }
 

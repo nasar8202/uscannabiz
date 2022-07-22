@@ -93,7 +93,7 @@
 	                        <div id="dokan-navigation" aria-label="Menu">
 	                           <label id="mobile-menu-icon" for="toggle-mobile-menu" aria-label="Menu">☰</label><input id="toggle-mobile-menu" type="checkbox">
                                <ul class="dokan-dashboard-menu">
-								<li class="active dashboard"><a href="{{route('dashboard')}}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+								<li class="active dashboard"><a href="{{route('dashboard')}}"><i class="fas fa-tachometer"></i> Dashboard</a></li>
 								<li class="products"><a href="{{route('product')}}"><i class="fas fa-briefcase"></i> Products</a></li>
 								<li class="orders"><a href="{{route('vendor_order')}}"><i class="fas fa-shopping-cart"></i> Orders</a></li>
 								<li class="orders"><a href="{{route('show_brokers')}}"><i class="fas fa-shopping-cart"></i> Broker</a></li>
