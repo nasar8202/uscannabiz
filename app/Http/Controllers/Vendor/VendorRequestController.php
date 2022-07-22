@@ -8,6 +8,7 @@ use App\Models\VendorRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
+use App\Models\Customers;
 class VendorRequestController extends Controller
 {
     /**
@@ -72,7 +73,7 @@ class VendorRequestController extends Controller
         }
         $vendor->save();
         $product = Product::where('id',$request->input('product_id'))->first();
-
+        //$vendor = Customer::where('id',$request->input('vendor_id'))->first();
         $details = [
             'name'=> $request->full_name,
             'email' => $request->input('email'),
@@ -83,9 +84,17 @@ class VendorRequestController extends Controller
             'product_name'=>$product->product_name,
             'sku'=>$product->sku
         ];
+        $vendor = Customers::where('id',$request->input('vendor_id'))->first();
 
-        \Mail::to($request->input('email'))->send(new \App\Mail\SendEmailAdminCustomerBroker($details));
+        $usersArray = [$request->input('email'), $vendor->email];
+        foreach($usersArray as $user){
+            //echo $user;
+            \Mail::to($user)->send(new \App\Mail\SendEmailAdminCustomerBroker($details));
+
+        }
         return redirect()->route('order_thanks')->with('success',"Request Has Been Submited");
+        // \Mail::to($request->input('email'))->send(new \App\Mail\SendEmailAdminCustomerBroker($details));
+        // return redirect()->route('order_thanks')->with('success',"Request Has Been Submited");
         }
     }
 
