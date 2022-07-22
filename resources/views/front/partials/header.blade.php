@@ -179,7 +179,7 @@ use Illuminate\Support\Facades\Request;
                               {{-- <a href="{{ Route('edit-account') }}">My Account</a> --}}
                               @endif
                             </li>
-                            <li>
+                            <li class="logoutBtn">
                                 <a href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
                                         document.getElementById('logout-form').submit();">

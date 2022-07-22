@@ -38,7 +38,7 @@
                 <form action="{{url('admin/updateAdminPassword')}}" method="POST">
                     @csrf
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="card shadow ">
                                 <div class="card-body">
                                     <div class="form-group">
@@ -54,7 +54,7 @@
                                                placeholder="Confirm Password"
                                                required>
                                     </div>
-                                    <div class="text-center">
+                                    <div class="text-right">
                                         <button type="submit" class="btn btn-md btn-primary">Submit</button>
                                     </div>
                                 </div>
