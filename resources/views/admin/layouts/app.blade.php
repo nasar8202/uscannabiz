@@ -238,18 +238,24 @@
                                     <p>Product</p>
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a href="{{route('product.requestProduct')}}" class="nav-link {{ request()->IS('admin/requestProduct') ? 'active' : '' }}">
+                                    <i class="nav-icon fa fa-angle-double-right"></i>
+                                    <p>Produucts Request </p>
+                                </a>
+                            </li>
                             {{-- <li class="nav-item">
                                 <a href="{{route('manufacturer.index')}}" class="nav-link {{ request()->IS('admin/manufacturer') ? 'active' : '' }}">
                                     <i class="nav-icon fa fa-angle-double-right"></i>
                                     <p>Manufacturer</p>
                                 </a>
                             </li> --}}
-                            <li class="nav-item">
+                            {{-- <li class="nav-item">
                                 <a href="{{route('coupons.index')}}" class="nav-link {{ request()->IS('admin/coupons') ? 'active' : '' }}">
                                     <i class="nav-icon fa fa-angle-double-right"></i>
                                     <p>Coupons</p>
                                 </a>
-                            </li>
+                            </li> --}}
                             {{-- <li class="nav-item">
                                 <a href="{{route('collection.index')}}" class="nav-link {{ request()->IS('admin/collection') ? 'active' : '' }}">
                                     <i class="nav-icon fa fa-angle-double-right"></i>
@@ -268,12 +274,12 @@
                                     <p>Newsletter</p>
                                 </a>
                             </li> --}}
-                            <li class="nav-item">
+                            {{-- <li class="nav-item">
                                 <a href="{{route('shipping.index')}}" class="nav-link {{ request()->IS('admin/shipping') ? 'active' : '' }}">
                                     <i class="nav-icon fa fa-angle-double-right"></i>
                                     <p>Shipping Rate</p>
                                 </a>
-                            </li>
+                            </li> --}}
                         </ul>
                     </li>
                     <li class="nav-item">

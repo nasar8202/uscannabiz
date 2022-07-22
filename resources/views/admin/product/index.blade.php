@@ -104,7 +104,7 @@
 
                         <div class="card">
                             <div class="card-header">
-                                <a class="btn btn-primary addBtn" href="{{ route('product.create') }}">Add Product</a>
+                                {{-- <a class="btn btn-primary addBtn" href="{{ route('product.create') }}">Add Product</a> --}}
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">

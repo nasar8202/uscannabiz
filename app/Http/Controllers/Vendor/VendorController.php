@@ -8,6 +8,8 @@ use App\User;
 use Stripe\Customer;
 use App\Models\Order;
 use App\Models\Customers;
+use App\Models\Product;
+use App\Models\Category;
 use App\Models\OrderItem;
 use Illuminate\Http\Request;
 use App\Rules\MatchOldPassword;
@@ -132,6 +134,17 @@ class VendorController extends Controller
         }
         return view('vendor.order.index',compact('orderCount','orderCompletedCount','orderPendingCount','orderCancelledCount'));
     }
+
+    public function show_inventory()
+    {   
+        $category = Category::all();
+        $vendor_id = Auth::user()->id;
+
+        $product = DB::table('products')->where('vender_id',$vendor_id)->get();
+        
+        return view('vendor.inventory.index',compact(['category',$category ,'product',$product]));
+    }
+
     public function vendorEdit()
     {
         $user_vendor = Auth::user()->id;

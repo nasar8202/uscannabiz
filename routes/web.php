@@ -29,7 +29,7 @@ Route::view('/thanks', 'front.thanks')->name('order_thanks');
 Route::post('/vendor-request', 'Vendor\VendorRequestController@store')->name('vendorRequest_shop');
 Route::get('/wishlist', 'Front\ShopController@view_wishlist')->name('shop.view_wishlist');
 Route::get('/shop', 'Front\ShopController@index')->name('shop.index');
-// Route::get('/shop/{slug}', 'Front\ShopController@show')->name('shop.show');
+Route::get('/shop/{slug}', 'Front\ShopController@show')->name('shop.show');
 Route::get('/shop/{slug}', 'Front\ShopController@show')->name('shop.showProduct');
 Route::post('shop/add-wishlist', 'Front\ShopController@add_wishlist')->name('shop.wishlist');
 
@@ -77,6 +77,7 @@ Route::middleware(['user'])->prefix('user')->group(function () {
 
     Route::post('update-account/{id}', 'User\UserController@updateUserAccount')->name('update-account');
 
+    Route::get('/getVendor', 'User\UserController@getVendor')->name('getVendor');
     Route::get('/my-orders', 'User\UserController@MyOrders')->name('MyOrders');
     Route::get('/order/{id}', 'User\UserController@show')->name('order');
     //WishList
@@ -103,6 +104,7 @@ Route::namespace('Vendor')->prefix('/vendor')->middleware('vendor')->group(funct
     Route::get('dashboard', 'VendorController@dashboard')->name('dashboard');
     Route::get('/order', 'VendorController@order')->name('vendor_order');
     Route::get('/brokers', 'VendorController@show_broker')->name('show_brokers');
+    Route::get('/inventory', 'VendorController@show_inventory')->name('show_inventory');
 
     Route::get('/show_brokers_yajra', 'VendorController@show_brokers_yajra')->name('show_brokers_yajra');
 
@@ -125,7 +127,7 @@ Route::namespace('Vendor')->prefix('/vendor')->middleware('vendor')->group(funct
 
 
 });
-Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
+
 Route::namespace('Admin')->prefix('/admin')->middleware('admin')->group(function () {
     //Dashboard
     Route::get('/dashboard', 'AdminController@dashboard')->name('dashboard');
@@ -142,6 +144,10 @@ Route::namespace('Admin')->prefix('/admin')->middleware('admin')->group(function
 
     //category
     Route::get('/category', 'Categories@index')->name('category');
+
+    Route::get('/requestProduct', 'ProductController@requestProduct')->name('product.requestProduct');
+    Route::get('productStatusAccept/{id}', 'ProductController@productStatusAccept')->name('productStatusAccept');
+
     Route::match(['get', 'post'], '/add-category', 'Categories@addCategory')->name('admin.add-category');
     Route::match(['get', 'post'], '/category-edit/{id}', 'Categories@edit')->name('admin.edit-category');
     Route::get('/category-view/{id}', 'Categories@show')->name('category-view');

@@ -70,12 +70,15 @@ class CustomersController extends Controller
             'state' => 'required',
             'country' => 'required',
             'address' => 'required',
+            'password' => 'required',
+            'confirm_password' => 'same:password|required',
         ));
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
         else{
 
+            // dd($request->all());
 
         $customer = new Customers;
         $customer->first_name = $request->input('first_name');
@@ -96,7 +99,7 @@ class CustomersController extends Controller
         $user = new User;
         $user->name = $request->input('first_name');
         $user->email = $request->input('email');
-        $user->password = Hash::make($request->input('first_name'));
+        $user->password = Hash::make($request->input('password'));
         $user->role_id = 4;
         $user->customers_id = $customer_id;
         $user->save();

@@ -33,6 +33,12 @@ class UserController extends Controller
 
         return view('user.dashboard',compact('orders','products','recentOrders','addresses','countries'));
     }
+    public function getVendor(Request $request)
+    {
+        $products = Product::where('id',$request->data_val)->first();
+        $vendor = User::where('id',$products->vender_id)->first();
+        return response()->json(['data'=>$vendor->id]);
+    }
     public function show($id)
     {
         $order = Order::where('id', $id)->with('orderItems', 'customer', 'orderItems.product')->firstOrFail();
