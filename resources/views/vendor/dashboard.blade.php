@@ -100,34 +100,34 @@
 	                                       </li> --}}
 	                                    </ul>
 	                                 </div>
-	                                 <div class="content-half-part">
+	                                 <!-- <div class="content-half-part">
 	                                    <canvas id="order-stats" width="199" height="199" style="display: block; box-sizing: border-box; height: 199px; width: 199px;"></canvas>
-	                                 </div>
+	                                 </div> -->
 	                              </div>
 	                              <!-- .orders -->
 	                              <script type="text/javascript">
-	                                 jQuery(function($) {
-	                                     var order_stats = [0,0,0,0,0,0];
-	                                     var colors = ["#73a724","#999","#21759b","#d54e21","#e6db55","#f0ad4e"];
-	                                     var labels = ["Completed","Pending","Processing","Cancelled","Refunded","On Hold"];
+	                                 // jQuery(function($) {
+	                                 //     var order_stats = [0,0,0,0,0,0];
+	                                 //     var colors = ["#73a724","#999","#21759b","#d54e21","#e6db55","#f0ad4e"];
+	                                 //     var labels = ["Completed","Pending","Processing","Cancelled","Refunded","On Hold"];
 
-	                                     var ctx = $("#order-stats").get(0).getContext("2d");
-	                                     var donn = new Chart(ctx, {
-	                                         type: 'doughnut',
-	                                         data: {
-	                                             datasets: [{
-	                                                 data: order_stats,
-	                                                 backgroundColor: colors
-	                                             }],
-	                                             labels: labels,
-	                                         },
-	                                         options: {
-	                                             plugins: {
-	                                                 legend: false
-	                                             }
-	                                         }
-	                                     });
-	                                 });
+	                                 //     var ctx = $("#order-stats").get(0).getContext("2d");
+	                                 //     var donn = new Chart(ctx, {
+	                                 //         type: 'doughnut',
+	                                 //         data: {
+	                                 //             datasets: [{
+	                                 //                 data: order_stats,
+	                                 //                 backgroundColor: colors
+	                                 //             }],
+	                                 //             labels: labels,
+	                                 //         },
+	                                 //         options: {
+	                                 //             plugins: {
+	                                 //                 legend: false
+	                                 //             }
+	                                 //         }
+	                                 //     });
+	                                 // });
 	                              </script>
 	                              <div class="dashboard-widget products">
 	                                 <div class="widget-title">

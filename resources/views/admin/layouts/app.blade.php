@@ -48,6 +48,7 @@
         }
 
  </style>
+    <link rel="stylesheet" href="{{URL::asset('admin/style.css')}}">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
