@@ -403,24 +403,24 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <div class="tab-pane" role="tabpanel" class="tab-pane fade in active" id="related_products">
+                                {{-- <div class="tab-pane" role="tabpanel" class="tab-pane fade in active" id="related_products">
                                     <div class="col-md-12 text-right">
                                         <input type="button" class="btn btn-primary btn-sm" value="Add Related Product" onclick="addMoreRelatedProducts()" style="margin-top: 10px;margin-bottom: 10px;">
                                     </div>
                                     <table class="table table-bordered">
                                         <thead>
                                         <tr>
-                                            {{--                                            <th>Product ID</th>--}}
+                                                                                       <th>Product ID</th>
                                             <th>Product Name</th>
-                                            {{--                                            <th>Price</th>--}}
-                                            {{--                                            <th>Qty</th>--}}
+                                                                                       <th>Price</th>
+                                                                                       <th>Qty</th>
                                             <th>Action</th>
                                         </tr>
                                         </thead>
                                         <tbody id="add_more_related">
                                         </tbody>
                                     </table>
-                                </div>
+                                </div> --}}
                             </div>
                                 <div class="card-footer text-right">
                                     <button type="submit" class="btn btn-primary" id="submit_btn" style="">Submit</button>

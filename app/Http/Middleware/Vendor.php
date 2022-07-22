@@ -16,10 +16,9 @@ class Vendor
      */
     public function handle($request, Closure $next)
     {
-        if(Auth::check()==true && Auth::user()->role_id==3){
+        if(Auth::check()==true && Auth::user()->role_id==3 && Auth::user()->approvel_status == 1){
             return $next($request);
-
         }
-        return redirect('login');
+        return back()->with('error','Admin Deactive this Vendor');
     }
 }

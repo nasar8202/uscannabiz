@@ -6,12 +6,14 @@
     <div class="row justify-content-center">
         <div class="login-box">
             <div class="login-logo">
-                <a href="../../index2.html"><b>Admin</b>LTE</a>
+                <img src="{{asset('assets/uploads/2022/03/Uscannazon4.png')}}" width="120" height="100" alt="Us Cannazon" id="logo" data-height-percentage="54">
+                 <br>    
+                <a href="#">Us Cannazon Admin</a>
             </div>
             <!-- /.login-logo -->
             <div class="card">
                 <div class="card-body login-card-body">
-                    <p class="login-box-msg">Sign in to start your session</p>
+                    <p class="login-box-msg">Sign in</p>
 
                     <form method="POST" action="{{ route('login') }}">
                         @csrf

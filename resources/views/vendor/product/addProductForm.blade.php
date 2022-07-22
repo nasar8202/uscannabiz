@@ -240,7 +240,7 @@
                      </table>
                  </div>
 <hr>
-                 <div class="row" id="related_products">
+                 {{-- <div class="row" id="related_products">
                     <div class="col">
                         <div class="col-md-6 text-right">
                             <button type="button" class="woocommerce-Button woocommerce-button button woocommerce" value="Add Related Product" onclick="addMoreRelatedProducts()" style="margin-top: 10px;margin-bottom: 10px;">Add Related Product</button>
@@ -257,7 +257,7 @@
                         </tbody>
                     </table>
 
-                </p>
+                </p> --}}
                <p class="woocommerce-form-row form-row">
                   <button type="submit" class="woocommerce-Button woocommerce-button button woocommerce-form-register__submit" name="register" value="Register">Add Product</button>
 

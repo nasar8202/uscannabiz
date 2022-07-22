@@ -36,7 +36,13 @@
                                         <div class="alert alert-success">
                                             {{ session()->get('success') }}
                                         </div>
-                                    @endif @if(count($errors) > 0)
+                                    @endif 
+                                    @if (session()->has('error'))
+                                    <div class="alert alert-danger">
+                                        {{ session()->get('error') }}
+                                    </div>
+                                @endif 
+                                    @if(count($errors) > 0)
                                         <div class="alert alert-danger">
                                             <ul>
                                                 @foreach ($errors->all() as $error)
