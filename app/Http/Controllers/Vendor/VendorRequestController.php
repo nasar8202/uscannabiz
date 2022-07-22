@@ -39,6 +39,7 @@ class VendorRequestController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $validator = Validator::make($request->all(), array(
             'full_name' => 'required',
             'phone_num' => 'required',
@@ -84,13 +85,21 @@ class VendorRequestController extends Controller
             'product_name'=>$product->product_name,
             'sku'=>$product->sku
         ];
-        $vendor = Customers::where('id',$request->input('vendor_id'))->first();
-
+        $vendor = Customers::where('user_id',$request->input('vendor_id'))->first();
+        if($request->input('vendor_id') != 1){
         $usersArray = [$request->input('email'), $vendor->email];
         foreach($usersArray as $user){
             //echo $user;
             \Mail::to($user)->send(new \App\Mail\SendEmailAdminCustomerBroker($details));
 
+        }
+        }else{
+            $usersArray = [$request->input('email')];
+            foreach($usersArray as $user){
+            //echo $user;
+            \Mail::to($user)->send(new \App\Mail\SendEmailAdminCustomerBroker($details));
+
+        }
         }
         return redirect()->route('order_thanks')->with('success',"Request Has Been Submited");
         // \Mail::to($request->input('email'))->send(new \App\Mail\SendEmailAdminCustomerBroker($details));

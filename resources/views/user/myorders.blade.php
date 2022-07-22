@@ -533,7 +533,7 @@
                                                             </li>
                                                             <li
                                                                 class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--orders">
-                                                                <a href="/user/my-orders">Orders</a>
+                                                                <a href="{{route('MyOrders')}}">Orders</a>
                                                             </li>
                                                             {{-- <li
                                                                 class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--downloads">
@@ -596,7 +596,7 @@
                                                                             </td>
                                                                             <td>
                                                                                 {{--                                                <a href="#" class="btnStyle btn-block">Track Order</a>--}}
-                                                                                <a href="/user/order/{{$order->id}}" class="btnStyle orderDetailBtn"  >View Order</a>
+                                                                                <a href="{{route('order',['id'=>$order->id])}}" class="btnStyle orderDetailBtn"  >View Order</a>
                                                                                 {{--                                                <a href="#" class="btnStyle">Reorder</a>--}}
                                                                             </td>
                                                                         </tr>
@@ -629,7 +629,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="{{asset('front/js/location.js')}}"></script>
+
     <script>
 
         $('document').ready(function () {
