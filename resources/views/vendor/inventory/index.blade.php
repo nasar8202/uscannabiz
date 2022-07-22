@@ -10,7 +10,7 @@
 	      <div id="content-area" class="clearfix">
 	         <div id="left-area">
 	            <article id="post-7" class="post-7 page type-page status-publish hentry">
-	               <h1 class="entry-title main_title">Products</h1>
+	               <h1 class="entry-title main_title">Inventory</h1>
 				  
 	               <div class="entry-content">
 	                  <div class="dokan-dashboard-wrap">
@@ -34,8 +34,8 @@
 								<li class="products {{ Request::route()->getName() == 'product' ? 'active' : '' }}"><a href="{{route('product')}}"><i class="fas fa-briefcase"></i> Products</a></li>
 								<li class="orders {{ Request::route()->getName() == 'vendor_order' ? 'active' : '' }}"><a href="{{route('vendor_order')}}"><i class="fas fa-shopping-cart"></i> Orders</a></li>
 								<li class="orders {{ Request::route()->getName() == 'show_brokers' ? 'active' : '' }}"><a href="{{route('show_brokers')}}"><i class="fas fa-shopping-cart"></i> Broker</a></li>
-	                            <li class="orders {{ Request::route()->getName() == 'show_inventory' ? 'active' : '' }}"><a href="{{route('show_inventory')}}"><i class="fas fa-shopping-cart"></i> Inventory</a></li>  
-								{{-- <li class="withdraw"><a href="{{route('show_brokers_yajra')}}""><i class="fas fa-upload"></i> Broker Yajra</a></li> --}}
+	                            <li class="orders {{ Request::route()->getName() == 'show_inventory' ? 'active' : '' }}"><a href="{{route('show_inventory')}}"><i class="fas fa-shopping-cart"></i> Inventory</a></li> 
+                                {{-- <li class="withdraw"><a href="{{route('show_brokers_yajra')}}""><i class="fas fa-upload"></i> Broker Yajra</a></li> --}}
 	                              <li class="settings {{ Request::route()->getName() == 'editVendor' ? 'active' : '' }}"><a href="{{ Route('editVendor') }}"><i class="fas fa-cog"></i> Settings <i class="fas fa-angle-right pull-right"></i></a></li>
 	                              {{-- <li class="dokan-common-links dokan-clearfix">
 	                                 <a title="" class="tips" data-placement="top" href="Us-Cannazon/user_uscannabiz/" target="_blank" data-original-title="Visit Store"><i class="fas fa-external-link-alt"></i></a>
@@ -66,11 +66,11 @@
 						         </ul>
 								 
 						         <!-- .post-statuses-filter -->
-						         <span class="dokan-add-product-link">
+						         <!-- <span class="dokan-add-product-link">
 						         <a href="{{Route('productForm')}}" class="dokan-btn dokan-btn-theme dokan-add-new-product">
 						         <i class="fas fa-briefcase">&nbsp;</i>
 						         Add new product                                        </a>
-						         </span>
+						         </span> -->
 						      </div>
 						      <div class="dokan-w12">
 						         <form class="dokan-form-inline dokan-w8 dokan-product-date-filter" action="{{route('product_filter')}}" method="get">
@@ -81,7 +81,7 @@
 						                  <option value="202203">March 2022</option>
 						               </select>
 						            </div> --}}
-						            <div class="dokan-form-group">
+						            <!-- <div class="dokan-form-group">
 						               <select name="product_cat" id="product_cat" class="product_cat dokan-form-control chosen">
 						                  <option value="-1" selected="selected">– Select a category –</option>
 						                  <option value="all">All</option>
@@ -91,34 +91,35 @@
 										 @endforeach
 
 						               </select>
-						            </div>
-						            {{-- <div class="dokan-form-group">
+						            </div> -->
+						            <!-- {{-- <div class="dokan-form-group">
 						               <select name="product_type" id="filter-by-type" class="dokan-form-control" style="max-width:140px;">
 						                  <option value="">Product type</option>
 						                  <option value="simple">Simple</option>
 						               </select>
 						            </div> --}}
 						            <button type="submit" name="product_listing_filter" value="ok" class="dokan-btn">Filter</button>
-						         </form>
-						         <form method="get" action="{{route('product_filter_search')}}" class="dokan-form-inline dokan-w5 dokan-product-search-form">
+						         </form> -->
+						         <!-- <form method="get" action="{{route('product_filter_search')}}" class="dokan-form-inline dokan-w5 dokan-product-search-form">
 						            <button type="submit" name="product_listing_search" value="ok" class="dokan-btn">Search</button>
 						            <input type="hidden" id="dokan_product_search_nonce" name="dokan_product_search_nonce" value="754d5308e1"><input type="hidden" name="_wp_http_referer" value="/wp/uscannabiz/dashboard/products/">
 						            <div class="dokan-form-group">
 						               <input type="text" class="dokan-form-control" name="product_search_name" placeholder="Search Products" value="">
 						            </div>
-						         </form>
+						         </form> -->
 						      </div>
 						      <div class="dokan-dashboard-product-listing-wrapper">
 						         <form id="product-filter" method="get" action="{{route('deleteProductbulk')}}" class="dokan-form-inline">
-						            <div class="dokan-form-group">
+						            <!-- <div class="dokan-form-group">
 						               <label for="bulk-product-action-selector" class="screen-reader-text">Select bulk action</label>
 						               <select name="status" id="bulk-product-action-selector" class="dokan-form-control chosen">
 						                  <option class="bulk-product-status" value="-1">Bulk Actions</option>
 						                  <option class="bulk-product-status" value="delete">Delete Permanently</option>
 						               </select>
-						            </div>
+						            </div> -->
 						            <div class="dokan-form-group">
-						               <input type="hidden" id="security" name="security" value="90eee0abd0"><input type="hidden" name="_wp_http_referer" value="/wp/uscannabiz/dashboard/products/">                                    <input type="submit" name="bulk_product_status_change" id="bulk-product-action" class="dokan-btn dokan-btn-theme" value="Apply">
+						               <input type="hidden" id="security" name="security" value="90eee0abd0"><input type="hidden" name="_wp_http_referer" value="/wp/uscannabiz/dashboard/products/">                                    
+                                       <!-- <input type="submit" name="bulk_product_status_change" id="bulk-product-action" class="dokan-btn dokan-btn-theme" value="Apply"> -->
 						            </div>
 						            <table class="dokan-table dokan-table-striped product-listing-table dokan-inline-editable-table" id="dokan-product-list-table">
 						               <thead>
@@ -206,7 +207,9 @@
 						                  </tr>
 										  @endforeach
 										@else
+                                        <?php //echo $data = $product; die(); ?>
 										@foreach($product as $pro)
+                                            
 						                  <tr class="">
 						                     <th class="dokan-product-select check-column">
 						                        <label for="cb-select-432"></label>
@@ -216,12 +219,13 @@
 						                        <a href="#"><img width="150" height="150" src="{{asset('uploads/products/'.$pro->product_image)}}" class="attachment-thumbnail size-thumbnail" alt=""></a>
 						                     </td>
 						                     <td data-title="Name" class="column-primary">
-						                        <strong><a href="products/?product_id=432&amp;action=edit">{{$pro->product_name}}</a></strong>
-						                        <div class="row-actions">
+						                        <!-- <strong><a href="products/?product_id=432&amp;action=edit">{{$pro->product_name}}</a></strong> -->
+                                                <strong>{{$pro->product_name}}</strong>
+						                        <!-- <div class="row-actions">
 						                           <span class="edit"><a href="edit-products/{{$pro->id}}">Edit</a> | </span>
 												   <span class="delete"><a href="delete-product/{{$pro->id}}" >Delete Permanently</a></span>
 												    {{-- <span class="view"><a href="product/testing-products/">View</a></span> --}}
-						                        </div>
+						                        </div> -->
 						                        <button type="button" class="toggle-row"></button>
 						                     </td>
 						                     <td class="post-status" data-title="Status">
@@ -231,7 +235,7 @@
 						                        <span class="na">{{$pro->sku}}</span>
 						                     </td>
 						                     <td data-title="Stock">
-						                        <mark class="instock">{{$pro->product_stock}}</mark>
+						                        <mark class="instock">{{$pro->product_qty}}</mark>
 						                     </td>
 						                     <td data-title="Price">
 						                        <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>{{$pro->product_current_price}}</span>

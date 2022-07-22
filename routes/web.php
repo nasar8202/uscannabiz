@@ -103,6 +103,7 @@ Route::namespace('Vendor')->prefix('/vendor')->middleware('vendor')->group(funct
     Route::get('dashboard', 'VendorController@dashboard')->name('dashboard');
     Route::get('/order', 'VendorController@order')->name('vendor_order');
     Route::get('/brokers', 'VendorController@show_broker')->name('show_brokers');
+    Route::get('/inventory', 'VendorController@show_inventory')->name('show_inventory');
 
     Route::get('/show_brokers_yajra', 'VendorController@show_brokers_yajra')->name('show_brokers_yajra');
 
