@@ -40,7 +40,8 @@ class VendorController extends Controller
                 return datatables()->of(Customers::join('users','users.email','=','customers.email')->where('role_id','=',3)->get())
                     ->addIndexColumn()
                     ->addColumn('status', function ($data) {
-                        if($data->status == 0){
+                        // return $data;
+                        if($data->approvel_status == 0){
                             // return $data->user_id;
                             return '<label class="switch"><input type="checkbox"  data-id="'.$data->user_id.'" data-val="1"  id="status-switch"><span class="slider round"></span></label>';
                         }else{
@@ -144,9 +145,9 @@ class VendorController extends Controller
     {
         //return $request->id;
            $data = array(
-            'status'=>$request->val
+            'approvel_status'=>$request->val
            );
-        $status = Customers::where('user_id',$request->id)->update($data);
+        $status = User::where('id',$request->id)->update($data);
 
         return response()->json(['success'=>'Status Updated Successfully']);
 
