@@ -114,29 +114,29 @@
           
                <div class="split-row form-row-wide">
                   <p class="form-row form-group">
-                     <label for="first-name">Full Name <span class="required">*</span></label>
-                     <input type="text" class="input-text form-control" name="full_name" id="first-name" required="required">
+                     <!-- <label for="first-name">Full Name <span class="required">*</span></label> -->
+                     <input type="text" class="input-text form-control" name="full_name" id="first-name" required="required" placeholder="Full Name">
                   </p>
                   <p class="form-row form-group">
-                     <label for="last-name">Phone Number <span class="required">*</span></label>
-                     <input type="number" class="input-text form-control" name="phone_num" id="last-name" required="required">
+                     <!-- <label for="last-name">Phone Number <span class="required">*</span></label> -->
+                     <input type="number" class="input-text form-control" name="phone_num" id="last-name" required="required" placeholder="Phone Number">
                  
                   </p>
                
                   <p class="form-row form-group">
-                     <label for="last-name">Email <span class="required">*</span></label>
-                     <input type="email" class="input-text form-control" name="email" id="last-name" required="required">
+                     <!-- <label for="last-name">Email <span class="required">*</span></label> -->
+                     <input type="email" class="input-text form-control" name="email" id="last-name" required="required" placeholder="Email">
                   </p>
                   <p class="form-row form-group">
-                     <label for="last-name">Address <span class="required">*</span></label>
-                     <input type="text" class="input-text form-control" name="address" id="last-name" required="required">
+                     <!-- <label for="last-name">Address <span class="required">*</span></label> -->
+                     <input type="text" class="input-text form-control" name="address" id="last-name" required="required" placeholder="Address">
                   </p>
                   <p class="form-row form-group">
-                     <label for="last-name">City <span class="required">*</span></label>
-                     <input type="text" class="input-text form-control" name="city" id="last-name" required="required">
+                     <!-- <label for="last-name">City <span class="required">*</span></label> -->
+                     <input type="text" class="input-text form-control" name="city" id="last-name" required="required" placeholder="City">
                   </p>
                   <p class="form-row form-group">
-                     <label for="last-name">Select Product <span class="required">*</span></label>
+                     <!-- <label for="last-name">Select Product <span class="required">*</span></label> -->
                      <select name="product_id" id="product_vendor_find" class="input-text form-control">
                         <option value="" selected disabled>Select Product</option>
                         @foreach(GetProducts() as $products)
@@ -146,11 +146,11 @@
                   </p>
                   <input type="hidden" value="" name="vendor_id" id="set_vendor_id">
                   <p class="form-row form-group">
-                     <label for="last-name">Quantity <span class="required">*</span></label>
-                     <input type="number" class="input-text form-control" name="quantity" title="Qty" size="4" required="required" inputmode="numeric" autocomplete="off">
+                     <!-- <label for="last-name">Quantity <span class="required">*</span></label> -->
+                     <input type="number" class="input-text form-control" name="quantity" title="Qty" size="4" required="required" inputmode="numeric" autocomplete="off" placeholder="Quantity">
                   </p>
                   {{-- <div class="quantity">
-                     <input type="number" name="quantity" id="quantity_62b36070a592a" class="input-text qty text" step="1" min="1" max="" name="quantity" value="1" title="Qty" size="4" placeholder="" inputmode="numeric" autocomplete="off">
+                     <input type="number" name="quantity" id="quantity_62b36070a592a" class="input-text qty text" step="1" min="1" max="" name="quantity" value="1" title="Qty" size="4" placeholder=""   inputmode="numeric" autocomplete="off">
                   </div> --}}
                
                <br>
@@ -175,23 +175,23 @@
 
 // product modal popup
 
-var modal = document.querySelector(".modal");
-var trigger = document.querySelector(".trigger");
-var closeButton = document.querySelector(".close-button");
+// var modal = document.querySelector(".modal");
+// var trigger = document.querySelector(".trigger");
+// var closeButton = document.querySelector(".close-button");
 
-function toggleModal() {
-    modal.classList.toggle("show-modal");
-}
+// function toggleModal() {
+//     modal.classList.toggle("show-modal");
+// }
 
-function windowOnClick(event) {
-    if (event.target === modal) {
-        toggleModal();
-    }
-}
+// function windowOnClick(event) {
+//     if (event.target === modal) {
+//         toggleModal();
+//     }
+// }
 
-trigger.addEventListener("click", toggleModal);
-closeButton.addEventListener("click", toggleModal);
-window.addEventListener("click", windowOnClick);
+// trigger.addEventListener("click", toggleModal);
+// closeButton.addEventListener("click", toggleModal);
+// window.addEventListener("click", windowOnClick);
 
 // product modal popup
 
@@ -288,6 +288,14 @@ $('#product_vendor_find').change(function(){
                      $('#set_vendor_id').val(response.data)
                     }
                 });
+});
+
+
+$('.trigger').click(function() {
+   $('.modal.modalTn').slideDown();
+})
+$('.modal.modalTn span.close-button').click(function(){
+    $(this).closest('.modalTn').slideUp();
 });
 
    </script>

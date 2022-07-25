@@ -107,18 +107,19 @@ class OrderController extends Controller
     {
         $users = User::where(['id'=>Auth::user()->id,'email'=>Auth::user()->email])->first();
         $order = Order::with('customer')->orderBy('created_at','desc')->get();
-        // dd($order);
-        // dd($users->customers_id);
+        //  dd($users->customers_id);
+         
         try {
             if (request()->ajax()) {
                 if($users->role_id == 1){
+                    
                     return datatables()->of(Order::with('customer')->orderBy('created_at','desc')->get())
                     ->addIndexColumn()
                     ->addColumn('order_no', function ($data) {
                         return $data->order_no ?? '';
                     })->addColumn('customer', function ($data) {
                         // if ($data->customer_id == null) {
-                            return $data->customer_name;
+                            return $data->customer_name??'';
                         // } else {
                         //     return $data->customer->first_name . ' ' . $data->customer->last_name;
                         // }
@@ -145,8 +146,11 @@ class OrderController extends Controller
                     })->rawColumns(['order_no', 'customer', 'status', 'total_amount', 'order_date', 'action'])->make(true);
             }
             else{
+                
                 $check = Customers::where('broker_request_id', $users->customers_id)->first();
+                //dd($check);
                 $vendor_request = VendorRequest::where('vendor_id',$check->user_id)->orderBy('created_at','desc')->get();
+                //dd($vendor_request);
                 foreach($vendor_request as $items){
                     $products = Product::where('id',$items->product_id)->first();
                 }
@@ -155,7 +159,7 @@ class OrderController extends Controller
                 // $vendor_request = VendorRequest::where('vendor_id',$check->user_id)->orderBy('created_at','desc')->get();
                 // $order_check = Order::where('id',$vendor_request->order_id)->first();
                  //dd($vendor_request);
-                 dd(VendorRequest::where('vendor_id',$check_vendor->user_id)->orderBy('created_at','desc')->get());
+                 //dd(VendorRequest::where('vendor_id',$check_vendor->user_id)->orderBy('created_at','desc')->get());
                 // return datatables()->of(Order::where(['customer_id'=>$users->customers_id,'status'=>3])->orderBy('created_at','desc')->get())
                 return datatables()->of(VendorRequest::where('vendor_id',$check_vendor->user_id)->orderBy('created_at','desc')->get())
                 ->addIndexColumn()
