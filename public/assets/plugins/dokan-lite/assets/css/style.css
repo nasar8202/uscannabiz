@@ -6,21 +6,6 @@
  * file in assets/css directoryS
  */
  
- 
- /*Zeveloper*/
- 
-    .dokan-dashboard .container {
-        max-width: 100%;
-        width: 100%;
-    }
-    
-    .dokan-dashboard h1.entry-title.main_title {
-        text-align: center;
-    }
- 
- /*Zeveloper*/
- 
- 
 .dokan-spinner {
   position: absolute;
   width: 20px;
@@ -2225,7 +2210,7 @@ article.dokan-notice-single-notice-area span.dokan-single-announcement-date {
 }
 .dokan-dashboard .dokan-dash-sidebar #dokan-navigation > input:checked + ul.dokan-dashboard-menu {
   display: block !important;
-  background: #000;
+  background: #0d4400;
   color: #fff;
   animation: showNav 350ms ease-in-out both;
 }
@@ -2584,7 +2569,7 @@ div.media-sidebar a.edit-attachment {
   color: #a05;
 }
 .dokan-product-listing .dokan-product-listing-area .row-actions .delete a:hover {
-  color: red;
+  color: #0D4400;
 }
 .dokan-product-listing .dokan-product-listing-area tr:hover .row-actions {
   visibility: visible;
@@ -6203,6 +6188,7 @@ body li:hover.woocommerce-MyAccount-navigation-link a {
     height: 100%;
     background: rgba(0,0,0,.7);
     z-index: 111111;
+    display: none;
 }
 .modal.modalTn .modal-content {
     background: #fff;
@@ -6217,13 +6203,14 @@ body li:hover.woocommerce-MyAccount-navigation-link a {
     position: absolute;
     right: 0;
     top: 0;
-    background: red;
+    background: #0D4400;
     width: 30px;
     height: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
     color: #ffff;
+    cursor: pointer;
 }
 .modal.modalTn .modal-content  h2 {
     margin-bottom: 30px;
@@ -6236,6 +6223,7 @@ body li:hover.woocommerce-MyAccount-navigation-link a {
     border-radius: 50px;
     height: 42px;
     border: 1px solid #e3e3e3;
+    padding: 5px 30px;
 }
 .modal.modalTn .modal-content button.woocommerce-Button.woocommerce-button.button.woocommerce-form-register__submit {
     border: 1px solid #0D4400;
@@ -6249,3 +6237,54 @@ body li:hover.woocommerce-MyAccount-navigation-link a {
 .modal.modalTn .modal-content button.woocommerce-Button.woocommerce-button.button.woocommerce-form-register__submit:hover {
     opacity: .8;
 }
+
+ /*Zeveloper*/
+ 
+    .dokan-dashboard .container {
+        max-width: 100%;
+        width: 100%;
+    }
+    
+    .dokan-dashboard h1.entry-title.main_title {
+        text-align: center;
+    }
+    
+    .dokan-dashboard div#main-content .container #content-area #left-area {
+        width: 100% !important;
+        max-width: 100%;
+    }
+    
+    .dokan-dashboard .dokan-dashboard-wrap {
+        margin-bottom: 0px;
+    }
+    
+    @media (max-width:992px){
+        .dokan-dashboard .dokan-dash-sidebar{
+            width:25%;
+        }
+        .dokan-dashboard .dokan-dashboard-content{
+            width:75%;
+        }
+    }
+    
+    @media (max-width:767px){
+        .dokan-dashboard .dokan-dash-sidebar{
+            width:100%;
+        }
+        
+        .dokan-dashboard .dokan-dashboard-content{
+            width:100%;
+        }
+        
+        .dokan-dashboard-product-listing-wrapper {
+            width: 100%;
+            overflow-x: auto;
+        }
+        
+        .dokan-dashboard-product-listing-wrapper table tr th,.dokan-dashboard-product-listing-wrapper table tr td {
+            min-width: 120px;
+            text-align: center;
+        }
+    }
+ 
+ /*Zeveloper*/
