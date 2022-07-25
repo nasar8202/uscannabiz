@@ -241,7 +241,7 @@
                             <li class="nav-item">
                                 <a href="{{route('product.requestProduct')}}" class="nav-link {{ request()->IS('admin/requestProduct') ? 'active' : '' }}">
                                     <i class="nav-icon fa fa-angle-double-right"></i>
-                                    <p>Produucts Request </p>
+                                    <p>Products Request </p>
                                 </a>
                             </li>
                             {{-- <li class="nav-item">
