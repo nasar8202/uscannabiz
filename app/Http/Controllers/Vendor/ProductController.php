@@ -52,8 +52,9 @@ class ProductController extends Controller
         $vendor_id = Auth::user()->id;
         $product = DB::table('products')->where('vender_id',$vendor_id)->get();
         $category_filter = Product::where('product_name', 'like', '%' . $request->product_search_name . '%')->where('vender_id',$vendor_id)->get();
-
-        return view('vendor.product.index',compact(['category',$category ,'product',$product,'category_filter',$category_filter]));
+        $product_stock = DB::table('products')->where('vender_id',$vendor_id)->first();
+        $product_count = $category_filter->count();
+        return view('vendor.product.index',compact(['category',$category ,'product',$product,'category_filter',$category_filter,'product_stock','product_count']));
     }
 
     public function addProductForm()
