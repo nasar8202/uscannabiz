@@ -39,6 +39,7 @@ class VendorRequestController extends Controller
      */
     public function store(Request $request)
     {
+
         // dd($request->all());
         $validator = Validator::make($request->all(), array(
             'full_name' => 'required',
@@ -60,7 +61,7 @@ class VendorRequestController extends Controller
 
 
         $vendor = new VendorRequest;
-        $vendor->product_id = $request->input('product_id');
+        $vendor->product_id = $request->product_id;
         $vendor->vendor_id = $request->input('vendor_id');
         $vendor->full_name = $request->input('full_name');
         $vendor->phone_num = $request->input('phone_num');
