@@ -65,7 +65,7 @@ class Categories extends Controller
                 'category_image' => isset($imageName) ? $imageName : null,
             ]);
             if ($category) {
-                return redirect()->back()->with(['success' => 'Category Added Successfully']);
+                return redirect()->route('category')->with(['success' => 'Category Added Successfully']);
             }
         }
         $mainCategories = Category::where('status', 1)->where('parent_id', 0)->get();
@@ -123,7 +123,7 @@ class Categories extends Controller
             $category->meta_tag_keywords = $request->input('meta-keywords');
 
             if ($category->save()) {
-                return redirect()->back()->with(['success' => 'Category Edit Successfully']);
+                return redirect()->route('category')->with(['success' => 'Category Edit Successfully']);
             }
         }else {
             $content=Category::findOrFail($id);

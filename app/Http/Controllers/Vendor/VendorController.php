@@ -294,6 +294,23 @@ class VendorController extends Controller
 
     public function assignbroker(Request $request)
     {
+        $messsages = array(
+            'id.required'=>'Please Select Broker to Request.',
+        );
+    
+        $rules = array(
+            'id'=>'required',
+        );
+    
+        $validator = Validator::make($request->all(), $rules,$messsages);
+
+        // $validator = Validator::make($request->all(), [
+        //     'id' => 'required',
+        // ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator);
+        }
         // $broker_request_id = $request->id;
 
         // $vendor_email = Auth::user()->email;

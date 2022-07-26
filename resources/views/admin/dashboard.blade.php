@@ -143,8 +143,8 @@
                                     @else
                                     <tr onclick="window.location='order/{{$latestOrders->id}}'" style='cursor: pointer;'>
                                     @endif
-                                        <td> {{$latestOrders->id}} </td>
-                                        <td> {{$latestOrders->full_name??''}} </td>
+                                        <td> {{$latestOrders->order_no}} </td>
+                                        <td> {{$latestOrders->full_name??'Anonymous'}} </td>
                                         @if(Auth::user()->role_id == 4)
                                         @else
                                         <td>

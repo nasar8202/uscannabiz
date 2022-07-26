@@ -236,6 +236,26 @@ class ProductController extends Controller
     public function destroyProductBulk(Request $request)
     {
         // dd($request->all());
+        $messsages = array(
+            'bulk_products.required'=>'Please Select Products to delete.',
+        );
+    
+        $rules = array(
+            'bulk_products'=>'required',
+        );
+    
+        $validator = Validator::make($request->all(), $rules,$messsages);
+        // $validator = Validator::make($request->all(), [
+        //     'bulk_products' => 'required',
+        // ]);
+        // $messsages = [
+        //     'bulk_products.required'=>'Please Select Products to delete.',
+        // ];
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator);
+        }
+
         if($request->status == 'delete'){
         foreach($request->bulk_products as $products){
             $product = DB::table('products')->where('id',$products)->delete();

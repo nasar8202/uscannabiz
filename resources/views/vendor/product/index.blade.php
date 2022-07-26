@@ -51,6 +51,15 @@
 									 {{ session()->get('success') }}
 								 </div>
 								 @endif
+								 @if ($errors->any())
+								 @foreach ($errors->all() as $error)
+								 <div class="alert alert-danger alert-block">
+									 
+										 <strong>{{ $error }}</strong>
+									 
+								 </div>
+								 @endforeach
+								 @endif
 						   <article class="dokan-product-listing-area">
 						      <div class="product-listing-top dokan-clearfix">
 						         <ul class="dokan-listing-filter dokan-left subsubsub">
@@ -82,8 +91,8 @@
 						               </select>
 						            </div> --}}
 						            <div class="dokan-form-group">
-						               <select name="product_cat" id="product_cat" class="product_cat dokan-form-control chosen">
-						                  <option value="-1" selected="selected">– Select a category –</option>
+						               <select name="product_cat" id="product_cat" required class="product_cat dokan-form-control chosen">
+						                  <option value="" selected="selected" disable>– Select a category –</option>
 						                  <option value="all">All</option>
 						                 @foreach ($category as $cat)
 										 <option class="level-0" value="{{$cat->id}}">{{$cat->name}}</option>
@@ -112,8 +121,8 @@
 						         <form id="product-filter" method="get" action="{{route('deleteProductbulk')}}" class="dokan-form-inline">
 						            <div class="dokan-form-group">
 						               <label for="bulk-product-action-selector" class="screen-reader-text">Select bulk action</label>
-						               <select name="status" id="bulk-product-action-selector" class="dokan-form-control chosen">
-						                  <option class="bulk-product-status" value="-1">Bulk Actions</option>
+						               <select name="status" id="bulk-product-action-selector" required class="dokan-form-control chosen">
+						                  <option class="bulk-product-status" value="" selected disabled>Bulk Actions</option>
 						                  <option class="bulk-product-status" value="delete">Delete Permanently</option>
 						               </select>
 						            </div>
