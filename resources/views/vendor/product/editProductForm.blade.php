@@ -103,7 +103,7 @@
                          <div id="content-area" class="clearfix">
         <div id="left-area">
          <div class="u-column2 col-2">
-            <h2>Edit Product</h2>
+            <h2>Update Product</h2>
             @if (session()->has('success'))
                                         <div class="alert alert-success">
                                             {{ session()->get('success') }}
@@ -135,10 +135,10 @@
                </p>
 
                   <div class="split-row form-row-wide">
-                     <p class="form-row form-group">
+                     <!-- <p class="form-row form-group">
                         <label for="first-name">Product Sku <span class="required">*</span></label>
                         <input type="text" class="input-text form-control" name="product_sku" id="first-name" value="{{$product->sku}}" required="required">
-                     </p>
+                     </p> -->
                      <p class="form-row form-group">
                         <label for="last-name">Product Slug <span class="required">*</span></label>
                         <input type="text" class="input-text form-control" name="product_slug" id="last-name" value="{{$product->slug}}" required="required">
