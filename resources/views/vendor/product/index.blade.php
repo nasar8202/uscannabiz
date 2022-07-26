@@ -64,13 +64,13 @@
 						      <div class="product-listing-top dokan-clearfix">
 						         <ul class="dokan-listing-filter dokan-left subsubsub">
 						            <li class="active">
-						               <a >All ({{$product_count}})</a>
+						               <a >All ({{$product_count??'0'}})</a>
 						            </li>
 						            <!--<li>-->
 						            <!--   <a >Online (7)</a>-->
 						            <!--</li>-->
 						            <li>
-						               <a >In stock ({{$product_stock->product_qty}})</a>
+						               <a >In stock ({{$product_stock->product_qty??'0'}})</a>
 						            </li>
 						         </ul>
 								 
