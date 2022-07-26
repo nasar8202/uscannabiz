@@ -298,6 +298,21 @@ $('.modal.modalTn span.close-button').click(function(){
     $(this).closest('.modalTn').slideUp();
 });
 
+
+// Zeveloper
+
+$(window).on('load', function() {
+    $('table').wrapAll('<div class="table-overflowx-auto"><div>');
+});
+
+$('#dokan-product-list-table.dokan-table td:not(.hidden)').on('click',function(){
+    $(this).parent('tr').toggleClass('is-expanded');
+});
+
    </script>
+   
+    <script>
+        
+    </script>
 </body>
 </html>

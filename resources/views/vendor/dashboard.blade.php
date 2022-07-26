@@ -85,7 +85,7 @@
 	                                          </a>
 	                                       </li> --}}
 	                                       <li>
-	                                          <a href="#" style="color: #d54e21">
+	                                          <a style="color: #d54e21">
 	                                          <span class="title">Cancelled</span> <span class="count">{{$orderCancelledCount??0}}</span>
 	                                          </a>
 	                                       </li>

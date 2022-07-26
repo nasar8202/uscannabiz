@@ -25,21 +25,25 @@ class ProductController extends Controller
         $vendor_id = Auth::user()->id;
 
         $product = DB::table('products')->where('vender_id',$vendor_id)->get();
-
-        return view('vendor.product.index',compact(['category',$category ,'product',$product]));
+        $product_count = DB::table('products')->where('vender_id',$vendor_id)->count();
+        $product_stock = DB::table('products')->where('vender_id',$vendor_id)->first();
+        return view('vendor.product.index',compact(['category',$category ,'product',$product,'product_stock','product_count']));
     }
     public function filter(Request $request)
     {
         $category = Category::all();
         $vendor_id = Auth::user()->id;
         $product = DB::table('products')->where('vender_id',$vendor_id)->get();
+        $product_stock = DB::table('products')->where('vender_id',$vendor_id)->first();
+        $product_count = DB::table('products')->where('vender_id',$vendor_id)->count();
         if($request->product_cat == 'all'){
             $category_filter = DB::table('products')->where('vender_id',$vendor_id)->get();
         }
         else{
             $category_filter = Product::where(['category_id'=>$request->product_cat,'vender_id'=>$vendor_id])->get();
+            
         }
-        return view('vendor.product.index',compact(['category',$category ,'product',$product,'category_filter',$category_filter]));
+        return view('vendor.product.index',compact(['category',$category ,'product',$product,'category_filter',$category_filter,'product_stock','product_count']));
     }
     public function search(Request $request)
     {

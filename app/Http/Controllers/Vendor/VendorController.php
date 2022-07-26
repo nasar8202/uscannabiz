@@ -141,8 +141,9 @@ class VendorController extends Controller
         $vendor_id = Auth::user()->id;
 
         $product = DB::table('products')->where('vender_id',$vendor_id)->get();
+        $product_stock = DB::table('products')->where('vender_id',$vendor_id)->first();
         
-        return view('vendor.inventory.index',compact(['category',$category ,'product',$product]));
+        return view('vendor.inventory.index',compact(['category',$category ,'product',$product,'product_stock']));
     }
 
     public function vendorEdit()
