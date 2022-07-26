@@ -162,8 +162,13 @@
       </div>
       
     </div>
+
+</div>--}}
+{{-- product modal popup --}} 
+
 </div>
 {{-- product modal popup --}}
+
 
 @section('extra-js')
     <!-- Include AlgoliaSearch JS Client and autocomplete.js library -->
