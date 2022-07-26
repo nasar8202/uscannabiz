@@ -79,13 +79,13 @@ class FrontController extends Controller
                 'email' => $request->email,
                 'status'=>0
             ]);
-            $details = [
-                'name'=> $request->fname." ".$request->lname,
-                'email' => $request->email,
-                'password'=> $request->password
-            ];
+            // $details = [
+            //     'name'=> $request->fname." ".$request->lname,
+            //     'email' => $request->email,
+            //     'password'=> $request->password
+            // ];
 
-            \Mail::to($request->input('email'))->send(new \App\Mail\SendEmailCustomerRegistration($details));
+            // \Mail::to($request->input('email'))->send(new \App\Mail\SendEmailCustomerRegistration($details));
             return redirect()->back()->with(['success' => 'Register Successfully']);
 
         }
@@ -110,13 +110,13 @@ class FrontController extends Controller
             $find_user->customers_id = $customer->id;
             $find_user->save();
             
-            $details = [
-                'name'=> $request->fname." ".$request->lname,
-                'email' => $request->email,
-                'password'=> $request->password
-            ];
+            // $details = [
+            //     'name'=> $request->fname." ".$request->lname,
+            //     'email' => $request->email,
+            //     'password'=> $request->password
+            // ];
 
-            \Mail::to($request->input('email'))->send(new \App\Mail\SendEmailCustomerRegistration($details));
+            // \Mail::to($request->input('email'))->send(new \App\Mail\SendEmailCustomerRegistration($details));
             return redirect()->back()->with(['success' => 'Register Successfully']);
 
         }
@@ -160,12 +160,12 @@ class FrontController extends Controller
 
             // Customers::create([$customerData]);
             // return $user;
-            $details = [
-                'name'=> $request->fname." ".$request->lname,
-                'email' => $request->email,
-                'password'=> $request->password
-            ];
-            \Mail::to($request->input('email'))->send(new \App\Mail\SendEmailCustomerRegistration($details));
+            // $details = [
+            //     'name'=> $request->fname." ".$request->lname,
+            //     'email' => $request->email,
+            //     'password'=> $request->password
+            // ];
+            // \Mail::to($request->input('email'))->send(new \App\Mail\SendEmailCustomerRegistration($details));
             return redirect()->back()->with(['success' => 'Register Successfully']);
         }
 
