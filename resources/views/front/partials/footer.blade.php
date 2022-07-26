@@ -96,7 +96,7 @@
 </footer>
 </div>
 </div>
-<!-- {{-- product modal popup --}}
+{{-- product modal popup --}}
 
 {{-- <button class="trigger">Click the modal!</button> --}}
 <div class="modal modalTn">
@@ -163,7 +163,7 @@
       
     </div>
 </div>
-{{-- product modal popup --}} -->
+{{-- product modal popup --}}
 
 @section('extra-js')
     <!-- Include AlgoliaSearch JS Client and autocomplete.js library -->

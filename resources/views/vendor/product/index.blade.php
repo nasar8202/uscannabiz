@@ -113,7 +113,7 @@
 						            <button type="submit" name="product_listing_search" value="ok" class="dokan-btn">Search</button>
 						            <input type="hidden" id="dokan_product_search_nonce" name="dokan_product_search_nonce" value="754d5308e1"><input type="hidden" name="_wp_http_referer" value="/wp/uscannabiz/dashboard/products/">
 						            <div class="dokan-form-group">
-						               <input type="text" class="dokan-form-control" name="product_search_name" placeholder="Search Products" value="">
+						               <input type="text" class="dokan-form-control" name="product_search_name" required placeholder="Search Products" value="">
 						            </div>
 						         </form>
 						      </div>
