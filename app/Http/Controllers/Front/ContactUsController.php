@@ -33,13 +33,13 @@ class ContactUsController extends Controller
                 Mail::send('front.emails.contact-us', $mailData, function($message) use($mailData){
                     $message->to($mailData['to'])->subject('Uscannazon - Contact Us');
                 });
-
+return redirect()->route('submitContact')->with(['message' => 'Your Query Submitted.']);
                 
 
             }catch (\Exception $ex){
                 echo $ex->getMessage();exit;
             }
-            return redirect()->route('contactUs')->with(['message' => 'Your Query Submitted.']);
+            
         }
         
     }

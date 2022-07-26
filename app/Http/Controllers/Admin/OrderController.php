@@ -148,7 +148,7 @@ class OrderController extends Controller
             else{
                 
                 $check = Customers::where('broker_request_id', $users->customers_id)->first();
-                //dd($check);
+                //dd($check->user_id);
                 $vendor_request = VendorRequest::where('vendor_id',$check->user_id)->orderBy('created_at','desc')->get();
                 //dd($vendor_request);
                 foreach($vendor_request as $items){
