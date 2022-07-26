@@ -99,3 +99,6 @@
 
     dokan.login_form_popup.init();
 })(jQuery);
+
+
+
