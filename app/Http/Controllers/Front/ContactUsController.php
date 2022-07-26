@@ -23,12 +23,13 @@ class ContactUsController extends Controller
         if($request->method() == 'POST'){
             try{
                 
-                $setting = Settings::find(1);
+                //$setting = Settings::find(1);
                 $mailData = array(
                     'name' => $request->input('name'),
                     'email' => $request->input('email'),
                     'userMessage' => $request->input('message'),
                     'to' => 'muhammad.mairaj@oip.com.pk',
+                    //'to' => 'developerb989@gmail.com',
                 );
                 Mail::send('front.emails.contact-us', $mailData, function($message) use($mailData){
                     $message->to($mailData['to'])->subject('Uscannazon - Contact Us');
