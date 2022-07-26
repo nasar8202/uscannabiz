@@ -64,13 +64,13 @@
 						      <div class="product-listing-top dokan-clearfix">
 						         <ul class="dokan-listing-filter dokan-left subsubsub">
 						            <li class="active">
-						               <a >All ({{$product_count??'0'}})</a>
+						               <a >All ({{$product_count??0}})</a>
 						            </li>
 						            <!--<li>-->
 						            <!--   <a >Online (7)</a>-->
 						            <!--</li>-->
 						            <li>
-						               <a >In stock ({{$product_stock->product_qty??'0'}})</a>
+						               <a >In stock ({{$product_stock->product_qty??0}})</a>
 						            </li>
 						         </ul>
 								 
@@ -193,7 +193,7 @@
 						                        <span class="na">{{$pro->sku}}</span>
 						                     </td>
 						                     <td data-title="Stock">
-						                        <mark class="instock">{{$pro->product_qty}}</mark>
+						                        <mark class="instock">{{$pro->product_qty??0}}</mark>
 						                     </td>
 						                     <td data-title="Price">
 						                        <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>{{$pro->product_current_price}}</span>
@@ -240,7 +240,7 @@
 						                        <span class="na">{{$pro->sku}}</span>
 						                     </td>
 						                     <td data-title="Stock">
-						                        <mark class="instock">{{$pro->product_qty}}</mark>
+						                        <mark class="instock">{{$pro->product_qty??0}}</mark>
 						                     </td>
 						                     <td data-title="Price">
 						                        <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>{{$pro->product_current_price}}</span>
