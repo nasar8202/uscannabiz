@@ -14,6 +14,7 @@ use App\Models\OptionValue;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
+use App\User;
 use App\Models\ProductAttribute;
 use App\Models\ProductImage;
 use App\Models\ProductMetaData;
@@ -22,6 +23,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use DB;
 use Auth;
+use App\Notifications\ProductApprovedNotificaton;
 class ProductController extends Controller
 {
     /**
@@ -77,17 +79,18 @@ class ProductController extends Controller
     public function productStatusAccept($id)
     {
 
-        // $customer =Customers::join('Users','Users.email','=','Customers.email')->where('role_id','=',2)->where('Customers.user_id',$id)->first();
+       // $customer =User::join('products','users.id','=','products.vender_id')->select('products.approvel_admin_status','users.email')->where('products.id',$id)->first();
 
         $customer =Product::where('id',$id)->first();
         $customer->approvel_admin_status = 1;
         $customer->save();
+        $user = User::where('id',$customer->vender_id)->first();
 
-        //  $data_status = array(
-        //     'approvel_status'=>1
-        //  );
-
-
+// dd($user);
+            if($customer->approvel_admin_status = 1)
+            {
+                $user->notify(new ProductApprovedNotificaton());
+            }
 
             return back()->with('success','Customer Approved Successfully');
     }
@@ -312,9 +315,9 @@ class ProductController extends Controller
             $request->file('product_image_first')->move(public_path() . '/uploads/products/', $product_image_first);
             $product->product_image = $product_image_first;
         } else {
-            
+
             $product_image_first = null;
-            
+
             $timestamp = mt_rand(1, time());
         }
 

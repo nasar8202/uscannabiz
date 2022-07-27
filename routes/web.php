@@ -17,7 +17,7 @@ use app\Http\Controllers\Admin\VendorController;
 
 
 
-
+Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::get('/', 'Front\FrontController@index')->name('homepage');
 // login register front
 Route::post('/register', 'Front\FrontController@Register')->name('register');

@@ -157,6 +157,7 @@
         $(document).ready(function () {
             var DataTable = $("#example1").DataTable({
                 dom: "Blfrtip",
+
                 buttons: [{
                     extend: "copy",
                     className: "btn-sm"
@@ -182,7 +183,7 @@
                 },
                 order: [ [4, 'desc'] ],
                 columns: [
-
+                    // defaultContent: 'NA',
                     // {data: 'id', name: 'id'},
                     // {data: 'program_name', name: 'program_name'},
                     { data: 'DT_RowIndex', name: 'DT_RowIndex' },
@@ -192,7 +193,8 @@
                     {data: 'order_date', name: 'order_date'},
                     {data: 'status', name: 'status'},
                     {data: 'action', name: 'action', orderable: false}
-                ]
+                ],
+
 
             });
 

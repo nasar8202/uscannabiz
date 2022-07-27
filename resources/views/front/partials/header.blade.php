@@ -39,7 +39,7 @@ use Illuminate\Support\Facades\Request;
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" defer />
       <!--Zeveloper-->
       <link rel="stylesheet" id="dokan-fontawesome-css"href="{{ URL::asset('assets/plugins/dokan-lite/assets/vendors/font-awesome/font-awesome.min.css?ver=3.4.1') }}" type="text/css" media="all">
-      
+
       <link rel="stylesheet" id="divi-style-css"href="{{ URL::asset('assets/themes/Divi-child/style.css?ver=4.15.1') }}" type="text/css" media="all">
       <link rel="stylesheet" id="divi-style-css"href="{{ URL::asset('assets/style/style.css') }}" type="text/css" media="all">
       <script type="text/javascript" src="{{ URL::asset('assets/wp-includes/js/jquery/jquery.min.js?ver=3.6.0" id="jquery-core-js')}}"></script>
@@ -100,7 +100,6 @@ use Illuminate\Support\Facades\Request;
 
                            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home page_item page-item-34 current_page_item menu-item-43 {{ Request::route()->getName() == 'homepage' ? 'current-menu-item' : '' }}"><a href="{{ route('homepage') }}" aria-current="page">Home</a></li>
                            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-44 {{ Request::route()->getName() == 'aboutUs' ? 'current-menu-item' : '' }}"><a href="{{ route('aboutUs') }}">About Us</a></li>
-<<<<<<< HEAD
                            @php
                            $role = Auth::user();
                            @endphp
@@ -108,8 +107,6 @@ use Illuminate\Support\Facades\Request;
                            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-44"><a href="javascript:void(0)" class="trigger">Product Request</a></li>
                            @endif
                             </li>
-=======
->>>>>>> 17cdf3d77f7d6eb02a448b0976317893b18a74b8
                            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-46 {{ Request::route()->getName() == 'faq' ? 'current-menu-item' : '' }}"><a href="{{ route('faq') }}">FAQ Page</a></li>
                            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-45 {{ Request::route()->getName() == 'contactUs' ? 'current-menu-item' : '' }}"><a href="{{ route('contactUs') }}">Contact Us</a></li>
                            {{-- @if(Auth::check())

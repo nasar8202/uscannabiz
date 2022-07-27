@@ -11,6 +11,8 @@ use Validator;
 use DB;
 use Illuminate\Support\Facades\Hash;
 use Auth;
+use App\Notifications\UserApprovedNotificaton;
+
 class CustomersController extends Controller
 {
     /**
@@ -303,7 +305,11 @@ class CustomersController extends Controller
         $customer =User::where('id',$id)->first();
         $customer->approvel_status = 1;
         $customer->save();
+        if($customer->approvel_status = 1)
+        {
+            $customer->notify(new UserApprovedNotificaton());
 
+        }
         //  $data_status = array(
         //     'approvel_status'=>1
         //  );
