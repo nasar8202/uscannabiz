@@ -271,7 +271,11 @@
                                                 <td class="left">
                                                     <strong>Total</strong>
                                                 </td>
-                                                <td class="right">${{$product->product_current_price+$order->broker_price}}</td>
+                                                @if(isset($order))
+                                                <td class="right">${{$product->product_current_price+$order->broker_price??''}}</td>
+                                                @else
+                                                <td class="right">${{$product->product_current_price}}</td>
+                                                @endif
                                                 {{-- <td class="right">
                                                     <strong>${{$order->total_amount+$order->shipping_cost}}</strong>
                                                 </td> --}}
