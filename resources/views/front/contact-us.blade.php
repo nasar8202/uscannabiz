@@ -91,22 +91,22 @@ ul.et_pb_social_media_follow{list-style-type:none!important;margin:0 0 22px;padd
                            </div>
                         </div>
                      </div>
-                      
-                    
+
+
                      <div class="et_pb_column et_pb_column_2_3 et_pb_column_2  et_pb_css_mix_blend_mode_passthrough et-last-child">
                         <div  class="et_pb_with_border et_pb_module et_pb_contact_form_0 et_pb_contact_form_container clearfix">
-                        
+                            @if(session()->has('message'))
+                            <h1>
+
+
+                                               {{ session()->get('message') }}
+
+
+                            </h1>@endif
                            <h1 class="et_pb_contact_main_title">Get In Touch</h1>
                            <div class="et-pb-contact-message"></div>
                            <div class="et_pb_contact">
-                                       @if(session()->has('message'))
-                     <h1>
-                        
-                                    
-                                        {{ session()->get('message') }}
-                                   
-                                
-                     </h1>@endif
+
                                <form class="et_pb_contact_form clearfix" method="post" action="{{ route('submitContact') }}">
                                   @csrf
                                  <p class="et_pb_contact_field et_pb_contact_field_0 et_pb_contact_field_half" data-id="name" data-type="input">
@@ -122,18 +122,18 @@ ul.et_pb_social_media_follow{list-style-type:none!important;margin:0 0 22px;padd
                                     <textarea name="message" id="et_pb_contact_message_0" required class="et_pb_contact_message input" data-required_mark="required" data-field_type="text" data-original_id="message" placeholder="Message"></textarea>
                                  </p>
                                  <input type="hidden" value="et_contact_proccess" name="et_pb_contactform_submit_0">
-                                 
+
                                     <button  type="submit" name="et_builder_submit_button" class="et_pb_contact_submit et_pb_button">Submit</button>
                                  </div>
                                  <input type="hidden" id="_wpnonce-et-pb-contact-form-submitted-0" name="_wpnonce-et-pb-contact-form-submitted-0" value="c2d464493b"><input type="hidden" name="_wp_http_referer" value="wp/uscannabiz/contact-us/">
                               </form>
-                              
+
                            </div>
-                           
+
                         </div>
                      </div>
                   </div>
-                  
+
                </div>
             </div>
          </div>

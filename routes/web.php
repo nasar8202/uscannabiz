@@ -139,10 +139,14 @@ Route::namespace('Admin')->prefix('/admin')->middleware('admin')->group(function
     //vendor request
 
     Route::get('brokerAssignToVendor/{id}/{vendor_id}', 'VendorController@brokerAssignToVendor')->name('brokerAssignToVendor');
+    Route::get('/vendors', 'VendorController@vendor_get')->name('vendor_get');
+    Route::get('/customers/get', 'VendorController@customer_get')->name('customer_get');
     Route::get('brokerCancleToVendor/{id}/{vendor_id}', 'VendorController@brokerCancleToVendor')->name('brokerCancleToVendor');
     Route::get('/vendorRequest', 'VendorController@vendorRequest')->name('vendorRequest');
     Route::get('vendorshow/{id}', 'VendorController@show')->name('vendorshow');
     Route::get('customerRequest', 'CustomersController@customerRequest')->name('customerRequest');
+    Route::get('brokerapproved', 'CustomersController@brokerapproved')->name('brokerapproved');
+    Route::get('vendorapproved', 'CustomersController@vendorapproved')->name('vendorapproved');
     Route::get('customerStatusAccept/{id}', 'CustomersController@customerStatusAccept')->name('customerStatusAccept');
     Route::get('customerStatusReject/{id}', 'CustomersController@customerStatusReject')->name('customerStatusReject');
     Route::get('/show_vendor_request/{id}', 'VendorController@show_vendor_request')->name('show_vendor_request');

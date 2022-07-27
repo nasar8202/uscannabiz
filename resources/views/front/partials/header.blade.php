@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Request;
       <link rel="icon" href="https://webprojectmockup.com/wp/uscannabiz/wp-content/uploads/2022/03/cropped-Uscannazon4-1-192x192.png" sizes="192x192" />
 
       <title>Us Cannazon | Market Place | @yield('title', '')</title>
+      <meta name="csrf-token" content="{{ csrf_token() }}">
       <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
       <meta name="robots" content="max-image-preview:large">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
