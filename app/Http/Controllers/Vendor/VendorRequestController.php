@@ -58,52 +58,61 @@ class VendorRequestController extends Controller
             //     'role_id' => 4,
             // ]);
 
+            $product = Product::where('id',$request->input('product_id'))->first();
 
-        $vendor = new VendorRequest;
-        $vendor->product_id = $request->input('product_id');
-        $vendor->vendor_id = $request->input('vendor_id');
-        $vendor->full_name = $request->input('full_name');
-        $vendor->phone_num = $request->input('phone_num');
-        $vendor->email = $request->input('email');
-        $vendor->address = $request->input('address');
-        $vendor->city = $request->input('city');
-        $vendor->quantity = $request->input('quantity');
-        $auth = Auth::user();
-        if(isset($auth) && $auth->role_id == 2){
-            $vendor->customer_id = $auth->id;
-        }
-        $vendor->save();
-        $product = Product::where('id',$request->input('product_id'))->first();
-        //$vendor = Customer::where('id',$request->input('vendor_id'))->first();
-        $details = [
-            'name'=> $request->full_name,
-            'email' => $request->input('email'),
-            'phone_num' => $request->input('phone_num'),
-            'city' => $request->input('city'),
-            'quantity' => $request->input('quantity'),
-            'address'=>  $request->input('address'),
-            'product_name'=>$product->product_name,
-            'sku'=>$product->sku
-        ];
-        $vendor = Customers::where('user_id',$request->input('vendor_id'))->first();
-        if($request->input('vendor_id') != 1){
-        $usersArray = [$request->input('email'), $vendor->email];
-        foreach($usersArray as $user){
-            //echo $user;
-            \Mail::to($user)->send(new \App\Mail\SendEmailAdminCustomerBroker($details));
+            $pro = $product->product_qty;
+            $qty = $request->input('quantity');
+            
+            if($qty < $pro){
+                $vendor = new VendorRequest;
+                $vendor->product_id = $request->input('product_id');
+                $vendor->vendor_id = $request->input('vendor_id');
+                $vendor->full_name = $request->input('full_name');
+                $vendor->phone_num = $request->input('phone_num');
+                $vendor->email = $request->input('email');
+                $vendor->address = $request->input('address');
+                $vendor->city = $request->input('city');
+                $vendor->quantity = $request->input('quantity');
+                $auth = Auth::user();
+                if(isset($auth) && $auth->role_id == 2){
+                    $vendor->customer_id = $auth->id;
+                }
+                $vendor->save();
+                $product = Product::where('id',$request->input('product_id'))->first();
+                //$vendor = Customer::where('id',$request->input('vendor_id'))->first();
+                $details = [
+                    'name'=> $request->full_name,
+                    'email' => $request->input('email'),
+                    'phone_num' => $request->input('phone_num'),
+                    'city' => $request->input('city'),
+                    'quantity' => $request->input('quantity'),
+                    'address'=>  $request->input('address'),
+                    'product_name'=>$product->product_name,
+                    'sku'=>$product->sku
+                ];
+                $vendor = Customers::where('user_id',$request->input('vendor_id'))->first();
+                if($request->input('vendor_id') != 1){
+                $usersArray = [$request->input('email'), $vendor->email];
+                foreach($usersArray as $user){
+                    //echo $user;
+                    \Mail::to($user)->send(new \App\Mail\SendEmailAdminCustomerBroker($details));
 
-        }
-        }else{
-            $usersArray = [$request->input('email')];
-            foreach($usersArray as $user){
-            //echo $user;
-            \Mail::to($user)->send(new \App\Mail\SendEmailAdminCustomerBroker($details));
+                }
+                }else{
+                    $usersArray = [$request->input('email')];
+                    foreach($usersArray as $user){
+                    //echo $user;
+                    \Mail::to($user)->send(new \App\Mail\SendEmailAdminCustomerBroker($details));
 
-        }
-        }
-        return redirect()->route('order_thanks')->with('success',"Request Has Been Submited");
-        // \Mail::to($request->input('email'))->send(new \App\Mail\SendEmailAdminCustomerBroker($details));
-        // return redirect()->route('order_thanks')->with('success',"Request Has Been Submited");
+                }
+                }
+                return redirect()->route('order_thanks')->with('success',"Request Has Been Submited");
+                // \Mail::to($request->input('email'))->send(new \App\Mail\SendEmailAdminCustomerBroker($details));
+                // return redirect()->route('order_thanks')->with('success',"Request Has Been Submited");
+            
+            } else{
+                return back()->with('error',"Only: {$pro} available in Stock");
+            }
         }
     }
 

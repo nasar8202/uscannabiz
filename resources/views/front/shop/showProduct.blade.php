@@ -64,7 +64,6 @@ ul.et_pb_social_media_follow{list-style-type:none!important;margin:0 0 22px;padd
                 {{ session()->get('success_message') }}
             </div>
         @endif
-
         @if(count($errors) > 0)
             <div class="alert alert-danger">
                 <ul>
@@ -138,6 +137,11 @@ ul.et_pb_social_media_follow{list-style-type:none!important;margin:0 0 22px;padd
 	             </div>
                 </form>
 	          </div>
+                @if (session()->has('error_message'))
+                    <div class="alert alert-success" style="color: red;font-weight: bold;">
+                        {{ session()->get('error_message') }}
+                    </div>
+                @endif
 	       </div>
 	       <div class="et_pb_row et_pb_row_3_tb_body">
 	          <div class="et_pb_column et_pb_column_4_4 et_pb_column_4_tb_body  et_pb_css_mix_blend_mode_passthrough et-last-child">
