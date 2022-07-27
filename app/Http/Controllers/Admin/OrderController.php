@@ -108,11 +108,10 @@ class OrderController extends Controller
         $users = User::where(['id'=>Auth::user()->id,'email'=>Auth::user()->email])->first();
         $order = Order::with('customer')->orderBy('created_at','desc')->get();
         //  dd($users->customers_id);
-         
         try {
             if (request()->ajax()) {
                 if($users->role_id == 1){
-                    
+
                     return datatables()->of(Order::with('customer')->orderBy('created_at','desc')->get())
                     ->addIndexColumn()
                     ->addColumn('order_no', function ($data) {
@@ -148,13 +147,18 @@ class OrderController extends Controller
             else{
                 
                 $check = Customers::where('broker_request_id', $users->customers_id)->first();
+<<<<<<< HEAD
                 //dd($check);
+=======
+                dd($check);
+>>>>>>> 78679463f1f0e662715d2ee42c7d6abdaa608b65
                 $vendor_request = VendorRequest::where('vendor_id',$check->user_id)->orderBy('created_at','desc')->get();
                 //dd($vendor_request);
                 foreach($vendor_request as $items){
                     $products = Product::where('id',$items->product_id)->first();
                 }
                 $check_vendor = Customers::where('user_id', $products->vender_id)->first();
+<<<<<<< HEAD
                 // $vendor_request_customer = VendorRequest::where('vendor_id',$check_vendor->user_id)->orderBy('created_at','desc')->get();
                 // $vendor_request = VendorRequest::where('vendor_id',$check->user_id)->orderBy('created_at','desc')->get();
                 // $order_check = Order::where('id',$vendor_request->order_id)->first();
@@ -206,9 +210,59 @@ class OrderController extends Controller
                         </a>&nbsp;<button title="Delete" type="button" name="delete" id="' . $data->id . '" class="delete btn btn-danger btn-sm">
                         <i class="fa fa-trash"></i></button>';
                     }
+=======
+            //     return datatables()->of(VendorRequest::where('vendor_id',$check_vendor->user_id)->orderBy('created_at','desc')->get())
+            //     ->addIndexColumn()
+            //     ->addColumn('customer', function ($data) {
+            //         // if ($data->customer_id == null) {
+            //             return $data->full_name??'';
+            //         // } else {
+            //         //     return $data->customer->first_name . ' ' . $data->customer->last_name;
+            //         // }
+            //     })->addColumn('email', function ($data) {
+            //         return $data->email??'';
+            //     })->addColumn('phone', function ($data) {
+            //         return $data->phone_num??'';
+            //     })->addColumn('order_date', function ($data) {
+            //         return date('d-M-Y', strtotime($data->created_at)) ?? '';
+            //     })->addColumn('status', function ($data) {
+            //         $order_check = Order::where('id',$data->order_id)->first();
+            //         if(isset($order_check)){
+            //         if ($order_check->order_status == 'pending') {
+            //             return '<span class="badge badge-secondary">Pending</span>';
+            //         } elseif ($order_check->order_status == 'cancelled') {
+            //             return '<span class="badge badge-danger">Cancelled</span>';
+            //         } elseif ($order_check->order_status == 'completed') {
+            //             return '<span class="badge badge-success">Completed</span>';
+            //         } elseif ($order_check->order_status == 'shipped') {
+            //             return '<span class="badge badge-info">Shipped</span>';
+            //         }
+            //         }
+            //         else{
+            //         return '<span class="badge badge-secondary">Pending</span>';
+            //         }
+            //     })
+            //     ->addColumn('action', function ($data) {
+            //         // return $data->product_id;
+            //         if(!$data->order_id == ""){
+            //         return '<a title="View" href="order/broker/' . $data->product_id . '/' . $data->id . '/' . $data->order_id . '" class="btn btn-dark btn-sm">
+            //                 <i class="fas fa-eye"></i>
+            //                 </a>&nbsp;<button title="Delete" type="button" name="delete" id="' . $data->id . '" class="delete btn btn-danger btn-sm">
+            //                 <i class="fa fa-trash"></i></button>';
+            //         }
+            //         else{
+            //             return '<a title="View" href="order/broker/' . $data->product_id . '/' . $data->id . '" class="btn btn-dark btn-sm">
+            //             <i class="fas fa-eye"></i>
+            //             </a>&nbsp;<button title="Delete" type="button" name="delete" id="' . $data->id . '" class="delete btn btn-danger btn-sm">
+            //             <i class="fa fa-trash"></i></button>';
+            //         }
+>>>>>>> 78679463f1f0e662715d2ee42c7d6abdaa608b65
 
-                })->rawColumns(['order_no', 'customer', 'status', 'total_amount', 'order_date', 'action'])->make(true);
-            }
+            //     })->rawColumns(['order_no', 'customer', 'status', 'total_amount', 'order_date', 'action'])->make(true);
+            
+                
+               
+        }
             }
         } catch (\Exception $ex) {
             return redirect('/')->with('error', 'SomeThing Went Wrong baby');
@@ -218,7 +272,17 @@ class OrderController extends Controller
             return view('admin.order.index');
         }
         else{
-            return view('admin.order.broker_index');
+            $check = Customers::where('broker_request_id', $users->customers_id)->first();
+                
+                $vendor_request = VendorRequest::where('vendor_id',$check->user_id)->orderBy('created_at','desc')->get();
+                foreach($vendor_request as $items){
+                    $products = Product::where('id',$items->product_id)->first();
+                }
+                if(!$vendor_request->isEmpty()){
+                    $check_vendor = Customers::where('user_id', $products->vender_id)->first();
+                    $vender_request = VendorRequest::where('vendor_id',$check_vendor->user_id)->orderBy('created_at','desc')->get();
+                }
+            return view('admin.order.broker_index',compact('vender_request') );
         }
     }
 
@@ -268,10 +332,30 @@ class OrderController extends Controller
 
     public function destroy($id)
     {
-        $content = Order::find($id);
-        $content->delete(); //
-        $orderItems = OrderItem::where('order_id', $id)->delete();
-        echo 1;
+        // dd($id);
+        $vender_request = VendorRequest::find($id);
+        $vender_request->delete();
+
+        // $content = Order::find($id);
+        // $content->delete(); //
+        // $orderItems = OrderItem::where('order_id', $id)->delete();
+        
+        // return back()->with('success','Order Deleted Successfully');
+        return 1;
+    }
+
+    public function destroyBoth($id,$id2)
+    {
+        $vender_request = VendorRequest::find($id);
+        $vender_request->delete();
+        $order = Order::find($id2);
+        $order->delete();
+        return 1;
+        // return back()->with('success','Order Deleted Successfully');
+        // $content = Order::find($id);
+        // $content->delete(); //
+        // $orderItems = OrderItem::where('order_id', $id)->delete();
+        
     }
 
 
@@ -286,16 +370,16 @@ class OrderController extends Controller
     public function broker_price(Request $request)
     {
 
-        $product_id = $request->input('product_id'); 
+        $product_id = $request->input('product_id');
         $product_record = Product::where('id', $product_id)->first();
-        
+
         $qty = $product_record->product_qty;
         $update_qty = $qty - $request->input('quantity');
 
         $qty_update = DB::table('products')
               ->where('id', $product_id)
               ->update(['product_qty' => $update_qty]);
-        //dd($update_qty); 
+        //dd($update_qty);
         // dd($request->all());
         // $customer_check = Customers::where('user_id',Auth::user()->id)->first();
         $timestamp = mt_rand(1, time());

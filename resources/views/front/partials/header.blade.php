@@ -39,7 +39,7 @@ use Illuminate\Support\Facades\Request;
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" defer />
       <!--Zeveloper-->
       <link rel="stylesheet" id="dokan-fontawesome-css"href="{{ URL::asset('assets/plugins/dokan-lite/assets/vendors/font-awesome/font-awesome.min.css?ver=3.4.1') }}" type="text/css" media="all">
-      
+
       <link rel="stylesheet" id="divi-style-css"href="{{ URL::asset('assets/themes/Divi-child/style.css?ver=4.15.1') }}" type="text/css" media="all">
       <link rel="stylesheet" id="divi-style-css"href="{{ URL::asset('assets/style/style.css') }}" type="text/css" media="all">
       <script type="text/javascript" src="{{ URL::asset('assets/wp-includes/js/jquery/jquery.min.js?ver=3.6.0" id="jquery-core-js')}}"></script>

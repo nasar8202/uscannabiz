@@ -60,7 +60,15 @@ class LoginController extends Controller
 
     public function logout()
     {
+        $first_time_login = true;
+        $user = Auth::user()->first_time_login == 0;
+        if (isset($user)) {
+
+            Auth::user()->first_time_login = false;
+            Auth::user()->save();
+        }
         Auth::logout();
+
         //session()->flash('msg_logout', 'Panel System Successfully Logout');
         //alert()->success('You have been logout successfully','GoodBye');
         //session()->flush();

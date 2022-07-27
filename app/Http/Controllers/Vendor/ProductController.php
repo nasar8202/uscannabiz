@@ -7,6 +7,7 @@ use DB;
 use Auth;
 
 use App\Models\Product;
+use App\User;
 use App\Models\Category;
 use App\Models\Customer;
 use App\Models\Customers;
@@ -16,7 +17,7 @@ use App\Models\RelatedProduct;
 use App\Models\ProductMetaData;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
-
+use App\Notifications\AdminNewProductNotification;
 class ProductController extends Controller
 {
     public function index()
@@ -68,6 +69,7 @@ class ProductController extends Controller
     {
         
 
+       // dd($request->all());
         $validator = Validator::make($request->all(), array(
 
             'product_name' => 'required',
@@ -149,6 +151,11 @@ class ProductController extends Controller
                         ]);
                     }
                 }
+                $administrators = User::where('id',1)->get();
+                foreach($administrators as $administrator){
+                    $administrator->notify(new AdminNewProductNotification($request->get('product_name'), $request->get('product_slug'),$request->get('current_price')));
+                }
+                //return $product;
 
 
             }
@@ -212,14 +219,22 @@ class ProductController extends Controller
     public function vendorAddProductForm(Request $request,$id)
     {
 
-        $data = Product::find($id);
-        $auth = Auth::user();
-        if($auth){
-            $customer_check = Customers::where('user_id',$auth->id)->first();
-            return view('front.shop.vendorAddProductForm',compact(['data','customer_check']));
-        }
-        else{
-            return view('front.shop.vendorAddProductForm',compact(['data']));
+
+        $product = Product::where('id', $id)->first();
+        $pro = $product->product_qty;
+        if($pro > 0){
+            $data = Product::find($id);
+            $auth = Auth::user();
+            if($auth){
+                $customer_check = Customers::where('user_id',$auth->id)->first();
+                return view('front.shop.vendorAddProductForm',compact(['data','customer_check']));
+            }
+            else{
+                return view('front.shop.vendorAddProductForm',compact(['data']));
+            }
+        }else{
+            return back()->with('error_message',"Product not available in Stock");
+            //return view('front.shop.showProduct');
         }
     }
     public function destroyProduct($id)

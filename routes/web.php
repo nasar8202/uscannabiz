@@ -17,7 +17,7 @@ use app\Http\Controllers\Admin\VendorController;
 
 
 
-
+Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::get('/', 'Front\FrontController@index')->name('homepage');
 // login register front
 Route::post('/register', 'Front\FrontController@Register')->name('register');
@@ -177,6 +177,7 @@ Route::namespace('Admin')->prefix('/admin')->middleware('admin')->group(function
     Route::get('/order/{id}', 'OrderController@show')->name('order.show');
     Route::get('/order/changeOrderStatus/{id}', 'OrderController@changeOrderStatus')->name('order.changeOrderStatus');
     Route::delete('/order/destroy/{id}', 'OrderController@destroy')->name('order.destroy');
+    Route::delete('/order/destroyBoth/{id}/{id2}', 'OrderController@destroyBoth')->name('order.destroyBoth');
     Route::post('submit-request', 'OrderController@broker_price')->name('submit-request');
     Route::post('submit-request-update', 'OrderController@broker_price_update')->name('submit-request-update');
 
