@@ -2,16 +2,18 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\Customers;
-use App\Models\Order;
+use Auth;
 use App\User;
 use Validator;
+use App\Models\Order;
+use App\Models\Customers;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
-use Auth;
-use App\Notifications\VendorApprovedNotificaton;
+use App\Notifications\AdminNewUserNotification;
 use App\Notifications\BrokerApprovedNotificaton;
+use App\Notifications\VendorApprovedNotificaton;
+
 class VendorController extends Controller
 {
     /**
@@ -64,12 +66,12 @@ class VendorController extends Controller
 
         // $customer =Customers::join('Users','Users.email','=','Customers.email')->where('role_id','=',2)->where('Customers.user_id',$id)->first();
 
-        $customer =User::where('role_id',$id)->first();
+        $customer =User::where('id',$id)->first();
         $customer->approvel_status = 1;
         $customer->save();
         if($customer->approvel_status = 1)
         {
-            $customer->notify(new VendorApprovedNotificaton());
+            $customer->notify(new AdminNewUserNotification());
 
         }
 
@@ -82,7 +84,7 @@ class VendorController extends Controller
 
         // $customer =Customers::join('Users','Users.email','=','Customers.email')->where('role_id','=',2)->where('Customers.user_id',$id)->first();
 
-        $customer =User::where('role_id',$id)->first();
+        $customer =User::where('id',$id)->first();
         $customer->approvel_status = 1;
         $customer->save();
         if($customer->approvel_status = 1)
@@ -92,7 +94,22 @@ class VendorController extends Controller
         }
 
 
-            return back()->with('success','Customer Approved Successfully');
+            return back()->with('success','Broker Approved Successfully');
+    }
+    public function vendorStatusAccept($id)
+    {
+
+        $customer =User::where('id',$id)->first();
+        $customer->approvel_status = 1;
+        $customer->save();
+        if($customer->approvel_status = 1)
+        {
+            $customer->notify(new VendorApprovedNotificaton());
+
+        }
+
+
+            return back()->with('success','Vendor Approved Successfully');
     }
     /**
      * Show the form for creating a new resource.
@@ -262,6 +279,53 @@ class VendorController extends Controller
         $customer->save();
 
         return back()->with('success','Broker Cancle Successfully');
+    }
+    public function vendor_get()
+    {
+
+            $user = User::join('customers','users.customers_id','=','customers.id')->where(['role_id'=>3,'approvel_status'=>1])->get();
+                try {
+        
+                    if (request()->ajax()) {
+                        return datatables()->of($user)
+                            ->addIndexColumn()
+                            ->addColumn('action', function ($data) {
+                                return '<a title="View" href="customers/' . $data->id . '"
+                                class="btn btn-dark btn-sm"><i class="fas fa-eye"></i></a>&nbsp;
+                                <a title="edit" href="customers/' . $data->id . '/edit" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
+                                &nbsp;<button title="Delete" type="button" name="delete" id="' . $data->id . '"
+                                class="delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>';
+                            })->rawColumns(['action'])->make(true);
+        
+                    }
+                } catch (\Exception $ex) {
+                    return redirect('/')->with('error', $ex->getMessage());
+                }
+        return view('admin.vendorApproved.index');
+    }
+
+    public function customer_get()
+    {
+
+            $user = User::join('customers','users.customers_id','=','customers.id')->where(['role_id'=>2,'approvel_status'=>1])->get();
+                try {
+        
+                    if (request()->ajax()) {
+                        return datatables()->of($user)
+                            ->addIndexColumn()
+                            ->addColumn('action', function ($data) {
+                                return '<a title="View" href="customers/' . $data->id . '"
+                                class="btn btn-dark btn-sm"><i class="fas fa-eye"></i></a>&nbsp;
+                                <a title="edit" href="customers/' . $data->id . '/edit" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
+                                &nbsp;<button title="Delete" type="button" name="delete" id="' . $data->id . '"
+                                class="delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>';
+                            })->rawColumns(['action'])->make(true);
+        
+                    }
+                } catch (\Exception $ex) {
+                    return redirect('/')->with('error', $ex->getMessage());
+                }
+        return view('admin.customerRequest.index');
     }
 
 }

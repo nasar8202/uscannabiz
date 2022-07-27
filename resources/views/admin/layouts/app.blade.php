@@ -289,9 +289,21 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a href="{{route('customer_get')}}" class="nav-link {{ request()->IS('admin/customers/get') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-user"></i>
+                            <p>Customers</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="{{route('customers.index')}}" class="nav-link {{ request()->IS('admin/customers') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-user"></i>
                             <p>Broker</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('vendor_get')}}" class="nav-link {{ request()->IS('admin/vendors') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-user"></i>
+                            <p>Vendor</p>
                         </a>
                     </li>
 
@@ -309,13 +321,13 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{route('vendorRequest')}}" class="nav-link {{ request()->IS('admin/vendorRequest') ? 'active' : '' }}">
+                        <a href="{{route('brokerapproved')}}" class="nav-link {{ request()->IS('admin/brokerapproved') ? 'active' : '' }}">
                             <i class="nav-icon  fas fa-user"></i>
                             <p>New Broker Request</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{route('vendorRequest')}}" class="nav-link {{ request()->IS('admin/vendorRequest') ? 'active' : '' }}">
+                        <a href="{{route('vendorapproved')}}" class="nav-link {{ request()->IS('admin/vendorapproved') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-user"></i>
                             <p>New Vendor Request</p>
                         </a>

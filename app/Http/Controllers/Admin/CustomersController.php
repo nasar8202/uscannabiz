@@ -23,7 +23,7 @@ class CustomersController extends Controller
     final public function index()
     {
 
-    $user = User::join('customers','users.customers_id','=','customers.id')->where(['role_id'=>4])->get();
+    $user = User::join('customers','users.customers_id','=','customers.id')->where(['role_id'=>4,'approvel_status'=>1])->get();
         try {
 
             if (request()->ajax()) {
@@ -294,6 +294,60 @@ class CustomersController extends Controller
         //     return redirect('/')->with('error', $ex->getMessage());
         // }
         return view('admin.customerRequest.customerRequest');
+    }
+
+    public function brokerapproved()
+    {
+        try {
+            if (request()->ajax()) {
+                return datatables()->of(User::where('role_id','=',4)->where('approvel_status',0)->get())
+                    ->addIndexColumn()
+
+                    ->addColumn('status', function ($data) {
+                        if ($data->status == 0) {
+                            return '<label>Pending</label>';
+                        } else {
+                            return '<label>Accept</label>';
+                        }
+                    })
+                    ->addColumn('action', function ($data) {
+                        return '<a title="Approve" href="brokerStatusAccept/' . $data->id . '"
+                         class="btn btn-success btn-sm">Approve &nbsp;<i class="fa fa-check"></i></a>&nbsp;';
+
+                    })->rawColumns(['status',  'action'])->make(true);
+            }
+        } catch (\Exception $ex) {
+            return redirect('/')->with('error', 'SomeThing Went Wrong baby');
+        }
+
+        return view('admin.brokerApproved.brokerApproved');
+    }
+
+    public function vendorapproved()
+    {
+        try {
+            if (request()->ajax()) {
+                return datatables()->of(User::where('role_id','=',3)->where('approvel_status',0)->get())
+                    ->addIndexColumn()
+
+                    ->addColumn('status', function ($data) {
+                        if ($data->status == 0) {
+                            return '<label>Pending</label>';
+                        } else {
+                            return '<label>Accept</label>';
+                        }
+                    })
+                    ->addColumn('action', function ($data) {
+                        return '<a title="Approve" href="vendorStatusAccept/' . $data->id . '"
+                         class="btn btn-success btn-sm">Approve &nbsp;<i class="fa fa-check"></i></a>&nbsp;';
+
+                    })->rawColumns(['status',  'action'])->make(true);
+            }
+        } catch (\Exception $ex) {
+            return redirect('/')->with('error', 'SomeThing Went Wrong baby');
+        }
+
+        return view('admin.vendorApproved.vendorApproved');
     }
 
 
