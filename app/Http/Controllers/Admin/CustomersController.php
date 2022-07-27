@@ -118,13 +118,13 @@ class CustomersController extends Controller
         //     'role_id' => 4,
         //     'customer_id'=>$customer_id,
         // ]);
-        $details = [
-            'name'=> $request->first_name." ".$request->last_name,
-            'email' => $request->email,
-            'password'=> $request->first_name
-        ];
+        // $details = [
+        //     'name'=> $request->first_name." ".$request->last_name,
+        //     'email' => $request->email,
+        //     'password'=> $request->first_name
+        // ];
 
-        \Mail::to($request->input('email'))->send(new \App\Mail\SendEmailVendorRegistration($details));
+        // \Mail::to($request->input('email'))->send(new \App\Mail\SendEmailVendorRegistration($details));
 
         //dd("Email is Sent.");
         return redirect('/admin/customers')->with('success',"Broker added We have Sent you password on email");

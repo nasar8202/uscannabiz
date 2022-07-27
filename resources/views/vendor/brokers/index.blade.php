@@ -16,6 +16,15 @@
                                             {{ session()->get('success') }}
                                         </div>
 										@endif
+										@if ($errors->any())
+										@foreach ($errors->all() as $error)
+										<div class="alert alert-danger alert-block">
+											
+												<strong>{{ $error }}</strong>
+											
+										</div>
+										@endforeach
+										@endif
 	               <div class="entry-content">
 	                  <div class="dokan-dashboard-wrap">
 						<div class="dokan-dash-sidebar">

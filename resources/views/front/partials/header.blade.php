@@ -76,11 +76,11 @@ use Illuminate\Support\Facades\Request;
                      <a href="mailto:Emailinfo@uscannazon.com"><span id="et-info-email">Emailinfo@uscannazon.com</span></a>
                   </div>
                   <div id="et-secondary-menu">
-                    <a href="{{ route('cart.index') }}">Items
+                    <span>Items
                         @if (Cart::instance('default')->count() > 0)
                             <span class="cart-count"><span>{{ Cart::instance('default')->count() }}</span></span>
                         @endif
-                    </a>
+                    </span>
                   </div>
                </div>
             </div>

@@ -65,10 +65,13 @@ class ProductController extends Controller
             if (request()->ajax()) {
                 return datatables()->of(Product::with('category')->where('approvel_admin_status',0)->orderBy('created_at','desc')->get())
                 ->addIndexColumn()
+                 ->addColumn('category_id', function ($data) {
+                    return $data->category->name ?? '';
+                })
                     ->addColumn('action', function ($data) {
                         return '<a title="Approve" href="productStatusAccept/' . $data->id . '"
                         class="btn btn-success btn-sm">Approve &nbsp;<i class="fa fa-check"></i></a>&nbsp;';
-                    })->rawColumns([ 'action'])->make(true);
+                    })->rawColumns([ 'action','category_id'])->make(true);
             }
         } catch (\Exception $ex) {
             return redirect('/')->with('error', 'SomeThing Went Wrong baby');

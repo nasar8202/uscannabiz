@@ -48,3 +48,4 @@
 		$( 'body' ).addClass( browser_class );
 	});
 })(jQuery);
+

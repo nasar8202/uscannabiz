@@ -26,21 +26,25 @@ class ProductController extends Controller
         $vendor_id = Auth::user()->id;
 
         $product = DB::table('products')->where('vender_id',$vendor_id)->get();
-
-        return view('vendor.product.index',compact(['category',$category ,'product',$product]));
+        $product_count = DB::table('products')->where('vender_id',$vendor_id)->count();
+        $product_stock = DB::table('products')->where('vender_id',$vendor_id)->first();
+        return view('vendor.product.index',compact(['category',$category ,'product',$product,'product_stock','product_count']));
     }
     public function filter(Request $request)
     {
         $category = Category::all();
         $vendor_id = Auth::user()->id;
         $product = DB::table('products')->where('vender_id',$vendor_id)->get();
+        $product_stock = DB::table('products')->where('vender_id',$vendor_id)->first();
+        $product_count = DB::table('products')->where('vender_id',$vendor_id)->count();
         if($request->product_cat == 'all'){
             $category_filter = DB::table('products')->where('vender_id',$vendor_id)->get();
         }
         else{
             $category_filter = Product::where(['category_id'=>$request->product_cat,'vender_id'=>$vendor_id])->get();
+            
         }
-        return view('vendor.product.index',compact(['category',$category ,'product',$product,'category_filter',$category_filter]));
+        return view('vendor.product.index',compact(['category',$category ,'product',$product,'category_filter',$category_filter,'product_stock','product_count']));
     }
     public function search(Request $request)
     {
@@ -49,8 +53,9 @@ class ProductController extends Controller
         $vendor_id = Auth::user()->id;
         $product = DB::table('products')->where('vender_id',$vendor_id)->get();
         $category_filter = Product::where('product_name', 'like', '%' . $request->product_search_name . '%')->where('vender_id',$vendor_id)->get();
-
-        return view('vendor.product.index',compact(['category',$category ,'product',$product,'category_filter',$category_filter]));
+        $product_stock = DB::table('products')->where('vender_id',$vendor_id)->first();
+        $product_count = $category_filter->count();
+        return view('vendor.product.index',compact(['category',$category ,'product',$product,'category_filter',$category_filter,'product_stock','product_count']));
     }
 
     public function addProductForm()
@@ -62,6 +67,7 @@ class ProductController extends Controller
     }
     public function addProduct(Request $request)
     {
+        
 
        // dd($request->all());
         $validator = Validator::make($request->all(), array(
@@ -87,7 +93,7 @@ class ProductController extends Controller
                 } else {
                     $product_image_first = null;
                 }
-
+               
                 $timestamp = mt_rand(1, time());
 
                 $product = Product::create([
@@ -243,6 +249,26 @@ class ProductController extends Controller
     public function destroyProductBulk(Request $request)
     {
         // dd($request->all());
+        $messsages = array(
+            'bulk_products.required'=>'Please Select Products to delete.',
+        );
+    
+        $rules = array(
+            'bulk_products'=>'required',
+        );
+    
+        $validator = Validator::make($request->all(), $rules,$messsages);
+        // $validator = Validator::make($request->all(), [
+        //     'bulk_products' => 'required',
+        // ]);
+        // $messsages = [
+        //     'bulk_products.required'=>'Please Select Products to delete.',
+        // ];
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator);
+        }
+
         if($request->status == 'delete'){
         foreach($request->bulk_products as $products){
             $product = DB::table('products')->where('id',$products)->delete();
@@ -290,12 +316,13 @@ class ProductController extends Controller
         } else {
             $product_image_first = null;
         }
-
+        
+        $timestamp = mt_rand(1, time());
         $product->category_id  = $request->get('main_category');
         $product->sub_category_id = $request->get('sub_category');
         $product->product_name = $request->get('product_name');
         $product->description = $request->get('description');
-        $product->sku = $request->get('product_sku');
+        $product->sku = $timestamp." ".$request->get('product_name');
         $product->slug = $request->get('product_slug');
         $product->product_current_price = $request->get('current_price');
         $product->product_sale = $request->get('product_sale') ?? 'no';

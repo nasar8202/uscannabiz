@@ -51,17 +51,26 @@
 									 {{ session()->get('success') }}
 								 </div>
 								 @endif
+								 @if ($errors->any())
+								 @foreach ($errors->all() as $error)
+								 <div class="alert alert-danger alert-block">
+									 
+										 <strong>{{ $error }}</strong>
+									 
+								 </div>
+								 @endforeach
+								 @endif
 						   <article class="dokan-product-listing-area">
 						      <div class="product-listing-top dokan-clearfix">
 						         <ul class="dokan-listing-filter dokan-left subsubsub">
 						            <li class="active">
-						               <a href="#">All (7)</a>
+						               <a >All ({{$product_count??0}})</a>
 						            </li>
+						            <!--<li>-->
+						            <!--   <a >Online (7)</a>-->
+						            <!--</li>-->
 						            <li>
-						               <a href="#">Online (7)</a>
-						            </li>
-						            <li>
-						               <a href="#">In stock (7)</a>
+						               <a >In stock ({{$product_stock->product_qty??0}})</a>
 						            </li>
 						         </ul>
 								 
@@ -82,8 +91,8 @@
 						               </select>
 						            </div> --}}
 						            <div class="dokan-form-group">
-						               <select name="product_cat" id="product_cat" class="product_cat dokan-form-control chosen">
-						                  <option value="-1" selected="selected">– Select a category –</option>
+						               <select name="product_cat" id="product_cat" required class="product_cat dokan-form-control chosen">
+						                  <option value="" selected="selected" disable>– Select a category –</option>
 						                  <option value="all">All</option>
 						                 @foreach ($category as $cat)
 										 <option class="level-0" value="{{$cat->id}}">{{$cat->name}}</option>
@@ -104,7 +113,7 @@
 						            <button type="submit" name="product_listing_search" value="ok" class="dokan-btn">Search</button>
 						            <input type="hidden" id="dokan_product_search_nonce" name="dokan_product_search_nonce" value="754d5308e1"><input type="hidden" name="_wp_http_referer" value="/wp/uscannabiz/dashboard/products/">
 						            <div class="dokan-form-group">
-						               <input type="text" class="dokan-form-control" name="product_search_name" placeholder="Search Products" value="">
+						               <input type="text" class="dokan-form-control" name="product_search_name" required placeholder="Search Products" value="">
 						            </div>
 						         </form>
 						      </div>
@@ -112,8 +121,8 @@
 						         <form id="product-filter" method="get" action="{{route('deleteProductbulk')}}" class="dokan-form-inline">
 						            <div class="dokan-form-group">
 						               <label for="bulk-product-action-selector" class="screen-reader-text">Select bulk action</label>
-						               <select name="status" id="bulk-product-action-selector" class="dokan-form-control chosen">
-						                  <option class="bulk-product-status" value="-1">Bulk Actions</option>
+						               <select name="status" id="bulk-product-action-selector" required class="dokan-form-control chosen">
+						                  <option class="bulk-product-status" value="" selected disabled>Bulk Actions</option>
 						                  <option class="bulk-product-status" value="delete">Delete Permanently</option>
 						               </select>
 						            </div>
@@ -129,11 +138,11 @@
 						                     </th>
 						                     <th>Image</th>
 						                     <th>Name</th>
-						                     <th>Status</th>
+						                     <!--<th>Status</th>-->
 						                     <th>SKU</th>
 						                     <th>Stock</th>
 						                     <th>Price</th>
-						                     <th>Earning<span class="tips earning-info" title="" data-original-title="Earning could be greater than or less than the calculated value based on different criteria like tax and shipping fee receiver"></span></th>
+						                     <!--<th>Earning<span class="tips earning-info" title="" data-original-title="Earning could be greater than or less than the calculated value based on different criteria like tax and shipping fee receiver"></span></th>-->
 						                     <th>Type</th>
 						                     <th>Views</th>
 						                     <th>Date</th>
@@ -142,7 +151,7 @@
 						               <tbody>
 										{{-- @if($category_filter->isEmpty())
 										<tr class="">
-											<td data-title="empty-data" colspan="11" class="column-thumb">
+											<td data-title="empty-data" colspan="11" class="column-thumb text-center" style="text-center">
 											   no data available for this category
 											</td>
 										</tr>
@@ -177,26 +186,26 @@
 						                        </div>
 						                        <button type="button" class="toggle-row"></button>
 						                     </td>
-						                     <td class="post-status" data-title="Status">
-						                        <label class="dokan-label dokan-label-success">Online</label>
-						                     </td>
+						                     <!--<td class="post-status" data-title="Status">-->
+						                     <!--   <label class="dokan-label dokan-label-success">Online</label>-->
+						                     <!--</td>-->
 						                     <td data-title="SKU">
 						                        <span class="na">{{$pro->sku}}</span>
 						                     </td>
 						                     <td data-title="Stock">
-						                        <mark class="instock">{{$pro->product_stock}}</mark>
+						                        <mark class="instock">{{$pro->product_qty??0}}</mark>
 						                     </td>
 						                     <td data-title="Price">
 						                        <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>{{$pro->product_current_price}}</span>
 						                     </td>
-						                     <td data-title="Earning">
-						                        <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>4.50</span>
-						                     </td>
+						                     <!--<td data-title="Earning">-->
+						                     <!--   <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>4.50</span>-->
+						                     <!--</td>-->
 						                     <td data-title="Type">
-						                        <span class="product-type tips simple" title="" data-original-title="Simple">{{$pro->product_type}}</span>
+						                        <span >{{$pro->product_type}}</span>
 						                     </td>
 						                     <td data-title="Views">
-						                        1
+						                        {{$pro->view}}
 						                     </td>
 						                     <td class="post-date" data-title="Date">
 						                        <abbr title="May 18, 2022 1:14 am">{{$pro->created_at}}</abbr>
@@ -224,26 +233,26 @@
 						                        </div>
 						                        <button type="button" class="toggle-row"></button>
 						                     </td>
-						                     <td class="post-status" data-title="Status">
-						                        <label class="dokan-label dokan-label-success">Online</label>
-						                     </td>
+						                     <!--<td class="post-status" data-title="Status">-->
+						                     <!--   <label class="dokan-label dokan-label-success">Online</label>-->
+						                     <!--</td>-->
 						                     <td data-title="SKU">
 						                        <span class="na">{{$pro->sku}}</span>
 						                     </td>
 						                     <td data-title="Stock">
-						                        <mark class="instock">{{$pro->product_stock}}</mark>
+						                        <mark class="instock">{{$pro->product_qty??0}}</mark>
 						                     </td>
 						                     <td data-title="Price">
 						                        <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>{{$pro->product_current_price}}</span>
 						                     </td>
-						                     <td data-title="Earning">
-						                        <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>4.50</span>
-						                     </td>
+						                     <!--<td data-title="Earning">-->
+						                     <!--   <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>4.50</span>-->
+						                     <!--</td>-->
 						                     <td data-title="Type">
-						                        <span class="product-type tips simple" title="" data-original-title="Simple">{{$pro->product_type}}</span>
+						                        <span  >{{$pro->product_type}}</span>
 						                     </td>
 						                     <td data-title="Views">
-						                        1
+						                        {{$pro->view}}
 						                     </td>
 						                     <td class="post-date" data-title="Date">
 						                        <abbr title="May 18, 2022 1:14 am">{{$pro->created_at}}</abbr>
@@ -405,4 +414,6 @@
 	   </div>
 	</div>
 </div>
+
+
 @endsection

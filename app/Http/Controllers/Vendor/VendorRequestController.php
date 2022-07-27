@@ -39,6 +39,7 @@ class VendorRequestController extends Controller
      */
     public function store(Request $request)
     {
+
         // dd($request->all());
         $validator = Validator::make($request->all(), array(
             'full_name' => 'required',
@@ -60,7 +61,7 @@ class VendorRequestController extends Controller
 
 
         $vendor = new VendorRequest;
-        $vendor->product_id = $request->input('product_id');
+        $vendor->product_id = $request->product_id;
         $vendor->vendor_id = $request->input('vendor_id');
         $vendor->full_name = $request->input('full_name');
         $vendor->phone_num = $request->input('phone_num');
@@ -87,19 +88,19 @@ class VendorRequestController extends Controller
         ];
         $vendor = Customers::where('user_id',$request->input('vendor_id'))->first();
         if($request->input('vendor_id') != 1){
-        $usersArray = [$request->input('email'), $vendor->email];
-        foreach($usersArray as $user){
-            //echo $user;
-            \Mail::to($user)->send(new \App\Mail\SendEmailAdminCustomerBroker($details));
+        // $usersArray = [$request->input('email'), $vendor->email];
+        // foreach($usersArray as $user){
+        //     //echo $user;
+        //     \Mail::to($user)->send(new \App\Mail\SendEmailAdminCustomerBroker($details));
 
-        }
+        // }
         }else{
-            $usersArray = [$request->input('email')];
-            foreach($usersArray as $user){
-            //echo $user;
-            \Mail::to($user)->send(new \App\Mail\SendEmailAdminCustomerBroker($details));
+            // $usersArray = [$request->input('email')];
+            // foreach($usersArray as $user){
+            // //echo $user;
+            // \Mail::to($user)->send(new \App\Mail\SendEmailAdminCustomerBroker($details));
 
-        }
+        //}
         }
         return redirect()->route('order_thanks')->with('success',"Request Has Been Submited");
         // \Mail::to($request->input('email'))->send(new \App\Mail\SendEmailAdminCustomerBroker($details));

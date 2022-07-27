@@ -46,8 +46,8 @@ Route::get('/blog-details/{id}', 'Front\BlogController@show')->name('blog-detail
 
 
 Route::post('/news-letter', 'Front\FrontController@subscribeNewsletter')->name('newsletter');
-Route::match(['get', 'post'], '/contact-us', 'Front\ContactUsController@index')->name('contactUs');
-
+Route::get('/contact-us', 'Front\ContactUsController@index')->name('contactUs');
+Route::post('/submit-contact', 'Front\ContactUsController@submitContact')->name('submitContact');
 //ADMIN LOGIN
 Route::get('/admin/login', function () {
     return view('admin.auth.login');
