@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use App\User;
-class AdminNewUserNotificaton extends Notification
+class AdminNewBrokerNotificaton extends Notification
 {
     use Queueable;
     private $user;
@@ -41,9 +41,8 @@ class AdminNewUserNotificaton extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('New User has Register Request.'.$this->user->name.'('.$this->user->email.')')
-                    ->action('Notification Action', route('customerRequest'));
-
+        ->line('New Broker  Register Request. name and email'.$this->user->name.'('.$this->user->email.')')
+        ->action('Notification Action', route('customerRequest'));
     }
 
     /**

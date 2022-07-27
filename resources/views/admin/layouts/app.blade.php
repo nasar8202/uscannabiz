@@ -294,23 +294,30 @@
                             <p>Broker</p>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a href="{{route('Vendor.index')}}" class="nav-link {{ request()->IS('admin/Vendor') ? 'active' : '' }}">
-                            <i class="nav-icon fas fa-user"></i>
-                            <p>Vendor</p>
-                        </a>
-                    </li>
+
                     <li class="nav-item">
                         <a href="{{route('vendorRequest')}}" class="nav-link {{ request()->IS('admin/vendorRequest') ? 'active' : '' }}">
                             <i class="nav-icon  fas fa-user"></i>
-                            <p>Vendor Request</p>
+                            <p>Broker Approvel</p>
                         </a>
                     </li>
 
                     <li class="nav-item">
                         <a href="{{route('customerRequest')}}" class="nav-link {{ request()->IS('admin/customerRequest') ? 'active' : '' }}">
                             <i class="nav-icon  fas fa-user"></i>
-                            <p>Customer Request</p>
+                            <p>New Customer Request</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('vendorRequest')}}" class="nav-link {{ request()->IS('admin/vendorRequest') ? 'active' : '' }}">
+                            <i class="nav-icon  fas fa-user"></i>
+                            <p>New Broker Request</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('vendorRequest')}}" class="nav-link {{ request()->IS('admin/vendorRequest') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-user"></i>
+                            <p>New Vendor Request</p>
                         </a>
                     </li>
 
