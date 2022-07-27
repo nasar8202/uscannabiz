@@ -84,7 +84,16 @@
                                        <input type="email" class="input-text" name="account_email" id="account_email" value="{{$user->email}}">
                                     </p>
                                     <br>
-                                    <fieldset>
+                                    <p>
+                                       <input type="hidden" id="_wpnonce" name="_wpnonce" value="ebd582eb76"><input type="hidden" name="_wp_http_referer" value="/wp/uscannabiz/dashboard/edit-account/">
+
+                                       <button type="submit" class="dokan-btn dokan-btn-danger dokan-btn-theme" name="dokan_save_account_details" >Save Changes</button>
+                                       <input type="hidden" name="action" value="dokan_save_account_details">
+                                    </p>
+                                 </form>
+                                    <form class="edit-account" action="{{route('updateVendorPass',$user->id)}}" method="post">
+                                       {{ csrf_field() }}
+                                       <fieldset>
                                        <legend>Password Change</legend>
                                        <br>
                                        <p class="form-row form-row-wide">
@@ -104,7 +113,7 @@
                                     <p>
                                        <input type="hidden" id="_wpnonce" name="_wpnonce" value="ebd582eb76"><input type="hidden" name="_wp_http_referer" value="/wp/uscannabiz/dashboard/edit-account/">
 
-                                       <button type="submit" class="dokan-btn dokan-btn-danger dokan-btn-theme" name="dokan_save_account_details" >Save Changes</button>
+                                       <button type="submit" class="dokan-btn dokan-btn-danger dokan-btn-theme" name="dokan_save_account_details" >Save Password Changes</button>
                                        <input type="hidden" name="action" value="dokan_save_account_details">
                                     </p>
                                     <br>

@@ -104,6 +104,10 @@ class FrontController extends Controller
                 'last_name' => $request->lname,
                 'phone_no' => $request->phone,
                 'email' => $request->email,
+                'city' => $request->city,
+                'state' => $request->state,
+                'country' => $request->country,
+                'address' => $request->address,
                 'status'=>0
             ]);
             $find_user = User::find($user->id);

@@ -615,7 +615,7 @@
                                                                             <th>Item</th>
                                                                             <th>Quantity</th>
                                                                             <th>Sub Total</th>
-                                                                            <th>Total Name</th>
+                                                                            <th>Total Price</th>
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
@@ -646,7 +646,7 @@
                                                                         $total_price = $vender_request->quantity*$product->product_current_price;
                                                                         @endphp --}}
                                                                         <td class="right">${{$order->sub_total}}</td>
-                                                                        <td class="right">${{$order->total_amount}}</td>
+                                                                        <td class="right">${{$order->total_amount + $order->broker_price }}</td>
                                                                     </tr>
 
                                                                     </tbody>
