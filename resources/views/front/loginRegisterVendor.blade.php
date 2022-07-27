@@ -116,7 +116,7 @@
                                        </div>
                                          <p class="form-row form-group user-role vendor-customer-registration">
                                             <label class="radio">
-                                            <input type="radio" name="role" value="2" checked>
+                                            <input type="radio" name="role" value="2" id="customer_add_fields" checked>
                                             I am a customer    </label>
                                             <br>
                                             <label class="radio">
@@ -154,7 +154,11 @@
 
 $(document).ready(function() {
 
-
+   
+               $('#customer_add_fields').click(function() {
+                 $('.for_broker').html('');
+                 $('.for_vender').html('');
+              });
 
               $('#vendor_add_fields').click(function() {
                  $('.for_broker').html('');

@@ -529,7 +529,7 @@
                                                         <ul>
                                                             <li
                                                                 class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--dashboard is-active">
-                                                                <a href="{{route('edit-account')}}">Dashboard</a>
+                                                                <a href="{{route('MyOrders')}}">Dashboard</a>
                                                             </li>
                                                             <li
                                                                 class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--orders">
@@ -629,7 +629,16 @@
                                                                             ></span></p>
 
                                                                 </div>
-
+                                                            </form>
+                                                            <p>
+                                                                <button type="submit" class="button"
+                                                                    name="save_address" value="Save address">Update
+                                                                    User</button>
+                                                            </p>
+                                                            <br>
+                                                            
+                                                        <form action = "{{Route('update-account-password',$user->id)}}" method="post">
+                                                            @csrf
                                                                 <fieldset>
                                                                 <legend>Password Change</legend>
                                                                 <p class="form-row form-row-wide">
@@ -649,12 +658,11 @@
                                                                 <p>
                                                                     <button type="submit" class="button"
                                                                         name="save_address" value="Save address">Update
-                                                                        User</button>
+                                                                        User Password</button>
                                                                 </p>
                                                             </div>
 
                                                         </form>
-
 
                                                     </div>
                                                 </div>

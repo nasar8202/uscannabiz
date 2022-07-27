@@ -76,6 +76,8 @@ Route::middleware(['user'])->prefix('user')->group(function () {
     Route::get('edit-account/', 'User\UserController@editUserAccount')->name('edit-account');
 
     Route::post('update-account/{id}', 'User\UserController@updateUserAccount')->name('update-account');
+    
+    Route::post('update-account-password/{id}', 'User\UserController@updateUserPassword')->name('update-account-password');
 
     Route::get('/getVendor', 'User\UserController@getVendor')->name('getVendor');
     Route::get('/my-orders', 'User\UserController@MyOrders')->name('MyOrders');
@@ -90,6 +92,7 @@ Route::middleware(['user'])->prefix('user')->group(function () {
     Route::post('/addCustomerAddress', 'User\UserController@addCustomerAddress')->name('addCustomerAddress');
     Route::post('/updateCustomerAddress', 'User\UserController@updateCustomerAddress')->name('updateCustomerAddress');
     Route::get('/getAddressDetail/{id}', 'User\UserController@getAddressDetail')->name('getAddressDetail');
+    Route::post('/sendReview_customer', 'User\ReviewController@sendReview_customer')->name('sendReview_customer');
 
     Route::get('/getCountries', 'User\UserController@getCountries')->name('getCountries');
     Route::get('/getStates/countryId/{id}', 'User\UserController@getStates')->name('getStates');
@@ -121,6 +124,8 @@ Route::namespace('Vendor')->prefix('/vendor')->middleware('vendor')->group(funct
     Route::post('update-products/{id}', 'ProductController@updateProduct')->name('updateProduct');
     Route::get('editVendor', 'VendorController@vendorEdit')->name('editVendor');
     Route::post('updateVendor/{id}', 'VendorController@vendorUpdate')->name('updateVendor');
+    
+    Route::post('updateVendorPass/{id}', 'VendorController@vendorUpdatePass')->name('updateVendorPass');
 
     Route::get('/checkProductSkuVendor', 'ProductController@checkProductSkuVendor')->name('checkProductSkuVendor');
 
@@ -185,6 +190,7 @@ Route::namespace('Admin')->prefix('/admin')->middleware('admin')->group(function
 
 
     //REVIEW
+    
     Route::get('/review', 'ReviewController@index')->name('review.index');
     Route::get('/review/{id}', 'ReviewController@show')->name('review.show');
     Route::match(['get', 'post'], '/review/edit/{id}', 'ReviewController@edit')->name('review.edit');

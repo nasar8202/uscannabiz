@@ -166,21 +166,21 @@ class VendorController extends Controller
 
         $user->email = $request->input('account_email');
 
-        if($request->input('password_current')){
-            $validator = Validator::make($request->all(), [
-                'password_current' => 'required',
-                'password' => 'required|min:8',
-                'confirm_password' => 'required|min:8|same:password',
-            ]);
+        // if($request->input('password_current')){
+        //     $validator = Validator::make($request->all(), [
+        //         'password_current' => 'required',
+        //         'password' => 'required|min:8',
+        //         'confirm_password' => 'required|min:8|same:password',
+        //     ]);
 
-            if ($validator->fails()) {
-                return redirect()->back()->withErrors($validator);
-            }
-            if (!Hash::check($request->password_current, $user->password)) {
-                return back()->with(['error'=>'Current password does not match!']);
-            }
-            $user->password = Hash::make($request->password);
-        }
+        //     if ($validator->fails()) {
+        //         return redirect()->back()->withErrors($validator);
+        //     }
+        //     if (!Hash::check($request->password_current, $user->password)) {
+        //         return back()->with(['error'=>'Current password does not match!']);
+        //     }
+        //     $user->password = Hash::make($request->password);
+        // }
         $user->save();
 
         $customer = Customers::where('user_id',$id)->first();
@@ -193,6 +193,35 @@ class VendorController extends Controller
         $customer->save();
 
         return back()->with(['success' => 'Updated Successfully']);
+    }
+
+    public function vendorUpdatePass(Request $request,$id)
+    {
+
+        $user = User::find($id);
+
+
+            $validator = Validator::make($request->all(), [
+                'password_current' => 'required',
+                'password' => 'required|min:8',
+                'confirm_password' => 'required|min:8|same:password',
+            ]);
+
+            if (!Hash::check($request->password_current, $user->password)) {
+                return back()->with(['error'=>'Current password does not match!']);
+            }
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator);
+            }
+            
+
+            $user->password = Hash::make($request->password);
+        
+        $user->save();
+
+
+        return back()->with(['success' => 'Updated Successfully']);
+
     }
     public function show_broker()
     {
