@@ -51,8 +51,16 @@ class UserController extends Controller
     {
         $orders = Order::where('customer_id',Auth::user()->id)->get();
         $recentOrders = Order::where('customer_id',Auth::user()->id)->orderBy('id','desc')->take(10)->get();
+        $first_time_login = false;
 
-        return view('user.myorders',compact('orders','recentOrders'));
+        if (Auth::user()->first_time_login) {
+            $first_time_login = true;
+            Auth::user()->first_time_login = false;
+            Auth::user()->save();
+        } else {
+            $first_time_login = false;
+        }
+        return view('user.myorders',compact('orders','recentOrders','first_time_login'));
     }
     public function getOrderDetail($id)
     {
