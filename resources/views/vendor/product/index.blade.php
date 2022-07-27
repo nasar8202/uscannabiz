@@ -70,7 +70,7 @@
 						            <!--   <a >Online (7)</a>-->
 						            <!--</li>-->
 						            <li>
-						               <a >In stock ({{$product_stock->product_qty??0}})</a>
+						               {{-- <a >In stock ({{$product_stock->product_qty??0}})</a> --}}
 						            </li>
 						         </ul>
 								 
@@ -142,6 +142,7 @@
 						                     <th>SKU</th>
 						                     <th>Stock</th>
 						                     <th>Price</th>
+						                     <th>Approval Statue</th>
 						                     <!--<th>Earning<span class="tips earning-info" title="" data-original-title="Earning could be greater than or less than the calculated value based on different criteria like tax and shipping fee receiver"></span></th>-->
 						                     <th>Type</th>
 						                     <th>Views</th>
@@ -190,7 +191,7 @@
 						                     <!--   <label class="dokan-label dokan-label-success">Online</label>-->
 						                     <!--</td>-->
 						                     <td data-title="SKU">
-						                        <span class="na">{{$pro->sku}}</span>
+						                        <span class="na">{{$pro->sku??''}}</span>
 						                     </td>
 						                     <td data-title="Stock">
 						                        <mark class="instock">{{$pro->product_qty??0}}</mark>
@@ -201,11 +202,14 @@
 						                     <!--<td data-title="Earning">-->
 						                     <!--   <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>4.50</span>-->
 						                     <!--</td>-->
+						                     <td data-title="Approval Status">
+						                        <span >{{$pro->approvel_admin_status == 1 ? 'Approved' : 'Not Approved'}}</span>
+						                     </td>
 						                     <td data-title="Type">
-						                        <span >{{$pro->product_type}}</span>
+						                        <span >{{$pro->product_type??''}}</span>
 						                     </td>
 						                     <td data-title="Views">
-						                        {{$pro->view}}
+						                        {{$pro->view??''}}
 						                     </td>
 						                     <td class="post-date" data-title="Date">
 						                        <abbr title="May 18, 2022 1:14 am">{{$pro->created_at}}</abbr>
@@ -248,6 +252,9 @@
 						                     <!--<td data-title="Earning">-->
 						                     <!--   <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>4.50</span>-->
 						                     <!--</td>-->
+											 <td data-title="Approval Status">
+						                        <span >{{$pro->approvel_admin_status == 1 ? 'Approved' : 'Not Approved'}}</span>
+						                     </td>
 						                     <td data-title="Type">
 						                        <span  >{{$pro->product_type}}</span>
 						                     </td>
