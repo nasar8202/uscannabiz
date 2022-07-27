@@ -108,14 +108,14 @@
         @if ($errors->any())
         @foreach ($errors->all() as $error)
         <div class="alert alert-danger alert-block">
-            
+
                 <strong>{{ $error }}</strong>
-            
+
         </div>
         @endforeach
         @endif
 
-        
+
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
@@ -133,7 +133,7 @@
                             </div>
                             <!-- /.card-header -->
 
-                                
+
                             <div class="card-body">
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
@@ -143,7 +143,7 @@
                                         <th> Email</th>
                                         <th>Status</th>
                                         <th>Action</th>
-                                        
+
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -182,16 +182,16 @@
     <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
-            
+
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="submit" class="btn btn-primary">Save Customer</button>
-                
+
             </form>
               </div>
         </div>
         </div>
-      
+
     </div>
 @endsection
 @section('script')
@@ -234,7 +234,7 @@
                     {data: 'name', name: 'Name'},
                     {data: 'email', name: 'Email'},
                     {data: 'status', name: 'status'},
-                    
+
 
 
                     {data: 'action', name: 'action', orderable: false}
@@ -278,14 +278,14 @@
                     }
                 })
             });
-            
+
         })
 
         $(document).on('click','#status-switch',function(){
                 let id = $(this).data('id');
                 let val = $(this).data('val');
-                
-                
+
+
                 $.ajax({
                     type:"get",
                     url:"{{route('changeVendorStatus')}}",
@@ -310,7 +310,7 @@
                     }
                 })
             });
-      
+
     </script>
 
 

@@ -58,9 +58,9 @@
 						               <a>All (7)</a>
 						            </li>
 						            
-						            <li>
+						            {{-- <li>
 						               <a >In stock ({{$product_stock->product_qty??'0'}})</a>
-						            </li>
+						            </li> --}}
 						         </ul>
 								 
 						         <!-- .post-statuses-filter -->

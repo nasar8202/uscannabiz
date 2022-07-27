@@ -35,7 +35,7 @@ class ProductController extends Controller
     {
         try {
             if (request()->ajax()) {
-                return datatables()->of(Product::with('category')->orderBy('created_at','desc')->get())
+                return datatables()->of(Product::with('category')->where('approvel_admin_status',1)->orderBy('created_at','desc')->get())
                     ->addIndexColumn()
                     ->addColumn('category_id', function ($data) {
                         return $data->category->name ?? '';

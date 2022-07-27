@@ -375,6 +375,17 @@ select.dokan-form-control {
   padding-right: 15px;
   font-weight: bold;
 }
+ul.list-inline {
+    display: flex;
+}
+div.dataTables_wrapper div.dataTables_filter input {
+    margin-right: 1em;
+}
+a.dokan-btn.dokan-btn-sm.dokan-btn-danger.dokan-btn-theme {
+    margin-right: 1em;
+}
+
+
 @media (max-width: 430px) {
   .dokan-form-horizontal .dokan-control-label {
     text-align: left;
@@ -5779,9 +5790,13 @@ p.vendor-customer-registration .radio:hover {
     width: auto;
   }
   .dokan-dashboard #left-area .dokan-dash-sidebar ul.dokan-dashboard-menu li {
-    display: inline-block;
+     display: inline-block;
     border-right: 1px solid #454545;
+    width: 49%;
   }
+  .dokan-dashboard .dokan-dashboard-content {
+    padding: 30px !important;
+}
   .dokan-dashboard #left-area .dokan-dash-sidebar ul.dokan-dashboard-menu li.active:after {
     content: '';
     display: none;
@@ -6150,7 +6165,7 @@ p.stars {
 .et_pb_tabs .et_pb_tabs_controls li a {
     height: 40px;
 }
-body div#et-top-navigation ul#top-menu li:nth-last-child(1),
+body div#et-top-navigation ul#top-menu li:nth-last-child(1),@
 body div#et-top-navigation ul#top-menu li.logoutBtn{
     display: inline-block;
     position: absolute;
@@ -6237,7 +6252,26 @@ body li:hover.woocommerce-MyAccount-navigation-link a {
 .modal.modalTn .modal-content button.woocommerce-Button.woocommerce-button.button.woocommerce-form-register__submit:hover {
     opacity: .8;
 }
-
+.table.orderTable.shippingDetail {
+    order: 4;
+}
+.itemDetail .table-overflowx-auto > div {
+    display: flex;
+    flex-flow: wrap;
+    flex-direction: column;
+}
+.itemDetail .table-overflowx-auto > div > table.table.orderTable:first-child {
+    order: 1;
+}
+.itemDetail .table-overflowx-auto > div > table.table.orderTable:nth-child(2) {
+    order: 3;
+}
+.table.orderTable.proDetail {
+    order: 2;
+}
+.itemDetail .table-overflowx-auto > div > table.table.orderTable:nth-child(3) {
+    order: 5;
+}
  /*Zeveloper*/
  
     .dokan-dashboard .container {
@@ -6328,9 +6362,9 @@ body li:hover.woocommerce-MyAccount-navigation-link a {
             overflow-x:hidden;
         }
         
-        .table-overflowx-auto{
-            overflow-x:auto;
-        }
+        /*.table-overflowx-auto{*/
+        /*    overflow-x:auto;*/
+        /*}*/
         .entry-content tr td{
            min-width: 130px; 
         }
