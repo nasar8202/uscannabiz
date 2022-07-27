@@ -71,8 +71,8 @@
                                     <thead>
                                     <tr style="text-align: center">
                                         <th>Id</th>
-                                        <th>Vendor Name</th>
-                                        <th>Broker Name</th>
+                                        <th>First Name</th>
+                                        <th>Last Name</th>
                                         <th>Email</th>
                                         <th>Phone No</th>
                                         <th>City</th>

@@ -57,7 +57,43 @@ class ProductController extends Controller
         }
         return view('admin.product.index');
     }
+    public function requestProduct()
+    {
+        try {
+            if (request()->ajax()) {
+                return datatables()->of(Product::with('category')->where('approvel_admin_status',0)->orderBy('created_at','desc')->get())
+                ->addIndexColumn()
+                 ->addColumn('category_id', function ($data) {
+                    return $data->category->name ?? '';
+                })
+                    ->addColumn('action', function ($data) {
+                        return '<a title="Approve" href="productStatusAccept/' . $data->id . '"
+                        class="btn btn-success btn-sm">Approve &nbsp;<i class="fa fa-check"></i></a>&nbsp;';
+                    })->rawColumns([ 'action','category_id'])->make(true);
+            }
+        } catch (\Exception $ex) {
+            return redirect('/')->with('error', 'SomeThing Went Wrong baby');
+        }
+        return view('admin.product.product-request');
+    }
 
+    public function productStatusAccept($id)
+    {
+
+        // $customer =Customers::join('Users','Users.email','=','Customers.email')->where('role_id','=',2)->where('Customers.user_id',$id)->first();
+
+        $customer =Product::where('id',$id)->first();
+        $customer->approvel_admin_status = 1;
+        $customer->save();
+
+        //  $data_status = array(
+        //     'approvel_status'=>1
+        //  );
+
+
+
+            return back()->with('success','Customer Approved Successfully');
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -82,11 +118,10 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-
+        // dd($request->all());
         $validator = Validator::make($request->all(), array(
             'main_category' => 'required',
             'product_name' => 'required',
-            'product_sku' => 'required|unique:products,sku,',
             'product_slug' => 'required|unique:products,slug,',
             'current_price' => 'required|numeric',
             'description' => 'required',
@@ -106,12 +141,12 @@ class ProductController extends Controller
                 } else {
                     $product_image_first = null;
                 }
-
+                $timestamp = mt_rand(1, time());
                 $product = Product::create([
                     'category_id' => $request->get('main_category'),
                     'sub_category_id' => $request->get('sub_category'),
                     'product_name' => $request->get('product_name'),
-                    'sku' => $request->get('product_sku'),
+                    'sku' => $timestamp." ".$request->get('product_name'),
                     'slug' => $request->get('product_slug'),
                     'product_current_price' => $request->get('current_price'),
                     'product_sale' => $request->get('product_sale') ?? 'no',
@@ -257,7 +292,6 @@ class ProductController extends Controller
         $this->validate($request, array(
             'main_category' => 'required',
             'product_name' => 'required',
-            'product_sku' => 'required|unique:products,sku,' . $id,
             'product_slug' => 'required|unique:products,slug,' . $id,
             'current_price' => 'required|numeric',
             'description' => 'required',
@@ -281,14 +315,17 @@ class ProductController extends Controller
             $request->file('product_image_first')->move(public_path() . '/uploads/products/', $product_image_first);
             $product->product_image = $product_image_first;
         } else {
+            
             $product_image_first = null;
+            
+            $timestamp = mt_rand(1, time());
         }
 
         $product->category_id  = $request->get('main_category');
         $product->sub_category_id = $request->get('sub_category');
         $product->product_name = $request->get('product_name');
         $product->description = $request->get('description');
-        $product->sku = $request->get('product_sku');
+        $product->sku = $timestamp." ".$request->get('product_name');
         $product->slug = $request->get('product_slug');
         $product->product_current_price = $request->get('current_price');
         $product->product_sale = $request->get('product_sale') ?? 'no';

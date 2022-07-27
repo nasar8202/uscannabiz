@@ -43,10 +43,17 @@
                                  <input type="hidden" value="{{$data->id}}" name="product_id">
                                  <input type="hidden" value="{{$data->vender_id}}" name="vendor_id">
                                  </h3> 
-                                  
-                                  {{-- <label>Product Price</label>
+                                 @if (Auth::check())
+                                 @php
+                                 $check_broker = Auth::user()->role_id;
+                             @endphp
+                             @if ($check_broker == 4)
+                                      
+                                  <label>Product Price</label>
                                   <h3>{{$data->product_current_price}}
-                                    </h3>  --}}
+                                    </h3> 
+                                    @endif
+                                    @endif
                                  </div>
                                    {!! $errors->first('product_image_first', '<p class="help-block">:message</p>') !!}
                                </div>

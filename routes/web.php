@@ -29,7 +29,7 @@ Route::view('/thanks', 'front.thanks')->name('order_thanks');
 Route::post('/vendor-request', 'Vendor\VendorRequestController@store')->name('vendorRequest_shop');
 Route::get('/wishlist', 'Front\ShopController@view_wishlist')->name('shop.view_wishlist');
 Route::get('/shop', 'Front\ShopController@index')->name('shop.index');
-// Route::get('/shop/{slug}', 'Front\ShopController@show')->name('shop.show');
+Route::get('/shop/{slug}', 'Front\ShopController@show')->name('shop.show');
 Route::get('/shop/{slug}', 'Front\ShopController@show')->name('shop.showProduct');
 Route::post('shop/add-wishlist', 'Front\ShopController@add_wishlist')->name('shop.wishlist');
 
@@ -46,8 +46,8 @@ Route::get('/blog-details/{id}', 'Front\BlogController@show')->name('blog-detail
 
 
 Route::post('/news-letter', 'Front\FrontController@subscribeNewsletter')->name('newsletter');
-Route::match(['get', 'post'], '/contact-us', 'Front\ContactUsController@index')->name('contactUs');
-
+Route::get('/contact-us', 'Front\ContactUsController@index')->name('contactUs');
+Route::post('/submit-contact', 'Front\ContactUsController@submitContact')->name('submitContact');
 //ADMIN LOGIN
 Route::get('/admin/login', function () {
     return view('admin.auth.login');
@@ -77,6 +77,7 @@ Route::middleware(['user'])->prefix('user')->group(function () {
 
     Route::post('update-account/{id}', 'User\UserController@updateUserAccount')->name('update-account');
 
+    Route::get('/getVendor', 'User\UserController@getVendor')->name('getVendor');
     Route::get('/my-orders', 'User\UserController@MyOrders')->name('MyOrders');
     Route::get('/order/{id}', 'User\UserController@show')->name('order');
     //WishList
@@ -126,7 +127,7 @@ Route::namespace('Vendor')->prefix('/vendor')->middleware('vendor')->group(funct
 
 
 });
-Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
+
 Route::namespace('Admin')->prefix('/admin')->middleware('admin')->group(function () {
     //Dashboard
     Route::get('/dashboard', 'AdminController@dashboard')->name('dashboard');
@@ -143,6 +144,10 @@ Route::namespace('Admin')->prefix('/admin')->middleware('admin')->group(function
 
     //category
     Route::get('/category', 'Categories@index')->name('category');
+
+    Route::get('/requestProduct', 'ProductController@requestProduct')->name('product.requestProduct');
+    Route::get('productStatusAccept/{id}', 'ProductController@productStatusAccept')->name('productStatusAccept');
+
     Route::match(['get', 'post'], '/add-category', 'Categories@addCategory')->name('admin.add-category');
     Route::match(['get', 'post'], '/category-edit/{id}', 'Categories@edit')->name('admin.edit-category');
     Route::get('/category-view/{id}', 'Categories@show')->name('category-view');

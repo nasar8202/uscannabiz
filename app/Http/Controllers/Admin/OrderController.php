@@ -107,18 +107,19 @@ class OrderController extends Controller
     {
         $users = User::where(['id'=>Auth::user()->id,'email'=>Auth::user()->email])->first();
         $order = Order::with('customer')->orderBy('created_at','desc')->get();
-        // dd($order);
-        // dd($users->customers_id);
+        //  dd($users->customers_id);
+         
         try {
             if (request()->ajax()) {
                 if($users->role_id == 1){
+                    
                     return datatables()->of(Order::with('customer')->orderBy('created_at','desc')->get())
                     ->addIndexColumn()
                     ->addColumn('order_no', function ($data) {
                         return $data->order_no ?? '';
                     })->addColumn('customer', function ($data) {
                         // if ($data->customer_id == null) {
-                            return $data->customer_name;
+                            return $data->customer_name??'';
                         // } else {
                         //     return $data->customer->first_name . ' ' . $data->customer->last_name;
                         // }
@@ -151,11 +152,6 @@ class OrderController extends Controller
                     $products = Product::where('id',$items->product_id)->first();
                 }
                 $check_vendor = Customers::where('user_id', $products->vender_id)->first();
-                // $vendor_request_customer = VendorRequest::where('vendor_id',$check_vendor->user_id)->orderBy('created_at','desc')->get();
-                // $vendor_request = VendorRequest::where('vendor_id',$check->user_id)->orderBy('created_at','desc')->get();
-                // $order_check = Order::where('id',$vendor_request->order_id)->first();
-                 //dd($vendor_request);
-                // return datatables()->of(Order::where(['customer_id'=>$users->customers_id,'status'=>3])->orderBy('created_at','desc')->get())
                 return datatables()->of(VendorRequest::where('vendor_id',$check_vendor->user_id)->orderBy('created_at','desc')->get())
                 ->addIndexColumn()
                 ->addColumn('customer', function ($data) {
@@ -167,7 +163,7 @@ class OrderController extends Controller
                 })->addColumn('email', function ($data) {
                     return $data->email??'';
                 })->addColumn('phone', function ($data) {
-                    return $data->phone_num;
+                    return $data->phone_num??'';
                 })->addColumn('order_date', function ($data) {
                     return date('d-M-Y', strtotime($data->created_at)) ?? '';
                 })->addColumn('status', function ($data) {
@@ -368,8 +364,8 @@ class OrderController extends Controller
             'product_name'=>$product->product_name,
             'total'=>$sub_total
         ];
-        $vendor = Customers::where('id',$request->input('vendor_id'))->first();
-// dd($vendor);
+        $vendor = Customers::where('user_id',$request->input('vendor_id'))->first();
+// dd($request->vendor_id);
         $usersArray = [$request->input('customer_email'), $vendor->email];
         foreach($usersArray as $user){
             //echo $user;

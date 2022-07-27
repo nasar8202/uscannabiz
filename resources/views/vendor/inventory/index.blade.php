@@ -55,13 +55,11 @@
 						      <div class="product-listing-top dokan-clearfix">
 						         <ul class="dokan-listing-filter dokan-left subsubsub">
 						            <li class="active">
-						               <a href="#">All (7)</a>
+						               <a>All (7)</a>
 						            </li>
+						            
 						            <li>
-						               <a href="#">Online (7)</a>
-						            </li>
-						            <li>
-						               <a href="#">In stock (7)</a>
+						               <a >In stock ({{$product_stock->product_qty??'0'}})</a>
 						            </li>
 						         </ul>
 								 
@@ -130,11 +128,11 @@
 						                     </th>
 						                     <th>Image</th>
 						                     <th>Name</th>
-						                     <th>Status</th>
+						                     <!--<th>Status</th>-->
 						                     <th>SKU</th>
 						                     <th>Stock</th>
 						                     <th>Price</th>
-						                     <th>Earning<span class="tips earning-info" title="" data-original-title="Earning could be greater than or less than the calculated value based on different criteria like tax and shipping fee receiver"></span></th>
+						                     <!--<th>Earning<span class="tips earning-info" title="" data-original-title="Earning could be greater than or less than the calculated value based on different criteria like tax and shipping fee receiver"></span></th>-->
 						                     <th>Type</th>
 						                     <th>Views</th>
 						                     <th>Date</th>
@@ -155,7 +153,7 @@
 										@endphp
 										@if($count == 0)
 										<tr class="">
-											<td data-title="empty-data" colspan="11" class="column-thumb">
+											<td data-title="empty-data" colspan="11" class="column-thumb text-center">
 											   no data available for this category
 											</td>
 										</tr>
@@ -178,26 +176,26 @@
 						                        </div>
 						                        <button type="button" class="toggle-row"></button>
 						                     </td>
-						                     <td class="post-status" data-title="Status">
-						                        <label class="dokan-label dokan-label-success">Online</label>
-						                     </td>
+						                     <!--<td class="post-status" data-title="Status">-->
+						                     <!--   <label class="dokan-label dokan-label-success">Online</label>-->
+						                     <!--</td>-->
 						                     <td data-title="SKU">
 						                        <span class="na">{{$pro->sku}}</span>
 						                     </td>
 						                     <td data-title="Stock">
-						                        <mark class="instock">{{$pro->product_stock}}</mark>
+						                        <mark class="instock">{{$pro->product_qty??''}}</mark>
 						                     </td>
 						                     <td data-title="Price">
 						                        <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>{{$pro->product_current_price}}</span>
 						                     </td>
-						                     <td data-title="Earning">
-						                        <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>4.50</span>
-						                     </td>
+						                     <!--<td data-title="Earning">-->
+						                     <!--   <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>4.50</span>-->
+						                     <!--</td>-->
 						                     <td data-title="Type">
-						                        <span class="product-type tips simple" title="" data-original-title="Simple">{{$pro->product_type}}</span>
+						                        <span >{{$pro->product_type}}</span>
 						                     </td>
 						                     <td data-title="Views">
-						                        1
+						                       {{$pro->view}}
 						                     </td>
 						                     <td class="post-date" data-title="Date">
 						                        <abbr title="May 18, 2022 1:14 am">{{$pro->created_at}}</abbr>
@@ -228,26 +226,26 @@
 						                        </div> -->
 						                        <button type="button" class="toggle-row"></button>
 						                     </td>
-						                     <td class="post-status" data-title="Status">
-						                        <label class="dokan-label dokan-label-success">Online</label>
-						                     </td>
+						                     <!--<td class="post-status" data-title="Status">-->
+						                     <!--   <label class="dokan-label dokan-label-success">Online</label>-->
+						                     <!--</td>-->
 						                     <td data-title="SKU">
 						                        <span class="na">{{$pro->sku}}</span>
 						                     </td>
 						                     <td data-title="Stock">
-						                        <mark class="instock">{{$pro->product_qty}}</mark>
+						                        <mark class="instock">{{$pro->product_qty??''}}</mark>
 						                     </td>
 						                     <td data-title="Price">
 						                        <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>{{$pro->product_current_price}}</span>
 						                     </td>
-						                     <td data-title="Earning">
-						                        <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>4.50</span>
-						                     </td>
+						                     <!--<td data-title="Earning">-->
+						                     <!--   <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>4.50</span>-->
+						                     <!--</td>-->
 						                     <td data-title="Type">
-						                        <span class="product-type tips simple" title="" data-original-title="Simple">{{$pro->product_type}}</span>
+						                        <span >{{$pro->product_type}}</span>
 						                     </td>
 						                     <td data-title="Views">
-						                        1
+						                        {{$pro->view}}
 						                     </td>
 						                     <td class="post-date" data-title="Date">
 						                        <abbr title="May 18, 2022 1:14 am">{{$pro->created_at}}</abbr>

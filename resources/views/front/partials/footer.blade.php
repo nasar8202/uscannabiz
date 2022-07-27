@@ -51,8 +51,8 @@
                   <div id="nav_menu-3" class="fwidget et_pb_widget widget_nav_menu">
                      <div class="menu-returns-container">
                         <ul id="menu-returns" class="menu">
-                           <li id="menu-item-52" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="faq-page/">FAQs</a></li>
-                           <li id="menu-item-318" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-318"><a href="size-guide/">Size Guide</a></li>
+                           <li id="menu-item-52" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="{{ route('faq') }}">FAQs</a></li>
+                           
                            <li id="menu-item-431" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-431"><a href="dashboard/">Sell With Us</a></li>
                            <li id="menu-item-426" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-426"><a href="site-map/">Site map</a></li>
                         </ul>
@@ -96,6 +96,80 @@
 </footer>
 </div>
 </div>
+{{-- product modal popup --}}
+
+{{-- <button class="trigger">Click the modal!</button> --}}
+<div class="modal modalTn">
+    <div class="modal-content">
+        <span class="close-button">×</span>
+        <div class="u-column2 col-2">
+         <h2>Add To Request</h2>
+         <form method="Post" action="{{ route('vendorRequest_shop') }}" class="woocommerce-form woocommerce-form-register register">
+          {{ csrf_field() }}
+           
+{{--           
+          <input type="hidden" value="{{$data->id}}" name="product_id">
+          <input type="hidden" value="{{$data->vender_id}}" name="vendor_id"> --}}
+        
+          
+               <div class="split-row form-row-wide">
+                  <p class="form-row form-group">
+                     <!-- <label for="first-name">Full Name <span class="required">*</span></label> -->
+                     <input type="text" class="input-text form-control" name="full_name" id="first-name" required="required" placeholder="Full Name">
+                  </p>
+                  <p class="form-row form-group">
+                     <!-- <label for="last-name">Phone Number <span class="required">*</span></label> -->
+                     <input type="number" class="input-text form-control" name="phone_num" id="last-name" required="required" placeholder="Phone Number">
+                 
+                  </p>
+               
+                  <p class="form-row form-group">
+                     <!-- <label for="last-name">Email <span class="required">*</span></label> -->
+                     <input type="email" class="input-text form-control" name="email" id="last-name" required="required" placeholder="Email">
+                  </p>
+                  <p class="form-row form-group">
+                     <!-- <label for="last-name">Address <span class="required">*</span></label> -->
+                     <input type="text" class="input-text form-control" name="address" id="last-name" required="required" placeholder="Address">
+                  </p>
+                  <p class="form-row form-group">
+                     <!-- <label for="last-name">City <span class="required">*</span></label> -->
+                     <input type="text" class="input-text form-control" name="city" id="last-name" required="required" placeholder="City">
+                  </p>
+                  <p class="form-row form-group">
+                     <!-- <label for="last-name">Select Product <span class="required">*</span></label> -->
+                     <select name="product_id" id="product_vendor_find" class="input-text form-control">
+                        <option value="" selected disabled>Select Product</option>
+                        @foreach(GetProducts() as $products)
+                        <option value="{{$products->id}}" data-vendor="{{$products->vender_id}}">{{$products->product_name}}</option>
+                        @endforeach
+                     </select>
+                  </p>
+                  <input type="hidden" value="" name="vendor_id" id="set_vendor_id">
+                  <p class="form-row form-group">
+                     <!-- <label for="last-name">Quantity <span class="required">*</span></label> -->
+                     <input type="number" class="input-text form-control" name="quantity" title="Qty" size="4" required="required" inputmode="numeric" autocomplete="off" placeholder="Quantity">
+                  </p>
+                  {{-- <div class="quantity">
+                     <input type="number" name="quantity" id="quantity_62b36070a592a" class="input-text qty text" step="1" min="1" max="" name="quantity" value="1" title="Qty" size="4" placeholder=""   inputmode="numeric" autocomplete="off">
+                  </div> --}}
+               
+               <br>
+            <p class="woocommerce-form-row form-row">
+               <button type="submit" class="woocommerce-Button woocommerce-button button woocommerce-form-register__submit" name="register" value="Register">Add Product Request</button>
+
+            </p>
+         </form>
+      </div>
+      
+    </div>
+
+</div>--}}
+{{-- product modal popup --}} 
+
+</div>
+{{-- product modal popup --}}
+
+
 @section('extra-js')
     <!-- Include AlgoliaSearch JS Client and autocomplete.js library -->
     <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
@@ -103,6 +177,29 @@
 {{--    <script src="{{ asset('js/algolia.js') }}"></script>--}}
 @endsection
 <script type="text/javascript">
+
+// product modal popup
+
+// var modal = document.querySelector(".modal");
+// var trigger = document.querySelector(".trigger");
+// var closeButton = document.querySelector(".close-button");
+
+// function toggleModal() {
+//     modal.classList.toggle("show-modal");
+// }
+
+// function windowOnClick(event) {
+//     if (event.target === modal) {
+//         toggleModal();
+//     }
+// }
+
+// trigger.addEventListener("click", toggleModal);
+// closeButton.addEventListener("click", toggleModal);
+// window.addEventListener("click", windowOnClick);
+
+// product modal popup
+
 (function () {
 var c = document.body.className;
 c = c.replace(/woocommerce-no-js/, 'woocommerce-js');
@@ -183,6 +280,44 @@ if ( value === '3') {
 }
 });
 
+$('#product_vendor_find').change(function(){
+                var data_val = $(this).val();
+               //  console.log(data_val);
+                $.ajax({
+                    type: "GET",
+                    url: '{{route("getVendor")}}',
+                    data: {
+                        'data_val': data_val
+                    },
+                    success: function(response) {
+                     $('#set_vendor_id').val(response.data)
+                    }
+                });
+});
+
+
+$('.trigger').click(function() {
+   $('.modal.modalTn').slideDown();
+})
+$('.modal.modalTn span.close-button').click(function(){
+    $(this).closest('.modalTn').slideUp();
+});
+
+
+// Zeveloper
+
+$(window).on('load', function() {
+    $('table').wrapAll('<div class="table-overflowx-auto"><div>');
+});
+
+$('#dokan-product-list-table.dokan-table td:not(.hidden)').on('click',function(){
+    $(this).parent('tr').toggleClass('is-expanded');
+});
+
    </script>
+   
+    <script>
+        
+    </script>
 </body>
 </html>

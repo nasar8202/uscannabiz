@@ -22,13 +22,13 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Broker Edit</h1>
+                        <h1>Update Broker </h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ url('admin/dashboard') }}">Home</a></li>
                             <li class="breadcrumb-item">Broker</li>
-                            <li class="breadcrumb-item active">Edit</li>
+                            <li class="breadcrumb-item active">Update</li>
                         </ol>
                     </div>
                 </div>
@@ -97,7 +97,7 @@
                                         <input type="number" class="form-control" required name="broker_percentage" value="{{$customer->broker_percentage}}" placeholder="Enter broker Percentage">
                                       </div> --}}
                                       
-                                      <button type="submit" class="btn btn-primary">Update Customer</button>
+                                      <button type="submit" class="btn btn-primary"> Update Broker</button>
                           </div>
                 
             

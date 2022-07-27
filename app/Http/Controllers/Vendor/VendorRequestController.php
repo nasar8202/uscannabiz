@@ -39,6 +39,7 @@ class VendorRequestController extends Controller
      */
     public function store(Request $request)
     {
+
         // dd($request->all());
         $validator = Validator::make($request->all(), array(
             'full_name' => 'required',

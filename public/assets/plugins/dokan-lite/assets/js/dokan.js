@@ -3524,3 +3524,4 @@ jQuery(function($) {
         Dokan_Withdraw.init();
     });
 })(jQuery);
+

@@ -7,13 +7,13 @@ use Illuminate\Support\Facades\Request;
       <meta charset="UTF-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta content="width=device-width, initial-scale=1" name="viewport" />
-      
+
       <link rel="pingback" href="xmlrpc.php">
       <script type="text/javascript">
          document.documentElement.className = 'js';
       </script>
       <link rel="icon" href="https://webprojectmockup.com/wp/uscannabiz/wp-content/uploads/2022/03/cropped-Uscannazon4-1-192x192.png" sizes="192x192" />
-      
+
       <title>Us Cannazon | Market Place | @yield('title', '')</title>
       <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
       <meta name="robots" content="max-image-preview:large">
@@ -64,7 +64,7 @@ use Illuminate\Support\Facades\Request;
          <style>.woocommerce-product-gallery{ opacity: 1 !important; }</style>
       </noscript>
       <link rel="stylesheet" id="et-core-unified-34-cached-inline-styles"href="{{ URL::asset('assets/et-cache/34/et-core-unified-34.min.css?ver=1655922750') }}">
-      
+
    </head>
    <body class="home page-template-default page page-id-34 theme-Divi et-tb-has-template et-tb-has-footer woocommerce-no-js et_button_no_icon et_pb_button_helper_class et_fixed_nav et_show_nav et_secondary_nav_enabled et_primary_nav_dropdown_animation_fade et_secondary_nav_dropdown_animation_fade et_header_style_left et_cover_background et_pb_gutter et_pb_gutters3 et_pb_pagebuilder_layout et_no_sidebar et_divi_theme et-db dokan-theme-Divi">
       <div id="page-container">
@@ -76,11 +76,11 @@ use Illuminate\Support\Facades\Request;
                      <a href="mailto:Emailinfo@uscannazon.com"><span id="et-info-email">Emailinfo@uscannazon.com</span></a>
                   </div>
                   <div id="et-secondary-menu">
-                    <a href="{{ route('cart.index') }}">Items
+                    <span>Items
                         @if (Cart::instance('default')->count() > 0)
                             <span class="cart-count"><span>{{ Cart::instance('default')->count() }}</span></span>
                         @endif
-                    </a>
+                    </span>
                   </div>
                </div>
             </div>
@@ -100,6 +100,13 @@ use Illuminate\Support\Facades\Request;
 
                            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home page_item page-item-34 current_page_item menu-item-43 {{ Request::route()->getName() == 'homepage' ? 'current-menu-item' : '' }}"><a href="{{ route('homepage') }}" aria-current="page">Home</a></li>
                            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-44 {{ Request::route()->getName() == 'aboutUs' ? 'current-menu-item' : '' }}"><a href="{{ route('aboutUs') }}">About Us</a></li>
+                           @php
+                           $role = Auth::user();
+                           @endphp
+                           @if(isset($role) && $role->role_id == 2)
+                           <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-44"><a href="javascript:void(0)" class="trigger">Product Request</a></li>
+                           @endif
+                            </li>
                            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-46 {{ Request::route()->getName() == 'faq' ? 'current-menu-item' : '' }}"><a href="{{ route('faq') }}">FAQ Page</a></li>
                            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-45 {{ Request::route()->getName() == 'contactUs' ? 'current-menu-item' : '' }}"><a href="{{ route('contactUs') }}">Contact Us</a></li>
                            {{-- @if(Auth::check())
@@ -115,7 +122,7 @@ use Illuminate\Support\Facades\Request;
                            <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-47"><a href="{{ route('myAccount') }}">Login/Sign Up</a></li>
                            @else
                            <li>
-                            
+
                            @php
                               $role = Auth::user()->role_id;
                               @endphp
@@ -127,7 +134,7 @@ use Illuminate\Support\Facades\Request;
                               {{-- <a href="{{ Route('edit-account') }}">My Account</a> --}}
                               @endif
                             </li>
-                            <li>
+                            <li class="logoutBtn">
                                 <a href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
                                         document.getElementById('logout-form').submit();">

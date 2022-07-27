@@ -50,7 +50,7 @@
                                     <thead>
                                     <tr style="text-align: center">
                                         <th>Category</th>
-                                        <th>Parent Category</th>
+                                        {{-- <th>Parent Category</th> --}}
                                         <th>Slug</th>
 
                                         <th>Action</th>
@@ -124,7 +124,6 @@
 
                     // {data: 'program_name', name: 'program_name'},
                     {data: 'name', name: 'name'},
-                    {data: 'parent_id', name: 'parent_id'},
                     {data: 'category_slug', name: 'category_slug'},
 
                     {data: 'action', name: 'action', orderable: false}

@@ -25,21 +25,25 @@ class ProductController extends Controller
         $vendor_id = Auth::user()->id;
 
         $product = DB::table('products')->where('vender_id',$vendor_id)->get();
-
-        return view('vendor.product.index',compact(['category',$category ,'product',$product]));
+        $product_count = DB::table('products')->where('vender_id',$vendor_id)->count();
+        $product_stock = DB::table('products')->where('vender_id',$vendor_id)->first();
+        return view('vendor.product.index',compact(['category',$category ,'product',$product,'product_stock','product_count']));
     }
     public function filter(Request $request)
     {
         $category = Category::all();
         $vendor_id = Auth::user()->id;
         $product = DB::table('products')->where('vender_id',$vendor_id)->get();
+        $product_stock = DB::table('products')->where('vender_id',$vendor_id)->first();
+        $product_count = DB::table('products')->where('vender_id',$vendor_id)->count();
         if($request->product_cat == 'all'){
             $category_filter = DB::table('products')->where('vender_id',$vendor_id)->get();
         }
         else{
             $category_filter = Product::where(['category_id'=>$request->product_cat,'vender_id'=>$vendor_id])->get();
+            
         }
-        return view('vendor.product.index',compact(['category',$category ,'product',$product,'category_filter',$category_filter]));
+        return view('vendor.product.index',compact(['category',$category ,'product',$product,'category_filter',$category_filter,'product_stock','product_count']));
     }
     public function search(Request $request)
     {
@@ -48,23 +52,25 @@ class ProductController extends Controller
         $vendor_id = Auth::user()->id;
         $product = DB::table('products')->where('vender_id',$vendor_id)->get();
         $category_filter = Product::where('product_name', 'like', '%' . $request->product_search_name . '%')->where('vender_id',$vendor_id)->get();
-
-        return view('vendor.product.index',compact(['category',$category ,'product',$product,'category_filter',$category_filter]));
+        $product_stock = DB::table('products')->where('vender_id',$vendor_id)->first();
+        $product_count = $category_filter->count();
+        return view('vendor.product.index',compact(['category',$category ,'product',$product,'category_filter',$category_filter,'product_stock','product_count']));
     }
 
     public function addProductForm()
     {
-        
+
         $categories = Category::get();
         $products = Product::whereStatus(1)->get();
         return view('vendor.product.addProductForm',compact('categories','products'));
     }
     public function addProduct(Request $request)
     {
+        
+
         $validator = Validator::make($request->all(), array(
 
             'product_name' => 'required',
-            'product_sku' => 'required|unique:products,sku,',
             'product_slug' => 'required|unique:products,slug,',
             'current_price' => 'required|numeric',
             'description' => 'required',
@@ -85,11 +91,13 @@ class ProductController extends Controller
                 } else {
                     $product_image_first = null;
                 }
+               
+                $timestamp = mt_rand(1, time());
 
                 $product = Product::create([
                     'category_id' => $request->get('main_category'),
                     'product_name' => $request->get('product_name'),
-                    'sku' => $request->get('product_sku'),
+                    'sku' => $timestamp." ".$request->get('product_name'),
                     'slug' => $request->get('product_slug'),
                     'product_current_price' => $request->get('current_price'),
                     'product_sale' => $request->get('product_sale') ?? 'no',
@@ -100,7 +108,7 @@ class ProductController extends Controller
                     'length' => 11,
                     'width' => 11,
                     'height' => 1,
-                    'weight' => 2,
+                    'weight' =>$request->get('weight'),
                     'description' => $request->get('description'),
                     'status' => $request->get('status') ?? 0,
                     'product_image' => $product_image_first,
@@ -189,6 +197,7 @@ class ProductController extends Controller
 
     }
 
+
     public function checkProductSkuVendor(Request $request)
     {
 
@@ -241,6 +250,26 @@ class ProductController extends Controller
     public function destroyProductBulk(Request $request)
     {
         // dd($request->all());
+        $messsages = array(
+            'bulk_products.required'=>'Please Select Products to delete.',
+        );
+    
+        $rules = array(
+            'bulk_products'=>'required',
+        );
+    
+        $validator = Validator::make($request->all(), $rules,$messsages);
+        // $validator = Validator::make($request->all(), [
+        //     'bulk_products' => 'required',
+        // ]);
+        // $messsages = [
+        //     'bulk_products.required'=>'Please Select Products to delete.',
+        // ];
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator);
+        }
+
         if($request->status == 'delete'){
         foreach($request->bulk_products as $products){
             $product = DB::table('products')->where('id',$products)->delete();
@@ -288,12 +317,13 @@ class ProductController extends Controller
         } else {
             $product_image_first = null;
         }
-
+        
+        $timestamp = mt_rand(1, time());
         $product->category_id  = $request->get('main_category');
         $product->sub_category_id = $request->get('sub_category');
         $product->product_name = $request->get('product_name');
         $product->description = $request->get('description');
-        $product->sku = $request->get('product_sku');
+        $product->sku = $timestamp." ".$request->get('product_name');
         $product->slug = $request->get('product_slug');
         $product->product_current_price = $request->get('current_price');
         $product->product_sale = $request->get('product_sale') ?? 'no';
@@ -304,7 +334,7 @@ class ProductController extends Controller
         $product->length = 145;
         $product->width = 12;
         $product->height = 12;
-        $product->weight = 11;
+        $product->weight =$request->get('weight');
         $product->status = $request->get('status') ?? 0;
         $product->vender_id = Auth::user()->id;
         $product->save();

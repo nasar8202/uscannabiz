@@ -137,14 +137,15 @@
                                     @forelse($data['latestOrders'] as $latestOrders)
                                     @php
                                         $latestOrders_data= App\Models\Order::where('id',$latestOrders->order_id)->first();
-                                    @endphp
+                                        @endphp
+                                        {{-- @dd($latestOrders_data) --}}
                                     @if(Auth::user()->role_id == 4)
                                     <tr>
                                     @else
                                     <tr onclick="window.location='order/{{$latestOrders->id}}'" style='cursor: pointer;'>
                                     @endif
-                                        <td> {{$latestOrders->id}} </td>
-                                        <td> {{$latestOrders->full_name??''}} </td>
+                                        <td> {{$latestOrders_data->order_no??'Not Accepted'}} </td>
+                                        <td> {{$latestOrders->full_name??'Anonymous'}} </td>
                                         @if(Auth::user()->role_id == 4)
                                         @else
                                         <td>
@@ -162,9 +163,9 @@
                                         @endif
                                         <td> {{date('d-M-Y',strtotime($latestOrders->created_at))}} </td>
                                         @if(Auth::user()->role_id == 4)
-                                        <td> ${{$latestOrders_data->total_amount??''}} </td>
+                                        <td> {{$latestOrders_data->total_amount??'Broker Amount Pending'}} </td>
                                         @else
-                                        <td> ${{$latestOrders->total_amount??''}} </td>
+                                        <td> ${{$latestOrders->total_amount}} </td>
                                         @endif
                                     </tr>
                                     @empty
