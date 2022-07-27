@@ -21,7 +21,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Notifications\AdminNewBrokerNotificaton;
-use App\Notifications\AdminNewUserNotificaton;
+use App\Notifications\AdminNewUserNotification;
 use App\Notifications\AdminNewVendorNotificaton;
 
 class FrontController extends Controller
@@ -89,7 +89,7 @@ class FrontController extends Controller
             // ];
             $administrators = User::where('role_id',1)->get();
             foreach($administrators as $administrator){
-                $administrator->notify(new AdminNewUserNotificaton($user));
+                $administrator->notify(new AdminNewUserNotification($user));
             }
 
             // \Mail::to($request->input('email'))->send(new \App\Mail\SendEmailCustomerRegistration($details));

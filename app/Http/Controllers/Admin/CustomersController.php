@@ -325,6 +325,7 @@ class CustomersController extends Controller
 
     public function vendorapproved()
     {
+       
         try {
             if (request()->ajax()) {
                 return datatables()->of(User::where('role_id','=',3)->where('approvel_status',0)->get())
