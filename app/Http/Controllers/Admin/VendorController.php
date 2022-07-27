@@ -291,9 +291,7 @@ class VendorController extends Controller
                             ->addIndexColumn()
                             ->addColumn('action', function ($data) {
                                 return '<a title="View" href="customers/' . $data->id . '"
-                                class="btn btn-dark btn-sm"><i class="fas fa-eye"></i></a>&nbsp;
-                                <a title="edit" href="customers/' . $data->id . '/edit" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
-                                &nbsp;<button title="Delete" type="button" name="delete" id="' . $data->id . '"
+                                class="btn btn-dark btn-sm"><i class="fas fa-eye"></i></a><button title="Delete" type="button" name="delete" id="' . $data->id . '"
                                 class="delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>';
                             })->rawColumns(['action'])->make(true);
         
@@ -314,10 +312,8 @@ class VendorController extends Controller
                         return datatables()->of($user)
                             ->addIndexColumn()
                             ->addColumn('action', function ($data) {
-                                return '<a title="View" href="customers/' . $data->id . '"
-                                class="btn btn-dark btn-sm"><i class="fas fa-eye"></i></a>&nbsp;
-                                <a title="edit" href="customers/' . $data->id . '/edit" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
-                                &nbsp;<button title="Delete" type="button" name="delete" id="' . $data->id . '"
+                                return '<a title="View" href="' . $data->id . '"
+                                class="btn btn-dark btn-sm"><i class="fas fa-eye"></i></a><button title="Delete" type="button" name="delete" id="' . $data->id . '"
                                 class="delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>';
                             })->rawColumns(['action'])->make(true);
         
