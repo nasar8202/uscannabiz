@@ -123,7 +123,7 @@
                                         @if(isset($vender_request))
                                         @foreach ($vender_request as $data)
                                         <tr>
-                                       
+                                      
                                             <td>{{$data->full_name}}</td>
                                             
                                             <td>{{$data->email}}</td>
