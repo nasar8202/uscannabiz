@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 use App\Rules\MatchOldPassword;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Validator;   
 use App\Exports\OrdersExport;
 use Maatwebsite\Excel\Facades\Excel;
 class VendorController extends Controller

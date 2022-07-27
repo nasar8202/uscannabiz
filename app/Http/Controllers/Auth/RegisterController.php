@@ -10,7 +10,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-
+use App\Notifications\AdminNewUserNotificaton;
 class RegisterController extends Controller
 {
     /*
@@ -107,7 +107,10 @@ class RegisterController extends Controller
             'last_name' => $data['last_name'],
             'email' => $data['email'],
         ]);
-
+        $administrators = User::where('id',1)->get();
+        foreach($administrators as $administrator){
+            $administrator->notify(new AdminNewUserNotificaton($user));
+        }
         return $user;
     }
 }
