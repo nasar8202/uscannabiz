@@ -94,7 +94,7 @@
                                             <tbody>
                                             <tr>
                                                 <td style="width: 1%;">
-                                                    <button data-toggle="tooltip" title="" class="btn btn-info btn-xs" data-original-title="Customer"><i class="fa fa-user fa-fw"></i></button>
+                                                    <span title="" class="btn btn-info btn-xs" ><i class="fa fa-user fa-fw"></i></span>
                                                 </td>
                                                 <td>
                                                     {{-- @if($order->customer_id == null) --}}
@@ -106,7 +106,7 @@
                                             </tr>
 
                                             <tr>
-                                                <td><button data-toggle="tooltip" title="" class="btn btn-info btn-xs" data-original-title="E-Mail"><i class="fa fa-envelope-o fa-fw"></i></button></td>
+                                                <td><span  class="btn btn-info btn-xs" ><i class="fa fa-envelope-o fa-fw"></i></span></td>
                                                 <td>
                                                     {{-- @if($order->customer_id == null) --}}
                                                     <input type="hidden" name="vender_email" value="{{$vender_detail->email}}">
@@ -271,7 +271,7 @@
                                                 <td class="left">
                                                     <strong>Total</strong>
                                                 </td>
-                                                <td class="right">${{$total_price}}</td>
+                                                <td class="right">${{$product->product_current_price+$order->broker_price}}</td>
                                                 {{-- <td class="right">
                                                     <strong>${{$order->total_amount+$order->shipping_cost}}</strong>
                                                 </td> --}}

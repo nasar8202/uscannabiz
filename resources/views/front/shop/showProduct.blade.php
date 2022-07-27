@@ -166,6 +166,29 @@ ul.et_pb_social_media_follow{list-style-type:none!important;margin:0 0 22px;padd
                                     @if(count($productReviews) > 0) {{count($productReviews)}} @endif Reviews
 	                               </h2>
 	                               <p class="woocommerce-noreviews">@if(count($productReviews) > 0) {{count($productReviews)}} @else No @endif review(s) for this Product</p>
+                                  
+                                   <table class="table">
+                                    <h5>Product Review</h5>
+                                    <thead>
+                                      <tr>
+                                       
+                                        <th scope="col">author</th>
+                                        <th scope="col">description</th>
+                                     
+                                      </tr>
+                                    </thead>
+                                    @foreach($productReviews as $reviews)
+                                    <tbody>
+                                      <tr>
+                                        
+                                        <td>{{$reviews->author}}</td>
+                                        <td>{{$reviews->description}}</td>
+                                        
+                                      </tr>
+                                      
+                                    </tbody>
+                                    @endforeach
+                                  </table>
 
 	                            </div>
 	                            <div id="review_form_wrapper">
@@ -196,10 +219,12 @@ ul.et_pb_social_media_follow{list-style-type:none!important;margin:0 0 22px;padd
                                             {{-- @dd($check_user) --}}
                                             @if(isset($check_user))
                                             <input type="hidden" name="user_id" id="" value="{{$check_user->id}}">
+                                            <button type="submit" id="button-review" >send</button>
                                             @else
                                             <input type="hidden" name="user_id" id="" value="">
+                                            <span class="alert alert-danger">You Cant Send Review Without Login</span>
                                             @endif
-                                            <button type="submit" id="button-review" >send</button>
+                                            
 	                                     </form>
 	                                  </div>
 	                                  <!-- #respond -->

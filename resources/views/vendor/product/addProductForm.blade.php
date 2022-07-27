@@ -153,7 +153,7 @@
                      </p>
                      <p class="form-row form-group">
                         <label for="last-name">Weight <span class="required">*</span></label>
-                        <input type="text" class="input-text form-control" name="weight" id="weight" value="" required="required">
+                        <input type="number" class="input-text form-control" name="weight" id="weight" value="" required="required">
                      </p>
                      <p class="form-row form-group form-row-wide">
                         <label for="exampleInputEmail1">Product Sale</label>

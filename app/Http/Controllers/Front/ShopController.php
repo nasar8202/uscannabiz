@@ -85,7 +85,8 @@ class ShopController extends Controller
         } else {
             $stockLevel = '<div class="badge badge-danger">Not available</div>';
         }
-        $productReviews = ProductReview::with('customer')->where('status', 1)->where('product_id', $product->id)->get();
+        $productReviews = ProductReview::where('product_id', $product->id)->get();
+        
         $categories = Category::where(['status'=>1,'id' => $product->category_id])->with('products')->first();
         // dd($product->id);
         //return $categories;

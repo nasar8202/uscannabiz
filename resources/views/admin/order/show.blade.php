@@ -172,6 +172,7 @@
                                                 </td>
                                                 <td class="right">${{$orderItems->product_per_price}}</td>
                                                 <td class="center">{{$orderItems->product_qty}}</td>
+                                                
                                                 <td class="right">${{$orderItems->product_per_price*$orderItems->product_qty}}</td>
                                             </tr>
                                             @php
@@ -206,19 +207,13 @@
                                                 </tr>
                                             @endif
 
-                                            <tr>
-                                                <td class="left">
-                                                    <strong>Flat Shipping Rate</strong>
-                                                </td>
-                                                <td class="right">${{$order->shipping_cost}}</td>
-                                            </tr>
 
                                             <tr>
                                                 <td class="left">
                                                     <strong>Total</strong>
                                                 </td>
                                                 <td class="right">
-                                                    <strong>${{$order->total_amount??''+$order->shipping_cost}}</strong>
+                                                    <strong>${{$orderItems->product_subtotal_price+$order->broker_price}}</strong>
                                                 </td>
                                             </tr>
                                             </tbody>
