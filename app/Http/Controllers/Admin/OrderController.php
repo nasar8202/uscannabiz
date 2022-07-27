@@ -145,9 +145,11 @@ class OrderController extends Controller
                     })->rawColumns(['order_no', 'customer', 'status', 'total_amount', 'order_date', 'action'])->make(true);
             }
             else{
+
                 $check = Customers::where('broker_request_id', $users->customers_id)->first();
-                dd($check);
+            //    dd($check);
                 $vendor_request = VendorRequest::where('vendor_id',$check->user_id)->orderBy('created_at','desc')->get();
+                //dd($vendor_request);
                 foreach($vendor_request as $items){
                     $products = Product::where('id',$items->product_id)->first();
                 }
@@ -199,9 +201,9 @@ class OrderController extends Controller
             //         }
 
             //     })->rawColumns(['order_no', 'customer', 'status', 'total_amount', 'order_date', 'action'])->make(true);
-            
-                
-               
+
+
+
         }
             }
         } catch (\Exception $ex) {
@@ -213,16 +215,23 @@ class OrderController extends Controller
         }
         else{
             $check = Customers::where('broker_request_id', $users->customers_id)->first();
-                
+                if($check == null){
+                    $message_broker = "Not Assign Yet From Vendor!";
+                    return view('admin.order.broker_index',compact('message_broker') );
+                }
                 $vendor_request = VendorRequest::where('vendor_id',$check->user_id)->orderBy('created_at','desc')->get();
                 foreach($vendor_request as $items){
                     $products = Product::where('id',$items->product_id)->first();
                 }
+                // dd($vendor_request);
                 if(!$vendor_request->isEmpty()){
                     $check_vendor = Customers::where('user_id', $products->vender_id)->first();
                     $vender_request = VendorRequest::where('vendor_id',$check_vendor->user_id)->orderBy('created_at','desc')->get();
+                    return view('admin.order.broker_index',compact('vender_request') );
                 }
-            return view('admin.order.broker_index',compact('vender_request') );
+                if($vendor_request->isEmpty()){
+                    return view('admin.order.broker_index');
+                }
         }
     }
 
@@ -279,7 +288,7 @@ class OrderController extends Controller
         // $content = Order::find($id);
         // $content->delete(); //
         // $orderItems = OrderItem::where('order_id', $id)->delete();
-        
+
         // return back()->with('success','Order Deleted Successfully');
         return 1;
     }
@@ -295,7 +304,7 @@ class OrderController extends Controller
         // $content = Order::find($id);
         // $content->delete(); //
         // $orderItems = OrderItem::where('order_id', $id)->delete();
-        
+
     }
 
 
@@ -397,8 +406,8 @@ class OrderController extends Controller
             'product_name'=>$product->product_name,
             'total'=>$sub_total
         ];
-        $vendor = Customers::where('user_id',$request->input('vendor_id'))->first();
-// dd($request->vendor_id);
+        $vendor = Customers::where('id',$request->input('vendor_id'))->first();
+// dd($vendor);
         $usersArray = [$request->input('customer_email'), $vendor->email];
         foreach($usersArray as $user){
             //echo $user;

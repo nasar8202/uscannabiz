@@ -14,6 +14,20 @@
         td{
             text-align: center;
         }
+        @media(max-width:1400px){
+            .broker-table {
+    width: 100%;
+    max-width: 100%;
+    overflow: scroll;
+}
+
+
+
+.broker-table table#example1 td:last-child {
+
+    display: flex;
+}
+        }
     </style>
 
 @endsection
@@ -67,6 +81,7 @@
                                     <a href="Addbroker" class="btn btn-primary float-right" >Add Broker</a>
                                 </div>
                             <div class="card-body">
+                                <div class="broker-table">
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                     <tr style="text-align: center">
@@ -86,6 +101,7 @@
                                     <tbody>
                                     </tbody>
                                 </table>
+                                </div>
                             </div>
                             <!-- /.card-body -->
                         </div>

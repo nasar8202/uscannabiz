@@ -103,6 +103,9 @@
                         <div class="card">
                             <!-- /.card-header -->
                             <div class="card-body">
+                                @if(isset($message_broker))
+                                    <h1>{{$message_broker}}</h1>
+                                @else
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                     <tr>
@@ -116,9 +119,10 @@
                                     </thead>
                                     
                                     <tbody>
-                                        <tr>
-                                            @if(!$vender_request == null)
+                                        
+                                        @if(isset($vender_request))
                                         @foreach ($vender_request as $data)
+                                        <tr>
                                        
                                             <td>{{$data->full_name}}</td>
                                             
@@ -169,11 +173,14 @@
                                         <td colspan="6">
                                             no data available
                                         </td>
+                                        
                                         @endif
                                         
                                     </tr>
                                       </tbody>
                                 </table>
+                                @endif
+
                             </div>
                             <!-- /.card-body -->
                         </div>

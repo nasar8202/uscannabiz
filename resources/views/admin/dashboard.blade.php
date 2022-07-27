@@ -163,7 +163,7 @@
                                         @endif
                                         <td> {{date('d-M-Y',strtotime($latestOrders->created_at))}} </td>
                                         @if(Auth::user()->role_id == 4)
-                                        <td> {{$latestOrders_data->total_amount??'Broker Amount Pending'}} </td>
+                                        <td> {{ $latestOrders_data ? '$'.$latestOrders_data->total_amount : 'Broker Amount Pending' }} </td>
                                         @else
                                         <td> ${{$latestOrders->total_amount}} </td>
                                         @endif

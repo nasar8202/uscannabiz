@@ -556,21 +556,23 @@
                                                         </ul>
                                                     </nav>
                                                     <div class="woocommerce-MyAccount-content">
-                                                        <div class="woocommerce-notices-wrapper"></div>
-                                                        <div class="woocommerce-message woocommerce-message--info woocommerce-Message woocommerce-Message--info woocommerce-info">
-                                                            Order Item Details
-                                                        </div>
-                                                            <div class="noRecord">
+                                                       
+                                                        <div class="noRecord">
+                                                            <div class="table orderTable itemDetail">
+                                                                 <h2 class="woocommerce-message woocommerce-message--info woocommerce-Message woocommerce-Message--info woocommerce-info">
+                                                                    Order Item Details
+                                                                </h2>
+                                                            
                                                                 <table class="table orderTable">
                                                                     <thead>
-                                                                    <tr>
-                                                                        <th>Order#</th>
-                                                                        <th>Customer Name</th>
-                                                                        <th>Phone No</th>
-                                                                        <th>Order Total</th>
-                                                                        <th>Order Status</th>
-                                                                        <th>Order Date</th>
-                                                                    </tr>
+                                                                        <tr>
+                                                                            <th>Order#</th>
+                                                                            <th>Customer Name</th>
+                                                                            <th>Phone No</th>
+                                                                            <th>Order Total</th>
+                                                                            <th>Order Status</th>
+                                                                            <th>Order Date</th>
+                                                                        </tr>
                                                                     </thead>
                                                                     <tbody>
                                                                         <tr>
@@ -593,20 +595,14 @@
                                                                                 <p>{{date('d-m-Y',strtotime($order->created_at))}}</p>
                                                                             </td>
                                                                         </tr>
-
+    
                                                                     </tbody>
                                                                 </table>
                                                             </div>
-
-
-                                                    </div>
-                                                
-                                                    <div class="woocommerce-MyAccount-content">
-                                                        <div class="woocommerce-notices-wrapper"></div>
-                                                        <div class="woocommerce-message woocommerce-message--info woocommerce-Message woocommerce-Message--info woocommerce-info">
-                                                            Product Details
-                                                        </div>
-                                                            <div class="noRecord">
+                                                            <div class="table orderTable proDetail">
+                                                                <h2 class="woocommerce-message woocommerce-message--info woocommerce-Message woocommerce-Message--info woocommerce-info">
+                                                                    Product Details
+                                                                </h2>
                                                                 <table class="table orderTable">
                                                                     <thead>
                                                                         <tr>
@@ -615,7 +611,7 @@
                                                                             <th>Item</th>
                                                                             <th>Quantity</th>
                                                                             <th>Sub Total</th>
-                                                                            <th>Total Name</th>
+                                                                            <th>Total Price</th>
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
@@ -646,23 +642,16 @@
                                                                         $total_price = $vender_request->quantity*$product->product_current_price;
                                                                         @endphp --}}
                                                                         <td class="right">${{$order->sub_total}}</td>
-                                                                        <td class="right">${{$order->total_amount}}</td>
+                                                                        <td class="right">${{$order->total_amount + $order->broker_price }}</td>
                                                                     </tr>
 
                                                                     </tbody>
                                                                 </table>
                                                             </div>
-
-
-                                                    </div>
-
-
-                                                    <div class="woocommerce-MyAccount-content">
-                                                        <div class="woocommerce-notices-wrapper"></div>
-                                                        <div class="woocommerce-message woocommerce-message--info woocommerce-Message woocommerce-Message--info woocommerce-info">
-                                                            Shipping Details
-                                                        </div>
-                                                            <div class="noRecord">
+                                                            <div class="table orderTable shippingDetail">
+                                                                <h2 class="woocommerce-message woocommerce-message--info woocommerce-Message woocommerce-Message--info woocommerce-info">
+                                                                    Shipping Details
+                                                                </h2>
                                                                 <table class="table orderTable">
                                                                     <thead>
                                                                         <tr>
@@ -691,9 +680,15 @@
                                                                                 <strong>State</strong> :  {{$order->billing_state}}
                                                                             </td>
                                                                         </tr>
-                                                                        </tbody>
+                                                                    </tbody>
                                                                 </table>
                                                             </div>
+                                                        </div>
+                                                    
+
+                                                    
+                                                        
+                                                        
 
 
                                                     </div>
@@ -712,5 +707,15 @@
         </div>
     </div>
 
+<script>
 
+    $(window).on('load',function(){
+        
+        setTimeout(function(){
+            $('.table.orderTable.proDetail,.table.orderTable.shippingDetail').appendTo('.itemDetail .table-overflowx-auto > div');    
+        },1000);
+        
+    });
+</script>
 @endsection
+

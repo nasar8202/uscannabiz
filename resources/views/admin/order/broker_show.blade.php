@@ -265,12 +265,7 @@
                                                 </tr>
                                             @endif
 
-                                            <tr>
-                                                <td class="left">
-                                                    <strong>Flat Shipping Rate</strong>
-                                                </td>
-                                                <td class="right">${{$product->shipping_cost}}</td>
-                                            </tr>
+                                            
 
                                             <tr>
                                                 <td class="left">

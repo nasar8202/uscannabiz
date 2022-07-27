@@ -76,3 +76,31 @@ input[type='submit'].dokan-btn-danger, a.dokan-btn-danger, .dokan-btn-danger {
     margin-right: 2px;
     font-family: ETmodules;
 }
+
+.woocommerce-MyAccount-content fieldset {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.woocommerce-MyAccount-content fieldset p.form-row.form-row-wide {
+    flex: 0 0 48%;
+    margin-right: 2%;
+}
+.woocommerce-account .woocommerce {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.woocommerce-account .woocommerce .woocommerce-MyAccount-content {
+    margin-left: 2%;
+}
+.card.shadow {
+    width: 50%;
+    margin: 0 auto;
+} 
+@media(max-width:1279px){
+    #et-top-navigation #top-menu li a{
+        font-size:10px !important;
+    }
+}
