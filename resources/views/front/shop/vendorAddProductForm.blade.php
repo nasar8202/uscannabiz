@@ -12,6 +12,11 @@
              {{ session()->get('success') }}
          </div>
          @endif
+         @if (session()->has('error'))
+         <div class="alert alert-success" style="color: red;font-weight: bold;">
+             {{ session()->get('error') }}
+         </div>
+         @endif
            
          <div class="u-column2 col-2">
             <h2>Add To Request</h2>

@@ -219,14 +219,22 @@ class ProductController extends Controller
     public function vendorAddProductForm(Request $request,$id)
     {
 
-        $data = Product::find($id);
-        $auth = Auth::user();
-        if($auth){
-            $customer_check = Customers::where('user_id',$auth->id)->first();
-            return view('front.shop.vendorAddProductForm',compact(['data','customer_check']));
-        }
-        else{
-            return view('front.shop.vendorAddProductForm',compact(['data']));
+
+        $product = Product::where('id', $id)->first();
+        $pro = $product->product_qty;
+        if($pro > 0){
+            $data = Product::find($id);
+            $auth = Auth::user();
+            if($auth){
+                $customer_check = Customers::where('user_id',$auth->id)->first();
+                return view('front.shop.vendorAddProductForm',compact(['data','customer_check']));
+            }
+            else{
+                return view('front.shop.vendorAddProductForm',compact(['data']));
+            }
+        }else{
+            return back()->with('error_message',"Product not available in Stock");
+            //return view('front.shop.showProduct');
         }
     }
     public function destroyProduct($id)
