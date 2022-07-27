@@ -20,6 +20,9 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\Notifications\AdminNewBrokerNotificaton;
+use App\Notifications\AdminNewUserNotificaton;
+use App\Notifications\AdminNewVendorNotificaton;
 
 class FrontController extends Controller
 {
@@ -84,9 +87,13 @@ class FrontController extends Controller
             //     'email' => $request->email,
             //     'password'=> $request->password
             // ];
+            $administrators = User::where('role_id',1)->get();
+            foreach($administrators as $administrator){
+                $administrator->notify(new AdminNewUserNotificaton($user));
+            }
 
             // \Mail::to($request->input('email'))->send(new \App\Mail\SendEmailCustomerRegistration($details));
-            return redirect()->back()->with(['success' => 'Register Successfully']);
+            return redirect()->back()->with(['success' => 'You Register Successfully wait for admin approvel mail will sent you after approvel']);
 
         }
         if($request->role == 4)
@@ -109,15 +116,18 @@ class FrontController extends Controller
             $find_user = User::find($user->id);
             $find_user->customers_id = $customer->id;
             $find_user->save();
-            
+
             // $details = [
             //     'name'=> $request->fname." ".$request->lname,
             //     'email' => $request->email,
             //     'password'=> $request->password
             // ];
-
+            $administrators = User::where('role_id',1)->get();
+            foreach($administrators as $administrator){
+                $administrator->notify(new AdminNewBrokerNotificaton($user));
+            }
             // \Mail::to($request->input('email'))->send(new \App\Mail\SendEmailCustomerRegistration($details));
-            return redirect()->back()->with(['success' => 'Register Successfully']);
+            return redirect()->back()->with(['success' => 'You Register Successfully wait for admin approvel mail will sent you after approvel']);
 
         }
         else{
@@ -127,7 +137,10 @@ class FrontController extends Controller
                 'password' => Hash::make($request->password),
                 'role_id' => 3,
             ]);
-
+            $administrators = User::where('role_id',1)->get();
+            foreach($administrators as $administrator){
+                $administrator->notify(new AdminNewVendorNotificaton($user));
+            }
             $customer = Customers::create([
                 'user_id' => $user->id,
                 'first_name' => $request->fname,
@@ -165,8 +178,9 @@ class FrontController extends Controller
             //     'email' => $request->email,
             //     'password'=> $request->password
             // ];
+
             // \Mail::to($request->input('email'))->send(new \App\Mail\SendEmailCustomerRegistration($details));
-            return redirect()->back()->with(['success' => 'Register Successfully']);
+            return redirect()->back()->with(['success' => 'You Register Successfully wait for admin approvel mail will sent you after approvel']);
         }
 
     }

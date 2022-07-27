@@ -6,19 +6,19 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use App\User;
-class AdminNewUserNotificaton extends Notification
+
+class VendorApprovedNotificaton extends Notification
 {
     use Queueable;
-    private $user;
+
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(User $user)
+    public function __construct()
     {
-        $this->user = $user;
+        //
     }
 
     /**
@@ -41,9 +41,8 @@ class AdminNewUserNotificaton extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('New User has Register Request.'.$this->user->name.'('.$this->user->email.')')
-                    ->action('Notification Action', route('customerRequest'));
-
+                    ->line('The introduction to the notification.')
+                    ->action('login now', route('myAccount'));
     }
 
     /**

@@ -10,7 +10,8 @@ use App\User;
 use Validator;
 use Illuminate\Support\Facades\Hash;
 use Auth;
-
+use App\Notifications\VendorApprovedNotificaton;
+use App\Notifications\BrokerApprovedNotificaton;
 class VendorController extends Controller
 {
     /**
@@ -37,26 +38,19 @@ class VendorController extends Controller
 
             if (request()->ajax()) {
                 // return datatables()->of(Customers::join('Users','Users.id' ,'=' ,'Customers.user_id')->where('role_id','=',3)->get())
-                return datatables()->of(Customers::join('users','users.email','=','customers.email')->where('role_id','=',3)->get())
+                return datatables()->of(User::where('role_id','=',3)->where('approvel_status',0)->get())
                     ->addIndexColumn()
                     ->addColumn('status', function ($data) {
-                        // return $data;
-                        if($data->approvel_status == 0){
-                            // return $data->user_id;
-                            return '<label class="switch"><input type="checkbox"  data-id="'.$data->user_id.'" data-val="1"  id="status-switch"><span class="slider round"></span></label>';
-                        }else{
-                            return '<label class="switch"><input type="checkbox" checked data-id="'.$data->user_id.'" data-val="0"  id="status-switch"><span class="slider round"></span></label>';
+                        if ($data->status == 0) {
+                            return '<label>Pending</label>';
+                        } else {
+                            return '<label>Accept</label>';
                         }
                     })
                     ->addColumn('action', function ($data) {
-                        return '<a title="View" href="vendorshow/' . $data->id . '"
-                        class="btn btn-dark btn-sm"><i class="fas fa-eye"></i></a>&nbsp';
-                        
-                    // ->addColumn('action', function ($data) {
-                    //     return '<a title="View" href="vendorshow/' . $data->id . '"
-                    //     class="btn btn-dark btn-sm"><i class="fas fa-eye"></i></a>&nbsp;
-                    //     <button title="Delete" type="button" name="delete" id="' . $data->id . '"
-                    //     class="delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>';
+                        return '<a title="Approve" href="vendorStatusAccept/' . $data->id . '"
+                        class="btn btn-success btn-sm">Approve &nbsp;<i class="fa fa-check"></i></a>&nbsp;';
+
                     })->rawColumns(['status','action'])->make(true);
 
             }
@@ -65,7 +59,41 @@ class VendorController extends Controller
         }
         return view('admin.vendor.index');
     }
+    public function customerStatusAccept($id)
+    {
 
+        // $customer =Customers::join('Users','Users.email','=','Customers.email')->where('role_id','=',2)->where('Customers.user_id',$id)->first();
+
+        $customer =User::where('role_id',$id)->first();
+        $customer->approvel_status = 1;
+        $customer->save();
+        if($customer->approvel_status = 1)
+        {
+            $customer->notify(new VendorApprovedNotificaton());
+
+        }
+
+
+            return back()->with('success','Customer Approved Successfully');
+    }
+
+    public function brokerStatusAccept($id)
+    {
+
+        // $customer =Customers::join('Users','Users.email','=','Customers.email')->where('role_id','=',2)->where('Customers.user_id',$id)->first();
+
+        $customer =User::where('role_id',$id)->first();
+        $customer->approvel_status = 1;
+        $customer->save();
+        if($customer->approvel_status = 1)
+        {
+            $customer->notify(new BrokerApprovedNotificaton());
+
+        }
+
+
+            return back()->with('success','Customer Approved Successfully');
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -95,17 +123,17 @@ class VendorController extends Controller
      */
     public function show($id)
     {
-     
+
        try{
-        
+
            $content=Customers::where('user_id',$id)->first();
-           
+
             return view('admin.vendor.show',compact(['content']));
        }
        catch(\Exception $ex){
            return redirect ('admin/customers')->with('error',$ex->getMessage());
        }
-    
+
     }
 
     /**
@@ -170,34 +198,30 @@ class VendorController extends Controller
                 return datatables()->of(Customers::join('users','users.email','=','customers.email')->where('role_id','=',3)->where('broker_request','!=',null)->get())
                     ->addIndexColumn()
                     ->addColumn('status', function ($data) {
-                        if($data->status == 0){
-                            // return $data->user_id;
-                            return '<label class="switch"><input type="checkbox"  data-id="'.$data->user_id.'" data-val="1"  id="status-switch"><span class="slider round"></span></label>';
-                        }else{
-                            return '<label class="switch"><input type="checkbox" checked data-id="'.$data->user_id.'" data-val="0"  id="status-switch"><span class="slider round"></span></label>';
-                        }
+                        return '<a title="Approve" href="customerStatusAccept/' . $data->id . '"
+                        class="btn btn-success btn-sm">Approve &nbsp;<i class="fa fa-check"></i></a>&nbsp;';
                     })
                     ->addColumn('action', function ($data) {
                         // return $data->user_id;
-                        return '<a title="View" href="show_vendor_request/' . $data->id . '" 
+                        return '<a title="View" href="show_vendor_request/' . $data->id . '"
                         class="btn btn-dark btn-sm"><i class="fas fa-eye"></i></a>';
-                        // return '<a title="View" href="show_vendor_request/' . $data->id . '" 
-                        // class="btn btn-dark btn-sm"><i class="fas fa-eye"></i></a>&nbsp;<a title="View" href="customers/' . $data->id . '" 
-                        // class="btn btn-danger btn-sm"><i class="fa fa-times" aria-hidden="true"></i></a>&nbsp;<a title="View" href="customers/' . $data->id . '" 
+                        // return '<a title="View" href="show_vendor_request/' . $data->id . '"
+                        // class="btn btn-dark btn-sm"><i class="fas fa-eye"></i></a>&nbsp;<a title="View" href="customers/' . $data->id . '"
+                        // class="btn btn-danger btn-sm"><i class="fa fa-times" aria-hidden="true"></i></a>&nbsp;<a title="View" href="customers/' . $data->id . '"
                         // class="btn btn-success btn-sm"><i class="fa fa-check"></i></a>&nbsp;';
                     })->rawColumns(['status','action'])->make(true);
-                    
+
             }
         } catch (\Exception $ex) {
             return redirect('/')->with('error', $ex->getMessage());
         }
         return view('admin.vendorRequest.vendorRequest');
     }
-    
+
     public function show_vendor_request($id)
     {
         $vendor_id = $id;
-        
+
         $customer_search = Customers::where('user_id',$id)->first();
         foreach($customer_search as $customers){
             $data_item = explode('|', $customer_search->broker_request);
@@ -207,7 +231,7 @@ class VendorController extends Controller
         }
         $users = array_unique($user_check);
 
-   
+
         return view('admin.vendorRequest.index',compact('users','vendor_id','customer_search'));
     }
 
@@ -228,7 +252,7 @@ class VendorController extends Controller
         // // dd($customer);
         // $customer->broker_request_id = $id;
         // $customer->save();
-        
+
         // return back()->with('success','Broker Assigned Successfully');
     }
     public function brokerCancleToVendor($id,$vendor_id)
@@ -236,7 +260,7 @@ class VendorController extends Controller
         $customer = Customers::where('user_id',$vendor_id)->first();
         $customer->broker_request_id = null;
         $customer->save();
-        
+
         return back()->with('success','Broker Cancle Successfully');
     }
 
