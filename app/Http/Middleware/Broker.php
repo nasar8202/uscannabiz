@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
-class Admin
+class Broker
 {
     /**
      * Handle an incoming request.
@@ -16,11 +16,12 @@ class Admin
      */
     public function handle($request, Closure $next)
     {
-        if(Auth::check()==true && Auth::user()->role_id==1 || (Auth::check()==true && Auth::user()->role_id==4 ))
-        {
-            return $next($request);
+        if(Auth::check()==true && Auth::user()->role_id==4 && Auth::user()->approvel_status != 1){
+            Auth::logout();
+            return back()->with('error','Please Wait for Admin Approvel');
 
         }
-        return redirect('login');
+        return $next($request);
+
     }
 }
