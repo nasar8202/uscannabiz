@@ -17,7 +17,7 @@
                                     <label for="">Order Status</label>
                                     <select name="order_status" id="order_status" class="form-control" data-order_id="{{$order->id}}">
                                         <option value="pending" @if($order->order_status == 'pending') selected @endif>Pending</option>
-                                        <option value="shipped" @if($order->order_status == 'shipped') selected @endif>Shipped</option>
+                                        <option value="shipped" @if($order->order_status == 'paid') selected @endif>Shipped</option>
                                         <option value="completed" @if($order->order_status == 'completed') selected @endif>Completed</option>
                                         <option value="cancelled" @if($order->order_status == 'cancelled') selected @endif>Cancelled</option>
                                     </select>
@@ -50,10 +50,7 @@
                                                 </td>
                                                 <td>{{date('d-M-Y',strtotime($order->created_at))}}</td>
                                             </tr>
-                                            <tr>
-                                                <td><button data-toggle="tooltip" title="" class="btn btn-info btn-xs" data-original-title="Shipping Method"><i class="fa fa-truck fa-fw"></i></button></td>
-                                                <td>Flat Shipping Rate</td>
-                                            </tr>
+                                            
                                             </tbody>
                                         </table>
                                     </div>
@@ -110,8 +107,8 @@
                                     <table class="table table-bordered">
                                         <thead>
                                         <tr>
-                                            <td style="width: 50%;font-weight: bold" class="text-left">Payment Address</td>
-                                            <td style="width: 50%;;font-weight: bold" class="text-left">Shipping Address</td>
+                                            <td style="width: 50%;font-weight: bold" class="text-left">Details</td>
+                                           
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -126,15 +123,7 @@
                                                 <strong>Country</strong> : {{$order->billing_country}}
                                                 <br>
                                             </td>
-                                            <td class="text-left">
-                                                <strong>Address</strong> : {{$order->address}}
-                                                <br>
-                                                <strong>City</strong> : {{$order->shipping_city}}
-                                                <br>
-                                                <strong>State</strong> : {{$order->shipping_state}}
-                                                <br>
-                                                <strong>Country</strong> : {{$order->shipping_country}}
-                                            </td>
+                                            
                                         </tr>
                                         </tbody>
                                     </table>
@@ -201,13 +190,17 @@
                                     <div class="col-lg-4 col-sm-5 ml-auto">
                                         <table class="table table-clear">
                                             <tbody>
-
-                                            <tr>
-                                                <td class="left">
-                                                    <strong>Subtotal</strong>
-                                                </td>
-                                                <td class="right">${{$order->sub_total}}</td>
-                                            </tr>
+                                                <tr>
+                                                    @php
+                                                    $total_price = $order->orderItems->first()->product_qty*$order->orderItems->first()->product_per_price;
+                                                    @endphp
+                                                    @if(isset($order))
+                                                    <td class="left">
+                                                        <strong>Subtotal</strong>
+                                                    </td>
+                                                    <td class="right">${{$total_price}}</td>
+                                                    @endif
+                                                </tr>
                                             @if($order->discount > 0)
                                                 <tr>
                                                     <td class="left">
@@ -222,9 +215,14 @@
                                                 <td class="left">
                                                     <strong>Total</strong>
                                                 </td>
-                                                <td class="right">
-                                                    <strong>${{$orderItems->product_subtotal_price+$order->broker_price}}</strong>
-                                                </td>
+                                                @php
+                                                $total_price = $order->orderItems->first()->product_qty*$order->orderItems->first()->product_per_price;
+                                                @endphp
+                                                @if(isset($order))
+                                                <td class="right">${{$total_price+$order->broker_price??''}}</td>
+                                                @else
+                                                <td class="right">${{$total_price}}</td>
+                                                @endif
                                             </tr>
                                             </tbody>
                                         </table>

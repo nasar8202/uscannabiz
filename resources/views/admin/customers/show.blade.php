@@ -25,12 +25,99 @@
                 <div class="col-md-12">
 
                     <!-- /.card -->
+                    @if($user->role_id == 2)
 
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Details</h3>
+                            <h3 class="card-title">Customer Details</h3>
                         </div>
 
+                       
+                        <!-- /.card-header -->
+                        <div class="card-body">
+
+                            <table class="table table-bordered table-striped">
+                                <tr>
+                                    <th>First Name</th>
+                                    <td>{{ $content->first_name ?? '' }}</td>
+                                    <th>Last Name</th>
+                                    <td>{{ $content->last_name ?? '' }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Email</th>
+                                    <td>{{ $content->email ?? '' }}</td>
+                                    <th>Phone</th>
+                                    <td>{{ $content->phone_no ?? '' }}</td>
+                                </tr>
+                                {{-- <tr>
+                                    <th>City</th>
+                                    <td>{{ $content->city ?? '' }}</td>
+                                    <th>State</th>
+                                    <td>{{ $content->state ?? '' }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Country</th>
+                                    <td>{{ $content->country ?? '' }}</td>
+                                    <th>Address</th>
+                                    <td>{{ $content->address ?? '' }}</td>
+                                </tr> --}}
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    @elseif($user->role_id == 3)
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Vendor Details</h3>
+                        </div>
+
+                        <!-- /.card-header -->
+                        <div class="card-body">
+
+                            <table class="table table-bordered table-striped">
+                                <tr>
+                                    <th>First Name</th>
+                                    <td>{{ $content->first_name ?? '' }}</td>
+                                    <th>Last Name</th>
+                                    <td>{{ $content->last_name ?? '' }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Email</th>
+                                    <td>{{ $content->email ?? '' }}</td>
+                                    <th>Phone</th>
+                                    <td>{{ $content->phone_no ?? '' }}</td>
+                                </tr>
+                                <tr>
+                                    <th>City</th>
+                                    <td>{{ $content->city ?? '' }}</td>
+                                    <th>State</th>
+                                    <td>{{ $content->state ?? '' }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Country</th>
+                                    <td>{{ $content->country ?? '' }}</td>
+                                    <th>Address</th>
+                                    <td>{{ $content->address ?? '' }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Store Name</th>
+                                    <td>{{ $vendor_stores->store_name ?? '' }}</td>
+                                    <th>Store Url</th>
+                                    <td>{{ $vendor_stores->store_url ?? '' }}</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    @elseif($user->role_id == 4)
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Broker Details</h3>
+                        </div>
+
+                       
                         <!-- /.card-header -->
                         <div class="card-body">
 
@@ -63,6 +150,7 @@
                         </div>
                         <!-- /.card-body -->
                     </div>
+                    @endif
                     <!-- /.card -->
                 </div>
                 <!-- /.col -->

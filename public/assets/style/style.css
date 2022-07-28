@@ -195,4 +195,14 @@ body.et_cover_background{
 
 
 
+@media(max-width: 980px){
+    .et_fixed_nav #top-header {
+        position: fixed;
+        top: 0;
+    }
+}
+
+
+
+
 

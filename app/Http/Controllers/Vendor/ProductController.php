@@ -60,16 +60,22 @@ class ProductController extends Controller
 
     public function addProductForm()
     {
-
+        $auth = Auth::user()->customers_id;
+        $find_Customer = Customers::where('id',$auth)->first();
+        if($find_Customer->broker_request_id == null){
+            return back()->with('error','You Dont Have Any Broker');
+        }
+        else{
         $categories = Category::get();
         $products = Product::whereStatus(1)->get();
         return view('vendor.product.addProductForm',compact('categories','products'));
     }
+}
     public function addProduct(Request $request)
     {
         
 
-       // dd($request->all());
+    //    dd($request->all());
         $validator = Validator::make($request->all(), array(
 
             'product_name' => 'required',
@@ -81,7 +87,7 @@ class ProductController extends Controller
             // 'manufacturer' => 'required',
         ));
         if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
+            return redirect()->back()->withErrors($validator);
         }
         //image uploading
             DB::beginTransaction();
@@ -221,6 +227,7 @@ class ProductController extends Controller
 
 
         $product = Product::where('id', $id)->first();
+        
         $pro = $product->product_qty;
         if($pro > 0){
             $data = Product::find($id);

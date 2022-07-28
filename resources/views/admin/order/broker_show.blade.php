@@ -73,16 +73,20 @@
                                     </div>
                                 </div> --}}
                                 @if(isset($order))
+                                @if($order->order_status != 'completed')
                                 <div class="col-md-5 float-right">
                                     <label for="">Order Status</label>
                                     <select name="order_status" id="order_status" class="form-control" data-order_id="{{$order->id}}">
                                         <option value="pending" @if($order->order_status == 'pending') selected @endif>Pending</option>
-                                        <option value="shipped" @if($order->order_status == 'shipped') selected @endif>Shipped</option>
+                                        <option value="shipped" @if($order->order_status == 'paid') selected @endif>Paid</option>
                                         <option value="completed" @if($order->order_status == 'completed') selected @endif>Completed</option>
                                         <option value="cancelled" @if($order->order_status == 'cancelled') selected @endif>Cancelled</option>
                                     </select>
 
                                 </div>
+                                @else
+                                    Completed
+                                @endif
                                 @endif
                                 <div class="col-md-12">
                                     <div class="panel panel-default">
@@ -144,8 +148,8 @@
                                     <table class="table table-bordered">
                                         <thead>
                                         <tr>
-                                            <td style="width: 50%;font-weight: bold" class="text-left">Payment Address</td>
-                                            <td style="width: 50%;;font-weight: bold" class="text-left">Shipping Address</td>
+                                            <td style="width: 50%;font-weight: bold" class="text-left">Details</td>
+                                            
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -155,11 +159,7 @@
                                                 <br>
                                                 <strong>City</strong> :  {{$vender_request->city}}
                                             </td>
-                                            <td class="text-left">
-                                                <strong>Address</strong> : {{$vender_request->address}}
-                                                <br>
-                                                <strong>City</strong>  : {{$vender_request->city}}
-                                            </td>
+                                            
                                         </tr>
                                         </tbody>
                                     </table>
