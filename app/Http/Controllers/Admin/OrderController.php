@@ -151,7 +151,7 @@ class OrderController extends Controller
                 $vendor_request = VendorRequest::where('vendor_id',$check->user_id)->orderBy('created_at','desc')->get();
                 //dd($vendor_request);
                 foreach($vendor_request as $items){
-                    $products = Product::where('id',$items->product_id)->first();
+                    $products = Product::where('id',$items->product_id)->get();
                 }
                 $check_vendor = Customers::where('user_id', $products->vender_id)->first();
             //     return datatables()->of(VendorRequest::where('vendor_id',$check_vendor->user_id)->orderBy('created_at','desc')->get())

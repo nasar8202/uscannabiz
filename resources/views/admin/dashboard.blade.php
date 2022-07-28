@@ -114,6 +114,7 @@
                                 style="font-size:20px; font-weight: bold;">Latest Orders</span>
                         </div>
                         <div class="card-body">
+                            @if(Auth::user()->role_id == 1)
                             <table class="table">
                                 <thead>
                                     <tr>
@@ -138,7 +139,68 @@
                                     @php
                                         $latestOrders_data= App\Models\Order::where('id',$latestOrders->order_id)->first();
                                         @endphp
-                                        {{-- @dd($latestOrders_data) --}}
+                                    @if(Auth::user()->role_id == 4)
+                                    <tr>
+                                    @else
+                                    <tr onclick="window.location='order/{{$latestOrders->id}}'" style='cursor: pointer;'>
+                                    @endif
+                                        <td> {{$latestOrders->order_no??'Not Accepted'}} </td>
+                                        <td> {{$latestOrders->customer_name??'Anonymous'}} </td>
+                                        @if(Auth::user()->role_id == 4)
+                                        @else
+                                        <td>
+                                            @if ($latestOrders->order_status == 'pending')
+                                            <span class="badge badge-secondary">Pending</span>
+                                            @elseif ($latestOrders->order_status == 'cancelled')
+                                            <span class="badge badge-danger">Cancelled</span>
+                                            @elseif ($latestOrders->order_status == 'completed')
+                                            <span class="badge badge-success">Completed</span>
+                                            @elseif ($latestOrders->order_status == 'shipped')
+                                            <span class="badge badge-info">Shipped</span>
+                                            @endif
+                                            {{-- {{ucfirst($latestOrders->order_status)}}  --}}
+                                        </td>
+                                        @endif
+                                        <td> {{date('d-M-Y',strtotime($latestOrders->created_at))}} </td>
+                                        @if(Auth::user()->role_id == 4)
+                                        <td> {{ $latestOrders_data ? '$'.$latestOrders_data->total_amount : 'Broker Amount Pending' }} </td>
+                                        @else
+                                        <td> ${{$latestOrders->total_amount}} </td>
+                                        @endif
+                                    </tr>
+                                    @empty
+                                    <tr>
+                                        <td colspan="5" class="text-center"> Not Yet Latest Orders </td>
+                                    </tr>
+                                    @endforelse
+                                </tbody>
+                            </table>
+                            @else
+                            
+                                <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Order Id</th>
+                                        <th>Customer</th>
+                                        @if(Auth::user()->role_id == 4)
+                                        @else
+                                        <th>Status</th>
+                                        @endif
+                                        <th>Order Date</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{-- @php
+                                        $data['latestOrdersItems'] = App\Models\OrderItem::where('order_id',$latestOrders->id)->get();
+                                        $users = App\User::where(['id'=>Auth::user()->id,'email'=>Auth::user()->email])->get();
+                                        $check = App\Models\Customers::where('id', $users->customers_id)->get();
+                                        $vendor_request = App\Models\VendorRequest::where('vendor_id',$check->user_id)->get();
+                                    @endphp --}}
+                                    @forelse($data['latestOrders'] as $latestOrders)
+                                    @php
+                                        $latestOrders_data= App\Models\Order::where('id',$latestOrders->order_id)->first();
+                                        @endphp
                                     @if(Auth::user()->role_id == 4)
                                     <tr>
                                     @else
@@ -175,6 +237,7 @@
                                     @endforelse
                                 </tbody>
                             </table>
+                            @endif
                         </div>
                     </div>
                 </div>

@@ -251,10 +251,15 @@
                                             <tbody>
 
                                             <tr>
+                                                @php
+                                                $total_price = $vender_request->quantity*$product->product_current_price;
+                                                @endphp
+                                                @if(isset($order))
                                                 <td class="left">
                                                     <strong>Subtotal</strong>
                                                 </td>
-                                                <td class="right">${{$product->product_current_price}}</td>
+                                                <td class="right">${{$total_price}}</td>
+                                                @endif
                                             </tr>
                                             @if($product->discount > 0)
                                                 <tr>
@@ -271,10 +276,13 @@
                                                 <td class="left">
                                                     <strong>Total</strong>
                                                 </td>
+                                                @php
+                                                $total_price = $vender_request->quantity*$product->product_current_price;
+                                                @endphp
                                                 @if(isset($order))
-                                                <td class="right">${{$product->product_current_price+$order->broker_price??''}}</td>
+                                                <td class="right">${{$total_price+$order->broker_price??''}}</td>
                                                 @else
-                                                <td class="right">${{$product->product_current_price}}</td>
+                                                <td class="right">${{$total_price}}</td>
                                                 @endif
                                                 {{-- <td class="right">
                                                     <strong>${{$order->total_amount+$order->shipping_cost}}</strong>
