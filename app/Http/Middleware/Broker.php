@@ -16,6 +16,9 @@ class Broker
      */
     public function handle($request, Closure $next)
     {
+        if (!Auth::check()) {
+            return redirect()->route('login');
+        }
         if(Auth::check()==true && Auth::user()->role_id==4 && Auth::user()->approvel_status != 1){
             Auth::logout();
             return back()->with('error','Please Wait for Admin Approvel');
