@@ -60,9 +60,9 @@ class LoginController extends Controller
 
     public function logout()
     {
-        $first_time_login = true;
-        $user = Auth::user()->first_time_login == 0;
-        if (isset($user)) {
+       
+        $user = Auth::user();
+        if (isset($user->first_time_login)) {
 
             Auth::user()->first_time_login = false;
             Auth::user()->save();
