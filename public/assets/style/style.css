@@ -191,6 +191,16 @@ body.et_cover_background{
     
 }
 
+@media(max-width:1700px){
+    #top-menu li a{
+        font-size: 16px;
+    }
+    #top-menu li.logoutBtn{
+        padding-right: 0;
+    }
+    
+}
+
 
 
 @media(max-width:1279px){
