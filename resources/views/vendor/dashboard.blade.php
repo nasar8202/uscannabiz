@@ -38,16 +38,16 @@
 	                           <div class="dokan-w6 dokan-dash-left">
 	                              <div class="dashboard-widget big-counter">
 	                                 <ul class="list-inline">
-	                                    <li>
+	                                    {{-- <li>
 	                                       <div class="title">Sales</div>
 	                                       <div class="count"><span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>0.00</span></div>
 	                                    </li>
 	                                    <li>
 	                                       <div class="title">Earning</div>
 	                                       <div class="count"><span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>0.00</span></div>
-	                                    </li>
+	                                    </li> --}}
 	                                    <li>
-	                                       <div class="title">Pageview</div>
+	                                       <div class="title">Product Page Views</div>
 	                                       <div class="count">{{$productViewed->view ?? 0}}</div>
 
 	                                    </li>

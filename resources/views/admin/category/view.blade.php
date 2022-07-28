@@ -56,10 +56,10 @@
                                         <th>Category</th>
                                         <td>{{$content->name??''}}</td>
                                     </tr>
-                                    <tr>
+                                  {{--  <tr>
                                         <th>Parent Category</th>
                                         <td>{{$content->sub_category->name ?? 'N/A'}}</td>
-                                    </tr>
+                                    </tr> --}}
                                     <tr>
                                         <th>Slug</th>
                                         <td>{{$content->category_slug??''}}</td>
