@@ -19,7 +19,7 @@ class Admin
         if (!Auth::check()) {
             return redirect()->route('login');
         }
-        if(Auth::check()==true && Auth::user()->role_id==1 || (Auth::check()==true && Auth::user()->role_id==4 ))
+        if(Auth::check()==true && Auth::user()->role_id==1 || (Auth::check()==true && Auth::user()->role_id==4))
         {
             return $next($request);
 
