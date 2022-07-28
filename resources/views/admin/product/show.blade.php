@@ -46,8 +46,8 @@
                                     <tr>
                                         <th>Category</th>
                                         <td colspan="2">{{$product->category->name??''}}</td>
-                                        <th>Sub-Category</th>
-                                        <td colspan="2">{{$product->sub_category->name??''}}</td>
+                                        {{-- <th>Sub-Category</th>
+                                        <td colspan="2">{{$product->sub_category->name??''}}</td> --}}
                                     </tr>
                                     <tr>
                                         <th>Slug</th>
@@ -88,7 +88,7 @@
                                         <th>Meta Tag Description</th>
                                         <td colspan="5">{{$product->product_meta_data->meta_tag_description??''}}</td>
                                     </tr>
-                                    <tr>
+                                   {{-- <tr>
                                         <th>Attributes</th>
                                         <td colspan="5">
                                             @foreach($product->products_attributes as $products_attribute)
@@ -114,11 +114,11 @@
                                         <th>Height</th>
                                         <td colspan="2">{{$product->height??''}}</td>
 
-                                    </tr>
-                                    <tr>
                                         <th>Length</th>
                                         <td colspan="2">{{$product->length??''}}</td>
-                                        <th>Weight</th>
+                                    </tr> --}}
+                                    <tr>
+                                        <th>Weight (Pound)</th>
                                         <td colspan="2">{{$product->weight??''}}</td>
                                     </tr>
                                     <tr>
@@ -130,12 +130,12 @@
                                             @endforeach
                                         </td>
                                     </tr>
-                                    <tr>
+                                    {{--<tr>
                                         <th>Manufacturer</th>
-                                        <td colspan="5">
+                                       <td colspan="5">
                                             {{$product->manufacturer->name ?? ''}}
-                                        </td>
-                                    </tr>
+                                        </td> 
+                                    </tr>--}}
                                     </thead>
                                     <tbody>
 
