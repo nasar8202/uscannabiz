@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
+
 body, input, textarea, select {
     font-family: 'Poppins',Helvetica,Arial,Lucida,sans-serif;
 }
@@ -99,8 +100,35 @@ input[type='submit'].dokan-btn-danger, a.dokan-btn-danger, .dokan-btn-danger {
     width: 50%;
     margin: 0 auto;
 } 
-@media(max-width:1279px){
-    #et-top-navigation #top-menu li a{
-        font-size:10px !important;
+
+
+@media (min-width:980px) {
+    div#et-top-navigation ul#top-menu li:nth-last-child(-n+1) {
+        top: 30px;
     }
 }
+
+@media (min-width:1280px) {
+    div#et-top-navigation ul#top-menu li:nth-last-child(-n+1) {
+        position: absolute;
+        top: 20px;
+    }
+}
+
+
+@media(max-width:1279px){
+    /*#et-top-navigation #top-menu li a{*/
+    /*    font-size:10px !important;*/
+    /*}*/
+    #et-top-navigation #top-menu li a {
+        font-size: 12px !important;
+    }
+    body div#et-top-navigation ul#top-menu li:nth-last-child(-n+1) a{
+        padding: 14px 28px;
+    }
+}
+
+
+
+
+
