@@ -625,6 +625,7 @@
                 </div>
             </article>
         </div>
+
         @if ($first_time_login)
 
         <div class="modal modalTn login">
