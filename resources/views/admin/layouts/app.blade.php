@@ -291,7 +291,7 @@
                     <li class="nav-item">
                         <a href="{{route('customer_get')}}" class="nav-link {{ request()->IS('admin/customers/get') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-user"></i>
-                            <p>Customers</p>
+                            <p>All Customers</p>
                         </a>
                     </li>
                     <li class="nav-item">
