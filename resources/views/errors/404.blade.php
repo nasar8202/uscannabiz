@@ -35,7 +35,7 @@
             <div class="col-lg-8 col-12 col-sm-10 offset-lg-2 offset-sm-1">
               <h1 class="m-0">404</h1>
               <h6>Page not found - Uscannazon.com</h6>
-              <p>Uscannazon <span class="text-info"></span>,  <span class="text-info"><a href="/">back to Uscannazon</a></span> elit, sed do eiusmod.</p>
+              <p>Uscannazon <span class="text-info"></span>,  <span class="text-info"><a href="{{route('myAccount')}}">back to Uscannazon</a></span> elit, sed do eiusmod.</p>
             </div>
           </div>
         </div>
