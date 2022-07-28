@@ -201,13 +201,17 @@
                                     <div class="col-lg-4 col-sm-5 ml-auto">
                                         <table class="table table-clear">
                                             <tbody>
-
-                                            <tr>
-                                                <td class="left">
-                                                    <strong>Subtotal</strong>
-                                                </td>
-                                                <td class="right">${{$order->sub_total}}</td>
-                                            </tr>
+                                                <tr>
+                                                    @php
+                                                    $total_price = $order->orderItems->first()->product_qty*$order->orderItems->first()->product_per_price;
+                                                    @endphp
+                                                    @if(isset($order))
+                                                    <td class="left">
+                                                        <strong>Subtotal</strong>
+                                                    </td>
+                                                    <td class="right">${{$total_price}}</td>
+                                                    @endif
+                                                </tr>
                                             @if($order->discount > 0)
                                                 <tr>
                                                     <td class="left">
@@ -222,9 +226,14 @@
                                                 <td class="left">
                                                     <strong>Total</strong>
                                                 </td>
-                                                <td class="right">
-                                                    <strong>${{$orderItems->product_subtotal_price+$order->broker_price}}</strong>
-                                                </td>
+                                                @php
+                                                $total_price = $order->orderItems->first()->product_qty*$order->orderItems->first()->product_per_price;
+                                                @endphp
+                                                @if(isset($order))
+                                                <td class="right">${{$total_price+$order->broker_price??''}}</td>
+                                                @else
+                                                <td class="right">${{$total_price}}</td>
+                                                @endif
                                             </tr>
                                             </tbody>
                                         </table>

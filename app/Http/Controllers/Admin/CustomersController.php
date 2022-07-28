@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Models\Customers;
-use App\Models\Order;
-use App\User;
-use Illuminate\Http\Request;
-use Validator;
 use DB;
-use Illuminate\Support\Facades\Hash;
 use Auth;
+use App\User;
+use Validator;
+use App\Models\Order;
+use App\Models\Customers;
+use App\Models\VendorStore;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 use App\Notifications\UserApprovedNotificaton;
 
 class CustomersController extends Controller
@@ -143,9 +144,11 @@ class CustomersController extends Controller
     {
        try{
            $content=Customers::find($id);
+           $user = User::where('customers_id',$id)->first();
+           $vendor_stores = VendorStore::where('vendor_id',$id)->first();
            $customerOrders = Order::where('customer_id', $id)->with('orderItems', 'customer', 'orderItems.product')->get();
         //    dd($customerOrders);
-            return view('admin.customers.show',compact(['content','customerOrders']));
+            return view('admin.customers.show',compact(['content','customerOrders','user','vendor_stores']));
        }
        catch(\Exception $ex){
            return redirect ('admin/customers')->with('error',$ex->getMessage());
