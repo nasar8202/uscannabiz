@@ -124,16 +124,58 @@ body.et_cover_background{
     overflow-x: hidden;
 }
 
+.woocommerce .woocommerce-form-login .woocommerce-form-login__rememberme {
+    display: inline-block;
+    position: relative;
+    top: 10px;
+}
+.et_fixed_nav #main-header {
+    position: fixed;
+    padding: 20px 0;
+}
+
+
+/*Edit Page form CSS */
+
+/*.editAccount-Details article > form.edit-account{*/
+/*    display: flex;*/
+/*    flex-direction: row;*/
+/*    flex-wrap: wrap;*/
+/*    justify-content: space-between;*/
+/*}*/
+
+/*.editAccount-Details article > form.edit-account p:last-of-type{*/
+/*    display: block;*/
+/*    width: 100%;*/
+/*    margin: 10px 0;*/
+/*    text-align: right;*/
+/*}*/
+/*.page-id-34 .et_full_width_page .editAccount-Details .woocommerce form .form-row {*/
+/*    width: 50%;*/
+/*    max-width: 420px;*/
+/*}*/
+/*.page-id-34 .et_full_width_page .editAccount-Details .woocommerce form p.form-row.form-row-wide {*/
+/*    width: 50%;*/
+/*    max-width: 420px;*/
+/*}*/
+
+
 @media (min-width:980px) {
     div#et-top-navigation ul#top-menu li:nth-last-child(-n+1) {
-        top: 30px;
+        top: 30px !important;
+    }
+    .et-fixed-header#main-header div#et-top-navigation ul#top-menu li:nth-last-child(-n+1){
+        top: 20px !important;
     }
 }
 
 @media (min-width:1280px) {
     div#et-top-navigation ul#top-menu li:nth-last-child(-n+1) {
         position: absolute;
-        top: 20px;
+        top: 20px !important;
+    }
+    .et-fixed-header#main-header div#et-top-navigation ul#top-menu li:nth-last-child(-n+1){
+        top: 10px !important;
     }
 }
 
