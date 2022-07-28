@@ -60,7 +60,7 @@ class LoginController extends Controller
 
     public function logout()
     {
-       
+
         $user = Auth::user();
         if (isset($user->first_time_login)) {
 

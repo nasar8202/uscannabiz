@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 use App\Rules\MatchOldPassword;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;   
+use Illuminate\Support\Facades\Validator;
 use App\Exports\OrdersExport;
 use Maatwebsite\Excel\Facades\Excel;
 class VendorController extends Controller
@@ -136,13 +136,13 @@ class VendorController extends Controller
     }
 
     public function show_inventory()
-    {   
+    {
         $category = Category::all();
         $vendor_id = Auth::user()->id;
 
         $product = DB::table('products')->where('vender_id',$vendor_id)->get();
         $product_stock = DB::table('products')->where('vender_id',$vendor_id)->first();
-        
+
         return view('vendor.inventory.index',compact(['category',$category ,'product',$product,'product_stock']));
     }
 
@@ -213,10 +213,10 @@ class VendorController extends Controller
             if ($validator->fails()) {
                 return redirect()->back()->withErrors($validator);
             }
-            
+
 
             $user->password = Hash::make($request->password);
-        
+
         $user->save();
 
 
@@ -327,11 +327,11 @@ class VendorController extends Controller
         $messsages = array(
             'id.required'=>'Please Select Broker to Request.',
         );
-    
+
         $rules = array(
             'id'=>'required',
         );
-    
+
         $validator = Validator::make($request->all(), $rules,$messsages);
 
         // $validator = Validator::make($request->all(), [

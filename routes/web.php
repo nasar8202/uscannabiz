@@ -76,7 +76,7 @@ Route::middleware(['user'])->prefix('user')->group(function () {
     Route::get('edit-account/', 'User\UserController@editUserAccount')->name('edit-account');
 
     Route::post('update-account/{id}', 'User\UserController@updateUserAccount')->name('update-account');
-    
+
     Route::post('update-account-password/{id}', 'User\UserController@updateUserPassword')->name('update-account-password');
 
     Route::get('/getVendor', 'User\UserController@getVendor')->name('getVendor');
@@ -124,7 +124,7 @@ Route::namespace('Vendor')->prefix('/vendor')->middleware('vendor')->group(funct
     Route::post('update-products/{id}', 'ProductController@updateProduct')->name('updateProduct');
     Route::get('editVendor', 'VendorController@vendorEdit')->name('editVendor');
     Route::post('updateVendor/{id}', 'VendorController@vendorUpdate')->name('updateVendor');
-    
+
     Route::post('updateVendorPass/{id}', 'VendorController@vendorUpdatePass')->name('updateVendorPass');
 
     Route::get('/checkProductSkuVendor', 'ProductController@checkProductSkuVendor')->name('checkProductSkuVendor');
@@ -148,11 +148,9 @@ Route::namespace('Admin')->prefix('/admin')->middleware('admin')->group(function
     Route::get('brokerapproved', 'CustomersController@brokerapproved')->name('brokerapproved');
     Route::get('vendorapproved', 'CustomersController@vendorapproved')->name('vendorapproved');
     Route::get('customerStatusAccept/{id}', 'CustomersController@customerStatusAccept')->name('customerStatusAccept');
-    Route::get('brokerStatusAccept/{id}', 'VendorController@brokerStatusAccept')->name('brokerStatusAccept');
-    Route::get('vendorStatusAccept/{id}', 'VendorController@vendorStatusAccept')->name('vendorStatusAccept');
     Route::get('customerStatusReject/{id}', 'CustomersController@customerStatusReject')->name('customerStatusReject');
     Route::get('/show_vendor_request/{id}', 'VendorController@show_vendor_request')->name('show_vendor_request');
-    //Route::get('/vendorRequest', 'VendorController@vendorRequest')->name('vendorStatusAccept');
+
     //category
     Route::get('/category', 'Categories@index')->name('category');
 
@@ -194,7 +192,7 @@ Route::namespace('Admin')->prefix('/admin')->middleware('admin')->group(function
 
 
     //REVIEW
-    
+
     Route::get('/review', 'ReviewController@index')->name('review.index');
     Route::get('/review/{id}', 'ReviewController@show')->name('review.show');
     Route::match(['get', 'post'], '/review/edit/{id}', 'ReviewController@edit')->name('review.edit');
