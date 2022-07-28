@@ -12,6 +12,7 @@
                         <div class="card-header">
                             <div class="row">
 
+                                @if($order->order_status != 'completed')
                                 <div class="col-md-5 float-right">
                                     <label for="">Order Status</label>
                                     <select name="order_status" id="order_status" class="form-control" data-order_id="{{$order->id}}">
@@ -22,6 +23,9 @@
                                     </select>
 
                                 </div>
+                                @else
+                                    Completed
+                                @endif
                             </div>
 
                         </div>
@@ -206,7 +210,7 @@
                                                     <td class="right">${{$order->discount}}</td>
                                                 </tr>
                                             @endif
-
+ 
 
                                             <tr>
                                                 <td class="left">
