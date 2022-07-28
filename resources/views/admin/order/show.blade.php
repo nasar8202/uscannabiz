@@ -153,6 +153,9 @@
                                             <th class="right">Unit Cost</th>
                                             <th class="center">Qty</th>
                                             <th class="right">Total</th>
+                                            @if(isset($order->broker_price))
+                                            <th class="right">Broker Comission</th>
+                                            @endif
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -178,6 +181,9 @@
                                                 <td class="center">{{$orderItems->product_qty}}</td>
                                                 
                                                 <td class="right">${{$orderItems->product_per_price*$orderItems->product_qty}}</td>
+                                                @if(isset($order->broker_price))
+                                                <td class="right">${{$order->broker_price}}</td>
+                                                @endif
                                             </tr>
                                             @php
                                                 $subTotal += $orderItems->product_per_price;

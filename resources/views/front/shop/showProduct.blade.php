@@ -120,8 +120,8 @@ ul.et_pb_social_media_follow{list-style-type:none!important;margin:0 0 22px;padd
 	             </div>
                  @if (Auth::check())
                  @php
-                 $check_broker = Auth::user()->role_id;
-             @endphp
+                    $check_broker = Auth::user()->role_id;
+                @endphp
              @if ($check_broker == 4)
              
                 <div class="et_pb_module et_pb_wc_price et_pb_wc_price_0_tb_body">

@@ -163,7 +163,7 @@
       
     </div>
 
-</div>--}}
+</div>
 {{-- product modal popup --}} 
 
 </div>
