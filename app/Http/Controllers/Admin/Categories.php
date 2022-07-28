@@ -42,7 +42,13 @@ class Categories extends Controller
     {
         if ($request->method() == 'POST') {
             $this->validate($request, array(
-                'name' => 'required|unique:categories'
+                'name' => 'required|unique:categories',
+                'description' => 'required',
+                'meta-title' => 'required',
+                'meta-description' => 'required',
+                'meta-keywords' => 'required',
+                'file' => 'required|mimes:jpeg,png',
+
             ));
             //image uploading
             if ($request->file('file')) {

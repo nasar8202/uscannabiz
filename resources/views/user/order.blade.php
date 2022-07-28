@@ -610,7 +610,9 @@
                                                                             <th>Image</th>
                                                                             <th>Item</th>
                                                                             <th>Quantity</th>
+                                                                            <th>Unit Price</th>
                                                                             <th>Sub Total</th>
+                                                                            <th>Broker Price</th>
                                                                             <th>Total Price</th>
                                                                         </tr>
                                                                     </thead>
@@ -642,6 +644,8 @@
                                                                         $total_price = $vender_request->quantity*$product->product_current_price;
                                                                         @endphp --}}
                                                                         <td class="right">${{$order->sub_total}}</td>
+                                                                        <td class="right">${{$order_items_first->product_subtotal_price}}</td>
+                                                                        <td class="right">${{$order->broker_price}}</td>
                                                                         <td class="right">${{$order->total_amount + $order->broker_price }}</td>
                                                                     </tr>
 
@@ -655,8 +659,8 @@
                                                                 <table class="table orderTable">
                                                                     <thead>
                                                                         <tr>
-                                                                            <td style="width: 50%;font-weight: bold" class="text-left">Payment Address</td>
-                                                                            <td style="width: 50%;;font-weight: bold" class="text-left">Shipping Address</td>
+                                                                            <td style="width: 50%;font-weight: bold" class="text-left">Details</td>
+                                                                        
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
@@ -664,21 +668,11 @@
                                                                             <td class="text-left">
                                                                                 <strong>Address</strong> : {{$order->shipping_address}}
                                                                                 <br>
-                                                                                <strong>Country</strong> :  {{$order->shipping_country}}
-                                                                                <br>
+                                                                               
                                                                                 <strong>City</strong> :  {{$order->shipping_city}}
                                                                                 <br>
-                                                                                <strong>State</strong> :  {{$order->shipping_state}}
                                                                             </td>
-                                                                            <td class="text-left">
-                                                                                <strong>Address</strong> : {{$order->billing_address}}
-                                                                                <br>
-                                                                                <strong>Country</strong> :  {{$order->billing_country}}
-                                                                                <br>
-                                                                                <strong>City</strong> :  {{$order->billing_city}}
-                                                                                <br>
-                                                                                <strong>State</strong> :  {{$order->billing_state}}
-                                                                            </td>
+                                                                            
                                                                         </tr>
                                                                     </tbody>
                                                                 </table>

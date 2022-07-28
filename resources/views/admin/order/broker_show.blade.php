@@ -144,8 +144,8 @@
                                     <table class="table table-bordered">
                                         <thead>
                                         <tr>
-                                            <td style="width: 50%;font-weight: bold" class="text-left">Payment Address</td>
-                                            <td style="width: 50%;;font-weight: bold" class="text-left">Shipping Address</td>
+                                            <td style="width: 50%;font-weight: bold" class="text-left">Details</td>
+                                            
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -155,11 +155,7 @@
                                                 <br>
                                                 <strong>City</strong> :  {{$vender_request->city}}
                                             </td>
-                                            <td class="text-left">
-                                                <strong>Address</strong> : {{$vender_request->address}}
-                                                <br>
-                                                <strong>City</strong>  : {{$vender_request->city}}
-                                            </td>
+                                            
                                         </tr>
                                         </tbody>
                                     </table>

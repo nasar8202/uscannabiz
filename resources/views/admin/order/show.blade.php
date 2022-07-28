@@ -50,10 +50,7 @@
                                                 </td>
                                                 <td>{{date('d-M-Y',strtotime($order->created_at))}}</td>
                                             </tr>
-                                            <tr>
-                                                <td><button data-toggle="tooltip" title="" class="btn btn-info btn-xs" data-original-title="Shipping Method"><i class="fa fa-truck fa-fw"></i></button></td>
-                                                <td>Flat Shipping Rate</td>
-                                            </tr>
+                                            
                                             </tbody>
                                         </table>
                                     </div>
@@ -110,8 +107,8 @@
                                     <table class="table table-bordered">
                                         <thead>
                                         <tr>
-                                            <td style="width: 50%;font-weight: bold" class="text-left">Payment Address</td>
-                                            <td style="width: 50%;;font-weight: bold" class="text-left">Shipping Address</td>
+                                            <td style="width: 50%;font-weight: bold" class="text-left">Details</td>
+                                           
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -126,15 +123,7 @@
                                                 <strong>Country</strong> : {{$order->billing_country}}
                                                 <br>
                                             </td>
-                                            <td class="text-left">
-                                                <strong>Address</strong> : {{$order->address}}
-                                                <br>
-                                                <strong>City</strong> : {{$order->shipping_city}}
-                                                <br>
-                                                <strong>State</strong> : {{$order->shipping_state}}
-                                                <br>
-                                                <strong>Country</strong> : {{$order->shipping_country}}
-                                            </td>
+                                            
                                         </tr>
                                         </tbody>
                                     </table>
