@@ -22,15 +22,6 @@ class Vendor
         if(Auth::check()==true && Auth::user()->role_id==3 && Auth::user()->approvel_status != 1){
             Auth::logout();
             return back()->with('error','Admin Deactive this Vendor');
-        }else if(Auth::check()==true && Auth::user()->role_id==2 && Auth::user()->approvel_status == 1){
-
-            return back()->with('error','You are not customer');
-        }else if(Auth::check()==true && Auth::user()->role_id==1){
-            //Auth::logout();
-            return back()->with('error','You are not able');
-        }else if(Auth::check()==true && Auth::user()->role_id==4){
-            //Auth::logout();
-            return back()->with('error','You are not broker');
         }
         return $next($request);
 
