@@ -38,14 +38,14 @@
         @if ($errors->any())
         @foreach ($errors->all() as $error)
         <div class="alert alert-danger alert-block">
-            
+
                 <strong>{{ $error }}</strong>
-            
+
         </div>
         @endforeach
         @endif
 
-        
+
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
@@ -77,7 +77,7 @@
                                         <th>Country</th>
                                         <th>Address</th>
                                         <th>Action</th>
-                                        
+
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -116,16 +116,16 @@
     <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
-            
+
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="submit" class="btn btn-primary">Save Customer</button>
-                
+
             </form>
               </div>
         </div>
         </div>
-      
+
     </div>
 @endsection
 @section('script')
@@ -165,15 +165,15 @@
 
                     { data: 'DT_RowIndex', name: 'DT_RowIndex' },
                     // {data: 'id', name: 'id'},
-                    {data: 'first_name', name: 'First Name'},
-                    {data: 'last_name', name: 'Last Name'},
-                    {data: 'email', name: 'Email'},
-                    {data: 'phone_no', name: 'Phone No'},
-                    {data: 'city', name: 'City'},
-                    {data: 'state', name: 'State'},
-                    {data: 'country', name: 'Country'},
-                    {data: 'address', name: 'Address'},
-                    
+                    {data: 'first_name', name: 'first_name'},
+                    {data: 'last_name', name: 'last_name'},
+                    {data: 'email', name: 'email'},
+                    {data: 'phone_no', name: 'phone_no'},
+                    {data: 'city', name: 'city'},
+                    {data: 'state', name: 'state'},
+                    {data: 'country', name: 'country'},
+                    {data: 'address', name: 'address'},
+
 
 
                     {data: 'action', name: 'action', orderable: false}

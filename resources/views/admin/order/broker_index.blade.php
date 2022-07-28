@@ -117,24 +117,24 @@
                                         <th>Action</th>
                                     </tr>
                                     </thead>
-                                    
+
                                     <tbody>
-                                        
+
                                         @if(isset($vender_request))
                                         @foreach ($vender_request as $data)
                                         <tr>
-                                      
+
                                             <td>{{$data->full_name}}</td>
-                                            
+
                                             <td>{{$data->email}}</td>
                                             <td>{{$data->phone_num}}</td>
                                             <td>{{$data->created_at}}</td>
-                                                
+
                                             <td>
-                                                @php    
+                                                @php
                                                     $order_check = App\Models\Order::where('id',$data->order_id)->first();
                                                 @endphp
-                                            
+
                                                     @if(isset($order_check))
                                                     @if ($order_check->order_status == 'pending')
                                                        <span class="badge badge-secondary">Pending</span>
@@ -148,34 +148,34 @@
                                                     @else
                                                     <span class="badge badge-secondary">Pending</span>
                                                     @endif
-                                            
+
                                                 </td>
                                             <td><a title="View" href="order/broker/{{$data->product_id}}/{{$data->id}}/{{$data->order_id}} " class="btn btn-dark btn-sm">
                                                                <i class="fas fa-eye"></i>
-                                                           
+
                                                                  </a>&nbsp;
                                                                  @if($data->order_id == Null)
                                                                  <button title="Delete" type="button" name="delete" id="{{$data->id}} " class="delete btn btn-danger btn-sm">
                                                                  <i class="fa fa-trash"></i></button>
-                                                                
+
                                                                 @else
                                                                     <button title="Delete data" type="button" name="delete" id="{{$data->id}}/{{$data->order_id}} " class="delete1 btn btn-danger btn-sm">
                                                                         <i class="fa fa-trash"></i></button>
-                                                                
-                                                                
+
+
                                                                 @endif
                                                                 </td>
-                                        
-                                          
-                                          
+
+
+
                                         @endforeach
                                         @else
                                         <td colspan="6">
                                             no data available
                                         </td>
-                                        
+
                                         @endif
-                                        
+
                                     </tr>
                                       </tbody>
                                 </table>
@@ -278,13 +278,13 @@
             // });
 
             var delete_id;
-            
+
             $(document,this).on('click','.delete',function(){
                 delete_id = $(this).attr('id');
                 //delete_order_id = $(this).attr('order_id');
                 // var myArray = delete_id.split("/");
                 // var delete_my_id = myArray[0];
-                
+
                 $('#confirmModal').modal('show');
             });
 
@@ -326,14 +326,14 @@
                 delete_order_id = $(this).attr('order_id');
                 $('#confirmModal1').modal('show');
             });
-            
+
             $(document).on('click','#ok_delete_1',function(){
                 var myArray = delete_id.split("/");
                 var delete_my_id = myArray[0];
                 var delete_my_id2 = myArray[1];
                 $.ajax({
                     url:"{{url('admin/order/destroyBoth')}}/"+delete_my_id+'/'+delete_my_id2,
-                    
+
                     type:'post',
                     data:{
                         id:delete_my_id,
@@ -394,7 +394,7 @@
         })
 
 
-    </script> 
+    </script>
 
 
- @endsection 
+ @endsection
