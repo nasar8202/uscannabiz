@@ -295,9 +295,9 @@
                             </div>
                         </div>
                         @if(isset($order) && $order->order_status == 'pending')
-                        <button type="submit" class="float-right btn btn-primary">Update Request To Vendor</button>
+                        <button type="submit" class="float-right btn btn-primary">Update Commission</button>
                         @elseif(!isset($order))
-                        <button type="submit" class="float-right btn btn-primary">Add Request To Vendor</button>
+                        <button type="submit" class="float-right btn btn-primary">Confirm Order</button>
                         @endif
                     </form>
                     </div>
