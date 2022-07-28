@@ -84,7 +84,7 @@
 	                        <div id="dokan-navigation" aria-label="Menu">
 	                           <label id="mobile-menu-icon" for="toggle-mobile-menu" aria-label="Menu">☰</label><input id="toggle-mobile-menu" type="checkbox">
                                <ul class="dokan-dashboard-menu">
-								<li class="dashboard {{ Request::route()->getName() == 'dashboard' ? 'active' : '' }}"><a href="{{route('dashboard')}}"><i class="fas fa-tachometer"></i> Dashboard</a></li>
+								<li class="dashboard {{ Request::route()->getName() == 'dashboard_vendor' ? 'active' : '' }}"><a href="{{route('dashboard_vendor')}}"><i class="fas fa-tachometer"></i> Dashboard</a></li>
 								<li class="products {{ Request::route()->getName() == 'product' ? 'active' : '' }}"><a href="{{route('product')}}"><i class="fas fa-briefcase"></i> Products</a></li>
 								<li class="orders {{ Request::route()->getName() == 'vendor_order' ? 'active' : '' }}"><a href="{{route('vendor_order')}}"><i class="fas fa-shopping-cart"></i> Orders</a></li>
 								<li class="orders {{ Request::route()->getName() == 'show_brokers' ? 'active' : '' }}"><a href="{{route('show_brokers')}}"><i class="fas fa-shopping-cart"></i> Broker</a></li>
