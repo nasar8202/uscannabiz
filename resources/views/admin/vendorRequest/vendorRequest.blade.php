@@ -168,14 +168,14 @@
 
                     { data: 'DT_RowIndex', name: 'DT_RowIndex' },
                     // {data: 'id', name: 'id'},
-                    {data: 'first_name', name: 'First Name'},
-                    {data: 'last_name', name: 'Last Name'},
-                    {data: 'email', name: 'Email'},
-                    {data: 'phone_no', name: 'Phone No'},
-                    {data: 'city', name: 'City'},
-                    {data: 'state', name: 'State'},
-                    {data: 'country', name: 'Country'},
-                    {data: 'address', name: 'Address'},
+                    {data: 'first_name', name: 'first_name'},
+                    {data: 'last_name', name: 'last_name'},
+                    {data: 'email', name: 'email'},
+                    {data: 'phone_no', name: 'phone_no'},
+                    {data: 'city', name: 'city'},
+                    {data: 'state', name: 'state'},
+                    {data: 'country', name: 'country'},
+                    {data: 'address', name: 'address'},
 
 
 

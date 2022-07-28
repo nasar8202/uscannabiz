@@ -21,6 +21,9 @@ class User
         //     return redirect('/login')->with('erro_login', 'Your error text');
         // }
        // return $response;
+       if (!Auth::check()) {
+            return redirect()->route('login');
+        }
         $response = $next($request);
         if((Auth::check()==true && Auth::user()->role_id==2) && Auth::user()->approvel_status != 1){
             Auth::logout();

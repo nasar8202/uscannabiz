@@ -27,6 +27,7 @@ class LoginController extends Controller
      *
      * @var string
      */
+
 //    protected $redirectTo = RouteServiceProvider::HOME;
     public function redirectTo() {
         $role = Auth::user()->role_id;
@@ -60,7 +61,7 @@ class LoginController extends Controller
 
     public function logout()
     {
-       
+
         $user = Auth::user();
         if (isset($user->first_time_login)) {
 

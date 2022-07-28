@@ -231,8 +231,8 @@
 
                     { data: 'DT_RowIndex', name: 'DT_RowIndex' },
                     // {data: 'id', name: 'id'},
-                    {data: 'name', name: 'Name'},
-                    {data: 'email', name: 'Email'},
+                    {data: 'name', name: 'name'},
+                    {data: 'email', name: 'email'},
                     {data: 'status', name: 'status'},
 
 

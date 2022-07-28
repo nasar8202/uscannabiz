@@ -38,14 +38,14 @@
         @if ($errors->any())
         @foreach ($errors->all() as $error)
         <div class="alert alert-danger alert-block">
-            
+
                 <strong>{{ $error }}</strong>
-            
+
         </div>
         @endforeach
         @endif
 
-        
+
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
@@ -72,11 +72,11 @@
                                     <tr style="text-align: center">
                                         <th>Id</th>
                                         <th>Full Name</th>
-                                        
+
                                         <th>Email</th>
                                         <th>Status</th>
                                         <th>Action</th>
-                                        
+
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -115,16 +115,16 @@
     <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
-            
+
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="submit" class="btn btn-primary">Save Customer</button>
-                
+
             </form>
               </div>
         </div>
         </div>
-      
+
     </div>
 @endsection
 @section('script')
@@ -164,10 +164,10 @@
 
                     { data: 'DT_RowIndex', name: 'DT_RowIndex' },
                     // {data: 'id', name: 'id'},
-                    {data: 'name', name: 'Full Name'},
-                    {data: 'email', name: 'Email'},
+                    {data: 'name', name: 'name'},
+                    {data: 'email', name: 'email'},
                     {data: 'status', name: 'status'},
-                    
+
 
 
                     {data: 'action', name: 'action', orderable: false}

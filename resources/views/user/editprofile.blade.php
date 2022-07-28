@@ -527,9 +527,13 @@
                                                 <div class="woocommerce">
                                                     <nav class="woocommerce-MyAccount-navigation">
                                                         <ul>
-                                                            <li
+                                                            {{-- <li
                                                                 class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--dashboard is-active">
                                                                 <a href="{{route('MyOrders')}}">Dashboard</a>
+                                                            </li> --}}
+                                                            <li
+                                                                class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--edit-account">
+                                                                <a href="{{route('edit-account')}}">Account details</a>
                                                             </li>
                                                             <li
                                                                 class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--orders">
@@ -543,10 +547,6 @@
                                                                 class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--edit-address">
                                                                 <a href="my-account/edit-address/">Addresses</a>
                                                             </li> --}}
-                                                            <li
-                                                                class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--edit-account">
-                                                                <a href="{{route('edit-account')}}">Account details</a>
-                                                            </li>
                                                             <li
                                                                 class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--customer-logout">
                                                                 <a href="{{ route('logout') }}"

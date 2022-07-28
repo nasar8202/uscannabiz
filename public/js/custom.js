@@ -132,6 +132,10 @@ $("body").on('click', '.multi-image-upload i', function () {
   console.log('test');
 });
 
+
+
+
+
 /***/ }),
 
 /***/ 1:
