@@ -134,6 +134,9 @@ body.et_cover_background{
     padding: 20px 0;
 }
 
+.woocommerce button.button.woocommerce-form-login__submit{
+    padding: 6px 30px;
+}
 
 /*Edit Page form CSS */
 
@@ -180,6 +183,16 @@ body.et_cover_background{
 }
 
 
+
+@media(max-width:1700px){
+    #top-menu li a{
+        font-size: 16px;
+    }
+    
+}
+
+
+
 @media(max-width:1279px){
     /*#et-top-navigation #top-menu li a{*/
     /*    font-size:10px !important;*/
@@ -198,6 +211,15 @@ body.et_cover_background{
 @media(max-width: 980px){
     .et_fixed_nav #top-header {
         position: fixed;
+        top: 0;
+    }
+    .et_fixed_nav #main-header {
+        padding: 0;
+    }
+}
+
+@media(max-width: 371px){
+    .woocommerce .woocommerce-form-login .woocommerce-form-login__rememberme{
         top: 0;
     }
 }

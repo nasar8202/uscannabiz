@@ -55,6 +55,20 @@ input:checked+.slider {
     overflow-x:auto;
 }
 
+
+
+@media(max-width:1500px){
+    .broker-table table#example1 tbody tr td:last-child .btn{
+        padding: 5px 10px;
+        font-size: 10px;
+    }
+    .broker-table table#example1 tbody tr td:last-child{
+        justify-content: center !important;
+    }
+}
+
+
+
 @media (max-width:992px){
     .wrapper .content-wrapper .card-body {
         overflow-x: auto;
