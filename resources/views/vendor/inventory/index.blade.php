@@ -54,9 +54,9 @@
 						   <article class="dokan-product-listing-area">
 						      <div class="product-listing-top dokan-clearfix">
 						         <ul class="dokan-listing-filter dokan-left subsubsub">
-						            <li class="active">
+						            {{-- <li class="active">
 						               <a>All (7)</a>
-						            </li>
+						            </li> --}}
 						            
 						            {{-- <li>
 						               <a >In stock ({{$product_stock->product_qty??'0'}})</a>
@@ -122,10 +122,10 @@
 						            <table class="dokan-table dokan-table-striped product-listing-table dokan-inline-editable-table" id="dokan-product-list-table">
 						               <thead>
 						                  <tr>
-						                     <th id="cb" class="manage-column column-cb check-column">
+						                     {{-- <th id="cb" class="manage-column column-cb check-column">
 						                        <label for="cb-select-all"></label>
 						                        <input id="cb-select-all" class="dokan-checkbox" type="checkbox">
-						                     </th>
+						                     </th> --}}
 						                     <th>Image</th>
 						                     <th>Name</th>
 						                     <!--<th>Status</th>-->
@@ -160,10 +160,10 @@
 										@endif
 										@foreach($category_filter as $pro)
 						                  <tr class="">
-						                     <th class="dokan-product-select check-column">
+						                     {{-- <th class="dokan-product-select check-column">
 						                        <label for="cb-select-432"></label>
 						                        <input class="cb-select-items dokan-checkbox" type="checkbox" data-product-name="Testing Products" name="bulk_products[]" value="{{$pro->id}}">
-						                     </th>
+						                     </th> --}}
 						                     <td data-title="Image" class="column-thumb">
 						                        <a href="products/?product_id=432&amp;action=edit"><img width="150" height="150" src="{{asset('uploads/products/'.$pro->product_image)}}" class="attachment-thumbnail size-thumbnail" alt=""></a>
 						                     </td>
@@ -209,10 +209,10 @@
 										@foreach($product as $pro)
                                             
 						                  <tr class="">
-						                     <th class="dokan-product-select check-column">
+						                     {{-- <th class="dokan-product-select check-column">
 						                        <label for="cb-select-432"></label>
 						                        <input class="cb-select-items dokan-checkbox" type="checkbox" data-product-name="Testing Products" name="bulk_products[]" value="{{$pro->id}}">
-						                     </th>
+						                     </th> --}}
 						                     <td data-title="Image" class="column-thumb">
 						                        <a href="#"><img width="150" height="150" src="{{asset('uploads/products/'.$pro->product_image)}}" class="attachment-thumbnail size-thumbnail" alt=""></a>
 						                     </td>
