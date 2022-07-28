@@ -136,14 +136,19 @@ ul.et_pb_social_media_follow{list-style-type:none!important;margin:0 0 22px;padd
 	                   <p>{!! $product->description !!}</p>
 	                </div>
 	             </div>
-             @if ($check_broker != 4)
-	             <div class="et_pb_module et_pb_wc_add_to_cart et_pb_wc_add_to_cart_0_tb_body et_pb_fields_label_position_default et_pb_bg_layout_  et_pb_text_align_left">
-	                <div class="et_pb_module_inner">
-
-	                      <a href="{{ Route('vendorAddProductForm',$product->id ) }}" name="add-to-cart" value="381" class="single_add_to_cart_button button alt">Request to Broker</a>
-
-	                </div>
-	             </div>
+                 @if (Auth::check())
+                     @php
+                        $check_broker = Auth::user()->role_id;
+                    @endphp
+                 @if ($check_broker != 4)
+    	             <div class="et_pb_module et_pb_wc_add_to_cart et_pb_wc_add_to_cart_0_tb_body et_pb_fields_label_position_default et_pb_bg_layout_  et_pb_text_align_left">
+    	                <div class="et_pb_module_inner">
+    
+    	                      <a href="{{ Route('vendorAddProductForm',$product->id ) }}" name="add-to-cart" value="381" class="single_add_to_cart_button button alt">Request to Broker</a>
+    
+    	                </div>
+    	             </div>
+                 @endif
                  @endif
                 </form>
 	          </div>
