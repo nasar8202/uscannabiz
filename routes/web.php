@@ -148,6 +148,8 @@ Route::namespace('Admin')->prefix('/admin')->middleware('admin')->group(function
     Route::get('brokerapproved', 'CustomersController@brokerapproved')->name('brokerapproved');
     Route::get('vendorapproved', 'CustomersController@vendorapproved')->name('vendorapproved');
     Route::get('customerStatusAccept/{id}', 'CustomersController@customerStatusAccept')->name('customerStatusAccept');
+    Route::get('vendorStatusAccept/{id}', 'CustomersController@vendorStatusAccept')->name('vendorStatusAccept');
+    Route::get('brokerStatusAccept/{id}', 'CustomersController@brokerStatusAccept')->name('brokerStatusAccept');
     Route::get('customerStatusReject/{id}', 'CustomersController@customerStatusReject')->name('customerStatusReject');
     Route::get('/show_vendor_request/{id}', 'VendorController@show_vendor_request')->name('show_vendor_request');
 
