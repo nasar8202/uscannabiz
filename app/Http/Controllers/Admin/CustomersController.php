@@ -406,7 +406,7 @@ class CustomersController extends Controller
 
 
 
-            return back()->with('success','Customer Approved Successfully');
+            return back()->with('success','Vendor Approved Successfully');
     }
 
     public function brokerStatusAccept($id)
@@ -428,7 +428,7 @@ class CustomersController extends Controller
 
 
 
-            return back()->with('success','Customer Approved Successfully');
+            return back()->with('success','Broker Approved Successfully');
     }
     public function customerStatusReject($id)
     {
