@@ -22,13 +22,23 @@ class User
         // }
        // return $response;
        if (!Auth::check()) {
-        return redirect()->route('login');
-    }
+            return redirect()->route('login');
+        }
         $response = $next($request);
         if((Auth::check()==true && Auth::user()->role_id==2) && Auth::user()->approvel_status != 1){
             Auth::logout();
             return redirect('my-account')->with('success', 'Please Wait for Admin Approvel');
 
+        }else if(Auth::check()==true && Auth::user()->role_id==3 && Auth::user()->approvel_status == 1){
+            //Auth::logout();
+            return back()->with('error','You are not vendor');
+        }else if(Auth::check()==true && Auth::user()->role_id==1){
+            //Auth::logout();
+            return back()->with('error','You are not able');
+        }
+        else if(Auth::check()==true && Auth::user()->role_id==4){
+            //Auth::logout();
+            return back()->with('error','You are not broker');
         }
         return $response;
 
