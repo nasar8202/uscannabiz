@@ -376,6 +376,11 @@
 <script>
     $.widget.bridge('uibutton', $.ui.button)
 </script>
+
+
+
+
+
 <!-- Bootstrap 4 -->
 <script src="{{URL::asset('admin/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 {{--<!-- ChartJS -->--}}
@@ -415,13 +420,13 @@
     <script type="text/javascript"> toastr.error('{{ session('error')}}');</script>
 @endif
 <script>
-
 </script>
 
 {{-- datatables script --}}
 <script src="{{asset('admin/datatables/datatables.net/js/jquery.dataTables.min.js')}}"></script>
 <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 <script src="{{asset('admin/datatables/datatables.net/js/jquery.dataTables.min.js')}}"></script>
+
 
 
 @yield('script')

@@ -61,7 +61,7 @@
                     <div class="small-box bg-success">
                         <div class="inner">
                             <h3>{{$data['products']}}</h3>
-                            <p>All Products</p>
+                            <p>All Active Products</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-stats-bars"></i>

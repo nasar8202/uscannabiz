@@ -102,6 +102,28 @@ input[type='submit'].dokan-btn-danger, a.dokan-btn-danger, .dokan-btn-danger {
 } 
 
 
+.alert.alert-success {
+    display: inline-block;
+    background-color: #4fab39;
+    padding: 10px 20px;
+    border-radius: 10px;
+    color: #fff;
+    box-shadow: 0px 2px 10px #00800096;
+    position: absolute;
+    top: 45px;
+    right: 20px;
+    z-index: 999;
+    transition: all 1s ease;
+}
+.alert.alert-success.hide {
+    opacity: 0;
+    right: -100%;
+    transition: all 1s ease;
+}
+body.et_cover_background{
+    overflow-x: hidden;
+}
+
 @media (min-width:980px) {
     div#et-top-navigation ul#top-menu li:nth-last-child(-n+1) {
         top: 30px;

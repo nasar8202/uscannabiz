@@ -314,6 +314,12 @@ $('#dokan-product-list-table.dokan-table td:not(.hidden)').on('click',function()
     $(this).parent('tr').toggleClass('is-expanded');
 });
 
+$('.alert-success').ready(function() {
+    setTimeout(function() { 
+       $(".alert-success").addClass('hide')
+        }, 4000);
+    });
+
    </script>
    
     <script>

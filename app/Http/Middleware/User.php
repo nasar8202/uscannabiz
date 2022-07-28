@@ -22,8 +22,8 @@ class User
         // }
        // return $response;
        if (!Auth::check()) {
-        return redirect()->route('login');
-    }
+            return redirect()->route('login');
+        }
         $response = $next($request);
         if((Auth::check()==true && Auth::user()->role_id==2) && Auth::user()->approvel_status != 1){
             Auth::logout();
