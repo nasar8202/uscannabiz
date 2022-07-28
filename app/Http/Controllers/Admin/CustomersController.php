@@ -23,7 +23,7 @@ class CustomersController extends Controller
     final public function index()
     {
 
-    $user = User::join('customers','users.customers_id','=','customers.id')->where(['role_id'=>4,'approvel_status'=>1])->get();
+    $user = User::join('customers','users.id','=','customers.user_id')->where(['role_id'=>4,'approvel_status'=>1])->get();
         try {
 
             if (request()->ajax()) {
@@ -103,6 +103,7 @@ class CustomersController extends Controller
         $user->email = $request->input('email');
         $user->password = Hash::make($request->input('password'));
         $user->role_id = 4;
+        $user->approvel_status = 1;
         $user->customers_id = $customer_id;
         $user->save();
 
@@ -216,8 +217,15 @@ class CustomersController extends Controller
         $user->email = $request->input('email');
         $user->password = Hash::make($request->input('first_name'));
         $user->role_id = 4;
+        $user->approvel_status = 1;
         $user->customers_id = $customer_id;
         $user->save();
+
+        $user_id = $user->id;
+        $customer_user = Customers::find($customer_id);
+        $customer_user->user_id = $user_id;
+        $customer_user->save();
+        
         return redirect('/admin/customers')->with('success','Broker Updated Successfully');
         }
     }
