@@ -350,7 +350,7 @@ class CustomersController extends Controller
                         }
                     })
                     ->addColumn('action', function ($data) {
-                        return '<a title="Approve" href="vendorStatusAccept/' . $data->id . '"
+                        return '<a title="Approve" href="customerStatusAccept/' . $data->id . '"
                          class="btn btn-success btn-sm">Approve &nbsp;<i class="fa fa-check"></i></a>&nbsp;';
 
                     })->rawColumns(['status',  'action'])->make(true);
