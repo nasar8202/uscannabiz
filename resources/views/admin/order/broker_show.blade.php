@@ -87,6 +87,8 @@
                                 @else
                                     Completed
                                 @endif
+                                @else
+                                <a href="/admin/orderCancel/{{$vender_request->id}}" class="btn btn-danger"> Cancel Order </a>
                                 @endif
                                 <div class="col-md-12">
                                     <div class="panel panel-default">
