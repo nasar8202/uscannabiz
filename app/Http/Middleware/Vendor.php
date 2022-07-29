@@ -23,6 +23,7 @@ class Vendor
             Auth::logout();
             return back()->with('error','Admin Deactive this Vendor');
         }
+
         return $next($request);
 
     }

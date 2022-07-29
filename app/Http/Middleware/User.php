@@ -30,6 +30,7 @@ class User
             return redirect('my-account')->with('success', 'Please Wait for Admin Approvel');
 
         }
+
         return $response;
 
     }
