@@ -107,7 +107,7 @@ input[type='submit'].dokan-btn-danger, a.dokan-btn-danger, .dokan-btn-danger {
     display: inline-block;
     padding: 10px 20px;
     border-radius: 10px;
-    position: absolute;
+    position: fixed;
     top: 45px;
     right: 20px;
     z-index: 999;
@@ -135,8 +135,8 @@ input[type='submit'].dokan-btn-danger, a.dokan-btn-danger, .dokan-btn-danger {
 .alert.alert-info.hide,
 .alert.alert-danger.hide,
 .alert.alert-success.hide {
-    opacity: 0;
-    right: -100%;
+    /*opacity: 0;*/
+    /*right: -100%;*/
     transition: all 1s ease;
 }
 
@@ -151,15 +151,42 @@ body.et_cover_background{
 }
 .et_fixed_nav #main-header {
     position: fixed;
-    padding: 20px 0;
+    padding: 10px 0;
 }
 
 .woocommerce button.button.woocommerce-form-login__submit{
     padding: 6px 30px;
 }
 
+.main_productReview_table {
+    display: block;
+    max-width: 100%;
+    margin: 0 0 35px;
+}
+.main_productReview_table .productReview_table{
+    /*display: block;*/
+    width: 100%;
+}
+.main_productReview_table .productReview_table thead tr{
+    background-color: #0d4400;
+    color: #fff;
+}
+.main_productReview_table .productReview_table tbody tr {
+    background-color: #eeeeee;
+    color: #000;
+}
+.main_productReview_table .productReview_table  thead tr th{
+    text-transform: capitalize;
+    font-size: 14px;
+    min-width: 100px;
+    text-align: left;
+    padding: 10px 15px;
+}
 
-
+.main_productReview_table .productReview_table  tbody tr td{
+    font-size: 14px;
+    padding: 10px 15px;
+}
 
 
 /*Edit Page form CSS */
@@ -203,6 +230,28 @@ body.et_cover_background{
     float: right;
     width: 220px;
 }
+#main-content{
+    padding-top: 0px;
+}
+div #main-header{
+    box-shadow: none;
+}
+#post-34 > .entry-content > div > div > .et_pb_section_0.et_pb_section{
+    padding-top: 30px;
+}
+
+div#top-header div#et-secondary-menu > span:nth-child(1){
+    display: none;
+}
+
+.mobile_nav .mobile_menu_bar:before{
+    color: #0d4400;
+}
+
+.woocommerce form#commentform  .comment-form-author input[type=text] {
+    border-radius: 10px;
+}
+
 /*.dokan-w5 {*/
 /*    width: 47.666667%;*/
 /*    float: left;*/
@@ -360,6 +409,7 @@ body.et_cover_background{
         font-size: 12px !important;
         line-height: normal;
     }
+    
 }
 
 
@@ -372,6 +422,10 @@ body.et_cover_background{
     .et_fixed_nav #main-header {
         padding: 0;
     }
+    .sec-1 .woocommerce ul.products li.product:nth-child(odd){
+        margin-right: 20px;
+    }
+
 }
 
 @media(max-width: 767px){
@@ -443,6 +497,20 @@ body.et_cover_background{
     }
 }
 
+
+@media(max-width: 475px){
+    div#top-header div#et-info > a{
+        display: inline-block;
+        margin-top: 7px;
+    }
+    body:not(.et-tb) #main-content .container.msgContainer, body:not(.et-tb-has-header) #main-content .container.msgContainer {
+        padding-top: 0;
+    }
+}
+    
+    
+    
+
 @media(max-width: 467px){
     .et_no_sidebar #left-area.left-area-addToReqForm{
         width: 100% !important;
@@ -452,6 +520,8 @@ body.et_cover_background{
         width: 140px !important;
     }
 }
+
+
 
 
 @media(max-width: 430px){

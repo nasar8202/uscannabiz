@@ -72,10 +72,6 @@
                                         <th>Last Name</th>
                                         <th>Email</th>
                                         <th>Phone No</th>
-                                        <th>City</th>
-                                        <th>State</th>
-                                        <th>Country</th>
-                                        <th>Address</th>
                                         <th>Action</th>
 
                                     </tr>
@@ -169,10 +165,6 @@
                     {data: 'last_name', name: 'last_name'},
                     {data: 'email', name: 'email'},
                     {data: 'phone_no', name: 'phone_no'},
-                    {data: 'city', name: 'city'},
-                    {data: 'state', name: 'state'},
-                    {data: 'country', name: 'country'},
-                    {data: 'address', name: 'address'},
 
 
 

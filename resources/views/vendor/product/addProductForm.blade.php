@@ -143,7 +143,7 @@
              <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
                   <label for="reg_email">Product Name<span class="required">*</span></label>
                   <input type="text" class="woocommerce-Input woocommerce-Input--text input-text"
-                  name="product_name" id="reg_email" autocomplete="email" value="">
+                  name="product_name"   value="">
                </p>
 
                <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
@@ -163,7 +163,7 @@
                         <input type="text" class="input-text form-control" name="product_slug" id="last-name" value="" required="required">
                      </p>
                      <p class="form-row form-group">
-                        <label for="last-name">Weight <span class="required">*</span></label>
+                        <label for="last-name">Weight <small>(Pound)</small> <span class="required">*</span></label>
                         <input type="number" class="input-text form-control" name="weight" id="weight" value="" required="required">
                      </p>
                      <p class="form-row form-group form-row-wide">
@@ -173,7 +173,7 @@
                      </p>
                      <p class="form-row form-group">
                         <label for="exampleInputEmail1">Sale(%)</label>
-                        <input type="text" class="input-text form-control" readonly name="product_sale_percentage" id="product_sale_percentage" value="{{old('product_sale_percentage')}}" required="required">
+                        <input type="number" class="input-text form-control" readonly name="product_sale_percentage" id="product_sale_percentage" value="{{old('product_sale_percentage')}}" required="required">
 
                         </p>
                   </div>
@@ -188,7 +188,7 @@
 
                   <p class="form-row form-group form-row-wide">
                      <label for="exampleInputEmail1">Product Stock Qty</label>
-                     <input type="text" class="input-text form-control" name="product_stock_qty" id="product_stock_qty" readonly id="product_stock_qty" value="{{old('product_stock_qty')}}" required="required">
+                     <input type="number" class="input-text form-control" name="product_stock_qty" id="product_stock_qty" readonly id="product_stock_qty" value="{{old('product_stock_qty')}}" required="required">
 
 
                   </p>

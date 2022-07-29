@@ -85,7 +85,9 @@ input:checked+.slider {
 }
 
 
-
+.card-primary:not(.card-outline)>.card-header {
+    background-color: #033709;
+}
 
 
 

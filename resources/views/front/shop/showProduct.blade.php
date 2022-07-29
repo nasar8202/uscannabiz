@@ -58,7 +58,7 @@ ul.et_pb_social_media_follow{list-style-type:none!important;margin:0 0 22px;padd
    <div class="product-template-default single single-product theme-Divi et-tb-has-template et-tb-has-body et-tb-has-footer woocommerce woocommerce-page woocommerce-js et_button_no_icon et_pb_button_helper_class et_fixed_nav et_show_nav et_secondary_nav_enabled et_primary_nav_dropdown_animation_fade et_secondary_nav_dropdown_animation_fade et_header_style_left et_cover_background et_pb_gutter windows et_pb_gutters3 et_divi_theme et-db dokan-theme-Divi customize-support chrome">
 	<div id="main-content">
 	<div class="clearfix"></div>
-    <div class="container">
+    <div class="container msgContainer">
         @if (session()->has('success_message'))
             <div class="alert alert-success">
                 {{ session()->get('success_message') }}
@@ -140,7 +140,7 @@ ul.et_pb_social_media_follow{list-style-type:none!important;margin:0 0 22px;padd
                      @php
                         $check_broker = Auth::user()->role_id;
                     @endphp
-                 @if ($check_broker != 4)
+                 @if ($check_broker != 4 && $check_broker != 3)
     	             <div class="et_pb_module et_pb_wc_add_to_cart et_pb_wc_add_to_cart_0_tb_body et_pb_fields_label_position_default et_pb_bg_layout_  et_pb_text_align_left">
     	                <div class="et_pb_module_inner">
     
@@ -183,28 +183,30 @@ ul.et_pb_social_media_follow{list-style-type:none!important;margin:0 0 22px;padd
 	                               </h2>
 	                               <p class="woocommerce-noreviews">@if(count($productReviews) > 0) {{count($productReviews)}} @else No @endif review(s) for this Product</p>
                                   
-                                   <table class="table">
                                     <h5>Product Review</h5>
-                                    <thead>
-                                      <tr>
-                                       
-                                        <th scope="col">author</th>
-                                        <th scope="col">description</th>
-                                     
-                                      </tr>
-                                    </thead>
-                                    @foreach($productReviews as $reviews)
-                                    <tbody>
-                                      <tr>
-                                        
-                                        <td>{{$reviews->author}}</td>
-                                        <td>{{$reviews->description}}</td>
-                                        
-                                      </tr>
-                                      
-                                    </tbody>
-                                    @endforeach
-                                  </table>
+                                   <div class="main_productReview_table">
+                                       <table class="table productReview_table">
+                                        <thead>
+                                          <tr>
+                                            
+                                            <th scope="col">author</th>
+                                            <th scope="col">description</th>
+                                         
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($productReviews as $reviews)
+                                          <tr>
+                                            
+                                            <td>{{$reviews->author}}</td>
+                                            <td>{{$reviews->description}}</td>
+                                            
+                                          </tr>
+                                          
+                                        @endforeach
+                                        </tbody>
+                                      </table>
+                                   </div>
 
 	                            </div>
 	                            <div id="review_form_wrapper">
@@ -224,8 +226,8 @@ ul.et_pb_social_media_follow{list-style-type:none!important;margin:0 0 22px;padd
                                                 <i data-value="5" class="fas fa-star"></i>
                                             </span>
 	                                        </div>
-	                                        <p class="comment-form-comment"><label for="comment">Your review&nbsp;<span class="required">*</span></label><textarea id="comment" name="review" cols="45" rows="8" required></textarea></p>
 	                                        <p class="comment-form-author"><label for="author">Name&nbsp;<span class="required">*</span></label><input id="author" name="name" type="text" value="" size="30" required></p>
+	                                        <p class="comment-form-comment"><label for="comment">Your review&nbsp;<span class="required">*</span></label><textarea id="comment" name="review" cols="45" rows="8" required></textarea></p>
 	                                     
                                             
                                             <input type="hidden" name="product_id" id="product_id" value="{{ $product->id }}">
