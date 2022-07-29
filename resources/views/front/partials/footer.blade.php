@@ -24,7 +24,7 @@
                </ul>
             </div>
             <div class="et_pb_column et_pb_column_1_4 et_pb_column_1_tb_footer  et_pb_css_mix_blend_mode_passthrough">
-               <div class="et_pb_module et_pb_text et_pb_text_2_tb_footer  et_pb_text_align_left et_pb_bg_layout_light">
+               <div class="et_pb_module et_pb_text et_pb_text_2_tb_footer  et_pb_text_align_left et_pb_bg_layout_light footerInformation">
                   <div class="et_pb_text_inner">
                      <h4>Information</h4>
                   </div>

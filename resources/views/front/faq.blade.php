@@ -56,7 +56,7 @@
                                      <h2>Asked Questions</h2>
                                   </div>
                                </div>
-                               <div class="et_pb_module et_pb_accordion et_pb_accordion_0">
+                               <div class="et_pb_module et_pb_accordion et_pb_accordion_0 faqs-cards-main">
                                   <div class="et_pb_toggle et_pb_module et_pb_accordion_item et_pb_accordion_item_0  et_pb_toggle_open">
                                      <h5 class="et_pb_toggle_title">Lorem Ipsum dolor samit</h5>
                                      <div class="et_pb_toggle_content clearfix">

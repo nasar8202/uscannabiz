@@ -70,7 +70,7 @@
                                                     @endif
             </li>
                 @empty
-                    <div style="text-align: left">Category has No Products found</div>
+                    <div class='categoryResult' style="text-align: left">Category has No Products found</div>
                 @endforelse
            </ul>
         </div>

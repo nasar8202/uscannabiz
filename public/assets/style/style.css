@@ -186,6 +186,7 @@ body.et_cover_background{
 .main_productReview_table .productReview_table  tbody tr td{
     font-size: 14px;
     padding: 10px 15px;
+    min-width: 150px;
 }
 
 
@@ -252,6 +253,10 @@ div#top-header div#et-secondary-menu > span:nth-child(1){
     border-radius: 10px;
 }
 
+.categoryResult{
+    color: red;
+}
+    
 /*.dokan-w5 {*/
 /*    width: 47.666667%;*/
 /*    float: left;*/
@@ -425,6 +430,15 @@ div#top-header div#et-secondary-menu > span:nth-child(1){
     .sec-1 .woocommerce ul.products li.product:nth-child(odd){
         margin-right: 20px;
     }
+    .et_pb_image_0 .et_pb_image_wrap.aboutUsImg-overlay-main{
+        border-left-width: 0;
+        box-shadow: none;
+        max-width: 90%;
+        margin: 0 auto;
+    }
+    .footerInformation {
+        padding-top: 130px;
+    }
 
 }
 
@@ -495,8 +509,16 @@ div#top-header div#et-secondary-menu > span:nth-child(1){
     .page.page-id-34.dokan-theme-Divi .dokan-w12 form.dokan-form-inline select{
         min-height: 35px;
     }
+    .faqs-cards-main h5.et_pb_toggle_title {
+        padding-right: 12px !important;
+    }
 }
 
+@media(max-width: 476px){
+    .footerInformation {
+        padding-top: 0;
+    }
+}
 
 @media(max-width: 475px){
     div#top-header div#et-info > a{
@@ -506,6 +528,7 @@ div#top-header div#et-secondary-menu > span:nth-child(1){
     body:not(.et-tb) #main-content .container.msgContainer, body:not(.et-tb-has-header) #main-content .container.msgContainer {
         padding-top: 0;
     }
+    
 }
     
     
@@ -588,6 +611,11 @@ div#top-header div#et-secondary-menu > span:nth-child(1){
     .venderproductMain .table-overflowx-auto{
         margin-top: 40px;
     }
+    .categoryResult{
+        font-size: 12px;
+        line-height: normal;
+    }
+    
 }
 
 

@@ -36,9 +36,9 @@
                         </div>
                         <div class="et_pb_column et_pb_column_1_2 et_pb_column_2  et_pb_css_mix_blend_mode_passthrough et-last-child">
                            <div class="et_pb_with_border et_pb_module et_pb_image et_pb_image_0">
-                              <span class="et_pb_image_wrap has-box-shadow-overlay">
-                                 <div class="box-shadow-overlay"></div>
-                                 <img width="474" height="321" src="assets/uploads/2022/03/Mask-Group-4.png" alt="" title="Mask Group 4" srcset="assets/uploads/2022/03/Mask-Group-4.png 474w, assets/uploads/2022/03/Mask-Group-4-300x203.png 300w" sizes="(max-width: 474px) 100vw, 474px" class="wp-image-33">
+                              <span class="et_pb_image_wrap has-box-shadow-overlay aboutUsImg-overlay-main">
+                                 <div class="box-shadow-overlay aboutUsImg-overlay"></div>
+                                 <img width="474" height="321" src="assets/uploads/2022/03/Mask-Group-4.png" alt="" title="Mask Group 4" srcset="assets/uploads/2022/03/Mask-Group-4.png 474w, assets/uploads/2022/03/Mask-Group-4-300x203.png 300w" sizes="(max-width: 474px) 100vw, 474px" class="wp-image-33 aboutusBt-img">
                               </span>
                            </div>
                         </div>
