@@ -44,7 +44,7 @@
                     <p style="margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;">Product name : {{ $details['product_name'] }}</p>
 
                     <p style="margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;">Sku :{{ $details['sku'] }}</p>
-                    <p style="margin:0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;"><a href="http://localhost:8000/" style="color:#ee4c50;text-decoration:underline;">Uscanan</a></p>
+                    <p style="margin:0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;"><a href="{{route('homepage')}}" style="color:#ee4c50;text-decoration:underline;">Uscanan</a></p>
                   </td>
                 </tr>
                 {{-- <tr>
