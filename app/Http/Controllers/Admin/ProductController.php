@@ -95,7 +95,7 @@ class ProductController extends Controller
                 $user->notify(new ProductApprovedNotificaton());
             }
 
-            return back()->with('success','Customer Approved Successfully');
+            return back()->with('success','Product Approved Successfully');
     }
     /**
      * Show the form for creating a new resource.

@@ -43,7 +43,7 @@ class AdminNewVendorNotificaton extends Notification
     {
         return (new MailMessage)
                     ->line('New Vendor Register Request. Name and email  '.$this->user->name.'('.$this->user->email.')')
-                    ->action('Notification Action', route('customerRequest'));
+                    ->action('Notification Action', route('vendorapproved'));
     }
 
     /**

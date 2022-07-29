@@ -19,7 +19,15 @@
             </div><!-- /.container-fluid -->
         </section>
         <!-- /.content-header -->
+        @if ($errors->any())
+        @foreach ($errors->all() as $error)
+        <div class="alert alert-danger alert-block">
 
+                <strong>{{ $error }}</strong>
+
+        </div>
+        @endforeach
+        @endif
         <section class="content">
             <div class="container-fluid">
                 <div class="row">

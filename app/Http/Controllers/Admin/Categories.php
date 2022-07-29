@@ -47,7 +47,7 @@ class Categories extends Controller
                 'meta-title' => 'required',
                 'meta-description' => 'required',
                 'meta-keywords' => 'required',
-                'file' => 'required|mimes:jpeg,png',
+                'file' => 'required|image|mimes:jpeg,png,jpg',
 
             ));
             //image uploading

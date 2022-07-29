@@ -10,6 +10,7 @@ use App\Models\Order;
 use App\Models\Customers;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\VendorRequest;
 use App\Models\OrderItem;
 use Illuminate\Http\Request;
 use App\Rules\MatchOldPassword;
@@ -31,7 +32,8 @@ class VendorController extends Controller
         $orderCount = Order::where('vendor_id',$vendor_id)->count();
         $orderCompletedCount = Order::where('vendor_id',$vendor_id)->where('order_status','completed')->count();
 
-        $orderPendingCount = Order::where('vendor_id',$vendor_id)->where('order_status','pending')->count();
+        // $orderPendingCount = Order::where('vendor_id',$vendor_id)->where('order_status','pending')->count();
+        $orderPendingCount = VendorRequest::where('vendor_id',$vendor_id)->count();
         $orderCancelledCount = Order::where('vendor_id',$vendor_id)->where('order_status','cancelled')->count();
 
         $productCount = DB::table('products')
@@ -227,7 +229,7 @@ class VendorController extends Controller
     {
         $check = Customers::where('user_id',Auth::user()->id)->first();
         // dd($check);
-        $countBroker = User::where('role_id',4)->count();
+        $countBroker = User::where(['role_id'=>4,'approvel_status'=>1])->count();
         if($check->broker_request != null && $check->broker_request_id == null){
             $show_data = "Your Request Send To Admin Successfully Wait For Admin Approval !";
             return view('vendor.brokers.index',compact(['countBroker','show_data']));
@@ -242,7 +244,7 @@ class VendorController extends Controller
             return view('vendor.brokers.index',compact('brokers','countBroker','customer_condition'));
         }
         else{
-            $brokers = User::join('customers','users.customers_id','=','customers.id')->where(["role_id"=>4])
+            $brokers = User::join('customers','users.customers_id','=','customers.id')->where(["role_id"=>4,'approvel_status'=>1])
             ->select('customers.*','users.id as user_id_from_users')
             ->get();
             return view('vendor.brokers.index',compact(['brokers',$brokers,'countBroker',$countBroker]));
