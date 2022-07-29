@@ -100,7 +100,14 @@ input[type='submit'].dokan-btn-danger, a.dokan-btn-danger, .dokan-btn-danger {
     width: 50%;
     margin: 0 auto;
 } 
-
+.alert.alert-info ul,
+.alert.alert-danger ul,
+.alert.alert-success ul{
+    display: block;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
 .alert.alert-info,
 .alert.alert-danger,
 .alert.alert-success {
@@ -108,11 +115,23 @@ input[type='submit'].dokan-btn-danger, a.dokan-btn-danger, .dokan-btn-danger {
     padding: 10px 20px;
     border-radius: 10px;
     position: fixed;
-    top: 45px;
+    top: 160px;
     right: 20px;
     z-index: 999;
     transition: all 1s ease;
     color: #fff !important;
+}
+.alert.alert-danger{
+    top: 180px;
+}
+.alert.alert-info{
+    top: 160px;
+}
+.alert.alert-success {
+    top: 180px;
+}
+.alert.alert-error{
+    top: 200px;
 }
 
 .alert.alert-success {
