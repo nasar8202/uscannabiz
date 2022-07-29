@@ -414,7 +414,7 @@ class OrderController extends Controller
             'product_name'=>$product->product_name,
             'total'=>$sub_total
         ];
-        $vendor = Customers::where('id',$request->input('vendor_id'))->first();
+        $vendor = Customers::where('user_id',$request->input('vendor_id'))->first();
 // dd($vendor);
         $usersArray = [$request->input('customer_email'), $vendor->email];
         foreach($usersArray as $user){

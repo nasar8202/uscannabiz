@@ -257,6 +257,27 @@ div#top-header div#et-secondary-menu > span:nth-child(1){
     color: red;
 }
     
+
+div#et-top-navigation ul li:not(:nth-last-child(-n+1)).current-menu-item a:after{
+    bottom: 15px !important;
+}
+.et-fixed-header div#et-top-navigation ul li:not(:nth-last-child(-n+1)).current-menu-item a:after {
+    bottom: 5px !important;
+}
+.changPassHead{
+    display: block;
+    width: 100%;
+}
+
+button.button.chngPassBtn {
+    display: block;
+    width: 250px;
+    max-width: 100%;
+    padding: 20px;
+    height: 50px;
+    line-height: 50px;
+    margin-top: 10px;
+}
 /*.dokan-w5 {*/
 /*    width: 47.666667%;*/
 /*    float: left;*/
@@ -439,13 +460,48 @@ div#top-header div#et-secondary-menu > span:nth-child(1){
     .footerInformation {
         padding-top: 130px;
     }
+    .boxShodowImg .et_pb_image_0 .et_pb_image_wrap {
+        border-left-width: 0 !important;
+        box-shadow: none !important;
+        /*width: 90%;*/
+        margin: 0 auto;
+    }
+    .boxShodowImg > div{
+        padding: 0 50px;
+    }
+    button.button.chngPassBtn{
+        width: 47%;
+    }
+    .entry-content .woocommerce button.button, .woocommerce-page button.button.chngPassBtn {
+        font-size: 13px !important;
+    }
 
 }
 
-@media(max-width: 767px){
+
+@media(max-width: 860px){
+    nav.woocommerce-MyAccount-navigation{
+        padding: 20px !important;
+    }
+}
+@media(max-width: 768px){
     .woocommerce-account .woocommerce .woocommerce-MyAccount-content {
         margin-top: 40px;
     }
+    nav.woocommerce-MyAccount-navigation {
+        padding: 30px !important;
+    }
+    li.woocommerce-MyAccount-navigation-link:before{
+        font-size: 18px;
+        
+    }
+    .woocommerce-account .woocommerce-MyAccount-navigation li.woocommerce-MyAccount-navigation-link{
+        padding-left: 26px;
+    }
+}
+
+@media(max-width: 767px){
+    
     .woocommerce-MyAccount-content fieldset p.form-row.form-row-wide {
         flex: 0 0 100%;
         margin-right: 0;
@@ -512,6 +568,8 @@ div#top-header div#et-secondary-menu > span:nth-child(1){
     .faqs-cards-main h5.et_pb_toggle_title {
         padding-right: 12px !important;
     }
+    
+    
 }
 
 @media(max-width: 476px){
@@ -541,6 +599,9 @@ div#top-header div#et-secondary-menu > span:nth-child(1){
     .left-area-addToReqForm table img{
         height: 120px !important;
         width: 140px !important;
+    }
+    .faqs-cards-main .et_pb_toggle_content p{
+        line-height: normal;
     }
 }
 
@@ -590,6 +651,17 @@ div#top-header div#et-secondary-menu > span:nth-child(1){
 @media(max-width: 371px){
     .woocommerce .woocommerce-form-login .woocommerce-form-login__rememberme{
         top: 0;
+    }
+    .rowFaqCards .colFaqCards{
+        padding-right: 30px;
+        padding-left: 30px;
+    }
+    .rowFaqCards .faqs-cards-main .et_pb_toggle_open,
+    .rowFaqCards .faqs-cards-main .et_pb_toggle_close{
+            padding: 10px;
+    }
+    .boxShodowImg > div {
+        padding: 0 30px;
     }
 }
 

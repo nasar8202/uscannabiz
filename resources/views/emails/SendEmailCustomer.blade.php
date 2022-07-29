@@ -34,8 +34,8 @@
               <table role="presentation" style="width:100%;border-collapse:collapse;border:0;border-spacing:0;">
                 <tr>
                   <td style="padding:0 0 36px 0;color:#153643;">
-                    <h3 style="font-size:24px;margin:0 0 20px 0;font-family:Arial,sans-serif;"> Order</h3>
-                    <h4 style="font-size:24px;margin:0 0 20px 0;font-family:Arial,sans-serif;">Product </h4>
+                    <h3 style="font-size:24px;margin:0 0 20px 0;font-family:Arial,sans-serif;">Your Order</h3>
+                    <h4 style="font-size:24px;margin:0 0 20px 0;font-family:Arial,sans-serif;">Submitted </h4>
                     <p style="margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;">Name : {{ $details['customer_name'] }}</p>
                     <p style="margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;">Email : {{ $details['customer_email'] }}</p>
                     <p style="margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;">Phone Number : {{ $details['phone_num'] }}</p>

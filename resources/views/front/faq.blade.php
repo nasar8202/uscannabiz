@@ -49,8 +49,8 @@
                          </div>
                       </div>
                       <div class="et_pb_with_border et_pb_section et_pb_section_1 et_section_regular">
-                         <div class="et_pb_row et_pb_row_1">
-                            <div class="et_pb_column et_pb_column_1_2 et_pb_column_1  et_pb_css_mix_blend_mode_passthrough">
+                         <div class="et_pb_row et_pb_row_1 rowFaqCards">
+                            <div class="colFaqCards et_pb_column et_pb_column_1_2 et_pb_column_1  et_pb_css_mix_blend_mode_passthrough">
                                <div class="et_pb_module et_pb_text et_pb_text_1  et_pb_text_align_left et_pb_bg_layout_light">
                                   <div class="et_pb_text_inner">
                                      <h2>Asked Questions</h2>
@@ -77,7 +77,7 @@
                                   </div>
                                </div>
                             </div>
-                            <div class="et_pb_column et_pb_column_1_2 et_pb_column_2  et_pb_css_mix_blend_mode_passthrough et-last-child">
+                            <div class="boxShodowImg et_pb_column et_pb_column_1_2 et_pb_column_2  et_pb_css_mix_blend_mode_passthrough et-last-child">
                                <div class="et_pb_with_border et_pb_module et_pb_image et_pb_image_0">
                                   <span class="et_pb_image_wrap has-box-shadow-overlay">
                                      <div class="box-shadow-overlay"></div>
