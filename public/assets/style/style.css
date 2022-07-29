@@ -568,7 +568,10 @@ button.button.chngPassBtn {
     .faqs-cards-main h5.et_pb_toggle_title {
         padding-right: 12px !important;
     }
-    
+    button.button.chngPassBtn {
+        width: 250px;
+        max-width: 100%;
+    }
     
 }
 

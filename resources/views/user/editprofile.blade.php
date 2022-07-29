@@ -620,7 +620,7 @@
                                                                                 <p class="form-row form-row-last validate-required"
                                                                         id="shipping_last_name_field" data-priority="20">
                                                                         <label for="shipping_last_name" class="">
-                                                                            email&nbsp;</label><span
+                                                                            Email&nbsp;</label><span
                                                                             class="woocommerce-input-wrapper"><input
                                                                                 type="text" class="input-text "
                                                                                 name="email"
