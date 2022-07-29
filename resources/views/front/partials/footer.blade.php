@@ -5,7 +5,7 @@
          <div class="et_pb_row et_pb_row_0_tb_footer">
             <div class="et_pb_column et_pb_column_1_4 et_pb_column_0_tb_footer  et_pb_css_mix_blend_mode_passthrough">
                <div class="et_pb_module et_pb_image et_pb_image_0_tb_footer">
-                  <a href=""><span class="et_pb_image_wrap "><img loading="lazy" width="149" height="104" src="{{asset('assets/uploads/2022/03/Uscannazon-1.png')}}" alt="" title="Uscannazon" class="wp-image-80"></span></a>
+                  <a href="{{route('homepage')}}"><span class="et_pb_image_wrap "><img loading="lazy" width="149" height="104" src="{{asset('assets/uploads/2022/03/Uscannazon-1.png')}}" alt="" title="Uscannazon" class="wp-image-80"></span></a>
                </div>
                <div class="et_pb_module et_pb_text et_pb_text_0_tb_footer  et_pb_text_align_left et_pb_bg_layout_light">
                   <div class="et_pb_text_inner">
@@ -33,9 +33,12 @@
                   <div id="nav_menu-2" class="fwidget et_pb_widget widget_nav_menu">
                      <div class="menu-information-container">
                         <ul id="menu-information" class="menu">
-                           <li id="menu-item-49" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-49"><a href="about-us/">About Us</a></li>
-                           <li id="menu-item-50" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-50"><a href="contact-us/">Contact</a></li>
-                           <li id="menu-item-425" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-425"><a href="my-account/">Profile</a></li>
+                           <li id="menu-item-49" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-49"><a href="{{route('aboutUs')}}">About Us</a></li>
+                           <li id="menu-item-50" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-50"><a href="{{route('contactUs')}}">Contact</a></li>
+                           {{-- <li id="menu-item-425" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-425"><a href="{{route('myAccount')}}">Profile</a></li> --}}
+                           @if(Auth::check() && Auth::user()->role_id == 2)
+                           <li id="menu-item-425" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-425"><a href="{{ route('edit-account') }}">Profile</a></li>
+                           @endif
                         </ul>
                      </div>
                   </div>
@@ -52,9 +55,8 @@
                      <div class="menu-returns-container">
                         <ul id="menu-returns" class="menu">
                            <li id="menu-item-52" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="{{ route('faq') }}">FAQs</a></li>
-                           
-                           <li id="menu-item-431" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-431"><a href="dashboard/">Sell With Us</a></li>
-                           <li id="menu-item-426" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-426"><a href="site-map/">Site map</a></li>
+                           <li id="menu-item-431" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-431"><a href="{{ route('myAccount') }}">Sell With Us</a></li>
+                           <li id="menu-item-426" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-426"><a href="{{route('homepage')}}">Site map</a></li>
                         </ul>
                      </div>
                   </div>
@@ -106,12 +108,12 @@
          <h2>Add To Request</h2>
          <form method="Post" action="{{ route('vendorRequest_shop') }}" class="woocommerce-form woocommerce-form-register register">
           {{ csrf_field() }}
-           
-{{--           
+
+{{--
           <input type="hidden" value="{{$data->id}}" name="product_id">
           <input type="hidden" value="{{$data->vender_id}}" name="vendor_id"> --}}
-        
-          
+
+
                <div class="split-row form-row-wide">
                   <p class="form-row form-group">
                      <!-- <label for="first-name">Full Name <span class="required">*</span></label> -->
@@ -120,9 +122,9 @@
                   <p class="form-row form-group">
                      <!-- <label for="last-name">Phone Number <span class="required">*</span></label> -->
                      <input type="number" class="input-text form-control" name="phone_num" id="last-name" required="required" placeholder="Phone Number">
-                 
+
                   </p>
-               
+
                   <p class="form-row form-group">
                      <!-- <label for="last-name">Email <span class="required">*</span></label> -->
                      <input type="email" class="input-text form-control" name="email" id="last-name" required="required" placeholder="Email">
@@ -152,7 +154,7 @@
                   {{-- <div class="quantity">
                      <input type="number" name="quantity" id="quantity_62b36070a592a" class="input-text qty text" step="1" min="1" max="" name="quantity" value="1" title="Qty" size="4" placeholder=""   inputmode="numeric" autocomplete="off">
                   </div> --}}
-               
+
                <br>
             <p class="woocommerce-form-row form-row">
                <button type="submit" class="woocommerce-Button woocommerce-button button woocommerce-form-register__submit" name="register" value="Register">Add Product Request</button>
@@ -160,11 +162,11 @@
             </p>
          </form>
       </div>
-      
+
     </div>
 
 </div>
-{{-- product modal popup --}} 
+{{-- product modal popup --}}
 
 </div>
 {{-- product modal popup --}}
@@ -315,27 +317,27 @@ $('#dokan-product-list-table.dokan-table td:not(.hidden)').on('click',function()
 });
 
 $('.alert-success').ready(function() {
-    setTimeout(function() { 
+    setTimeout(function() {
        $(".alert-success").addClass('hide')
         }, 4000);
     });
-    
+
     $('.alert-danger').ready(function() {
-    setTimeout(function() { 
+    setTimeout(function() {
        $(".alert-danger").addClass('hide')
         }, 4000);
     });
-    
+
     $('.alert-info').ready(function() {
-    setTimeout(function() { 
+    setTimeout(function() {
        $(".alert-info").addClass('hide')
         }, 4000);
     });
 
    </script>
-   
+
     <script>
-        
+
     </script>
 </body>
 </html>

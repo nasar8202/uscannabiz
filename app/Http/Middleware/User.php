@@ -29,8 +29,10 @@ class User
             Auth::logout();
             return redirect('my-account')->with('success', 'Please Wait for Admin Approvel');
 
-        }
+        }else if(Auth::user()->role_id==3 && Auth::user()->approvel_status == 1){
 
+            return back()->with('error','Admin Deactive this Vendor');
+        }
         return $response;
 
     }

@@ -61,7 +61,7 @@
                     <div class="small-box bg-success">
                         <div class="inner">
                             <h3>{{$data['products']}}</h3>
-                            <p>All Active Products</p>
+                            <p>All Approved Products</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-stats-bars"></i>
@@ -76,7 +76,7 @@
                     <div class="small-box bg-primary">
                         <div class="inner">
                             <h3>{{$data['vendors']}}</h3>
-                            <p>All Active Vendors</p>
+                            <p>All Approved Vendors</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-person-add"></i>
@@ -90,7 +90,7 @@
                     <div class="small-box bg-warning">
                         <div class="inner">
                             <h3>{{$data['brokers']}}</h3>
-                            <p>All Active Brokers</p>
+                            <p>All Approved Brokers</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-person-add"></i>
