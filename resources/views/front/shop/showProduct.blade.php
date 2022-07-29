@@ -86,7 +86,7 @@ ul.et_pb_social_media_follow{list-style-type:none!important;margin:0 0 22px;padd
 	             </div>
 	             <div class="et_pb_module et_pb_wc_breadcrumb et_pb_wc_breadcrumb_0_tb_body et_pb_bg_layout_  et_pb_text_align_left">
 	                <div class="et_pb_module_inner">
-	                   <nav class="woocommerce-breadcrumb"><a href="">Home</a>  /  <a href="{{ route('shop.index') }}">{{$categories->name}}</a>  /  {{ $product->product_name }}</nav>
+	                   <nav class="woocommerce-breadcrumb"><a href="{{route('homepage')}}">Home</a>  /  <a href="{{ route('productCategory', ['slug' => $categories->category_slug,'id'=>$categories->id]) }}">{{$categories->name}}</a>  /  {{ $product->product_name }}</nav>
 	                </div>
 	             </div>
 	          </div>

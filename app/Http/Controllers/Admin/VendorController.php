@@ -283,7 +283,7 @@ class VendorController extends Controller
     public function vendor_get()
     {
 
-            $user = User::join('customers','users.id','=','customers.user_id')->where(['role_id'=>3,'approvel_status'=>1])->get();
+            $user = User::join('customers','users.customers_id','=','customers.id')->where(['role_id'=>3,'approvel_status'=>1])->get();
                 try {
         
                     if (request()->ajax()) {
@@ -305,7 +305,7 @@ class VendorController extends Controller
     public function customer_get()
     {
 
-            $user = User::join('customers','users.id','=','customers.user_id')->where(['role_id'=>2,'approvel_status'=>1])->get();
+            $user = User::join('customers','users.customers_id','=','customers.id')->where(['role_id'=>2,'approvel_status'=>1])->get();
                 try {
         
                     if (request()->ajax()) {
