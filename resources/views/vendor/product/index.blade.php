@@ -183,10 +183,10 @@
 						                        <input class="cb-select-items dokan-checkbox" type="checkbox" data-product-name="Testing Products" name="bulk_products[]" value="{{$pro->id}}">
 						                     </th>
 						                     <td data-title="Image" class="column-thumb">
-						                        <a href="products/?product_id=432&amp;action=edit"><img width="150" height="150" src="{{asset('uploads/products/'.$pro->product_image)}}" class="attachment-thumbnail size-thumbnail" alt=""></a>
+						                        <a ><img width="150" height="150" src="{{asset('uploads/products/'.$pro->product_image)}}" class="attachment-thumbnail size-thumbnail" alt=""></a>
 						                     </td>
 						                     <td data-title="Name" class="column-primary">
-						                        <strong><a href="products/?product_id=432&amp;action=edit">{{$pro->product_name}}</a></strong>
+						                        <strong><a >{{$pro->product_name}}</a></strong>
 						                        <div class="row-actions">
 						                           <span class="edit"><a href="edit-products/{{$pro->id}}">Edit</a> | </span>
 												   <span class="delete"><a href="delete-product/{{$pro->id}}" >Delete Permanently</a> </span>
@@ -233,10 +233,10 @@
 						                        <input class="cb-select-items dokan-checkbox" type="checkbox" data-product-name="Testing Products" name="bulk_products[]" value="{{$pro->id}}">
 						                     </th>
 						                     <td data-title="Image" class="column-thumb">
-						                        <a href="#"><img width="150" height="150" src="{{asset('uploads/products/'.$pro->product_image)}}" class="attachment-thumbnail size-thumbnail" alt=""></a>
+						                        <a ><img width="150" height="150" src="{{asset('uploads/products/'.$pro->product_image)}}" class="attachment-thumbnail size-thumbnail" alt=""></a>
 						                     </td>
 						                     <td data-title="Name" class="column-primary">
-						                        <strong><a href="products/?product_id=432&amp;action=edit">{{$pro->product_name}}</a></strong>
+						                        <strong><a >{{$pro->product_name}}</a></strong>
 						                        <div class="row-actions">
 						                           <span class="edit"><a href="edit-products/{{$pro->id}}">Edit</a> | </span>
 												   <span class="delete"><a href="delete-product/{{$pro->id}}" >Delete Permanently</a></span>

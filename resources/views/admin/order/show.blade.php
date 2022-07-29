@@ -118,10 +118,6 @@
                                                 <br>
                                                 <strong>City</strong> : {{$order->billing_city}}
                                                 <br>
-                                                <strong>State</strong> : {{$order->billing_state}}
-                                                <br>
-                                                <strong>Country</strong> : {{$order->billing_country}}
-                                                <br>
                                             </td>
                                             
                                         </tr>

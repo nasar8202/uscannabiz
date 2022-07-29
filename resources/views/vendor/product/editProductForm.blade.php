@@ -112,21 +112,30 @@
             <form method="post" action="{{ route('updateProduct', ['id' => $product->id])}}" class="woocommerce-form woocommerce-form-register register" enctype="multipart/form-data">
              {{ csrf_field() }}
 
-             <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-               <div class="col">
+             <p class="form-row form-group">
+               
                   <label for="exampleInputEmail1">Main Category</label>
-                  <select class="form-control {{ $errors->has('main_category') ? 'has-error' : ''}}" name="main_category" id="main-category" required>
+                  <select class="woocommerce-Input woocommerce-Input--text input-text {{ $errors->has('main_category') ? 'has-error' : ''}}" name="main_category" id="main-category" required>
                       <option value="" disabled selected>Select Category</option>
                       @foreach ($categories as $category)
                         <option value="{{$category->id}}" {{$product->category_id == $category->id ? 'selected' : ''}}>{{$category->name}}</option>
                       @endforeach
                   </select>
-               </div>
+               
+            </p>
+            <p class="form-row form-group">
+                <label for="exampleInputEmail1">Product Featured/New</label>
+                <select name="product_featured" id="" class="woocommerce-Input woocommerce-Input--text input-text" required>
+                    <option value="" >Select Product Type</option>
+                 
+                    <option value="Feature" @if($product->product_type == "Feature") {{ 'selected' }} @endif>Featured</option>
+                    <option value="New"  @if($product->product_type == "New") {{ 'selected' }} @endif>New</option>
+                </select>
             </p>
              <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
                   <label for="reg_email">Product Name<span class="required">*</span></label>
                   <input type="text" class="woocommerce-Input woocommerce-Input--text input-text"
-                  name="product_name" id="reg_email" autocomplete="email" value="{{$product->product_name}}">
+                  name="product_name"  value="{{$product->product_name}}">
                </p>
 
                <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
@@ -145,7 +154,7 @@
                      </p>
 
                      <p class="form-row form-group">
-                        <label for="last-name">Weight <span class="required">*</span></label>
+                        <label for="last-name">Weight <small>(Pound)</small> <span class="required">*</span></label>
                         <input type="number" class="input-text form-control" name="weight" id="last-name" value="{{$product->weight}}" required="required">
                      </p>
 
@@ -155,7 +164,7 @@
                   </p>
                   <p class="form-row form-group">
                         <label for="exampleInputEmail1">Sale(%)</label>
-                        <input type="text" class="input-text form-control" readonly name="product_sale_percentage" id="product_sale_percentage" value="{{$product->product_sale_percentage}}" required="required">
+                        <input type="number" class="input-text form-control" readonly name="product_sale_percentage" id="product_sale_percentage" value="{{$product->product_sale_percentage}}" required="required">
 
                         </p>
 
@@ -168,7 +177,7 @@
 
                   <p class="form-row form-group form-row-wide">
                      <label for="exampleInputEmail1">Product Stock Qty</label>
-                     <input type="text" class="input-text form-control" name="product_stock_qty" id="product_stock_qty" value="{{$product->product_qty}}" required="required">
+                     <input type="number" class="input-text form-control" name="product_stock_qty" id="product_stock_qty" value="{{$product->product_qty}}" required="required">
 
                   </p>
 

@@ -42,7 +42,7 @@ class AdminNewBrokerNotificaton extends Notification
     {
         return (new MailMessage)
         ->line('New Broker  Register Request. name and email'.$this->user->name.'('.$this->user->email.')')
-        ->action('Notification Action', route('customerRequest'));
+        ->action('Notification Action', route('brokerapproved'));
     }
 
     /**

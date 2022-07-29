@@ -36,7 +36,13 @@
                                         <div class="alert alert-success">
                                             {{ session()->get('success') }}
                                         </div>
-                                    @endif @if(count($errors) > 0)
+                                    @endif 
+                                    @if (session()->has('error'))
+                                    <div class="alert alert-danger">
+                                        {{ session()->get('error') }}
+                                    </div>
+                                @endif 
+                                    @if(count($errors) > 0)
                                         <div class="alert alert-danger">
                                             <ul>
                                                 @foreach ($errors->all() as $error)
@@ -63,7 +69,7 @@
                                             <input type="hidden" id="woocommerce-login-nonce" name="woocommerce-login-nonce" value="44e0230480"><input type="hidden" name="_wp_http_referer" value="wp/uscannabiz/my-account/">				<button type="submit" class="woocommerce-button button woocommerce-form-login__submit" name="login" value="Log in">Log in</button>
                                          </p>
                                          <p class="woocommerce-LostPassword lost_password">
-                                            <a href="{{ route('password.request') }}">Lost your password?</a>
+                                            <a href="{{ route('resetPasswordLink') }}">Lost your password?</a>
                                             {{-- <a href="/my-account/lost-password/">Lost your password?</a> --}}
                                          </p>
                                       </form>
@@ -80,7 +86,11 @@
                                             <label for="reg_password">Password&nbsp;<span class="required">*</span></label>
                                             <input type="password" class="woocommerce-Input woocommerce-Input--text input-text" name="password" id="reg_password" autocomplete="new-password">
                                          </p>
-                                         <div class="show_if_seller">
+                                         <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+                                          <label for="password">Confirm Password&nbsp;<span class="required">*</span></label>
+                                          <input class="woocommerce-Input woocommerce-Input--text input-text" type="password" value="{{ old('password') }}" name="confirm_password" id="password" autocomplete="current-password">
+                                       </p>
+
                                             <div class="split-row form-row-wide">
                                                <p class="form-row form-group">
                                                   <label for="first-name">First Name <span class="required">*</span></label>
@@ -96,18 +106,26 @@
                                              <label for="shop-phone">Phone Number<span class="required">*</span></label>
                                              <input type="text" class="input-text form-control" name="phone" id="shop-phone" value="" required="required">
                                           </p>
-                                            <div class="for_vender">
 
-                                             </div>
-                                         </div>
+                                         <div class="for_vender" >
+
+                                        </div>
+                                        
+                                        <div class="for_broker" >
+
+                                       </div>
                                          <p class="form-row form-group user-role vendor-customer-registration">
                                             <label class="radio">
-                                            <input type="radio" name="role" value="2" checked>
+                                            <input type="radio" name="role" value="2" id="customer_add_fields" checked>
                                             I am a customer    </label>
                                             <br>
                                             <label class="radio">
                                             <input type="radio" name="role" id="vendor_add_fields" value="3">
                                             I am a vendor    </label>
+                                            <br>
+                                            <label class="radio">
+                                            <input type="radio" name="role" id="broker_add_fields" value="4">
+                                            I am a broker    </label>
                                          </p>
                                          <div class="woocommerce-privacy-policy-text">
                                             <p>Your personal data will be used to support your experience throughout this website, to manage access to your account, and for other purposes described in our <a href="/?page_id=3" class="woocommerce-privacy-policy-link" target="_blank">privacy policy</a>.</p>
@@ -132,20 +150,32 @@
   </article>
 </div>
 
-
 <script>
 
-    $(document).ready(function() {
+$(document).ready(function() {
 
-
-
-                  $('#vendor_add_fields').click(function() {
-                    $(".for_vender").html('<p class="form-row form-group form-row-wide"><label for="company-name">City <span class="">*</span></label><input type="text" class="input-text form-control" name="city" id="city" value="" required=""></p><p class="form-row form-group form-row-wide"><label for="company-name">State <span class="">*</span></label><input type="text" class="input-text form-control" name="state" id="state" value="" required=""></p><p class="form-row form-group form-row-wide"><label for="company-name">Country <span class="">*</span></label><input type="text" class="input-text form-control" name="country" id="country" value="" required=""></p><p class="form-row form-group form-row-wide"><label for="company-name">Address <span class="">*</span></label><input type="text" class="input-text form-control" name="address" id="address" value="" required=""></p><p class="form-row form-group form-row-wide"><label for="company-name">Shop Name <span class="">*</span></label><input type="text" class="input-text form-control" name="store_name" id="company-name" value="" required=""></p><p class="form-row form-group form-row-wide"><label for="seller-url" class="pull-left">Shop URL <span class="">*</span></label><strong id="url-alart-mgs" class="pull-right"></strong><input type="text" class="input-text form-control" name="store_url" id="seller-url" value="" required=""><small>/Us-Cannazon/<strong id="url-alart"></strong></small></p>')
-                  });
-
-
+   
+               $('#customer_add_fields').click(function() {
+                 $('.for_broker').html('');
+                 $('.for_vender').html('');
               });
-    </script>
+
+              $('#vendor_add_fields').click(function() {
+                 $('.for_broker').html('');
+                 $('.for_vender').html('');
+                $(".for_vender").html('<p class="form-row form-group form-row-wide"><label for="company-name">City <span class="">*</span></label><input type="text" class="input-text form-control" name="city" id="city" value="" required=""></p><p class="form-row form-group form-row-wide"><label for="company-name">State <span class="">*</span></label><input type="text" class="input-text form-control" name="state" id="state" value="" required=""></p><p class="form-row form-group form-row-wide"><label for="company-name">Country <span class="">*</span></label><input type="text" class="input-text form-control" name="country" id="country" value="" required=""></p><p class="form-row form-group form-row-wide"><label for="company-name">Address <span class="">*</span></label><input type="text" class="input-text form-control" name="address" id="address" value="" required=""></p><p class="form-row form-group form-row-wide"><label for="company-name">Store Name <span class="">*</span></label><input type="text" class="input-text form-control" name="store_name" id="store_name" value="" required=""></p><p class="form-row form-group form-row-wide"><label for="company-name">Store Url <span class="">*</span></label><input type="text" class="input-text form-control" name="store_url" id="store_url" value="" required=""></p>')
+              });
+
+              $('#broker_add_fields').click(function() {
+                 $('.for_vender').html('');
+                 $('.for_broker').html('');
+                 $(".for_broker").html('<p class="form-row form-group form-row-wide"><label for="company-name">City <span class="">*</span></label><input type="text" class="input-text form-control" name="city" id="city" value="" required=""></p><p class="form-row form-group form-row-wide"><label for="company-name">State <span class="">*</span></label><input type="text" class="input-text form-control" name="state" id="state" value="" required=""></p><p class="form-row form-group form-row-wide"><label for="company-name">Country <span class="">*</span></label><input type="text" class="input-text form-control" name="country" id="country" value="" required=""></p><p class="form-row form-group form-row-wide"><label for="company-name">Address <span class="">*</span></label><input type="text" class="input-text form-control" name="address" id="address" value="" required=""></p>')
+
+               });
+
+
+          });
+</script>
 @endsection
 @section('extra-js')
     <!-- Include AlgoliaSearch JS Client and autocomplete.js library -->
