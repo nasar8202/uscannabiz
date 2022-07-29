@@ -38,7 +38,7 @@
                     <p style="margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;">Name : {{ $details['name'] }}</p>
                     <p style="margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;">Email : {{ $details['email'] }}</p>
                     <p style="margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;">Password : {{ $details['password'] }}</p>
-                    <p style="margin:0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;"><a href="http://localhost:8000/" style="color:#ee4c50;text-decoration:underline;">Uscanan</a></p>
+                    <p style="margin:0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;"><a href="{{route('homepage')}}" style="color:#ee4c50;text-decoration:underline;">Uscanan</a></p>
                   </td>
                 </tr>
                 {{-- <tr>

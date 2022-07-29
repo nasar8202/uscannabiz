@@ -63,7 +63,7 @@ class VendorRequestController extends Controller
 
             $pro = $product->product_qty;
             $qty = $request->input('quantity');
-            
+
             if($qty < $pro){
                 $vendor = new VendorRequest;
                 $vendor->product_id = $request->input('product_id');
@@ -92,8 +92,11 @@ class VendorRequestController extends Controller
                     'sku'=>$product->sku
                 ];
                 $vendor = Customers::where('user_id',$request->input('vendor_id'))->first();
+                $broker = Customers::where('user_id',$product->vender_id)->first();
+                $broker_email = Customers::where('id',$broker->broker_request_id)->first();
+
                 if($request->input('vendor_id') != 1){
-                $usersArray = [$request->input('email'), $vendor->email];
+                $usersArray = [$request->input('email'), $vendor->email,$broker_email->email];
                 foreach($usersArray as $user){
                     //echo $user;
                     \Mail::to($user)->send(new \App\Mail\SendEmailAdminCustomerBroker($details));
@@ -107,10 +110,10 @@ class VendorRequestController extends Controller
 
                 }
                 }
-                return redirect()->route('order_thanks')->with('success',"Request Has Been Submited");
+                //return redirect()->route('order_thanks')->with('success',"Request Has Been Submited");
                 // \Mail::to($request->input('email'))->send(new \App\Mail\SendEmailAdminCustomerBroker($details));
-                // return redirect()->route('order_thanks')->with('success',"Request Has Been Submited");
-            
+                 return redirect()->route('order_thanks')->with('success',"Request Has Been Submited");
+
             } else{
                 return back()->with('error',"Only: {$pro} available in Stock");
             }
