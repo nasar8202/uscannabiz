@@ -112,7 +112,7 @@ class OrderController extends Controller
             if (request()->ajax()) {
                 if($users->role_id == 1){
 
-                    return datatables()->of(Order::with('customer')->orderBy('created_at','desc')->get())
+                    return datatables()->of(Order::with('customer')->where('order_status','completed')->orderBy('created_at','desc')->get())
                     ->addIndexColumn()
                     ->addColumn('order_no', function ($data) {
                         return $data->order_no ?? '';
@@ -133,8 +133,8 @@ class OrderController extends Controller
                             return '<span class="badge badge-danger">Cancelled</span>';
                         } elseif ($data->order_status == 'completed') {
                             return '<span class="badge badge-success">Completed</span>';
-                        } elseif ($data->order_status == 'shipped') {
-                            return '<span class="badge badge-info">Shipped</span>';
+                        } elseif ($data->order_status == 'paid') {
+                            return '<span class="badge badge-info">Paid</span>';
                         }
                     })
                     ->addColumn('action', function ($data) {
@@ -214,26 +214,31 @@ class OrderController extends Controller
             return view('admin.order.index');
         }
         else{
+            
             $check = Customers::where('broker_request_id', $users->customers_id)->first();
+            
                 if($check == null){
                     $message_broker = "Not Assign Yet From Vendor!";
                     return view('admin.order.broker_index',compact('message_broker') );
                 }
                 $vendor_request = VendorRequest::where('vendor_id',$check->user_id)->orderBy('created_at','desc')->get();
+                
                 foreach($vendor_request as $items){
                     $products1 = Product::where('id',$items->product_id)->get();
                     foreach($products1 as $item1){
                         $product_id = $item1->vender_id;
                     }
                      if(!$vendor_request->isEmpty()){
+                        
                     $check_vendor = Customers::where('user_id', $product_id)->first();
                     $vender_request = VendorRequest::where('vendor_id',$check_vendor->user_id)->orderBy('created_at','desc')->get();
                     return view('admin.order.broker_index',compact('vender_request') );
                 }
+                }
                 if($vendor_request->isEmpty()){
                     return view('admin.order.broker_index');
                 }
-                }
+                // }
                    
         }
     }
@@ -315,7 +320,7 @@ class OrderController extends Controller
     {
         $order = Order::find($request->order_id);
         $order->broker_price = $request->broker_price;
-        $order->order_status = "completed";
+        $order->order_status = "Paid";
         $order->save();
         return redirect()->route('order.index')->with(['success' => 'Order Updated Successfully']);
     }
@@ -351,7 +356,7 @@ class OrderController extends Controller
         $order->sub_total = $request->input('total_amount');
         $order->total_amount = $grand_total;
 
-        $order->order_status = "completed";
+        $order->order_status = "Paid";
         $order->status = 1;
 
         $order->shipping_address = $request->input('shipping_address');

@@ -82,7 +82,7 @@
                                                 <label for="exampleInputFile">Category Image</label>
                                                 <div class="input-group">
                                                     <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" name="file" id="category-image">
+                                                        <input type="file" class="custom-file-input" accept="image/png, image/jpeg, image/jpg" name="file" id="category-image">
                                                         <label class="custom-file-label" for="category-image">Choose file</label>
                                                     </div>
                                                 </div>

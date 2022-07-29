@@ -20,7 +20,7 @@ function presentDate($date)
 
 function GetProducts()
 {
-    $products = Product::where('status',1)->get();
+    $products = Product::where(['status'=>1,'approvel_admin_status'=>1])->where('product_qty','!=',0)->get();
     return $products;
 }
 function setActiveCategory($category, $output = 'active')

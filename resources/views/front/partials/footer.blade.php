@@ -319,6 +319,18 @@ $('.alert-success').ready(function() {
        $(".alert-success").addClass('hide')
         }, 4000);
     });
+    
+    $('.alert-danger').ready(function() {
+    setTimeout(function() { 
+       $(".alert-danger").addClass('hide')
+        }, 4000);
+    });
+    
+    $('.alert-info').ready(function() {
+    setTimeout(function() { 
+       $(".alert-info").addClass('hide')
+        }, 4000);
+    });
 
    </script>
    

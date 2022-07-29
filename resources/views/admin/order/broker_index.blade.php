@@ -142,8 +142,8 @@
                                                     <span class="badge badge-danger">Cancelled</span>
                                                     @elseif ($order_check->order_status == 'completed')
                                                     <span class="badge badge-success">Completed</span>
-                                                    @elseif ($order_check->order_status == 'shipped')
-                                                    <span class="badge badge-info">Shipped</span>
+                                                    @elseif ($order_check->order_status == 'paid')
+                                                    <span class="badge badge-info">Paid</span>
                                                     @endif
                                                     @else
                                                     <span class="badge badge-secondary">Pending</span>

@@ -55,6 +55,53 @@ input:checked+.slider {
     overflow-x:auto;
 }
 
+
+
+
+.woocommerce ul.products li.product a img{
+    width: 100%;
+    height: 300px;
+    display: block;
+    object-fit: cover;
+}
+
+
+.changePass-main .card-body{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.changePass-main .card .card-body .form-group {
+    display: block;
+    width: 48%;
+    max-width: 350px;
+    margin-right: 20px;
+}
+.changePass-main .card .card-body .form-group + .text-right{
+    display: block;
+    width: 100%;
+}
+
+
+
+
+
+
+
+@media(max-width:1500px){
+    .broker-table table#example1 tbody tr td:last-child .btn{
+        padding: 5px 10px;
+        font-size: 10px;
+    }
+    .broker-table table#example1 tbody tr td:last-child{
+        justify-content: center !important;
+    }
+}
+
+
+
 @media (max-width:992px){
     .wrapper .content-wrapper .card-body {
         overflow-x: auto;
@@ -74,8 +121,21 @@ input:checked+.slider {
     .wrapper .content-wrapper .card-body table tr th,.wrapper .content-wrapper .card-body table tr td {
         min-width: 170px;
     }
+    
+    .changePass-main .card .card-body .form-group {
+        max-width: 300px;
+    }
 }
 
+
+@media (max-width:767px){
+    .changePass-main .card .card-body .form-group {
+        max-width: 400px;
+        margin-right: 0;
+        width: 100%;
+    }
+    
+}
 
 
 

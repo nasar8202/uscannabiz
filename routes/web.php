@@ -104,7 +104,7 @@ Route::namespace('Vendor')->prefix('/vendor')->middleware('vendor')->group(funct
     Route::get('assignbroker', 'VendorController@assignbroker')->name('assignbroker');
     Route::get('vendor_remove_broker/{id}', 'VendorController@vendor_remove_broker')->name('vendor_remove_broker');
     Route::get('export', 'VendorController@export')->name('export');
-    Route::get('dashboard', 'VendorController@dashboard')->name('dashboard');
+    Route::get('dashboard', 'VendorController@dashboard')->name('dashboard_vendor');
     Route::get('/order', 'VendorController@order')->name('vendor_order');
     Route::get('/brokers', 'VendorController@show_broker')->name('show_brokers');
     Route::get('/inventory', 'VendorController@show_inventory')->name('show_inventory');
@@ -148,6 +148,8 @@ Route::namespace('Admin')->prefix('/admin')->middleware('admin')->group(function
     Route::get('brokerapproved', 'CustomersController@brokerapproved')->name('brokerapproved');
     Route::get('vendorapproved', 'CustomersController@vendorapproved')->name('vendorapproved');
     Route::get('customerStatusAccept/{id}', 'CustomersController@customerStatusAccept')->name('customerStatusAccept');
+    Route::get('vendorStatusAccept/{id}', 'CustomersController@vendorStatusAccept')->name('vendorStatusAccept');
+    Route::get('brokerStatusAccept/{id}', 'CustomersController@brokerStatusAccept')->name('brokerStatusAccept');
     Route::get('customerStatusReject/{id}', 'CustomersController@customerStatusReject')->name('customerStatusReject');
     Route::get('/show_vendor_request/{id}', 'VendorController@show_vendor_request')->name('show_vendor_request');
 

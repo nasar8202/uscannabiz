@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Models\Customers;
-use App\Models\Order;
-use App\User;
-use Illuminate\Http\Request;
-use Validator;
 use DB;
-use Illuminate\Support\Facades\Hash;
 use Auth;
+use App\User;
+use Validator;
+use App\Models\Order;
+use App\Models\Customers;
+use App\Models\VendorStore;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 use App\Notifications\UserApprovedNotificaton;
+use App\Notifications\VendorApprovedNotificaton;
+use App\Notifications\BrokerApprovedNotificaton;
 
 class CustomersController extends Controller
 {
@@ -143,9 +146,11 @@ class CustomersController extends Controller
     {
        try{
            $content=Customers::find($id);
+           $user = User::where('customers_id',$id)->first();
+           $vendor_stores = VendorStore::where('vendor_id',$id)->first();
            $customerOrders = Order::where('customer_id', $id)->with('orderItems', 'customer', 'orderItems.product')->get();
         //    dd($customerOrders);
-            return view('admin.customers.show',compact(['content','customerOrders']));
+            return view('admin.customers.show',compact(['content','customerOrders','user','vendor_stores']));
        }
        catch(\Exception $ex){
            return redirect ('admin/customers')->with('error',$ex->getMessage());
@@ -380,6 +385,50 @@ class CustomersController extends Controller
 
 
             return back()->with('success','Customer Approved Successfully');
+    }
+
+    public function vendorStatusAccept($id)
+    {
+
+        // $customer =Customers::join('Users','Users.email','=','Customers.email')->where('role_id','=',2)->where('Customers.user_id',$id)->first();
+
+        $customer =User::where('id',$id)->first();
+        $customer->approvel_status = 1;
+        $customer->save();
+        if($customer->approvel_status = 1)
+        {
+            $customer->notify(new VendorApprovedNotificaton());
+
+        }
+        //  $data_status = array(
+        //     'approvel_status'=>1
+        //  );
+
+
+
+            return back()->with('success','Vendor Approved Successfully');
+    }
+
+    public function brokerStatusAccept($id)
+    {
+
+        // $customer =Customers::join('Users','Users.email','=','Customers.email')->where('role_id','=',2)->where('Customers.user_id',$id)->first();
+
+        $customer =User::where('id',$id)->first();
+        $customer->approvel_status = 1;
+        $customer->save();
+        if($customer->approvel_status = 1)
+        {
+            $customer->notify(new BrokerApprovedNotificaton());
+
+        }
+        //  $data_status = array(
+        //     'approvel_status'=>1
+        //  );
+
+
+
+            return back()->with('success','Broker Approved Successfully');
     }
     public function customerStatusReject($id)
     {

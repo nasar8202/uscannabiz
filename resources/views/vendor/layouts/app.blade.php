@@ -420,7 +420,6 @@
     <script type="text/javascript"> toastr.error('{{ session('error')}}');</script>
 @endif
 <script>
-
 </script>
 
 {{-- datatables script --}}
