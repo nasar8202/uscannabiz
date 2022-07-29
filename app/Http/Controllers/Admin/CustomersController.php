@@ -13,6 +13,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\Notifications\UserApprovedNotificaton;
+use App\Notifications\VendorApprovedNotificaton;
+use App\Notifications\BrokerApprovedNotificaton;
 
 class CustomersController extends Controller
 {
@@ -383,6 +385,50 @@ class CustomersController extends Controller
 
 
             return back()->with('success','Customer Approved Successfully');
+    }
+
+    public function vendorStatusAccept($id)
+    {
+
+        // $customer =Customers::join('Users','Users.email','=','Customers.email')->where('role_id','=',2)->where('Customers.user_id',$id)->first();
+
+        $customer =User::where('id',$id)->first();
+        $customer->approvel_status = 1;
+        $customer->save();
+        if($customer->approvel_status = 1)
+        {
+            $customer->notify(new VendorApprovedNotificaton());
+
+        }
+        //  $data_status = array(
+        //     'approvel_status'=>1
+        //  );
+
+
+
+            return back()->with('success','Vendor Approved Successfully');
+    }
+
+    public function brokerStatusAccept($id)
+    {
+
+        // $customer =Customers::join('Users','Users.email','=','Customers.email')->where('role_id','=',2)->where('Customers.user_id',$id)->first();
+
+        $customer =User::where('id',$id)->first();
+        $customer->approvel_status = 1;
+        $customer->save();
+        if($customer->approvel_status = 1)
+        {
+            $customer->notify(new BrokerApprovedNotificaton());
+
+        }
+        //  $data_status = array(
+        //     'approvel_status'=>1
+        //  );
+
+
+
+            return back()->with('success','Broker Approved Successfully');
     }
     public function customerStatusReject($id)
     {

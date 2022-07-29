@@ -214,26 +214,31 @@ class OrderController extends Controller
             return view('admin.order.index');
         }
         else{
+            
             $check = Customers::where('broker_request_id', $users->customers_id)->first();
+            
                 if($check == null){
                     $message_broker = "Not Assign Yet From Vendor!";
                     return view('admin.order.broker_index',compact('message_broker') );
                 }
                 $vendor_request = VendorRequest::where('vendor_id',$check->user_id)->orderBy('created_at','desc')->get();
+                
                 foreach($vendor_request as $items){
                     $products1 = Product::where('id',$items->product_id)->get();
                     foreach($products1 as $item1){
                         $product_id = $item1->vender_id;
                     }
                      if(!$vendor_request->isEmpty()){
+                        
                     $check_vendor = Customers::where('user_id', $product_id)->first();
                     $vender_request = VendorRequest::where('vendor_id',$check_vendor->user_id)->orderBy('created_at','desc')->get();
                     return view('admin.order.broker_index',compact('vender_request') );
                 }
+                }
                 if($vendor_request->isEmpty()){
                     return view('admin.order.broker_index');
                 }
-                }
+                // }
                    
         }
     }

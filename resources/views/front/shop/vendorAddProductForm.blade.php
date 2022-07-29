@@ -6,7 +6,7 @@
 <div id="main-content">
   <div class="container">
      <div id="content-area" class="clearfix">
-        <div id="left-area">
+        <div id="left-area" class='left-area-addToReqForm'>
          @if (session()->has('success'))
          <div class="alert alert-success">
              {{ session()->get('success') }}
@@ -64,7 +64,7 @@
            </div>
            
              
-                  <div class="split-row form-row-wide">
+                  <div class="split-row form-row-wide addToReqForm">
                      <p class="form-row form-group">
                         <label for="first-name">Full Name <span class="required">*</span></label>
                         <input type="text" class="input-text form-control" name="full_name" id="first-name" @if(isset($customer_check)) value="{{$customer_check->first_name}} {{$customer_check->last_name}}" @endif required="required">
@@ -93,7 +93,7 @@
                      </div>
                   
                   <br>
-               <p class="woocommerce-form-row form-row">
+               <p class="woocommerce-form-row form-row bntAddProdReq">
                   <button type="submit" class="woocommerce-Button woocommerce-button button woocommerce-form-register__submit" name="register" value="Register">Add Product Request</button>
 
                </p>

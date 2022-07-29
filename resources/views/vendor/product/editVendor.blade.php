@@ -43,7 +43,7 @@
                                           </ul>
                               </div>
                            </div>
-                           <div class="dokan-dashboard-content">
+                           <div class="dokan-dashboard-content editAccount-Details">
                               <article class="dashboard-content-area woocommerce edit-account-wrap">
                                  <h1 class="entry-title">Edit Account Details</h1>
                                  @if (session()->has('success'))
