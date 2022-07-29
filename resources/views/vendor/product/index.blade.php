@@ -1,4 +1,4 @@
-@extends('front.layout.app')
+    @extends('front.layout.app')
 @section('title', 'Product')
 @section('content')
 <style type="text/css">
@@ -45,7 +45,7 @@
 	                           </ul>
 	                        </div>
 	                     </div>
-	                     <div class="dokan-dashboard-content dokan-product-listing">
+	                     <div class="dokan-dashboard-content dokan-product-listing venderproductMain">
 							@if (session()->has('success'))
 								 <div class="alert alert-success">
 									 {{ session()->get('success') }}
@@ -114,10 +114,10 @@
 						                  <option value="simple">Simple</option>
 						               </select>
 						            </div> --}}
-						            <button type="submit" name="product_listing_filter" value="ok" class="dokan-btn">Filter</button>
+						            <button type="submit" name="product_listing_filter" value="ok" class="dokan-btn btnTopFilters">Filter</button>
 						         </form>
 						         <form method="get" action="{{route('product_filter_search')}}" class="dokan-form-inline dokan-w5 dokan-product-search-form">
-						            <button type="submit" name="product_listing_search" value="ok" class="dokan-btn">Search</button>
+						            <button type="submit" name="product_listing_search" value="ok" class="dokan-btn btnTopFilters">Search</button>
 						            <input type="hidden" id="dokan_product_search_nonce" name="dokan_product_search_nonce" value="754d5308e1"><input type="hidden" name="_wp_http_referer" value="/wp/uscannabiz/dashboard/products/">
 						            <div class="dokan-form-group">
 						               <input type="text" class="dokan-form-control" name="product_search_name" required placeholder="Search Products" value="">
@@ -134,7 +134,7 @@
 						               </select>
 						            </div>
 						            <div class="dokan-form-group">
-						               <input type="hidden" id="security" name="security" value="90eee0abd0"><input type="hidden" name="_wp_http_referer" value="/wp/uscannabiz/dashboard/products/">                                    <input type="submit" name="bulk_product_status_change" id="bulk-product-action" class="dokan-btn dokan-btn-theme" value="Apply">
+						               <input type="hidden" id="security" name="security" value="90eee0abd0"><input type="hidden" name="_wp_http_referer" value="/wp/uscannabiz/dashboard/products/">                                    <input type="submit" name="bulk_product_status_change" id="bulk-product-action" class="dokan-btn dokan-btn-theme btnTopFilters" value="Apply">
 						            </div>
 						            <table class="dokan-table dokan-table-striped product-listing-table dokan-inline-editable-table" id="dokan-product-list-table">
 						               <thead>
