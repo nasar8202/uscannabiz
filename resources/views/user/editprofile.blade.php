@@ -620,7 +620,7 @@
                                                                                 <p class="form-row form-row-last validate-required"
                                                                         id="shipping_last_name_field" data-priority="20">
                                                                         <label for="shipping_last_name" class="">
-                                                                            email&nbsp;</label><span
+                                                                            Email&nbsp;</label><span
                                                                             class="woocommerce-input-wrapper"><input
                                                                                 type="text" class="input-text "
                                                                                 name="email"
@@ -631,7 +631,7 @@
                                                                 </div>
                                                             </form>
                                                             <p>
-                                                                <button type="submit" class="button"
+                                                                <button type="submit" class="button chngPassBtn"
                                                                     name="save_address" value="Save address">Update
                                                                     User</button>
                                                             </p>
@@ -640,7 +640,7 @@
                                                         <form action = "{{Route('update-account-password',$user->id)}}" method="post">
                                                             @csrf
                                                                 <fieldset>
-                                                                <legend>Password Change</legend>
+                                                                <h3 class="changPassHead">Change Password</h3>
                                                                 <p class="form-row form-row-wide">
                                                                     <label for="password_current">Current Password (leave blank to leave unchanged)</label>
                                                                     <input type="password" class="input-text" name="password_current" id="password_current">
@@ -656,7 +656,7 @@
                                                                 </fieldset>
 
                                                                 <p>
-                                                                    <button type="submit" class="button"
+                                                                    <button type="submit" class="button chngPassBtn"
                                                                         name="save_address" value="Save address">Update
                                                                         User Password</button>
                                                                 </p>

@@ -191,6 +191,7 @@ Route::namespace('Admin')->prefix('/admin')->middleware('admin')->group(function
     Route::delete('/order/destroyBoth/{id}/{id2}', 'OrderController@destroyBoth')->name('order.destroyBoth');
     Route::post('submit-request', 'OrderController@broker_price')->name('submit-request');
     Route::post('submit-request-update', 'OrderController@broker_price_update')->name('submit-request-update');
+    Route::get('orderCancel/{id}', 'OrderController@ordercancel')->name('orderCancel');
 
 
     //REVIEW

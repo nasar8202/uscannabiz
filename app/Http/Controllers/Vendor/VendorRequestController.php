@@ -92,7 +92,7 @@ class VendorRequestController extends Controller
                     'sku'=>$product->sku
                 ];
                 $vendor = Customers::where('user_id',$request->input('vendor_id'))->first();
-                $broker = Customers::where('id',$product->vender_id)->first();
+                $broker = Customers::where('user_id',$product->vender_id)->first();
                 $broker_email = Customers::where('id',$broker->broker_request_id)->first();
 
                 if($request->input('vendor_id') != 1){

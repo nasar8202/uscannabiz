@@ -250,6 +250,7 @@ class OrderController extends Controller
 
     }
 
+
     public function brokershow($id,$request_id,$order_id)
     {
         // dd($request->all());
@@ -414,7 +415,7 @@ class OrderController extends Controller
             'product_name'=>$product->product_name,
             'total'=>$sub_total
         ];
-        $vendor = Customers::where('id',$request->input('vendor_id'))->first();
+        $vendor = Customers::where('user_id',$request->input('vendor_id'))->first();
 // dd($vendor);
         $usersArray = [$request->input('customer_email'), $vendor->email];
         foreach($usersArray as $user){
@@ -423,6 +424,13 @@ class OrderController extends Controller
 
         }
         return redirect()->route('order.index')->with(['success' => 'Order Updated Successfully']);
+    }
+
+    public function ordercancel($id)
+    {
+        $order_cancel = VendorRequest::find($id)->delete();
+        return redirect()->route('order.index')->with(['success' => 'Order Canceled Successfully']);
+
     }
 
 }
