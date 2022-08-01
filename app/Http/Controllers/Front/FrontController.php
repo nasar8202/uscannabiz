@@ -82,10 +82,10 @@ class FrontController extends Controller
                 'email' => $request->email,
                 'status'=>0
             ]);
-            
+
             $customer_id = $customer->id;
             $find_user = User::find($user->id);
-            
+
             $find_user->customers_id = $customer_id;
             $find_user->save();
             // $details = [
@@ -159,14 +159,14 @@ class FrontController extends Controller
                 'address' => $request->address,
 
             ]);
-            
+
             $customer_id = $customer->id;
             $find_user = User::find($user->id);
-            
+
             $find_user->customers_id = $customer_id;
             $find_user->save();
 
-           
+
 
             VendorStore::create([
                 'vendor_id'=>$customer_id,

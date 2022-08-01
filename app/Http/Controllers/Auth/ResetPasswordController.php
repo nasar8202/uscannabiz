@@ -32,11 +32,17 @@ class ResetPasswordController extends Controller
     public function redirectTo() {
         $role = Auth::user()->role_id;
         switch ($role) {
+            case '1':
+                return 'admin/dashboard';
+                break;
             case '2':
-                return 'user/dashboard';
+                return 'user/my-orders';
                 break;
             case '3':
                 return 'vendor/dashboard';
+                break;
+            case '4':
+                return 'admin/dashboard';
                 break;
             default:
                 return '/home';
