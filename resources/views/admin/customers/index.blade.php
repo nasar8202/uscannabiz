@@ -80,7 +80,7 @@
                                 <div class="card-header">
                                     <a href="Addbroker" class="btn btn-primary float-right" >Add Broker</a>
                                 </div>
-                            <div class="card-body">
+                            <div class="card-body tableaAdmin">
                                 <div class="broker-table">
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>

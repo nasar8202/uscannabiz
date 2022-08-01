@@ -75,7 +75,7 @@ ul.et_pb_social_media_follow{list-style-type:none!important;margin:0 0 22px;padd
                               <div class="et_pb_main_blurb_image"><span class="et_pb_image_wrap"><span class="et-waypoint et_pb_animation_top et_pb_animation_top_tablet et_pb_animation_top_phone et-pb-icon"></span></span></div>
                               <div class="et_pb_blurb_container">
                                  <div class="et_pb_blurb_description">
-                                    <p>000 000 00</p>
+                                    <p>+1 (800) 824 4749</p>
                                  </div>
                               </div>
                            </div>
@@ -85,7 +85,7 @@ ul.et_pb_social_media_follow{list-style-type:none!important;margin:0 0 22px;padd
                               <div class="et_pb_main_blurb_image"><span class="et_pb_image_wrap"><span class="et-waypoint et_pb_animation_top et_pb_animation_top_tablet et_pb_animation_top_phone et-pb-icon"></span></span></div>
                               <div class="et_pb_blurb_container">
                                  <div class="et_pb_blurb_description">
-                                    <p>info@example.com</p>
+                                    <p>Emailinfo@uscannazon.com</p>
                                  </div>
                               </div>
                            </div>
@@ -95,19 +95,21 @@ ul.et_pb_social_media_follow{list-style-type:none!important;margin:0 0 22px;padd
 
                      <div class="et_pb_column et_pb_column_2_3 et_pb_column_2  et_pb_css_mix_blend_mode_passthrough et-last-child">
                         <div  class="et_pb_with_border et_pb_module et_pb_contact_form_0 et_pb_contact_form_container clearfix">
-                            @if(session()->has('message'))
-                            <h1>
+                             @if (session()->has('message'))
+                                        <div class="alert alert-success">
+                                            {{ session()->get('message') }}
+                                        </div>
+                                    @endif 
+                            <!--@if(session()->has('message'))-->
+                            <!--<h1>-->
+                            <!--     {{ session()->get('message') }}-->
 
-
-                                               {{ session()->get('message') }}
-
-
-                            </h1>@endif
+                            <!--</h1>@endif-->
                            <h1 class="et_pb_contact_main_title">Get In Touch</h1>
                            <div class="et-pb-contact-message"></div>
                            <div class="et_pb_contact">
 
-                               <form class="et_pb_contact_form clearfix" method="post" action="{{ route('submitContact') }}">
+                               <form class="et_pb_contact_form clearfix" method="post" action="{{ route('submitContact') }}" onsubmit="location.reload()">
                                   @csrf
                                  <p class="et_pb_contact_field et_pb_contact_field_0 et_pb_contact_field_half" data-id="name" data-type="input">
                                     <label for="et_pb_contact_name_0" class="et_pb_contact_form_label">Name</label>
@@ -123,7 +125,7 @@ ul.et_pb_social_media_follow{list-style-type:none!important;margin:0 0 22px;padd
                                  </p>
                                  <input type="hidden" value="et_contact_proccess" name="et_pb_contactform_submit_0">
 
-                                    <button  type="submit" name="et_builder_submit_button" class="et_pb_contact_submit et_pb_button">Submit</button>
+                                    <button  type="submit" name="et_builder_submit_button" class="et_pb_contact_submit et_pb_button" ">Submit</button>
                                  </div>
                                  <input type="hidden" id="_wpnonce-et-pb-contact-form-submitted-0" name="_wpnonce-et-pb-contact-form-submitted-0" value="c2d464493b"><input type="hidden" name="_wp_http_referer" value="wp/uscannabiz/contact-us/">
                               </form>

@@ -333,6 +333,9 @@ $('.alert-success').ready(function() {
        $(".alert-info").addClass('hide')
         }, 4000);
     });
+    
+     if ( !$('.msgContainer').children().length )
+        $('.msgContainer').hide();
 
    </script>
 

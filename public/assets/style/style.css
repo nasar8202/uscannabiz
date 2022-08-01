@@ -154,8 +154,8 @@ input[type='submit'].dokan-btn-danger, a.dokan-btn-danger, .dokan-btn-danger {
 .alert.alert-info.hide,
 .alert.alert-danger.hide,
 .alert.alert-success.hide {
-    /*opacity: 0;*/
-    /*right: -100%;*/
+    opacity: 0;
+    right: -100%;
     transition: all 1s ease;
 }
 
@@ -170,7 +170,7 @@ body.et_cover_background{
 }
 .et_fixed_nav #main-header {
     position: fixed;
-    padding: 10px 0;
+    padding: 10px 0 15px;
 }
 
 .woocommerce button.button.woocommerce-form-login__submit{

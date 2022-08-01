@@ -134,7 +134,7 @@
                             <!-- /.card-header -->
 
 
-                            <div class="card-body">
+                            <div class="card-body tableaAdmin">
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                     <tr style="text-align: center">
