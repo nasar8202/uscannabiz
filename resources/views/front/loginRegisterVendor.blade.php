@@ -36,12 +36,12 @@
                                         <div class="alert alert-success">
                                             {{ session()->get('success') }}
                                         </div>
-                                    @endif 
+                                    @endif
                                     @if (session()->has('error'))
                                     <div class="alert alert-danger">
                                         {{ session()->get('error') }}
                                     </div>
-                                @endif 
+                                @endif
                                     @if(count($errors) > 0)
                                         <div class="alert alert-danger multiple">
                                             <ul>
@@ -110,7 +110,7 @@
                                          <div class="for_vender" >
 
                                         </div>
-                                        
+
                                         <div class="for_broker" >
 
                                        </div>
@@ -154,7 +154,7 @@
 
 $(document).ready(function() {
 
-   
+
                $('#customer_add_fields').click(function() {
                  $('.for_broker').html('');
                  $('.for_vender').html('');
