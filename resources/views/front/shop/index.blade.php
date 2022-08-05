@@ -287,13 +287,68 @@
                                                         class="wp-block-woocommerce-product-categories wc-block-product-categories is-list ">
                                                         <ul
                                                             class="wc-block-product-categories-list wc-block-product-categories-list--depth-0">
-                                                            @foreach ($categories as $category)
+                                                            {{-- @foreach ($categories as $category)
+                                                            @php
+                                                                $parent =  App\Models\Category::where('id',$category->parent_id)->first();
+                                                                // dd($parent);
+                                                            @endphp
+                                                            @if($category->parent_id != 0)
+                                                            <li class="wc-block-product-categories-list-item">
+                                                                <a style="" href="javascript:void(0)">{{$parent->name}}</a>
+                                                            <span class="wc-block-product-categories-list-item-count">
+                                                                <span aria-hidden="true">7</span><span class="screen-reader-text">7 products</span>
+                                                            </span>
+                                                            <ul class="wc-block-product-categories-list wc-block-product-categories-list--depth-1">
+                                                                <li class="wc-block-product-categories-list-item">
+                                                                    <a style="" href="{{ route('productCategory', ['slug' => $category->category_slug,'id'=>$category->id]) }}">{{ $category->name }}</a>
+                                                                    <span class="wc-block-product-categories-list-item-count"><span aria-hidden="true">2</span>
+                                                                </li>
+                                                            </ul>				
+                                                            </li>
+                                                            @else
+                                                            if($category->id == $parent->parent_id)
                                                                 <li
                                                                     class="wc-block-product-categories-list-item {{ setActiveCategory($category->slug) }}">
                                                                     <a
                                                                         href="{{ route('productCategory', ['slug' => $category->category_slug,'id'=>$category->id]) }}">{{ $category->name }}</a>
                                                                 </li>
+                                                            @endif
+                                                            @endforeach --}}
+                                                            @php
+                                                            $p_categories = App\Models\Category::where(['parent_id'=>0,'status'=>1])->get();
+                                                            @endphp
+                                                        @foreach ($p_categories as $category)
+                                                        @php
+                                                            $p_categories_sub = App\Models\Category::where(['parent_id'=>$category->id,'status'=>1])->first();
+                                                        @endphp
+                                                        {{-- @dd($p_categories_sub) --}}
+                                                        @if($p_categories_sub)
+                                                        <li class="wc-block-product-categories-list-item">
+                                                            <a style="" href="javascript:void(0)">{{$category->name}}</a>
+                                                            <span class="wc-block-product-categories-list-item-count">
+                                                                <span aria-hidden="true">7</span><span class="screen-reader-text">7 products</span>
+                                                            </span>
+                                                            <ul class="wc-block-product-categories-list wc-block-product-categories-list--depth-1">
+                                                                @php
+                                                                $p_categories_main = App\Models\Category::where('parent_id',$category->id)->get();
+                                                            @endphp
+                                                            @foreach ($p_categories_main as $sub_cat)
+                                                            <li class="wc-block-product-categories-list-item {{ setActiveCategory($sub_cat->slug) }}">
+                                                                <a style="" href="{{ route('productCategory', ['slug' => $sub_cat->category_slug,'id'=>$sub_cat->id]) }}">{{ $sub_cat->name }}</a>
+                                                                <span class="wc-block-product-categories-list-item-count"><span aria-hidden="true">2</span>
+                                                            </li>
                                                             @endforeach
+                                                        </ul>				
+                                                        </li>
+                                                        @else
+                                                            <li
+                                                                class="wc-block-product-categories-list-item {{ setActiveCategory($category->slug) }}">
+                                                                <a
+                                                                    href="{{ route('productCategory', ['slug' => $category->category_slug,'id'=>$category->id]) }}">{{ $category->name }}</a>
+                                                            </li>
+                                                        @endif
+                                                        @endforeach
+                                                            
 
                                                         </ul>
                                                     </div>

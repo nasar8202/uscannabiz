@@ -26,7 +26,7 @@ class Categories extends Controller
             if (request()->ajax()) {
                 return datatables()->of(Category::get())
                     ->addColumn('parent_id', function ($data) {
-                        return $data->sub_category->name ?? 'NULL';
+                        return $data->sub_category->name ?? 'No Parent Category';
                     })
                     ->addColumn('action', function ($data) {
                         return '<a title="View" href="category-view/' . $data->id . '" class="btn btn-dark btn-sm"><i class="fas fa-eye"></i></a>&nbsp;<a title="edit" href="category-edit/' . $data->id . '" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>&nbsp;<button title="Delete" type="button" name="delete" id="' . $data->id . '" class="delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>';
