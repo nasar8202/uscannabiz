@@ -123,22 +123,21 @@ class FrontController extends Controller
                 'address' => $request->address,
                 'status'=>0
             ]);
+            $customer_id = $customer->id;
             $find_user = User::find($user->id);
             $find_user->customers_id = $customer->id;
             $find_user->save();
-
-            // $details = [
-            //     'name'=> $request->fname." ".$request->lname,
-            //     'email' => $request->email,
-            //     'password'=> $request->password
-            // ];
+            
+            VendorStore::create([
+                'vendor_id'=>$customer_id,
+                'store_name'=>$request->store_name,
+                'store_url'=>$request->store_url
+            ]);
             $administrators = User::where('role_id',1)->get();
             foreach($administrators as $administrator){
                 $administrator->notify(new AdminNewBrokerNotificaton($user));
             }
-            // \Mail::to($request->input('email'))->send(new \App\Mail\SendEmailCustomerRegistration($details));
             return redirect()->back()->with(['success' => 'You Register Successfully wait for admin approvel mail will sent you after approvel']);
-
         }
         else{
             $user =  User::create([
@@ -159,14 +158,11 @@ class FrontController extends Controller
                 'address' => $request->address,
 
             ]);
-
             $customer_id = $customer->id;
             $find_user = User::find($user->id);
 
             $find_user->customers_id = $customer_id;
             $find_user->save();
-
-
 
             VendorStore::create([
                 'vendor_id'=>$customer_id,
