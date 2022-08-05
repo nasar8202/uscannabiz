@@ -9,7 +9,8 @@
                </div>
                <div class="et_pb_module et_pb_text et_pb_text_0_tb_footer  et_pb_text_align_left et_pb_bg_layout_light">
                   <div class="et_pb_text_inner">
-                     <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p>
+                     <p>Call us: (949)-689-6669</p>
+                     <p>Email: Info@uscannazon.com</p>
                   </div>
                </div>
                <div class="et_pb_module et_pb_text et_pb_text_1_tb_footer  et_pb_text_align_left et_pb_bg_layout_light">

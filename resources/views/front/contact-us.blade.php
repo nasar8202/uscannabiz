@@ -65,7 +65,9 @@ ul.et_pb_social_media_follow{list-style-type:none!important;margin:0 0 22px;padd
                               <div class="et_pb_main_blurb_image"><span class="et_pb_image_wrap"><span class="et-waypoint et_pb_animation_top et_pb_animation_top_tablet et_pb_animation_top_phone et-pb-icon"></span></span></div>
                               <div class="et_pb_blurb_container">
                                  <div class="et_pb_blurb_description">
-                                    <p>Street addresses: 445 Mount Eden Road, Mount Eden, Auckland – Postcodes: 5022</p>
+                                    <p>Uscannazon.com 
+                                       2222 Michaelson Dr. 
+                                      Irvine, CA 92612</p>
                                  </div>
                               </div>
                            </div>
@@ -75,7 +77,7 @@ ul.et_pb_social_media_follow{list-style-type:none!important;margin:0 0 22px;padd
                               <div class="et_pb_main_blurb_image"><span class="et_pb_image_wrap"><span class="et-waypoint et_pb_animation_top et_pb_animation_top_tablet et_pb_animation_top_phone et-pb-icon"></span></span></div>
                               <div class="et_pb_blurb_container">
                                  <div class="et_pb_blurb_description">
-                                    <p>+1 (800) 824 4749</p>
+                                    <p>+1 (949) 689-6669</p>
                                  </div>
                               </div>
                            </div>
@@ -85,7 +87,7 @@ ul.et_pb_social_media_follow{list-style-type:none!important;margin:0 0 22px;padd
                               <div class="et_pb_main_blurb_image"><span class="et_pb_image_wrap"><span class="et-waypoint et_pb_animation_top et_pb_animation_top_tablet et_pb_animation_top_phone et-pb-icon"></span></span></div>
                               <div class="et_pb_blurb_container">
                                  <div class="et_pb_blurb_description">
-                                    <p>Emailinfo@uscannazon.com</p>
+                                    <p>info@uscannazon.com</p>
                                  </div>
                               </div>
                            </div>

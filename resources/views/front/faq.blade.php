@@ -58,21 +58,21 @@
                                </div>
                                <div class="et_pb_module et_pb_accordion et_pb_accordion_0 faqs-cards-main">
                                   <div class="et_pb_toggle et_pb_module et_pb_accordion_item et_pb_accordion_item_0  et_pb_toggle_open">
-                                     <h5 class="et_pb_toggle_title">Lorem Ipsum dolor samit</h5>
+                                     <h5 class="et_pb_toggle_title">Can products be delivered?</h5>
                                      <div class="et_pb_toggle_content clearfix">
-                                        <p>Aenean lacinia bibendum nulla sed consectetur. Maecenas faucibus mollis interdum. Nulla vitae elit libero, a pharetra augue. Vivamus sagittis lacus vel augue laoreet rutrum faucibu.</p>
+                                        <p>Yes, any product can be delivered within individual states for an extra fee.</p>
                                      </div>
                                   </div>
                                   <div class="et_pb_toggle et_pb_module et_pb_accordion_item et_pb_accordion_item_1  et_pb_toggle_close">
-                                     <h5 class="et_pb_toggle_title">Lorem Ipsum dolor samit</h5>
+                                     <h5 class="et_pb_toggle_title">How does a company get started with Uscannazon.com?</h5>
                                      <div class="et_pb_toggle_content clearfix">
-                                        <p>Aenean lacinia bibendum nulla sed consectetur. Maecenas faucibus mollis interdum. Nulla vitae elit libero, a pharetra augue. Vivamus sagittis lacus vel augue laoreet rutrum faucibu.</p>
+                                        <p>Fill out the sign up form and down load all necessary documents.</p>
                                      </div>
                                   </div>
                                   <div class="et_pb_toggle et_pb_module et_pb_accordion_item et_pb_accordion_item_2  et_pb_toggle_close">
-                                     <h5 class="et_pb_toggle_title">Lorem Ipsum dolor samit</h5>
+                                     <h5 class="et_pb_toggle_title">Reequired Para</h5>
                                      <div class="et_pb_toggle_content clearfix">
-                                        <p>Aenean lacinia bibendum nulla sed consectetur. Maecenas faucibus mollis interdum. Nulla vitae elit libero, a pharetra augue. Vivamus sagittis lacus vel augue laoreet rutrum faucibu.</p>
+                                        <p>Uscannazon.com was created to alleviate the surplus products in the legal cannabis industry.</p>
                                      </div>
                                   </div>
                                </div>

@@ -25,12 +25,12 @@
                         <div class="et_pb_column et_pb_column_1_2 et_pb_column_1  et_pb_css_mix_blend_mode_passthrough">
                            <div class="et_pb_module et_pb_text et_pb_text_1  et_pb_text_align_left et_pb_bg_layout_light">
                               <div class="et_pb_text_inner">
-                                 <h2>About Our Practice</h2>
+                                 <h2>Why choose UsCannazon.com</h2>
                               </div>
                            </div>
                            <div class="et_pb_module et_pb_text et_pb_text_2  et_pb_text_align_left et_pb_bg_layout_light">
                               <div class="et_pb_text_inner">
-                                 <p>Aenean lacinia bibendum nulla sed consectetur. Maecenas faucibus mollis interdum. Nulla vitae elit libero, a pharetra augue. Vivamus sagittis lacus vel augue laoreet rutrum faucibu.</p>
+                                 <p>Uscannazon.com was created to alleviate growers, manufacturers and producers of their backed up inventory. As everyone in the cannabis business knows 2022 has been a rough year so far with prices dropping to record lows. This is why Uscannazon.com is so important to your business and let’s face it, your mental well being. </p>
                               </div>
                            </div>
                         </div>

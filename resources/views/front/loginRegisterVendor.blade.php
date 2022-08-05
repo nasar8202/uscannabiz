@@ -117,7 +117,7 @@
                                          <p class="form-row form-group user-role vendor-customer-registration">
                                             <label class="radio">
                                             <input type="radio" name="role" value="2" id="customer_add_fields" checked>
-                                            I am a customer    </label>
+                                            I am a buyer    </label>
                                             <br>
                                             <label class="radio">
                                             <input type="radio" name="role" id="vendor_add_fields" value="3">

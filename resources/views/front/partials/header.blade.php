@@ -73,8 +73,8 @@ use Illuminate\Support\Facades\Request;
             <div id="top-header">
                <div class="container clearfix">
                   <div id="et-info">
-                     <span id="et-info-phone"><a href="tel:1800-824-4749">Call Us : +1 (800) 824 4749</a></span>
-                     <a href="mailto:Emailinfo@uscannazon.com"><span id="et-info-email">Emailinfo@uscannazon.com</span></a>
+                     <span id="et-info-phone"><a href="tel:1800-824-4749">Call Us : +1 (949) 689 6669</a></span>
+                     <a href="mailto:Emailinfo@uscannazon.com"><span id="et-info-email">Email info@uscannazon.com</span></a>
                   </div>
                   <div id="et-secondary-menu">
                     <span>Items
