@@ -66,22 +66,32 @@ input:checked+.slider {
 }
 
 
+.changePass-main .card{
+    display: block;
+    max-width: 100%;
+    width: 500px;
+    margin: 0 auto;
+    padding: 50px 0;
+    border-radius: 10px;
+}
+
 .changePass-main .card-body{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
     justify-content: flex-start;
 }
 
+.changePass-main .card .card-body .form-group + .text-right,
 .changePass-main .card .card-body .form-group {
     display: block;
-    width: 48%;
-    max-width: 350px;
-    margin-right: 20px;
-}
-.changePass-main .card .card-body .form-group + .text-right{
-    display: block;
     width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.changePass-main .card .card-body .form-group + .text-right button{
+    display: block;
+    margin: 0 auto;
 }
 
 
@@ -92,7 +102,7 @@ input:checked+.slider {
 
 #example1_wrapper table#example1 tbody tr td:last-child{
     justify-content: center !important;
-    min-width: 100px;
+    min-width: 150px;
 }
 #example1_wrapper table#example1 tbody tr td:last-child .btn{
     padding: 5px 10px;
@@ -136,17 +146,13 @@ input:checked+.slider {
         min-width: 170px;
     }
     
-    .changePass-main .card .card-body .form-group {
-        max-width: 300px;
-    }
 }
 
 
 @media (max-width:767px){
-    .changePass-main .card .card-body .form-group {
-        max-width: 400px;
-        margin-right: 0;
-        width: 100%;
+    .changePass-main .card{
+        width: 400px;
+        max-width: 100%;
     }
     div.dataTables_wrapper div.dataTables_length,
     div.dataTables_wrapper div.dataTables_filter{

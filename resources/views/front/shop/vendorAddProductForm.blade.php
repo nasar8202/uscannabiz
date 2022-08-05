@@ -87,14 +87,15 @@
                         <label for="last-name">City <span class="required">*</span></label>
                         <input type="text" class="input-text form-control" name="city" id="last-name" @if(isset($customer_check)) value="{{$customer_check->city}}" @endif  required="required">
                      </p>
-                  <br>
-                     <div class="quantity">
+                  <!--<br>-->
+                     <div class="quantity prodQuantity">
+                         <label> Quantity </label>
                         <input type="number" name="quantity" id="quantity_62b36070a592a" class="input-text qty text" step="1" min="1" max="" name="quantity" value="1" title="Qty" size="4" placeholder="" inputmode="numeric" autocomplete="off">
                      </div>
                   
                   <br>
                <p class="woocommerce-form-row form-row bntAddProdReq">
-                  <button type="submit" class="woocommerce-Button woocommerce-button button woocommerce-form-register__submit" name="register" value="Register">Add Product Request</button>
+                  <button type="submit" class="woocommerce-Button woocommerce-button button woocommerce-form-register__submit addProdReqBtn" name="register" value="Register">Add Product Request</button>
 
                </p>
             </form>

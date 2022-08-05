@@ -25,7 +25,7 @@
                               <div class="et_pb_text_inner">
                                  <div class="woocommerce">
                                     <div class="woocommerce-notices-wrapper"></div>
-                                    <form method="POST" action="{{ route('password.email') }}" class="woocommerce-ResetPassword lost_reset_password">
+                                    <form method="POST" action="{{ route('password.email') }}" class="woocommerce-ResetPassword lostPassFomm lost_reset_password">
                                         @csrf
                                        <p>Lost your password? Please enter your email address. You will receive a link to create a new password via email.</p>
                                        <p>
@@ -40,7 +40,7 @@
                                             </span>
                                         @enderror
                                        </p>
-                                       <p class="woocommerce-form-row woocommerce-form-row--first form-row form-row-first">
+                                       <p class="woocommerce-form-row woocommerce-form-row--first form-row form-row-first lostPassInpMain">
                                           <label for="user_login"> email</label>
                                           <input class="woocommerce-Input woocommerce-Input--text input-text @error('email') is-invalid @enderror"   id="email" type="email" name="email" value="{{ old('email') }}" autocomplete="username">
                                        </p>

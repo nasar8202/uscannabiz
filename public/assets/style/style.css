@@ -129,6 +129,8 @@ input[type='submit'].dokan-btn-danger, a.dokan-btn-danger, .dokan-btn-danger {
 }
 .alert.alert-success {
     top: 180px;
+    right: unset;
+    left: 50px;
 }
 .alert.alert-error{
     top: 200px;
@@ -152,10 +154,15 @@ input[type='submit'].dokan-btn-danger, a.dokan-btn-danger, .dokan-btn-danger {
 }
 
 .alert.alert-info.hide,
-.alert.alert-danger.hide,
-.alert.alert-success.hide {
+.alert.alert-danger.hide {
     opacity: 0;
     right: -100%;
+    transition: all 1s ease;
+}
+
+.alert.alert-success.hide{
+    opacity: 0;
+    left: -110%;
     transition: all 1s ease;
 }
 
@@ -297,6 +304,43 @@ button.button.chngPassBtn {
     line-height: 50px;
     margin-top: 10px;
 }
+
+
+span.invalid-feedback {
+    color: red;
+    display: block;
+    margin: 20px 0 0;
+}
+form.resetPassForm{
+    display: block;
+    max-width: 600px;
+    /*margin: 0 auto;*/
+}
+form.lostPassFomm .lostPassInpMain{
+    display: block;
+    max-width: 500px;
+}
+.quantity.prodQuantity {
+    display: block;
+    width: 100%;
+}
+.prodQuantity.quantity input{
+    width: 100% !important;
+    border-radius: 30px !important;
+    padding: 13px !important;
+}
+.quantity.prodQuantity label {
+    padding-left: 5px;
+    display: block;
+}
+
+.woocommerce  .addToReqForm  button.addProdReqBtn{
+    display: block;
+    padding: 10px 20px !important;
+    margin-top: 20px;
+}
+
+
 /*.dokan-w5 {*/
 /*    width: 47.666667%;*/
 /*    float: left;*/
@@ -323,6 +367,7 @@ button.button.chngPassBtn {
         flex-wrap: wrap;
         justify-content: flex-start;
     }
+    .addToReqForm .quantity.prodQuantity,
     .addToReqForm .form-row.form-group{
         display: block;
         width: 48%;
@@ -533,6 +578,9 @@ button.button.chngPassBtn {
         font-size: 13px !important;
         padding: 6px 15px !important;
     }
+    .woocommerce form .addToReqForm .form-row button.woocommerce-Button.woocommerce-button.button.woocommerce-form-register__submit.addProdReqBtn{
+        padding: 8px 15px !important;
+    }
     .venderproductMain #product-filter .dokan-form-group{
         float: unset;
         flex: unset;
@@ -662,6 +710,7 @@ button.button.chngPassBtn {
     .venderproductMain #product-filter .dokan-form-group:nth-child(2){
         right: 7%;
     }
+  
 }
 
 @media(max-width: 390px){

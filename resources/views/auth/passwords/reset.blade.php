@@ -28,7 +28,7 @@
                               <div class="et_pb_text_inner">
                                  <div class="woocommerce">
                                     <div class="woocommerce-notices-wrapper"></div>
-                                    <form method="POST" action="{{ route('password.update') }}" class="woocommerce-ResetPassword lost_reset_password">
+                                    <form method="POST" action="{{ route('password.update') }}" class="woocommerce-ResetPassword resetPassForm lost_reset_password">
                                         @csrf
 
                                         <input type="hidden" name="token" value="{{ $token }}">
