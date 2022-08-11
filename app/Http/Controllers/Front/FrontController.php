@@ -127,7 +127,7 @@ class FrontController extends Controller
             $find_user = User::find($user->id);
             $find_user->customers_id = $customer->id;
             $find_user->save();
-            
+
             VendorStore::create([
                 'vendor_id'=>$customer_id,
                 'store_name'=>$request->store_name,
@@ -143,6 +143,7 @@ class FrontController extends Controller
             $user =  User::create([
                 'name' => $request->fname." ".$request->lname,
                 'email' => $request->email,
+                'referal_code' => $request->referal_code,
                 'password' => Hash::make($request->password),
                 'role_id' => 3,
             ]);
