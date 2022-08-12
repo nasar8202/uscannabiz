@@ -2,6 +2,7 @@
 
 use Carbon\Carbon;
 use App\Models\Product;
+use App\Models\Category;
 
 function presentPrice($price)
 {
@@ -18,10 +19,17 @@ function presentDate($date)
     return Carbon::parse($date)->format('M d, Y');
 }
 
-function GetProducts()
+// function GetProducts()
+// {
+//     // $products = Product::where(['status'=>1,'approvel_admin_status'=>1])->where('product_qty','!=',0)->get();
+//     $products = Category::where(['status'=>1])->get();
+//     return $products;
+// }
+function GetCategories()
 {
-    $products = Product::where(['status'=>1,'approvel_admin_status'=>1])->where('product_qty','!=',0)->get();
-    return $products;
+    // $products = Product::where(['status'=>1,'approvel_admin_status'=>1])->where('product_qty','!=',0)->get();
+    $categories = Category::where(['status'=>1])->get();
+    return $categories;
 }
 function setActiveCategory($category, $output = 'active')
 {

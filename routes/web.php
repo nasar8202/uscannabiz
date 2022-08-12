@@ -80,6 +80,7 @@ Route::middleware(['user'])->prefix('user')->group(function () {
     Route::post('update-account-password/{id}', 'User\UserController@updateUserPassword')->name('update-account-password');
 
     Route::get('/getVendor', 'User\UserController@getVendor')->name('getVendor');
+    Route::get('/getProductsFromCategory', 'User\UserController@getProductsFromCategory')->name('getProductsFromCategory');
     Route::get('/my-orders', 'User\UserController@MyOrders')->name('MyOrders');
     Route::get('/order/{id}', 'User\UserController@show')->name('order');
     //WishList
