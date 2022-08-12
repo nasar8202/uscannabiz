@@ -28,7 +28,7 @@ function presentDate($date)
 function GetCategories()
 {
     // $products = Product::where(['status'=>1,'approvel_admin_status'=>1])->where('product_qty','!=',0)->get();
-    $categories = Category::where(['status'=>1])->get();
+    $categories =  Category::where('status',1)->with('products')->get();
     return $categories;
 }
 function setActiveCategory($category, $output = 'active')
