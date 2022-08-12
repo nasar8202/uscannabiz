@@ -45,8 +45,6 @@ class VendorRequestController extends Controller
             'full_name' => 'required',
             'phone_num' => 'required',
             'email' => 'required',
-            'address' => 'required',
-            'city' => 'required',
             ));
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
@@ -71,8 +69,8 @@ class VendorRequestController extends Controller
                 $vendor->full_name = $request->input('full_name');
                 $vendor->phone_num = $request->input('phone_num');
                 $vendor->email = $request->input('email');
-                $vendor->address = $request->input('address');
-                $vendor->city = $request->input('city');
+                $vendor->address = $request->input('add_note');
+                $vendor->city ="city";
                 $vendor->quantity = $request->input('quantity');
                 $auth = Auth::user();
                 if(isset($auth) && $auth->role_id == 2){
@@ -96,7 +94,7 @@ class VendorRequestController extends Controller
                 $broker_email = Customers::where('id',$broker->broker_request_id)->first();
 
                 if($request->input('vendor_id') != 1){
-                $usersArray = [$request->input('email'), $vendor->email,$broker_email->email];
+                $usersArray = [$request->input('email'), $vendor->email,$broker_email->email??''];
                 foreach($usersArray as $user){
                     //echo $user;
                     \Mail::to($user)->send(new \App\Mail\SendEmailAdminCustomerBroker($details));

@@ -517,7 +517,11 @@
                                     </div>
                                 </div>
                             </div>
-
+                        @if(session()->has('error'))
+                            <div class="alert alert-success">
+                                {{ session()->get('error') }}
+                            </div>
+                        @endif
                             <div class="et_pb_section et_pb_section_1 et_pb_with_background et_section_regular">
                                 <div class="et_pb_row et_pb_row_1">
                                     <div
