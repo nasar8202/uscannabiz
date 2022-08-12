@@ -130,37 +130,28 @@
                      <!-- <label for="last-name">Email <span class="required">*</span></label> -->
                      <input type="email" class="input-text form-control" name="email" id="last-name" required="required" placeholder="Email">
                   </p>
-
-                  {{-- <p class="form-row form-group">
+                  <p class="form-row form-group">
+                     <!-- <label for="last-name">Address <span class="required">*</span></label> -->
+                     <input type="text" class="input-text form-control" name="address" id="last-name" required="required" placeholder="Address">
+                  </p>
+                  <p class="form-row form-group">
                      <!-- <label for="last-name">City <span class="required">*</span></label> -->
                      <input type="text" class="input-text form-control" name="city" id="last-name" required="required" placeholder="City">
-                  </p> --}}
+                  </p>
                   <p class="form-row form-group">
                      <!-- <label for="last-name">Select Product <span class="required">*</span></label> -->
-                     <select name="category_id" id="category_id" class="input-text form-control" required>
-                        <option value="" selected disabled>What product are looking for ?</option>
-                        @foreach(GetCategories() as $category)
-                        <option value="{{$category->id}}" >{{$category->name}}</option>
+                     <select name="product_id" id="product_vendor_find" class="input-text form-control" required>
+                        <option value="" selected disabled>Select Product</option>
+                        @foreach(GetProducts() as $products)
+                        <option value="{{$products->id}}" data-vendor="{{$products->vender_id}}">{{$products->product_name}}</option>
                         @endforeach
                      </select>
-                     <div id="products"></div>
-                     {{-- <select name="product_id" id="product_vendor_find" class="input-text form-control" required>
-                        <option value="" selected disabled>What product are looking for ?</option>
-                        @foreach(GetProducts() as $products)
-                        <option value="{{$products->id}}" data-vendor="{{$products->vender_id}}">{{$products->name}}</option>
-                        @endforeach
-                     </select> --}}
                   </p>
                   <input type="hidden" value="" name="vendor_id" id="set_vendor_id">
                   <p class="form-row form-group">
                      <!-- <label for="last-name">Quantity <span class="required">*</span></label> -->
                      <input type="number" class="input-text form-control" name="quantity" title="Qty" size="4" required="required" inputmode="numeric" autocomplete="off" placeholder="Quantity">
                   </p>
-                  <p class="form-row form-group">
-                    <!-- <label for="last-name">Address <span class="required">*</span></label> -->
-                    <textarea class="form-control" rows="7" cols="80" name="add_note" id="add_note" required="required" placeholder="        Add Notes"></textarea>
-                    {{-- <input type="text" class="input-text form-control" name="address" id="last-name" required="required" placeholder="Add note"> --}}
-                 </p>
                   {{-- <div class="quantity">
                      <input type="number" name="quantity" id="quantity_62b36070a592a" class="input-text qty text" step="1" min="1" max="" name="quantity" value="1" title="Qty" size="4" placeholder=""   inputmode="numeric" autocomplete="off">
                   </div> --}}
@@ -292,8 +283,7 @@ if ( value === '3') {
 }
 });
 
-// $('.product_vendor_find').change(function(){
-    $(document).on('change','.product_vendor_find', function(){    // 2nd (A)
+$('#product_vendor_find').change(function(){
                 var data_val = $(this).val();
                //  console.log(data_val);
                 $.ajax({
@@ -303,25 +293,7 @@ if ( value === '3') {
                         'data_val': data_val
                     },
                     success: function(response) {
-                       // console.log(response)
                      $('#set_vendor_id').val(response.data)
-                    }
-                });
-});
-
-$('#category_id').change(function(){
-                var data_val = $(this).val();
-                console.log(data_val);
-                $.ajax({
-                    type: "GET",
-                    url: '{{route("getProductsFromCategory")}}',
-                    data: {
-                        'data_val': data_val
-                    },
-                    success: function(response) {
-                        console.log(response)
-                        //$("#products").html('<div>test<div>')
-                        $('#products').html(response)
                     }
                 });
 });

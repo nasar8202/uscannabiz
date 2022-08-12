@@ -67,23 +67,7 @@ class UserController extends Controller
         $order = Order::where('id',(int)$id)->where('customer_id',Auth::user()->customers->id)->with('customer','orderItems','orderItems.product','payment')->first();
         return $order;
     }
-    public function getProductsFromCategory(Request $request)
-    {
 
-        $products = Product::where(['status'=>1,'approvel_admin_status'=>1])->where('product_qty','!=',0)->get();
-
-        $output = '<p class="form-row form-group">';
-        $output .= '<select name="product_id" id="product_vendor_find" class="input-text form-control product_vendor_find" required>';
-        $output .= '<option value="" selected disabled>What product are looking for ?</option>';
-        // generate the options for the select
-        foreach ($products as $product) {
-            $output .= '<option value="' . $product->id . '" data-vendor="'.$product->vender_id.'">' . $product->product_name . '</option>';
-        }
-
-        // close the select input
-        $output .= '</select></p>';
-        return $output;
-    }
     public function view_wishlist()
     {
 
