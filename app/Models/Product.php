@@ -108,6 +108,6 @@ class Product extends Model implements Buyable
 
 
 
-    
+
 
 }

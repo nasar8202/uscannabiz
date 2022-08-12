@@ -40,18 +40,18 @@ class VendorRequestController extends Controller
     public function store(Request $request)
     {
 
-        // dd($request->all());
+
         $validator = Validator::make($request->all(), array(
             'full_name' => 'required',
             'phone_num' => 'required',
             'email' => 'required',
-            'address' => 'required',
-            'city' => 'required',
+
             ));
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
         else{
+            // dd($request->all());
             // $user =  User::save([
             //     'name' => $request->input('first_name'),
             //     'email' => $request->input('email'),
@@ -71,13 +71,14 @@ class VendorRequestController extends Controller
                 $vendor->full_name = $request->input('full_name');
                 $vendor->phone_num = $request->input('phone_num');
                 $vendor->email = $request->input('email');
-                $vendor->address = $request->input('address');
-                $vendor->city = $request->input('city');
+                $vendor->address = $request->input('add_note');
+                $vendor->city = "city";
                 $vendor->quantity = $request->input('quantity');
                 $auth = Auth::user();
                 if(isset($auth) && $auth->role_id == 2){
                     $vendor->customer_id = $auth->id;
                 }
+                // dd($vendor);
                 $vendor->save();
                 $product = Product::where('id',$request->input('product_id'))->first();
                 //$vendor = Customer::where('id',$request->input('vendor_id'))->first();
@@ -87,14 +88,14 @@ class VendorRequestController extends Controller
                     'phone_num' => $request->input('phone_num'),
                     'city' => $request->input('city'),
                     'quantity' => $request->input('quantity'),
-                    'address'=>  $request->input('address'),
+                    'address'=>  $request->input('add_note'),
                     'product_name'=>$product->product_name,
                     'sku'=>$product->sku
                 ];
                 $vendor = Customers::where('user_id',$request->input('vendor_id'))->first();
                 $broker = Customers::where('user_id',$product->vender_id)->first();
                 $broker_email = Customers::where('id',$broker->broker_request_id)->first();
-
+// dd($broker_email);
                 if($request->input('vendor_id') != 1){
                 $usersArray = [$request->input('email'), $vendor->email,$broker_email->email];
                 foreach($usersArray as $user){
@@ -103,7 +104,7 @@ class VendorRequestController extends Controller
 
                 }
                 }else{
-                    $usersArray = [$request->input('email')];
+                    $usersArray = [$request->input('email'),$vendor->email];
                     foreach($usersArray as $user){
                     //echo $user;
                     \Mail::to($user)->send(new \App\Mail\SendEmailAdminCustomerBroker($details));
@@ -112,7 +113,7 @@ class VendorRequestController extends Controller
                 }
                 //return redirect()->route('order_thanks')->with('success',"Request Has Been Submited");
                 // \Mail::to($request->input('email'))->send(new \App\Mail\SendEmailAdminCustomerBroker($details));
-                 return redirect()->route('order_thanks')->with('success',"Request Has Been Submited");
+              //   return redirect()->route('order_thanks')->with('success',"Request Has Been Submited");
 
             } else{
                 return back()->with('error',"Only: {$pro} available in Stock");
