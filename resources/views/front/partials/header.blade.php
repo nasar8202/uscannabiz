@@ -65,6 +65,12 @@ use Illuminate\Support\Facades\Request;
          <style>.woocommerce-product-gallery{ opacity: 1 !important; }</style>
       </noscript>
       <link rel="stylesheet" id="et-core-unified-34-cached-inline-styles"href="{{ URL::asset('assets/et-cache/34/et-core-unified-34.min.css?ver=1655922750') }}">
+      
+      <style>
+         .sec-1 .wc-block-product-categories-list li.wc-block-product-categories-list-item.first-level{
+             cursor: pointer;
+         }
+      </style>
 
    </head>
    <body class="home page-template-default page page-id-34 theme-Divi et-tb-has-template et-tb-has-footer woocommerce-no-js et_button_no_icon et_pb_button_helper_class et_fixed_nav et_show_nav et_secondary_nav_enabled et_primary_nav_dropdown_animation_fade et_secondary_nav_dropdown_animation_fade et_header_style_left et_cover_background et_pb_gutter et_pb_gutters3 et_pb_pagebuilder_layout et_no_sidebar et_divi_theme et-db dokan-theme-Divi">

@@ -205,6 +205,12 @@
 
 // product modal popup
 
+
+
+
+
+
+
 (function () {
 var c = document.body.className;
 c = c.replace(/woocommerce-no-js/, 'woocommerce-js');
@@ -222,9 +228,22 @@ jQuery("span#toggle-span").click(function(){
 jQuery( ".wc-block-product-categories-list--depth-1" ).toggle("slow");
 });
 jQuery('.sec-1 .wc-block-product-categories-list li.wc-block-product-categories-list-item.first-level').click(function(){
-jQuery(this).toggleClass('active') ;
+    // jQuery('.sec-1 .wc-block-product-categories-list li.wc-block-product-categories-list-item.first-level').removeClass('active') ;
+    // if (jQuery(this).hasClass("active")) {
+    //     jQuery(this).removeClass("active");
+    //     console.log('has qa')
+    // }
+    // if (jQuery(this).not("active")) {
+    //     jQuery(this).addClass("active");
+    //     console.log('has qa')
+    // }
+    jQuery(this).toggleClass('active').siblings().removeClass('active');
 
 });
+
+
+
+
 });
 </script><script type="text/javascript" src="{{ URL::asset('assets/plugins/woocommerce/assets/js/jquery-blockui/jquery.blockUI.min.js?ver=2.7.0-wc.6.3.1" id="jquery-blockui-js')}}"></script>
 <script type="text/javascript" src="{{ URL::asset('assets/plugins/dokan-lite/assets/js/vendor-registration.js')}}"></script>

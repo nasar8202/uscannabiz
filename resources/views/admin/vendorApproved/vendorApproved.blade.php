@@ -74,6 +74,8 @@
                                         <th>Full Name</th>
 
                                         <th>Email</th>
+                                        
+                                        <th>Reffered by</th>
                                         <th>Status</th>
                                         <th>Action</th>
 
@@ -166,6 +168,7 @@
                     // {data: 'id', name: 'id'},
                     {data: 'name', name: 'name'},
                     {data: 'email', name: 'email'},
+                    {data: 'referal_code', name: 'referal_code'},
                     {data: 'status', name: 'status'},
 
 
