@@ -24,6 +24,8 @@ use Illuminate\Support\Facades\Validator;
 use DB;
 use Auth;
 use App\Notifications\ProductApprovedNotificaton;
+use App\Notifications\ProductDeclineNotificaton;
+
 class ProductController extends Controller
 {
     /**
@@ -51,7 +53,16 @@ class ProductController extends Controller
                         }
                     })
                     ->addColumn('action', function ($data) {
-                        return '<a title="View" href="product/' . $data->id . '" class="btn btn-dark btn-sm"><i class="fas fa-eye"></i></a><button title="Delete" type="button" name="delete" id="' . $data->id . '" class="delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>';
+                        if($data->product_type == 'Feature'){
+                            return '<a title="View" href="product/' . $data->id . '" class="btn btn-dark btn-sm"><i class="fas fa-eye"></i></a><button title="Delete" type="button" name="delete" id="' . $data->id . '" class="delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></button><a title="Featured Type"  class="btn btn-primary btn-sm">Feature Type</a> ';
+
+                        }if($data->product_type == NULL){
+                            return '<a title="View" href="product/' . $data->id . '" class="btn btn-dark btn-sm"><i class="fas fa-eye"></i></a><button title="Delete" type="button" name="delete" id="' . $data->id . '" class="delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></button> <a title="Assign Feature" href="starProductStatus/' . $data->id . '" class="btn btn-warning btn-sm"><span class="fa fa-star" ></span></a>';
+                        }
+                        else{
+                            return '<a title="View" href="product/' . $data->id . '" class="btn btn-dark btn-sm"><i class="fas fa-eye"></i></a><button title="Delete" type="button" name="delete" id="' . $data->id . '" class="delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></button> <a title="Assign Feature" href="starProductStatus/' . $data->id . '" class="btn btn-warning btn-sm"><span class="fa fa-star" ></span></a>';
+                        }
+
                     })->rawColumns(['status', 'category_id', 'action'])->make(true);
             }
         } catch (\Exception $ex) {
@@ -70,7 +81,8 @@ class ProductController extends Controller
                 })
                     ->addColumn('action', function ($data) {
                         return '<a title="Approve" href="productStatusAccept/' . $data->id . '"
-                        class="btn btn-success btn-sm">Approve &nbsp;<i class="fa fa-check"></i></a>&nbsp;';
+                        class="btn btn-success btn-sm">Approve &nbsp;<i class="fa fa-check"></i></a>&nbsp;<a title="Decline" href="productStatusDecline/' . $data->id . '"
+                        class="btn btn-danger btn-sm">Decline &nbsp;<i class="fa fa-times"></i></a>&nbsp;';
                     })->rawColumns([ 'action','category_id'])->make(true);
             }
         } catch (\Exception $ex) {
@@ -96,6 +108,19 @@ class ProductController extends Controller
             }
 
             return back()->with('success','Product Approved Successfully');
+    }
+    public function productStatusDecline($id)
+    {
+
+
+                $customer =Product::where('id',$id)->first();
+                $customer->approvel_admin_status = 2;
+                $customer->save();
+                $user = User::where('id',$customer->vender_id)->first();
+
+                $user->notify(new ProductDeclineNotificaton());
+
+            return back()->with('success','Product Decline Successfully');
     }
     /**
      * Show the form for creating a new resource.
@@ -490,6 +515,16 @@ class ProductController extends Controller
         if ($product->count() > 0) {
             $product->update(['status' => $request->val]);
             return 1;
+        }
+    }
+    public function starProductStatus(Request $request, $id)
+    {
+
+        $product = Product::where('id', $id);
+
+        if ($product->count() > 0) {
+            $product->update(['product_type' => 'Feature']);
+            return redirect()->back()->with(['success' => 'Product Updated to featured Successfully']);
         }
     }
 

@@ -148,8 +148,12 @@ Route::namespace('Admin')->prefix('/admin')->middleware('admin')->group(function
     Route::get('brokerapproved', 'CustomersController@brokerapproved')->name('brokerapproved');
     Route::get('vendorapproved', 'CustomersController@vendorapproved')->name('vendorapproved');
     Route::get('customerStatusAccept/{id}', 'CustomersController@customerStatusAccept')->name('customerStatusAccept');
+    Route::get('customerStatusDecline/{id}', 'CustomersController@customerStatusDecline')->name('customerStatusDecline');
     Route::get('vendorStatusAccept/{id}', 'CustomersController@vendorStatusAccept')->name('vendorStatusAccept');
+    Route::get('vendorStatusDecline/{id}', 'CustomersController@vendorStatusDecline')->name('vendorStatusDecline');
+
     Route::get('brokerStatusAccept/{id}', 'CustomersController@brokerStatusAccept')->name('brokerStatusAccept');
+    Route::get('brokerStatusDecline/{id}', 'CustomersController@brokerStatusDecline')->name('brokerStatusDecline');
     Route::get('customerStatusReject/{id}', 'CustomersController@customerStatusReject')->name('customerStatusReject');
     Route::get('/show_vendor_request/{id}', 'VendorController@show_vendor_request')->name('show_vendor_request');
 
@@ -158,6 +162,7 @@ Route::namespace('Admin')->prefix('/admin')->middleware('admin')->group(function
 
     Route::get('/requestProduct', 'ProductController@requestProduct')->name('product.requestProduct');
     Route::get('productStatusAccept/{id}', 'ProductController@productStatusAccept')->name('productStatusAccept');
+    Route::get('productStatusDecline/{id}', 'ProductController@productStatusDecline')->name('productStatusDecline');
 
     Route::match(['get', 'post'], '/add-category', 'Categories@addCategory')->name('admin.add-category');
     Route::match(['get', 'post'], '/category-edit/{id}', 'Categories@edit')->name('admin.edit-category');
@@ -177,6 +182,7 @@ Route::namespace('Admin')->prefix('/admin')->middleware('admin')->group(function
     Route::get('/checkProductSku', 'ProductController@checkProductSku')->name('checkProductSku');
     Route::get('/checkProductSlug', 'ProductController@checkProductSlug')->name('checkProductSlug');
     Route::get('/product/changeProductStatus/{id}', 'ProductController@changeProductStatus')->name('changeProductStatus');
+    Route::get('/starProductStatus/{id}', 'ProductController@starProductStatus')->name('starProductStatus');
     Route::resource('/product', 'ProductController');
 
 

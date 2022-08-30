@@ -43,7 +43,9 @@ class FrontController extends Controller
     }
     public function registerVendorAndCustomer(Request $request)
     {
-        // dd($request->all());
+        //dd($request->product_request  ? 'Yes' : 'No');
+
+        // dd($request->all());;
             // $userData = new User();
             // $userData['name'] = $request->fname." ".$request->lname;
             // $userData['email'] = $request->email;
@@ -104,11 +106,19 @@ class FrontController extends Controller
         }
         if($request->role == 4)
         {
+            if($request->product_request == 'Yes')
+            {
+                 $product_request = 1;
+            }else{
+                 $product_request = 0;
+
+            }
             $user =  User::create([
                 'name' => $request->fname." ".$request->lname,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
                 'role_id' => 4,
+
             ]);
 
             $customer = Customers::create([
@@ -121,7 +131,8 @@ class FrontController extends Controller
                 'state' => $request->state,
                 'country' => $request->country,
                 'address' => $request->address,
-                'status'=>0
+                'status'=>0,
+                'product_request'=>$product_request
             ]);
             $customer_id = $customer->id;
             $find_user = User::find($user->id);
@@ -140,12 +151,22 @@ class FrontController extends Controller
             return redirect()->back()->with(['success' => 'You Register Successfully wait for admin approvel mail will sent you after approvel']);
         }
         else{
+
+            if($request->product_request == 'Yes')
+            {
+                 $product_request = 1;
+            }else{
+                 $product_request = 0;
+
+            }
+
             $user =  User::create([
                 'name' => $request->fname." ".$request->lname,
                 'email' => $request->email,
                 'referal_code' => $request->referal_code,
                 'password' => Hash::make($request->password),
                 'role_id' => 3,
+
             ]);
             $customer = Customers::create([
                 'user_id' => $user->id,
@@ -157,6 +178,7 @@ class FrontController extends Controller
                 'state' => $request->state,
                 'country' => $request->country,
                 'address' => $request->address,
+                'product_request'=>$product_request
 
             ]);
             $customer_id = $customer->id;
