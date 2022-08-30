@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class VendorApprovedNotificaton extends Notification
+class ProductDeclineNotificaton extends Notification
 {
     use Queueable;
 
@@ -41,8 +41,9 @@ class VendorApprovedNotificaton extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('You are approved.')
-                    ->action('login now', route('myAccount'));
+                    ->line('Your Product Has been decline.')
+                    ->action('go to website', route('homepage'));
+
     }
 
     /**

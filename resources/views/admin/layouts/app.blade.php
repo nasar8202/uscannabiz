@@ -48,6 +48,7 @@
         }
 
  </style>
+
     <link rel="stylesheet" href="{{URL::asset('admin/style.css')}}">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -63,6 +64,7 @@
             <li class="nav-item">
                 <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
             </li>
+
         </ul>
 
         <!-- Right navbar links -->
@@ -90,7 +92,11 @@
                </div>
            </li>
        </ul> --}}
+       <ul class="navbar-nav" style="margin-left:40%">
+        <li><a class="btn btn-primary"  href="{{route('homepage')}}" >Go to Website</a></li>
+       </ul>
     </nav>
+
     <!-- /.navbar -->
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">

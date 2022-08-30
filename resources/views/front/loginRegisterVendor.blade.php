@@ -93,18 +93,18 @@
 
                                             <div class="split-row form-row-wide">
                                                <p class="form-row form-group">
-                                                  <label for="first-name">First Name <span class="required">*</span></label>
-                                                  <input type="text" class="input-text form-control" name="fname" id="first-name" value="" required="required">
+                                                  <label for="first-name">First Name </label>
+                                                  <input type="text" class="input-text form-control" name="fname" id="first-name" value="" >
                                                </p>
                                                <p class="form-row form-group">
-                                                  <label for="last-name">Last Name <span class="required">*</span></label>
-                                                  <input type="text" class="input-text form-control" name="lname" id="last-name" value="" required="required">
+                                                  <label for="last-name">Last Name </label>
+                                                  <input type="text" class="input-text form-control" name="lname" id="last-name" value="" >
                                                </p>
                                             </div>
 
                                             <p class="form-row form-group form-row-wide">
-                                             <label for="shop-phone">Phone Number<span class="required">*</span></label>
-                                             <input type="text" class="input-text form-control" name="phone" id="shop-phone" value="" required="required">
+                                             <label for="shop-phone">Phone Number</label>
+                                             <input type="text" class="input-text form-control" name="phone" id="shop-phone" value="" >
                                           </p>
 
                                          <div class="for_vender" >
@@ -163,13 +163,17 @@ $(document).ready(function() {
               $('#vendor_add_fields').click(function() {
                  $('.for_broker').html('');
                  $('.for_vender').html('');
+<<<<<<< HEAD
                 $(".for_vender").html('<p class="form-row form-group form-row-wide"><label for="company-name">City <span class="">*</span></label><input type="text" class="input-text form-control" name="city" id="city" value="" required=""></p><p class="form-row form-group form-row-wide"><label for="company-name">State <span class="">*</span></label><input type="text" class="input-text form-control" name="state" id="state" value="" required=""></p><p class="form-row form-group form-row-wide"><label for="company-name">Country <span class="">*</span></label><input type="text" class="input-text form-control" name="country" id="country" value="" required=""></p><p class="form-row form-group form-row-wide"><label for="company-name">Address <span class="">*</span></label><input type="text" class="input-text form-control" name="address" id="address" value="" required=""></p><p class="form-row form-group form-row-wide"><label for="company-name">Store Name <span class="">*</span></label><input type="text" class="input-text form-control" name="store_name" id="store_name" value="" required=""></p><p class="form-row form-group form-row-wide"><label for="company-name">Store Url <span class="">*</span></label><input type="text" class="input-text form-control" name="store_url" id="store_url" value="" required=""></p> <p class="form-row form-group form-row-wide"><label for="company-name">Reffered by  <span class="">(Optional)</span></label><input type="text" class="input-text form-control" name="referal_code" id="referal_code" ></p>')
+=======
+                $(".for_vender").html('<br/><p>request to be notified for product request:</p><input type="radio" id="product_request" name="product_request" value="Yes"><label for="Yer">Yes</label><br><input type="radio" id="css" name="product_request" value="No" checked><label for="No">No</label><br></p><p class="form-row form-group form-row-wide"><label for="company-name">State <span class="">*</span></label><input type="text" class="input-text form-control" name="state" id="state" value="" required=""></p><p class="form-row form-group form-row-wide"><label for="company-name">Country <span class="">*</span></label><input type="text" class="input-text form-control" name="country" id="country" value="" required=""></p><p class="form-row form-group form-row-wide"><label for="company-name">Address <span class="">*</span></label><input type="text" class="input-text form-control" name="address" id="address" value="" required=""></p><p class="form-row form-group form-row-wide"><label for="company-name">Store Name <span class="">*</span></label><input type="text" class="input-text form-control" name="store_name" id="store_name" value="" required=""></p><p class="form-row form-group form-row-wide"><label for="company-name">Store Url <span class="">*</span></label><input type="text" class="input-text form-control" name="store_url" id="store_url" value="" required=""></p> <p class="form-row form-group form-row-wide"><label for="company-name">referal Code  <span class="">(Optional)</span></label><input type="text" class="input-text form-control" name="referal_code" id="referal_code" ></p>')
+>>>>>>> e8dbbfed6b69e6eecb44ce56a44bf7561285d565
               });
 
               $('#broker_add_fields').click(function() {
                  $('.for_vender').html('');
                  $('.for_broker').html('');
-                 $(".for_broker").html('<p class="form-row form-group form-row-wide"><label for="company-name">City <span class="">*</span></label><input type="text" class="input-text form-control" name="city" id="city" value="" required=""></p><p class="form-row form-group form-row-wide"><label for="company-name">State <span class="">*</span></label><input type="text" class="input-text form-control" name="state" id="state" value="" required=""></p><p class="form-row form-group form-row-wide"><label for="company-name">Country <span class="">*</span></label><input type="text" class="input-text form-control" name="country" id="country" value="" required=""></p><p class="form-row form-group form-row-wide"><label for="company-name">Address <span class="">*</span></label><input type="text" class="input-text form-control" name="address" id="address" value="" required=""></p><p class="form-row form-group form-row-wide"><label for="company-name">Store Name <span class="">*</span></label><input type="text" class="input-text form-control" name="store_name" id="store_name" value="" required=""></p><p class="form-row form-group form-row-wide"><label for="company-name">Store Url <span class="">*</span></label><input type="text" class="input-text form-control" name="store_url" id="store_url" value="" required=""></p>')
+                 $(".for_broker").html('<p>request to be notified for product request:</p><input type="radio" id="product_request" name="product_request" value="Yes"><label for="Yer">Yes</label><br><input type="radio" id="css" name="product_request" value="No" checked><label for="No">No</label><br></p><p class="form-row form-group form-row-wide"><label for="company-name">City <span class="">*</span></label><input type="text" class="input-text form-control" name="city" id="city" value="" required=""></p><p class="form-row form-group form-row-wide"><label for="company-name">State <span class="">*</span></label><input type="text" class="input-text form-control" name="state" id="state" value="" required=""></p><p class="form-row form-group form-row-wide"><label for="company-name">Country <span class="">*</span></label><input type="text" class="input-text form-control" name="country" id="country" value="" required=""></p><p class="form-row form-group form-row-wide"><label for="company-name">Address <span class="">*</span></label><input type="text" class="input-text form-control" name="address" id="address" value="" required=""></p><p class="form-row form-group form-row-wide"><label for="company-name">Store Name <span class="">*</span></label><input type="text" class="input-text form-control" name="store_name" id="store_name" value="" required=""></p><p class="form-row form-group form-row-wide"><label for="company-name">Store Url <span class="">*</span></label><input type="text" class="input-text form-control" name="store_url" id="store_url" value="" required=""></p>')
 
                });
 

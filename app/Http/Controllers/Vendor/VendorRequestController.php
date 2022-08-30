@@ -63,6 +63,7 @@ class VendorRequestController extends Controller
             $qty = $request->input('quantity');
 
             if($qty < $pro){
+
                 $vendor = new VendorRequest;
                 $vendor->product_id = $request->input('product_id');
                 $vendor->vendor_id = $request->input('vendor_id');
@@ -76,9 +77,10 @@ class VendorRequestController extends Controller
                 if(isset($auth) && $auth->role_id == 2){
                     $vendor->customer_id = $auth->id;
                 }
-                $vendor->save();
+               // $vendor->save();
                 $product = Product::where('id',$request->input('product_id'))->first();
                 //$vendor = Customer::where('id',$request->input('vendor_id'))->first();
+
                 $details = [
                     'name'=> $request->full_name,
                     'email' => $request->input('email'),
@@ -90,17 +92,26 @@ class VendorRequestController extends Controller
                     'sku'=>$product->sku
                 ];
                 $vendor = Customers::where('user_id',$request->input('vendor_id'))->first();
+
                 $broker = Customers::where('user_id',$product->vender_id)->first();
+<<<<<<< HEAD
                 // dd($vendor);
+=======
+
+>>>>>>> e8dbbfed6b69e6eecb44ce56a44bf7561285d565
                 $broker_email = Customers::where('id',$broker->broker_request_id)->first();
 
                 if($request->input('vendor_id') != 1){
-                $usersArray = [$request->input('email'), $vendor->email,$broker_email->email??''];
-                foreach($usersArray as $user){
-                    //echo $user;
-                    \Mail::to($user)->send(new \App\Mail\SendEmailAdminCustomerBroker($details));
+                    if($broker->product_request == 1 || $broker_email->product_request == 1){
+                        $usersArray = [$request->input('email'), $vendor->email,$broker_email->email];
 
-                }
+                        foreach($usersArray as $user){
+                            //echo $user;
+                            \Mail::to($user)->send(new \App\Mail\SendEmailAdminCustomerBroker($details));
+
+                        }
+                    }
+
                 }else{
                     $usersArray = [$request->input('email')];
                     foreach($usersArray as $user){
