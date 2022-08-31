@@ -41,7 +41,7 @@ class BrokerDeclineNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-        ->line('You are decline please use an other way.')
+        ->line('your request is rejected.')
         ->action('go to website', route('homepage'));
     }
 

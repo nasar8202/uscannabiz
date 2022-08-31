@@ -94,19 +94,21 @@
                                             <div class="split-row form-row-wide">
                                                <p class="form-row form-group">
                                                   <label for="first-name">First Name </label>
-                                                  <input type="text" class="input-text form-control" name="fname" id="first-name" value="" >
+                                                  <input type="text" class="input-text form-control" name="fname" id="first-name" required value="" >
                                                </p>
                                                <p class="form-row form-group">
                                                   <label for="last-name">Last Name </label>
-                                                  <input type="text" class="input-text form-control" name="lname" id="last-name" value="" >
+                                                  <input type="text" class="input-text form-control" name="lname" id="last-name" required value="" >
                                                </p>
                                             </div>
 
                                             <p class="form-row form-group form-row-wide">
                                              <label for="shop-phone">Phone Number</label>
-                                             <input type="text" class="input-text form-control" name="phone" id="shop-phone" value="" >
+                                             <input type="text" class="input-text form-control" name="phone" id="shop-phone" required value="" >
                                           </p>
+                                        <div class="for_buyer" >
 
+                                        </div>
                                          <div class="for_vender" >
 
                                         </div>
@@ -120,7 +122,7 @@
                                             I am a buyer    </label>
                                             <br>
                                             <label class="radio">
-                                            <input type="radio" name="role" id="vendor_add_fields" value="3">
+                                            <input type="radio" name="role" id="vendor_add_fields"  value="3">
                                             I am a vendor    </label>
                                             <br>
                                             <label class="radio">
@@ -151,11 +153,17 @@
 </div>
 
 <script>
+$("document").ready(function() {
+    setTimeout(function() {
 
+        $("#customer_add_fields").trigger('click');
+    },1);
+});
 $(document).ready(function() {
 
 
                $('#customer_add_fields').click(function() {
+                $('.for_buyer').html('<p class="form-row form-group form-row-wide"><label for="company-name">Who Reffered You  <span class="">(Optional)</span></label><input type="text" class="input-text form-control" name="referal_code" id="referal_code" ></p>');
                  $('.for_broker').html('');
                  $('.for_vender').html('');
               });
@@ -164,7 +172,7 @@ $(document).ready(function() {
                  $('.for_broker').html('');
                  $('.for_vender').html('');
 
-                $(".for_vender").html('<br/><p>request to be notified for product request:</p><input type="radio" id="product_request" name="product_request" value="Yes"><label for="Yer">Yes</label><br><input type="radio" id="css" name="product_request" value="No" checked><label for="No">No</label><br></p><p class="form-row form-group form-row-wide"><label for="company-name">State <span class="">*</span></label><input type="text" class="input-text form-control" name="state" id="state" value="" required=""></p><p class="form-row form-group form-row-wide"><label for="company-name">Country <span class="">*</span></label><input type="text" class="input-text form-control" name="country" id="country" value="" required=""></p><p class="form-row form-group form-row-wide"><label for="company-name">Address <span class="">*</span></label><input type="text" class="input-text form-control" name="address" id="address" value="" required=""></p><p class="form-row form-group form-row-wide"><label for="company-name">Store Name <span class="">*</span></label><input type="text" class="input-text form-control" name="store_name" id="store_name" value="" required=""></p><p class="form-row form-group form-row-wide"><label for="company-name">Store Url <span class="">*</span></label><input type="text" class="input-text form-control" name="store_url" id="store_url" value="" required=""></p> <p class="form-row form-group form-row-wide"><label for="company-name">referal Code  <span class="">(Optional)</span></label><input type="text" class="input-text form-control" name="referal_code" id="referal_code" ></p>')
+                $(".for_vender").html('<br/><p>request to be notified for product request:</p><input type="radio" id="product_request" name="product_request" value="Yes"><label for="Yer">Yes</label><br><input type="radio" id="css" name="product_request" value="No" checked><label for="No">No</label><br></p><p class="form-row form-group form-row-wide"><label for="company-name">State <span class="">*</span></label><input type="text" class="input-text form-control" name="state" id="state" value="" required=""></p><p class="form-row form-group form-row-wide"><label for="company-name">Country <span class="">*</span></label><input type="text" class="input-text form-control" name="country" id="country" value="" required=""></p><p class="form-row form-group form-row-wide"><label for="company-name">Address <span class="">*</span></label><input type="text" class="input-text form-control" name="address" id="address" value="" required=""></p><p class="form-row form-group form-row-wide"><label for="company-name">Store Name <span class="">*</span></label><input type="text" class="input-text form-control" name="store_name" id="store_name" value="" required=""></p><p class="form-row form-group form-row-wide"><label for="company-name">Store Url <span class="">*</span></label><input type="text" class="input-text form-control" name="store_url" id="store_url" value="" required=""></p> <p class="form-row form-group form-row-wide"><label for="company-name">Reffer By  <span class="">(Optional)</span></label><input type="text" class="input-text form-control" name="referal_code" id="referal_code" ></p>')
 
               });
 

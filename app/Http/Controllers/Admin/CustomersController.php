@@ -17,7 +17,7 @@ use App\Notifications\VendorApprovedNotificaton;
 use App\Notifications\VendorDeclineNotificaton;
 use App\Notifications\BrokerApprovedNotificaton;
 use App\Notifications\BrokerDeclineNotification;
-use App\Notifications\UserDeclinedNotificaton;
+use App\Notifications\UserDeclinedNotification;
 class CustomersController extends Controller
 {
     /**
@@ -395,11 +395,9 @@ public function customerStatusDecline($id)
 {
 
         $customer =User::where('id',$id)->first();
-        $customer->approvel_status = 2;
-        $customer->save();
-
-        $customer->notify(new UserDeclinedNotificaton());
-
+        $customer->notify(new UserDeclinedNotification());
+        $customer =User::where('id',$id)->delete();
+        $customer =Customers::where('user_id',$id)->delete();
             return back()->with('success','Customer Decline Successfully');
 }
     public function vendorStatusAccept($id)
@@ -425,11 +423,10 @@ public function customerStatusDecline($id)
     }
     public function vendorStatusDecline($id)
     {
-        $customer =User::where('id',$id)->first();
-        $customer->approvel_status = 2;
-        $customer->save();
-
+            $customer =User::where('id',$id)->first();
             $customer->notify(new VendorDeclineNotificaton());
+            $customer =User::where('id',$id)->delete();
+            $customer =Customers::where('user_id',$id)->delete();
             return back()->with('success','Vendor Decline Successfully');
 
     }
@@ -461,11 +458,10 @@ public function customerStatusDecline($id)
         // $customer =Customers::join('Users','Users.email','=','Customers.email')->where('role_id','=',2)->where('Customers.user_id',$id)->first();
 
             $customer =User::where('id',$id)->first();
-            $customer->approvel_status = 2;
-            $customer->save();
 
             $customer->notify(new BrokerDeclineNotification());
-
+            $customer =User::where('id',$id)->delete();
+            $customer =Customers::where('user_id',$id)->delete();
             return back()->with('success','Broker Decline Successfully');
     }
     public function customerStatusReject($id)

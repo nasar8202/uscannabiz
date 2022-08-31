@@ -65,7 +65,7 @@ use Illuminate\Support\Facades\Request;
          <style>.woocommerce-product-gallery{ opacity: 1 !important; }</style>
       </noscript>
       <link rel="stylesheet" id="et-core-unified-34-cached-inline-styles"href="{{ URL::asset('assets/et-cache/34/et-core-unified-34.min.css?ver=1655922750') }}">
-      
+
       <style>
          .sec-1 .wc-block-product-categories-list li.wc-block-product-categories-list-item.first-level{
              cursor: pointer;
