@@ -73,6 +73,7 @@ class FrontController extends Controller
                 'name' => $request->fname." ".$request->lname,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
+                'referal_code' => $request->referal_code,
                 'role_id' => 2,
             ]);
 

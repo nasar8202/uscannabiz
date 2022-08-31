@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class UserDeclineNotification extends Notification
+class UserDeclinedNotification extends Notification
 {
     use Queueable;
 
@@ -41,7 +41,7 @@ class UserDeclineNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('You are Decline try an other way.')
+                    ->line('your request is rejected.')
                     ->action('go to Website', route('homepage'));
 
     }

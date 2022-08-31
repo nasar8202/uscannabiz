@@ -110,11 +110,6 @@
          <form method="Post" action="{{ route('vendorRequest_shop') }}" class="woocommerce-form woocommerce-form-register register">
           {{ csrf_field() }}
 
-{{--
-          <input type="hidden" value="{{$data->id}}" name="product_id">
-          <input type="hidden" value="{{$data->vender_id}}" name="vendor_id"> --}}
-
-
                <div class="split-row form-row-wide">
                   <p class="form-row form-group">
                      <!-- <label for="first-name">Full Name <span class="required">*</span></label> -->
@@ -151,12 +146,9 @@
                   </p>
                   <p class="form-row form-group">
                     <textarea class="input-text form-control" name="add_note" id="add_note" rows="9" cols="80" required="required" placeholder="       Add Notes"></textarea>
-                    <!-- <label for="last-name">Address <span class="required">*</span></label> -->
-                     {{-- <input type="text" class="input-text form-control" name="add_note" id="add_note" required="required" placeholder="Add Note"> --}}
+
                   </p>
-                  {{-- <div class="quantity">
-                     <input type="number" name="quantity" id="quantity_62b36070a592a" class="input-text qty text" step="1" min="1" max="" name="quantity" value="1" title="Qty" size="4" placeholder=""   inputmode="numeric" autocomplete="off">
-                  </div> --}}
+
 
                <br>
             <p class="woocommerce-form-row form-row">

@@ -640,11 +640,6 @@
                  <form method="Post" action="{{ route('vendorRequest_shop') }}" class="woocommerce-form woocommerce-form-register register">
                   {{ csrf_field() }}
 
-        {{--
-                  <input type="hidden" value="{{$data->id}}" name="product_id">
-                  <input type="hidden" value="{{$data->vender_id}}" name="vendor_id"> --}}
-
-
                        <div class="split-row form-row-wide">
                           <p class="form-row form-group">
                              <!-- <label for="first-name">Full Name <span class="required">*</span></label> -->
@@ -660,14 +655,14 @@
                              <!-- <label for="last-name">Email <span class="required">*</span></label> -->
                              <input type="email" class="input-text form-control" name="email" id="last-name" required="required" placeholder="Email">
                           </p>
-                          <p class="form-row form-group">
+                          {{-- <p class="form-row form-group">
                              <!-- <label for="last-name">Address <span class="required">*</span></label> -->
                              <input type="text" class="input-text form-control" name="address" id="last-name" required="required" placeholder="Address">
-                          </p>
-                          <p class="form-row form-group">
+                          </p> --}}
+                          {{-- <p class="form-row form-group">
                              <!-- <label for="last-name">City <span class="required">*</span></label> -->
                              <input type="text" class="input-text form-control" name="city" id="last-name" required="required" placeholder="City">
-                          </p>
+                          </p> --}}
                           <p class="form-row form-group">
                              <!-- <label for="last-name">Select Product <span class="required">*</span></label> -->
                              <select name="product_id" id="product_vendor_find" class="input-text form-control">
@@ -682,9 +677,10 @@
                              <!-- <label for="last-name">Quantity <span class="required">*</span></label> -->
                              <input type="number" class="input-text form-control" name="quantity" title="Qty" size="4" required="required" inputmode="numeric" autocomplete="off" placeholder="Quantity">
                           </p>
-                          {{-- <div class="quantity">
-                             <input type="number" name="quantity" id="quantity_62b36070a592a" class="input-text qty text" step="1" min="1" max="" name="quantity" value="1" title="Qty" size="4" placeholder=""   inputmode="numeric" autocomplete="off">
-                          </div> --}}
+                          <p class="form-row form-group">
+                            <textarea class="input-text form-control" name="add_note" id="add_note" rows="9" cols="80" required="required" placeholder="       Add Notes"></textarea>
+
+                          </p>
 
                        <br>
                     <p class="woocommerce-form-row form-row">
