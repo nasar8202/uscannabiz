@@ -347,10 +347,34 @@ form.lostPassFomm .lostPassInpMain{
 /*}*/
 /*11-8-22*/
 div.sec-1 .et_pb_with_border.et_pb_column:first-child {
-    position: fixed;
+       position: fixed;
     width: 300px;
-    padding-right:15px;
+    padding-right: 15px;
+    height: 380px;
+    overflow-y: scroll;
 }
+
+
+div.sec-1 .et_pb_with_border.et_pb_column:first-child::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #F5F5F5;
+}
+div.sec-1 .et_pb_with_border.et_pb_column:first-child::-webkit-scrollbar
+{
+	width: 12px;
+	background-color: #F5F5F5;
+}
+div.sec-1 .et_pb_with_border.et_pb_column:first-child::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #0D4400;
+}
+
+
+
 div.sec-1 .et_pb_with_border.et_pb_column:nth-child(2) {
     margin-left: 315px;
     width: calc(80% - 315px);
@@ -380,10 +404,7 @@ div.sec-1 .et_pb_column:first-child .wc-block-product-categories li.wc-block-pro
     padding-bottom: 10px;
     margin-bottom: 10px;
 }
-div.sec-1 .et_pb_with_border.et_pb_module.et_pb_widget_area.clearfix.et_pb_widget_area_left.et_pb_widget_area_left {
-    height: 60vh;
-    overflow: auto;
-}
+
 div.sec-1 .et_pb_with_border.et_pb_module.et_pb_widget_area.clearfix.et_pb_widget_area_left.et_pb_widget_area_left::-webkit-scrollbar-track
 {
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
@@ -537,6 +558,12 @@ div.sec-1 .et_pb_with_border.et_pb_module.et_pb_widget_area.clearfix.et_pb_widge
 }
 
 @media(max-width:1500px){
+    
+    
+    #logo {
+        width:150px;
+        
+    }
     #top-menu li{
         padding-right: 15px !important; 
     }
