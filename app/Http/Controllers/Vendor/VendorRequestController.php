@@ -9,6 +9,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
 use App\Models\Customers;
+use App\Models\Category;
+use App\User;
+use DB;
 class VendorRequestController extends Controller
 {
     /**
@@ -39,6 +42,10 @@ class VendorRequestController extends Controller
      */
     public function store(Request $request)
     {
+        //$vendor = User::where('role_id',3)->first();
+        //$broker = User::where('role_id',4)->first();
+
+
 
         // dd($request->all());
         $validator = Validator::make($request->all(), array(
@@ -57,12 +64,12 @@ class VendorRequestController extends Controller
             //     'role_id' => 4,
             // ]);
 
-            $product = Product::where('id',$request->input('product_id'))->first();
+            // $product = Product::where('id',$request->input('product_id'))->first();
 
-            $pro = $product->product_qty;
-            $qty = $request->input('quantity');
+            // $pro = $product->product_qty;
+            // $qty = $request->input('quantity');
 
-            if($qty < $pro){
+            // if($qty < $pro){
 
                 $vendor = new VendorRequest;
                 $vendor->product_id = $request->input('product_id');
@@ -77,9 +84,8 @@ class VendorRequestController extends Controller
                 if(isset($auth) && $auth->role_id == 2){
                     $vendor->customer_id = $auth->id;
                 }
-               // $vendor->save();
-                $product = Product::where('id',$request->input('product_id'))->first();
-                //$vendor = Customer::where('id',$request->input('vendor_id'))->first();
+                $vendor->save();
+                $category = Category::where('id',$request->input('product_id'))->first();
 
                 $details = [
                     'name'=> $request->full_name,
@@ -87,47 +93,65 @@ class VendorRequestController extends Controller
                     'phone_num' => $request->input('phone_num'),
                     'city' => $request->input('city'),
                     'quantity' => $request->input('quantity'),
-                    'address'=>  $request->input('address'),
-                    'product_name'=>$product->product_name,
-                    'sku'=>$product->sku
+                    'address'=>  $request->input('add_note'),
+                    'product_name'=>$category->name,
+
                 ];
-                $vendor = Customers::where('user_id',$request->input('vendor_id'))->first();
+                $vendorBrokerEmails = DB::table('customers')
+                ->select('users.approvel_status','users.email','customers.product_request','users.role_id')
+                ->join('users', 'users.id', '=', 'customers.user_id')
+                ->whereIn('users.role_id',  array(3,4))
+                //->where('users.role_id', '=', 4)
+                ->where('customers.product_request', '=', 1)
+                ->where('users.approvel_status', '=', 1)
+                ->get();
 
-                $broker = Customers::where('user_id',$product->vender_id)->first();
-<<<<<<< HEAD
-                // dd($vendor);
-=======
+                //$usersArray = [$request->input('email'), $vendor->email,$broker->email];
 
->>>>>>> e8dbbfed6b69e6eecb44ce56a44bf7561285d565
-                $broker_email = Customers::where('id',$broker->broker_request_id)->first();
-
-                if($request->input('vendor_id') != 1){
-                    if($broker->product_request == 1 || $broker_email->product_request == 1){
-                        $usersArray = [$request->input('email'), $vendor->email,$broker_email->email];
-
-                        foreach($usersArray as $user){
+                        foreach($vendorBrokerEmails as $user){
                             //echo $user;
                             \Mail::to($user)->send(new \App\Mail\SendEmailAdminCustomerBroker($details));
 
                         }
-                    }
-
-                }else{
-                    $usersArray = [$request->input('email')];
+                        $usersArray = [$request->input('email')];
                     foreach($usersArray as $user){
                     //echo $user;
                     \Mail::to($user)->send(new \App\Mail\SendEmailAdminCustomerBroker($details));
+                    }
+                // $vendor = Customers::where('user_id',$request->input('vendor_id'))->first();
 
-                }
-                }
+                // $broker = Customers::where('user_id',$product->vender_id)->first();
+
+                // $broker_email = Customers::where('id',$broker->broker_request_id)->first();
+
+                // if($request->input('vendor_id') != 1){
+                //     if($broker->product_request == 1 || $broker_email->product_request == 1){
+                //         $usersArray = [$request->input('email'), $vendor->email,$broker_email->email];
+
+                //         foreach($usersArray as $user){
+                //             //echo $user;
+                //             \Mail::to($user)->send(new \App\Mail\SendEmailAdminCustomerBroker($details));
+
+                //         }
+                //     }
+
+                // }else{
+                //     $usersArray = [$request->input('email')];
+                //     foreach($usersArray as $user){
+                //     //echo $user;
+                //     \Mail::to($user)->send(new \App\Mail\SendEmailAdminCustomerBroker($details));
+
+                // }
+                //}
                 //return redirect()->route('order_thanks')->with('success',"Request Has Been Submited");
                 // \Mail::to($request->input('email'))->send(new \App\Mail\SendEmailAdminCustomerBroker($details));
                  return redirect()->route('order_thanks')->with('success',"Request Has Been Submited");
 
-            } else{
-                return back()->with('error',"Only: {$pro} available in Stock");
             }
-        }
+            // else{
+            //     return back()->with('error',"Only: {$pro} available in Stock");
+            // }
+
     }
 
     /**

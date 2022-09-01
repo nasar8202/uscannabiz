@@ -135,7 +135,7 @@
                      <select name="product_id" id="product_vendor_find" class="input-text form-control" required>
                         <option value="" selected disabled>What product are you looking for ?</option>
                         @foreach(GetProducts() as $products)
-                        <option value="{{$products->id}}" data-vendor="{{$products->vender_id}}">{{$products->product_name}}</option>
+                        <option value="{{$products->id}}" data-vendor="{{$products->vender_id}}">{{$products->name}}</option>
                         @endforeach
                      </select>
                   </p>
