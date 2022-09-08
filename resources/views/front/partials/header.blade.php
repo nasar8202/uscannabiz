@@ -141,6 +141,13 @@ use Illuminate\Support\Facades\Request;
                               {{-- <a href="{{ Route('edit-account') }}">My Account</a> --}}
                               @endif
                             </li>
+                           @if($role == 1)
+                            <li class="logoutBtn">
+                                <a href="{{ route('dashboard') }}">
+                                    Dashboard
+                                </a>
+                            </li>
+                            @endif
                             <li class="logoutBtn">
                                 <a href="{{ route('logout') }}"
                                 onclick="event.preventDefault();

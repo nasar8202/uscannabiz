@@ -350,7 +350,7 @@ $('.alert-success').ready(function() {
 
      if ( !$('.msgContainer').children().length )
         $('.msgContainer').hide();
-
+        $('.width-100').parent().addClass('w-100');
    </script>
 
     <script>
