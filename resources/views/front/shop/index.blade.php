@@ -365,7 +365,7 @@
                                     <div
                                         class="et_pb_module et_pb_text et_pb_text_1 f-text  et_pb_text_align_left et_pb_bg_layout_light">
                                         <div class="et_pb_text_inner">
-                                            <h1>Featured Products</h1>
+                                            <h1>Categories</h1>
                                         </div>
                                     </div>
                                     <div class="et_pb_module et_pb_code et_pb_code_0 main-cate">
