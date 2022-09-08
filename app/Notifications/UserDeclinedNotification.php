@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class VendorApprovedNotificaton extends Notification
+class UserDeclinedNotification extends Notification
 {
     use Queueable;
 
@@ -41,8 +41,9 @@ class VendorApprovedNotificaton extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('You are approved.')
-                    ->action('login now', route('myAccount'));
+                    ->line('your request is rejected.')
+                    ->action('go to Website', route('homepage'));
+
     }
 
     /**

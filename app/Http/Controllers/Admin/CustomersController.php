@@ -14,8 +14,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\Notifications\UserApprovedNotificaton;
 use App\Notifications\VendorApprovedNotificaton;
+use App\Notifications\VendorDeclineNotificaton;
 use App\Notifications\BrokerApprovedNotificaton;
-
+use App\Notifications\BrokerDeclineNotification;
+use App\Notifications\UserDeclinedNotification;
 class CustomersController extends Controller
 {
     /**
@@ -230,7 +232,7 @@ class CustomersController extends Controller
         $customer_user = Customers::find($customer_id);
         $customer_user->user_id = $user_id;
         $customer_user->save();
-        
+
         return redirect('/admin/customers')->with('success','Broker Updated Successfully');
         }
     }
@@ -271,7 +273,8 @@ class CustomersController extends Controller
                     })
                     ->addColumn('action', function ($data) {
                         return '<a title="Approve" href="customerStatusAccept/' . $data->id . '"
-                         class="btn btn-success btn-sm">Approve &nbsp;<i class="fa fa-check"></i></a>&nbsp;';
+                         class="btn btn-success btn-sm">Approve &nbsp;<i class="fa fa-check"></i></a>&nbsp;<a title="Approve" href="customerStatusDecline/' . $data->id . '"
+                         class="btn btn-danger btn-sm">Decline &nbsp;<i class="fa fa-times"></i></a>&nbsp;';
 
                     })->rawColumns(['status',  'action'])->make(true);
             }
@@ -325,7 +328,8 @@ class CustomersController extends Controller
                     })
                     ->addColumn('action', function ($data) {
                         return '<a title="Approve" href="brokerStatusAccept/' . $data->id . '"
-                         class="btn btn-success btn-sm">Approve &nbsp;<i class="fa fa-check"></i></a>&nbsp;';
+                         class="btn btn-success btn-sm">Approve &nbsp;<i class="fa fa-check"></i></a>&nbsp;<a title="Approve" href="brokerStatusDecline/' . $data->id . '"
+                         class="btn btn-danger btn-sm">Decline &nbsp;<i class="fa fa-times"></i></a>&nbsp;';
 
                     })->rawColumns(['status',  'action'])->make(true);
             }
@@ -338,7 +342,7 @@ class CustomersController extends Controller
 
     public function vendorapproved()
     {
-       
+
         try {
             if (request()->ajax()) {
                 return datatables()->of(User::where('role_id','=',3)->where('approvel_status',0)->get())
@@ -353,7 +357,8 @@ class CustomersController extends Controller
                     })
                     ->addColumn('action', function ($data) {
                         return '<a title="Approve" href="vendorStatusAccept/' . $data->id . '"
-                         class="btn btn-success btn-sm">Approve &nbsp;<i class="fa fa-check"></i></a>&nbsp;';
+                         class="btn btn-success btn-sm">Approve &nbsp;<i class="fa fa-check"></i></a>&nbsp;<a title="Approve" href="vendorStatusDecline/' . $data->id . '"
+                         class="btn btn-danger btn-sm">Decline &nbsp;<i class="fa fa-times"></i></a>&nbsp;';
 
                     })->rawColumns(['status',  'action'])->make(true);
             }
@@ -386,7 +391,15 @@ class CustomersController extends Controller
 
             return back()->with('success','Customer Approved Successfully');
     }
+public function customerStatusDecline($id)
+{
 
+        $customer =User::where('id',$id)->first();
+        $customer->notify(new UserDeclinedNotification());
+        $customer =User::where('id',$id)->delete();
+        $customer =Customers::where('user_id',$id)->delete();
+            return back()->with('success','Customer Decline Successfully');
+}
     public function vendorStatusAccept($id)
     {
 
@@ -408,7 +421,15 @@ class CustomersController extends Controller
 
             return back()->with('success','Vendor Approved Successfully');
     }
+    public function vendorStatusDecline($id)
+    {
+            $customer =User::where('id',$id)->first();
+            $customer->notify(new VendorDeclineNotificaton());
+            $customer =User::where('id',$id)->delete();
+            $customer =Customers::where('user_id',$id)->delete();
+            return back()->with('success','Vendor Decline Successfully');
 
+    }
     public function brokerStatusAccept($id)
     {
 
@@ -429,6 +450,19 @@ class CustomersController extends Controller
 
 
             return back()->with('success','Broker Approved Successfully');
+    }
+
+    public function brokerStatusDecline($id)
+    {
+
+        // $customer =Customers::join('Users','Users.email','=','Customers.email')->where('role_id','=',2)->where('Customers.user_id',$id)->first();
+
+            $customer =User::where('id',$id)->first();
+
+            $customer->notify(new BrokerDeclineNotification());
+            $customer =User::where('id',$id)->delete();
+            $customer =Customers::where('user_id',$id)->delete();
+            return back()->with('success','Broker Decline Successfully');
     }
     public function customerStatusReject($id)
     {

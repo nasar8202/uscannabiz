@@ -294,7 +294,7 @@ class UserController extends Controller
         //     if ($validator->fails()) {
         //         return redirect()->back()->withErrors($validator);
         //     }
-            
+
 
         //     $user->password = Hash::make($request->password);
         // }
@@ -332,10 +332,10 @@ class UserController extends Controller
             if ($validator->fails()) {
                 return redirect()->back()->withErrors($validator);
             }
-            
+
 
             $user->password = Hash::make($request->password);
-        
+
         $user->save();
 
 

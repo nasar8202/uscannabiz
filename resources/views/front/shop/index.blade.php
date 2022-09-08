@@ -8,6 +8,9 @@
             padding-bottom: 20px;
             background-color: #0D4400 !important
         }
+        .w-100{
+            width:100% !important;
+        }
 
         .et_pb_row_0_tb_footer.et_pb_row {
             padding-top: 0px !important;
@@ -372,12 +375,22 @@
                                             @forelse ($categories_for_div as $category)
 
                                                     <li class="product-category product first">
-                                                        <a  href="{{ route('productCategory', ['slug' => $category->category_slug,'id'=>$category->id]) }}">
+                                                        
+                                                        @if($category->name == 'Seeds')
+                                                           <a class="width-100"  href="{{ route('productCategory', ['slug' => $category->category_slug,'id'=>$category->id]) }}">
                                                             <img src="{{asset('uploads/category').'/'.$category->category_image}}"  srcset="{{asset('uploads/category').'/'.$category->category_image}} 300w, {{asset('uploads/category').'/'.$category->category_image}} 150w, {{asset('uploads/category').'/'.$category->category_image}} 100w">
                                                             <h2 class="woocommerce-loop-category__title">
                                                                 {{ $category->name }} <mark class="count">(6)</mark>
                                                             </h2>
                                                         </a>
+                                                        @else
+                                                         <a  href="{{ route('productCategory', ['slug' => $category->category_slug,'id'=>$category->id]) }}">
+                                                            <img src="{{asset('uploads/category').'/'.$category->category_image}}"  srcset="{{asset('uploads/category').'/'.$category->category_image}} 300w, {{asset('uploads/category').'/'.$category->category_image}} 150w, {{asset('uploads/category').'/'.$category->category_image}} 100w">
+                                                            <h2 class="woocommerce-loop-category__title">
+                                                                {{ $category->name }} <mark class="count">(6)</mark>
+                                                            </h2>
+                                                        </a> 
+                                                        @endif
                                                     </li>
                                             @empty
                                                 <div style="text-align: left">No items found</div>
@@ -429,4 +442,5 @@
     <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
     <script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.min.js"></script>
     {{-- <script src="{{ asset('js/algolia.js') }}"></script> --}}
+    
 @endsection

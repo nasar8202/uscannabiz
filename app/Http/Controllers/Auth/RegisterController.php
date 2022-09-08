@@ -94,9 +94,11 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        dd($data['referal_code']);
         $user =  User::create([
             'name' => $data['name'],
             'email' => $data['email'],
+            'referal_code' => $data['referal_code'],
             'password' => Hash::make($data['password']),
             'role_id' => 2,
         ]);

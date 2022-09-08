@@ -70,7 +70,7 @@
                                      </div>
                                   </div>
                                   <div class="et_pb_toggle et_pb_module et_pb_accordion_item et_pb_accordion_item_2  et_pb_toggle_close">
-                                     <h5 class="et_pb_toggle_title">Reequired Para</h5>
+                                     <h5 class="et_pb_toggle_title">Why us?</h5>
                                      <div class="et_pb_toggle_content clearfix">
                                         <p>Uscannazon.com was created to alleviate the surplus products in the legal cannabis industry.</p>
                                      </div>
