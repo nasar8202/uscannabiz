@@ -333,7 +333,7 @@
                                                             </span>
                                                             <ul class="wc-block-product-categories-list wc-block-product-categories-list--depth-1">
                                                                 @php
-                                                                $p_categories_main = App\Models\Category::where('parent_id',$category->id)->get();
+                                                                $p_categories_main = App\Models\Category::where(['parent_id'=>$category->id,'status'=>1])->get();
                                                             @endphp
                                                             @foreach ($p_categories_main as $sub_cat)
                                                             <li class="wc-block-product-categories-list-item {{ setActiveCategory($sub_cat->slug) }}">
