@@ -240,7 +240,7 @@ ul.et_pb_social_media_follow{list-style-type:none!important;margin:0 0 22px;padd
                                             <button type="submit" id="button-review" >send</button>
                                             @else
                                             <input type="hidden" name="user_id" id="" value="">
-                                            <span class="alert alert-danger">You Cant Send Review Without Login</span>
+                                            <span class="text-danger">You Cant Send Review Without Login</span>
                                             @endif
                                             
 	                                     </form>
