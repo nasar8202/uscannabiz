@@ -327,7 +327,7 @@
                                                         {{-- @dd($p_categories_sub) --}}
                                                         @if($p_categories_sub)
                                                         <li class="wc-block-product-categories-list-item">
-                                                            <a style="" href="javascript:void(0)">{{$category->name}}</a>
+                                                            <a style="" href="{{ route('productCategory', ['slug' => $category->category_slug,'id'=>$category->id]) }}">{{$category->name}}</a>
                                                             <span class="wc-block-product-categories-list-item-count">
                                                                 <span aria-hidden="true">7</span><span class="screen-reader-text">7 products</span>
                                                             </span>
