@@ -347,11 +347,11 @@ form.lostPassFomm .lostPassInpMain{
 /*}*/
 /*11-8-22*/
 div.sec-1 .et_pb_with_border.et_pb_column:first-child {
-       position: fixed;
+position: absolute;
     width: 300px;
     padding-right: 15px;
-    height: 380px;
-    overflow-y: scroll;
+    height: auto;
+    overflow-y: auto;
 }
 
 
@@ -425,6 +425,10 @@ div.sec-1 .et_pb_with_border.et_pb_module.et_pb_widget_area.clearfix.et_pb_widge
 .et_overlay:before {
     color: #0D4400;
 }
+header#main-header .logo_container a img {
+    width: 11%;
+}
+
 
 /*Media Query */
 
@@ -617,6 +621,9 @@ div.sec-1 .et_pb_with_border.et_pb_module.et_pb_widget_area.clearfix.et_pb_widge
     #main-header div#et-top-navigation {
         padding-left: 27%!important;
     }
+    header#main-header .logo_container a img {
+    width: 110px;
+}
 }
 
 
@@ -1005,6 +1012,5 @@ div.sec-1 .et_pb_with_border.et_pb_module.et_pb_widget_area.clearfix.et_pb_widge
     }
 
 }
-
 
 
