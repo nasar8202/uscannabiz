@@ -303,7 +303,7 @@
                                                                     <a style="" href="{{ route('productCategory', ['slug' => $category->category_slug,'id'=>$category->id]) }}">{{ $category->name }}</a>
                                                                     <span class="wc-block-product-categories-list-item-count"><span aria-hidden="true">2</span>
                                                                 </li>
-                                                            </ul>				
+                                                            </ul>
                                                             </li>
                                                             @else
                                                             if($category->id == $parent->parent_id)
@@ -338,7 +338,7 @@
                                                                 <span class="wc-block-product-categories-list-item-count"><span aria-hidden="true">2</span>
                                                             </li>
                                                             @endforeach
-                                                        </ul>				
+                                                        </ul>
                                                         </li>
                                                         @else
                                                             <li
@@ -348,7 +348,7 @@
                                                             </li>
                                                         @endif
                                                         @endforeach
-                                                            
+
 
                                                         </ul>
                                                     </div>
