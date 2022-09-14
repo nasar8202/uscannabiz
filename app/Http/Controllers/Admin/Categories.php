@@ -24,7 +24,7 @@ class Categories extends Controller
 
         try {
             if (request()->ajax()) {
-                return datatables()->of(Category::get())
+                return datatables()->of(Category::where('status',1)->get())
                     ->addColumn('parent_id', function ($data) {
                         return $data->sub_category->name ?? 'No Parent Category';
                     })

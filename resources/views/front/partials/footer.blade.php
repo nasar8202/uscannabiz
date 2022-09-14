@@ -219,7 +219,8 @@ jQuery(document).ready(function(){
 jQuery("span#toggle-span").click(function(){
 jQuery( ".wc-block-product-categories-list--depth-1" ).toggle("slow");
 });
-jQuery('.sec-1 .wc-block-product-categories-list li.wc-block-product-categories-list-item.first-level').click(function(){
+// jQuery('.sec-1 .wc-block-product-categories-list li.wc-block-product-categories-list-item.first-level').click(function(){
+jQuery('.sec-1 .wc-block-product-categories-list li.wc-block-product-categories-list-item.first-level span#toggle-span').click(function(){
     // jQuery('.sec-1 .wc-block-product-categories-list li.wc-block-product-categories-list-item.first-level').removeClass('active') ;
     // if (jQuery(this).hasClass("active")) {
     //     jQuery(this).removeClass("active");
@@ -229,7 +230,7 @@ jQuery('.sec-1 .wc-block-product-categories-list li.wc-block-product-categories-
     //     jQuery(this).addClass("active");
     //     console.log('has qa')
     // }
-    jQuery(this).toggleClass('active').siblings().removeClass('active');
+    jQuery(this).parent().toggleClass('active').siblings().removeClass('active');
 
 });
 
@@ -350,7 +351,7 @@ $('.alert-success').ready(function() {
 
      if ( !$('.msgContainer').children().length )
         $('.msgContainer').hide();
-
+        $('.width-100').parent().addClass('w-100');
    </script>
 
     <script>

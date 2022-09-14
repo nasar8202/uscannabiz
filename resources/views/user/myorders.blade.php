@@ -496,6 +496,9 @@
                 font-size: 25px
             }
         }
+        .modal-content textarea.form-control{
+            border-radius: 20px;
+        }
     </style>
     <div
         class="page-template-default theme-Divi et-tb-has-template et-tb-has-footer woocommerce-account woocommerce-page woocommerce-js et_button_no_icon et_pb_button_helper_class et_fixed_nav et_show_nav et_secondary_nav_enabled et_primary_nav_dropdown_animation_fade et_secondary_nav_dropdown_animation_fade et_header_style_left et_cover_background et_pb_gutter windows et_pb_gutters3 et_pb_pagebuilder_layout et_no_sidebar et_divi_theme et-db dokan-theme-Divi customize-support chrome">
@@ -678,8 +681,7 @@
                              <input type="number" class="input-text form-control" name="quantity" title="Qty" size="4" required="required" inputmode="numeric" autocomplete="off" placeholder="Quantity">
                           </p>
                           <p class="form-row form-group">
-                            <textarea class="input-text form-control" name="add_note" id="add_note" rows="9" cols="80" required="required" placeholder="       Add Notes"></textarea>
-
+                            <textarea class="input-text form-control textarea-qa" name="add_note" id="add_note" rows="9" cols="80" required="required" placeholder="       Add Notes"></textarea>
                           </p>
 
                        <br>
