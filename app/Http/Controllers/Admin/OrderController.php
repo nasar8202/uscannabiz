@@ -276,10 +276,11 @@ class OrderController extends Controller
         $product = Product::where('id', $id)->first();
         $vender_request = VendorRequest::where('id',$request_id)->first();
         $vender_detail = User::where('id',$vender_request->vendor_id)->first();
+        $vender_detail_no = Customers::where('user_id',$vender_detail->id)->first();
         $login_vendor = Customers::where('user_id',Auth::user()->id)->first();
         // dd($login_vendor);
         // dd($order,$vender_detail,$vender_request);
-        return view('admin.order.broker_show', compact(['product','vender_request','vender_detail']));
+        return view('admin.order.broker_show', compact(['product','vender_request','vender_detail','vender_detail_no']));
 
     }
 

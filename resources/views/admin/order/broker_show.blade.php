@@ -127,8 +127,8 @@
                                                 <td><span  class="btn btn-info btn-xs" ><i class="fa fa-phone fa-fw"></i></span></td>
                                                 <td>
                                                     {{-- @if($order->customer_id == null) --}}
-                                                    <input type="hidden" name="vender_email" value="{{$vender_detail_no->phone_no}}">
-                                                        <a href="tel:{{$vender_detail_no->phone_no}}">{{$vender_detail_no->phone_no}}</a>
+                                                    <input type="hidden" name="vender_phone" value="{{$vender_detail_no->phone_no??''}}">
+                                                        <a href="tel:{{$vender_detail_no->phone_no??''}}">{{$vender_detail_no->phone_no??''}}</a>
                                                     {{-- @else
                                                         <a href="mailto:{{$order->customer->user->email}}">{{$order->customer->user->email}}</a>
                                                     @endif --}}
