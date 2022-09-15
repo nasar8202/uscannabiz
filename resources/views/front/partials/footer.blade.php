@@ -100,7 +100,6 @@
 </div>
 </div>
 {{-- product modal popup --}}
-
 {{-- <button class="trigger">Click the modal!</button> --}}
 <div class="modal modalTn">
     <div class="modal-content">
@@ -132,14 +131,16 @@
                   </p> --}}
                   <p class="form-row form-group">
                      <!-- <label for="last-name">Select Product <span class="required">*</span></label> -->
-                     <select name="product_id" id="product_vendor_find" class="input-text form-control" required>
+                     {{-- <select name="product_id" id="product_vendor_find" class="input-text form-control" required> --}}
+                     <select name="category_id" id="product_vendor_find" class="input-text form-control" required>
                         <option value="" selected disabled>What product are you looking for ?</option>
                         @foreach(GetProducts() as $products)
                         <option value="{{$products->id}}" data-vendor="{{$products->vender_id}}">{{$products->name}}</option>
                         @endforeach
                      </select>
                   </p>
-                  <input type="hidden" value="" name="vendor_id" id="set_vendor_id">
+                  
+                  {{-- <input type="hidden" value="{{$products->vender_id}}" name="vendor_id" id="set_vendor_id"> --}}
                   <p class="form-row form-group">
                      <!-- <label for="last-name">Quantity <span class="required">*</span></label> -->
                      <input type="number" class="input-text form-control" name="quantity" title="Qty" size="4" required="required" inputmode="numeric" autocomplete="off" placeholder="Quantity">
@@ -165,7 +166,6 @@
 
 </div>
 {{-- product modal popup --}}
-
 
 @section('extra-js')
     <!-- Include AlgoliaSearch JS Client and autocomplete.js library -->

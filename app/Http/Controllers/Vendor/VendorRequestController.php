@@ -40,6 +40,45 @@ class VendorRequestController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    public function ProductRequest(Request $request)
+    {
+        // dd($request->all());
+        $category = Category::where('id',$request->input('category_id'))->first();
+
+        $details = [
+            'name'=> $request->full_name,
+            'email' => $request->input('email'),
+            'phone_num' => $request->input('phone_num'),
+            'city' => $request->input('city'),
+            'quantity' => $request->input('quantity'),
+            'address'=>  $request->input('add_note'),
+            'product_name'=>$category->name,
+
+        ];
+        $vendorBrokerEmails = DB::table('customers')
+        ->select('users.approvel_status','users.email','customers.product_request','users.role_id')
+        ->join('users', 'users.id', '=', 'customers.user_id')
+        ->whereIn('users.role_id',  array(3,4))
+        //->where('users.role_id', '=', 4)
+        ->where('customers.product_request', '=', 1)
+        ->where('users.approvel_status', '=', 1)
+        ->get();
+    
+        
+        // dd($vendorBrokerEmails);
+        foreach($vendorBrokerEmails as $user){
+            //echo $user;
+            \Mail::to($user)->send(new \App\Mail\SendEmailAdminCustomerBroker($details));
+
+        }
+        $usersArray = [$request->input('email')];
+    foreach($usersArray as $user){
+    //echo $user;
+    \Mail::to($user)->send(new \App\Mail\SendEmailAdminCustomerBroker($details));
+    }
+    return redirect()->route('order_thanks')->with('success',"Request Has Been Submited");
+
+    }
     public function store(Request $request)
     {
         //$vendor = User::where('role_id',3)->first();
