@@ -157,13 +157,17 @@ ul.et_pb_social_media_follow{list-style-type:none!important;margin:0 0 22px;padd
     	             </div>
                  @endif
                  @else
-                 <div class="et_pb_module et_pb_wc_add_to_cart et_pb_wc_add_to_cart_0_tb_body et_pb_fields_label_position_default et_pb_bg_layout_  et_pb_text_align_left">
+                 {{-- <div class="et_pb_module et_pb_wc_add_to_cart et_pb_wc_add_to_cart_0_tb_body et_pb_fields_label_position_default et_pb_bg_layout_  et_pb_text_align_left">
 	                <div class="et_pb_module_inner">
 
 	                      <a href="{{ Route('vendorAddProductForm',$product->id ) }}" name="add-to-cart" value="381" class="single_add_to_cart_button button alt">Request to Broker</a>
 
 	                </div>
-	             </div>
+	             </div> --}}
+<br>
+                 <p style="color: red;font-weight: bold;">
+                    First Login To Buy This Product
+                </p>
 
                  @endif
                 </form>
@@ -219,7 +223,7 @@ ul.et_pb_social_media_follow{list-style-type:none!important;margin:0 0 22px;padd
 	                            <div id="review_form_wrapper">
 	                               <div id="review_form">
 	                                  <div id="respond" class="comment-respond">
-	                                     <span id="reply-title" class="comment-reply-title">Be the first to review &ldquo;abc-shirt&rdquo; <small><a rel="nofollow" id="cancel-comment-reply-link" href="/product/abc-shirt/#respond" style="display:none;">Cancel reply</a></small></span>
+	                                     {{-- <span id="reply-title" class="comment-reply-title">Be the first to review &ldquo;abc-shirt&rdquo; <small><a rel="nofollow" id="cancel-comment-reply-link" href="/product/abc-shirt/#respond" style="display:none;">Cancel reply</a></small></span> --}}
 	                                     <form  id="commentform" class="" action="{{route('sendReview_customer')}}" method="post">
                                             @csrf
 	                                        <p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> <span class="required-field-message" aria-hidden="true">Required fields are marked <span class="required" aria-hidden="true">*</span></span></p>
@@ -247,7 +251,7 @@ ul.et_pb_social_media_follow{list-style-type:none!important;margin:0 0 22px;padd
                                             <button type="submit" id="button-review" >send</button>
                                             @else
                                             <input type="hidden" name="user_id" id="" value="">
-                                            <span class="text-danger">You Cant Send Review Without Login</span>
+                                            <span style="color: red;font-weight: bold;">You Cant Send Review Without Login</span>
                                             @endif
 
 	                                     </form>

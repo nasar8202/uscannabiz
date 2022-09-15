@@ -110,7 +110,7 @@ use Illuminate\Support\Facades\Request;
                            @php
                            $role = Auth::user();
                            @endphp
-                           @if(isset($role) && $role->role_id == 2 || $role->role_id == 4)
+                           @if(isset($role) && $role->role_id == 2 || isset($role) &&  $role->role_id == 4)
                            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-44"><a href="javascript:void(0)" class="trigger">Product Request</a></li>
                            @endif
                             </li>
