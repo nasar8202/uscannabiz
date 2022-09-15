@@ -147,7 +147,7 @@ class OrderController extends Controller
             else{
 
                 $check = Customers::where('broker_request_id', $users->customers_id)->first();
-               dd($check);
+
                 $vendor_request = VendorRequest::where('vendor_id',$check->user_id)->orderBy('created_at','desc')->get();
                 //dd($vendor_request);
                 foreach($vendor_request as $items){
@@ -214,7 +214,7 @@ class OrderController extends Controller
             return view('admin.order.index');
         }
         else{
-            
+
             $check = Customers::where('broker_request_id', $users->customers_id)->first();
                 if($check == null){
                     $message_broker = "Not Assign Yet From Vendor!";
@@ -226,7 +226,7 @@ class OrderController extends Controller
                 // $vendor_request = VendorRequest::where('vendor_id',$check->user_id)->orderBy('created_at','desc')->get();
                 $vendor_request = VendorRequest::where('vendor_id',$customer->broker_request_id)->orderBy('created_at','desc')->get();
                 // $vendor_request = VendorRequest::get();
-                
+
                 foreach($vendor_request as $items){
                     // dd($items->customer_id);
                     // $user_get = Customers::where('user_id',$items->customer_id)->first();
@@ -236,7 +236,7 @@ class OrderController extends Controller
                         $product_id = $item1->vender_id;
                     }
                      if(!$vendor_request->isEmpty()){
-                        
+
                     $check_vendor = Customers::where('user_id', $product_id)->first();
                     $vender_request = VendorRequest::where('vendor_id',$check_vendor->user_id)->orderBy('created_at','desc')->get();
                     return view('admin.order.broker_index',compact('vender_request') );
@@ -246,7 +246,7 @@ class OrderController extends Controller
                     return view('admin.order.broker_index');
                 }
                 // }
-                   
+
         }
     }
 
