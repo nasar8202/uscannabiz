@@ -146,6 +146,18 @@
                             <p>Orders</p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{route('vendorBrokerAddProductForm')}}" class="nav-link {{ request()->IS('admin/vendorBrokerAddProductForm') ? 'active' : '' }}">
+                            <i class="nav-icon fa fa-angle-double-right"></i>
+                            <p>Add Product</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('vendorBrokerViewProduct')}}" class="nav-link {{ request()->IS('admin/vendorBrokerViewProduct') ? 'active' : '' }}">
+                            <i class="nav-icon fa fa-angle-double-right"></i>
+                            <p>View Product</p>
+                        </a>
+                    </li>
                     <?php  }
 
                     $role = Auth::user()->role_id;

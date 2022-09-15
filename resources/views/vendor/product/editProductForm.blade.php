@@ -87,7 +87,7 @@
 								<li class="dashboard {{ Request::route()->getName() == 'dashboard_vendor' ? 'active' : '' }}"><a href="{{route('dashboard_vendor')}}"><i class="fas fa-tachometer"></i> Dashboard</a></li>
 								<li class="products {{ Request::route()->getName() == 'product' ? 'active' : '' }}"><a href="{{route('product')}}"><i class="fas fa-briefcase"></i> Products</a></li>
 								<li class="orders {{ Request::route()->getName() == 'vendor_order' ? 'active' : '' }}"><a href="{{route('vendor_order')}}"><i class="fas fa-shopping-cart"></i> Orders</a></li>
-								<li class="orders {{ Request::route()->getName() == 'show_brokers' ? 'active' : '' }}"><a href="{{route('show_brokers')}}"><i class="fas fa-shopping-cart"></i> Broker</a></li>
+								{{-- <li class="orders {{ Request::route()->getName() == 'show_brokers' ? 'active' : '' }}"><a href="{{route('show_brokers')}}"><i class="fas fa-shopping-cart"></i> Broker</a></li> --}}
 	                            <li class="orders {{ Request::route()->getName() == 'show_inventory' ? 'active' : '' }}"><a href="{{route('show_inventory')}}"><i class="fas fa-shopping-cart"></i> Inventory</a></li>
                                 {{-- <li class="withdraw"><a href="{{route('show_brokers_yajra')}}""><i class="fas fa-upload"></i> Broker Yajra</a></li> --}}
 	                              <li class="settings {{ Request::route()->getName() == 'editVendor' ? 'active' : '' }}"><a href="{{ Route('editVendor') }}"><i class="fas fa-cog"></i> Settings <i class="fas fa-angle-right pull-right"></i></a></li>
@@ -113,7 +113,7 @@
              {{ csrf_field() }}
 
              <p class="form-row form-group">
-               
+
                   <label for="exampleInputEmail1">Main Category</label>
                   <select class="woocommerce-Input woocommerce-Input--text input-text {{ $errors->has('main_category') ? 'has-error' : ''}}" name="main_category" id="main-category" required>
                       <option value="" disabled selected>Select Category</option>
@@ -121,13 +121,13 @@
                         <option value="{{$category->id}}" {{$product->category_id == $category->id ? 'selected' : ''}}>{{$category->name}}</option>
                       @endforeach
                   </select>
-               
+
             </p>
             <p class="form-row form-group">
                 <label for="exampleInputEmail1">Product Featured/New</label>
                 <select name="product_featured" id="" class="woocommerce-Input woocommerce-Input--text input-text" required>
                     <option value="" >Select Product Type</option>
-                 
+
                     <option value="Feature" @if($product->product_type == "Feature") {{ 'selected' }} @endif>Featured</option>
                     <option value="New"  @if($product->product_type == "New") {{ 'selected' }} @endif>New</option>
                 </select>

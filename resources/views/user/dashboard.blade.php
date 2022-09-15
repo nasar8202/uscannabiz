@@ -527,10 +527,10 @@
                                                 <div class="woocommerce">
                                                     <nav class="woocommerce-MyAccount-navigation">
                                                         <ul>
-                                                            {{-- <li
-                                                                class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--dashboard is-active">
-                                                                <a href="{{route('MyOrders')}}">Dashboard</a>
-                                                            </li> --}}
+                                                            <li
+                                                            class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--dashboard is-active {{ Request::route()->getName() == 'show_brokers' ? 'active' : '' }}">
+                                                            <a href="{{route('show_brokers')}}">Broker</a>
+                                                        </li>
                                                             <li
                                                                 class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--edit-account">
                                                                 <a href="{{route('edit-account')}}">Account details</a>

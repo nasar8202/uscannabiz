@@ -241,7 +241,7 @@ class FrontController extends Controller
             //     });
 
             // }
-                $producttype = Product::where('product_type',"feature",)->where(['status'=>'1','approvel_admin_status'=>1])->get();
+                $producttype = Product::where('product_type',"feature")->where(['status'=>'1','approvel_admin_status'=>1])->get();
                 // dd($producttype);
           if (request()->sort == 'low_high') {
               $products = $products->orderBy('product_current_price');

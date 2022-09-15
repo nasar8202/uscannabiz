@@ -365,43 +365,31 @@
                                     <div
                                         class="et_pb_module et_pb_text et_pb_text_1 f-text  et_pb_text_align_left et_pb_bg_layout_light">
                                         <div class="et_pb_text_inner">
-                                            <h1>Categories</h1>
+                                            <h1>Featured Products</h1>
                                         </div>
                                     </div>
                                     <div class="et_pb_module et_pb_code et_pb_code_0 main-cate">
                                         <div class="et_pb_code_inner">
                                             <div class="woocommerce columns-4">
                                                 <ul class="products columns-4" style="display:flex;flex-wrap:wrap;">
-                                            @forelse ($categories_for_div as $category)
+                                                    @forelse ($producttype as $type)
 
                                                     <li class="product-category product first">
-                                                        
-                                                        @if($category->name == 'Seeds')
-                                                           <a class="width-100"  href="{{ route('productCategory', ['slug' => $category->category_slug,'id'=>$category->id]) }}">
-                                                            <img src="{{asset('uploads/category').'/'.$category->category_image}}"  srcset="{{asset('uploads/category').'/'.$category->category_image}} 300w, {{asset('uploads/category').'/'.$category->category_image}} 150w, {{asset('uploads/category').'/'.$category->category_image}} 100w">
-                                                            <h2 class="woocommerce-loop-category__title">
-                                                                {{ $category->name }} <mark class="count">(6)</mark>
-                                                            </h2>
+                                                        <a href="{{ route('shop.showProduct', $type->slug) }}" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
+                                                            <span class="et_shop_image"><img width="51" height="53" src="{{asset('uploads/products').'/'.$type->product_image}}" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="" loading="lazy"><span class="et_overlay"></span></span>
+                                                            <h2 class="woocommerce-loop-product__title">{{$type->product_name}}</h2>
                                                         </a>
-                                                        @else
-                                                         <a  href="{{ route('productCategory', ['slug' => $category->category_slug,'id'=>$category->id]) }}">
-                                                            <img src="{{asset('uploads/category').'/'.$category->category_image}}"  srcset="{{asset('uploads/category').'/'.$category->category_image}} 300w, {{asset('uploads/category').'/'.$category->category_image}} 150w, {{asset('uploads/category').'/'.$category->category_image}} 100w">
-                                                            <h2 class="woocommerce-loop-category__title">
-                                                                {{ $category->name }} <mark class="count">(6)</mark>
-                                                            </h2>
-                                                        </a> 
-                                                        @endif
                                                     </li>
-                                            @empty
-                                                <div style="text-align: left">No items found</div>
-                                            @endforelse
+                                                    @empty
+                                                        <div style="text-align: left">No items found</div>
+                                                    @endforelse
                                                 </ul>
                                             </div>
                                         </div>
                                      </div>
 
                                 </div>
-                                <div
+                                {{-- <div
                                     class="et_pb_column et_pb_column_1_5 et_pb_column_2  et_pb_css_mix_blend_mode_passthrough et-last-child">
                                     <div
                                         class="et_pb_module et_pb_text et_pb_text_2  et_pb_text_align_left et_pb_bg_layout_light">
@@ -424,7 +412,7 @@
                                             @endforelse
                                         </ul>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     </div>
@@ -442,5 +430,5 @@
     <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
     <script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.min.js"></script>
     {{-- <script src="{{ asset('js/algolia.js') }}"></script> --}}
-    
+
 @endsection

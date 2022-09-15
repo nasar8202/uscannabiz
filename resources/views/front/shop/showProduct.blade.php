@@ -59,6 +59,7 @@ ul.et_pb_social_media_follow{list-style-type:none!important;margin:0 0 22px;padd
 	<div id="main-content">
 	<div class="clearfix"></div>
     <div class="container msgContainer">
+
         @if (session()->has('success_message'))
             <div class="alert alert-success">
                 {{ session()->get('success_message') }}
@@ -73,6 +74,12 @@ ul.et_pb_social_media_follow{list-style-type:none!important;margin:0 0 22px;padd
                 </ul>
             </div>
         @endif
+        @if (session()->has('error'))
+        <div class="alert alert-danger">
+            {{ session()->get('error') }}
+        </div>
+    @endif
+
     </div>
 	<div class="et-l et-l--body">
 	 <div class="et_builder_inner_content et_pb_gutters3 product">
@@ -123,7 +130,7 @@ ul.et_pb_social_media_follow{list-style-type:none!important;margin:0 0 22px;padd
                     $check_broker = Auth::user()->role_id;
                 @endphp
              @if ($check_broker == 4)
-             
+
                 <div class="et_pb_module et_pb_wc_price et_pb_wc_price_0_tb_body">
 	                <div class="et_pb_module_inner">
                         <p class="price"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">&#36;</span>{{ $product->product_current_price }}</bdi></span></p>
@@ -143,9 +150,9 @@ ul.et_pb_social_media_follow{list-style-type:none!important;margin:0 0 22px;padd
                  @if ($check_broker != 4 && $check_broker != 3)
     	             <div class="et_pb_module et_pb_wc_add_to_cart et_pb_wc_add_to_cart_0_tb_body et_pb_fields_label_position_default et_pb_bg_layout_  et_pb_text_align_left">
     	                <div class="et_pb_module_inner">
-    
+
     	                      <a href="{{ Route('vendorAddProductForm',$product->id ) }}" name="add-to-cart" value="381" class="single_add_to_cart_button button alt">Request to Broker</a>
-    
+
     	                </div>
     	             </div>
                  @endif
@@ -157,7 +164,7 @@ ul.et_pb_social_media_follow{list-style-type:none!important;margin:0 0 22px;padd
 
 	                </div>
 	             </div>
-                 
+
                  @endif
                 </form>
 	          </div>
@@ -182,27 +189,27 @@ ul.et_pb_social_media_follow{list-style-type:none!important;margin:0 0 22px;padd
                                     @if(count($productReviews) > 0) {{count($productReviews)}} @endif Reviews
 	                               </h2>
 	                               <p class="woocommerce-noreviews">@if(count($productReviews) > 0) {{count($productReviews)}} @else No @endif review(s) for this Product</p>
-                                  
+
                                     <h5>Product Review</h5>
                                    <div class="main_productReview_table">
                                        <table class="table productReview_table">
                                         <thead>
                                           <tr>
-                                            
+
                                             <th scope="col">author</th>
                                             <th scope="col">description</th>
-                                         
+
                                           </tr>
                                         </thead>
                                         <tbody>
                                         @foreach($productReviews as $reviews)
                                           <tr>
-                                            
+
                                             <td>{{$reviews->author}}</td>
                                             <td>{{$reviews->description}}</td>
-                                            
+
                                           </tr>
-                                          
+
                                         @endforeach
                                         </tbody>
                                       </table>
@@ -228,8 +235,8 @@ ul.et_pb_social_media_follow{list-style-type:none!important;margin:0 0 22px;padd
 	                                        </div>
 	                                        <p class="comment-form-author"><label for="author">Name&nbsp;<span class="required">*</span></label><input id="author" name="name" type="text" value="" size="30" required></p>
 	                                        <p class="comment-form-comment"><label for="comment">Your review&nbsp;<span class="required">*</span></label><textarea id="comment" name="review" cols="45" rows="8" required></textarea></p>
-	                                     
-                                            
+
+
                                             <input type="hidden" name="product_id" id="product_id" value="{{ $product->id }}">
                                             @php
                                             $check_user = Auth::user();
@@ -242,7 +249,7 @@ ul.et_pb_social_media_follow{list-style-type:none!important;margin:0 0 22px;padd
                                             <input type="hidden" name="user_id" id="" value="">
                                             <span class="text-danger">You Cant Send Review Without Login</span>
                                             @endif
-                                            
+
 	                                     </form>
 	                                  </div>
 	                                  <!-- #respond -->

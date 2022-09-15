@@ -208,11 +208,11 @@ class VendorController extends Controller
     {
 
         try {
-            $check =Customers::join('users','users.email','=','customers.email')->where('role_id','=',3)->where('broker_request','!=',null)->get();
+            $check =Customers::join('users','users.email','=','customers.email')->where('role_id','=',2)->where('broker_request','!=',null)->get();
             // dd($check);
             if (request()->ajax()) {
                 // return datatables()->of(Customers::join('Users','Users.id' ,'=' ,'Customers.user_id')->where('role_id','=',3)->get())
-                return datatables()->of(Customers::join('users','users.email','=','customers.email')->where('role_id','=',3)->where('broker_request','!=',null)->get())
+                return datatables()->of(Customers::join('users','users.email','=','customers.email')->where('role_id','=',2)->where('broker_request','!=',null)->get())
                     ->addIndexColumn()
                     ->addColumn('status', function ($data) {
                         return '<a title="Approve" href="customerStatusAccept/' . $data->id . '"
@@ -285,7 +285,7 @@ class VendorController extends Controller
 
             $user = User::join('customers','users.customers_id','=','customers.id')->where(['role_id'=>3,'approvel_status'=>1])->get();
                 try {
-        
+
                     if (request()->ajax()) {
                         return datatables()->of($user)
                             ->addIndexColumn()
@@ -294,7 +294,7 @@ class VendorController extends Controller
                                 class="btn btn-dark btn-sm"><i class="fas fa-eye"></i></a><button title="Delete" type="button" name="delete" id="' . $data->id . '"
                                 class="delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>';
                             })->rawColumns(['action'])->make(true);
-        
+
                     }
                 } catch (\Exception $ex) {
                     return redirect('/')->with('error', $ex->getMessage());
@@ -307,7 +307,7 @@ class VendorController extends Controller
 
             $user = User::join('customers','users.customers_id','=','customers.id')->where(['role_id'=>2,'approvel_status'=>1])->get();
                 try {
-        
+
                     if (request()->ajax()) {
                         return datatables()->of($user)
                             ->addIndexColumn()
@@ -316,7 +316,7 @@ class VendorController extends Controller
                                 class="btn btn-dark btn-sm"><i class="fas fa-eye"></i></a><button title="Delete" type="button" name="delete" id="' . $data->id . '"
                                 class="delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>';
                             })->rawColumns(['action'])->make(true);
-        
+
                     }
                 } catch (\Exception $ex) {
                     return redirect('/')->with('error', $ex->getMessage());

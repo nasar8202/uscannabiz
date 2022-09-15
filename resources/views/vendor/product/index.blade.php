@@ -11,7 +11,7 @@
 	         <div id="left-area">
 	            <article id="post-7" class="post-7 page type-page status-publish hentry">
 	               <h1 class="entry-title main_title">Products</h1>
-				  
+
 	               <div class="entry-content">
 	                  <div class="dokan-dashboard-wrap">
 	                     <div class="dokan-dash-sidebar">
@@ -33,8 +33,8 @@
 								<li class="dashboard {{ Request::route()->getName() == 'dashboard_vendor' ? 'active' : '' }}"><a href="{{route('dashboard_vendor')}}"><i class="fas fa-tachometer"></i> Dashboard</a></li>
 								<li class="products {{ Request::route()->getName() == 'product' ? 'active' : '' }}"><a href="{{route('product')}}"><i class="fas fa-briefcase"></i> Products</a></li>
 								<li class="orders {{ Request::route()->getName() == 'vendor_order' ? 'active' : '' }}"><a href="{{route('vendor_order')}}"><i class="fas fa-shopping-cart"></i> Orders</a></li>
-								<li class="orders {{ Request::route()->getName() == 'show_brokers' ? 'active' : '' }}"><a href="{{route('show_brokers')}}"><i class="fas fa-shopping-cart"></i> Broker</a></li>
-	                            <li class="orders {{ Request::route()->getName() == 'show_inventory' ? 'active' : '' }}"><a href="{{route('show_inventory')}}"><i class="fas fa-shopping-cart"></i> Inventory</a></li>  
+								{{-- <li class="orders {{ Request::route()->getName() == 'show_brokers' ? 'active' : '' }}"><a href="{{route('show_brokers')}}"><i class="fas fa-shopping-cart"></i> Broker</a></li> --}}
+	                            <li class="orders {{ Request::route()->getName() == 'show_inventory' ? 'active' : '' }}"><a href="{{route('show_inventory')}}"><i class="fas fa-shopping-cart"></i> Inventory</a></li>
 								{{-- <li class="withdraw"><a href="{{route('show_brokers_yajra')}}""><i class="fas fa-upload"></i> Broker Yajra</a></li> --}}
 	                              <li class="settings {{ Request::route()->getName() == 'editVendor' ? 'active' : '' }}"><a href="{{ Route('editVendor') }}"><i class="fas fa-cog"></i> Settings <i class="fas fa-angle-right pull-right"></i></a></li>
 	                              {{-- <li class="dokan-common-links dokan-clearfix">
@@ -61,9 +61,9 @@
 								 @if ($errors->any())
 								 @foreach ($errors->all() as $error)
 								 <div class="alert alert-danger alert-block">
-									 
+
 										 <strong>{{ $error }}</strong>
-									 
+
 								 </div>
 								 @endforeach
 								 @endif
@@ -80,7 +80,7 @@
 						               {{-- <a >In stock ({{$product_stock->product_qty??0}})</a> --}}
 						            </li>
 						         </ul>
-								 
+
 						         <!-- .post-statuses-filter -->
 						         <span class="dokan-add-product-link">
 						         <a href="{{Route('productForm')}}" class="dokan-btn dokan-btn-theme dokan-add-new-product">

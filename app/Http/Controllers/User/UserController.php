@@ -343,5 +343,82 @@ class UserController extends Controller
 
     }
 
+    public function show_broker()
+    {
+        $check = Customers::where('user_id',Auth::user()->id)->first();
+        // dd($check);
+        $countBroker = User::where(['role_id'=>4,'approvel_status'=>1])->count();
+        if($check->broker_request != null && $check->broker_request_id == null){
+            $show_data = "Your Request Send To Admin Successfully Wait For Admin Approval !";
+            return view('user.brokers.index',compact(['countBroker','show_data']));
+        }
+        elseif($check->broker_request != null && $check->broker_request_id != null){
+            // $brokers = User::join('customers','users.customers_id','=','customers.id')->where(["role_id"=>4])
+            // ->select('customers.*','users.id as user_id_from_users')
+            // ->get();
+            $brokers = Customers::where('id',$check->broker_request_id)->get();
+            // $customer_condition = Customers::where();
+            $customer_condition = $check->broker_request_id;
+            return view('user.brokers.index',compact('brokers','countBroker','customer_condition'));
+        }
+        else{
+            $brokers = User::join('customers','users.customers_id','=','customers.id')->where(["role_id"=>4,'approvel_status'=>1])
+            ->select('customers.*','users.id as user_id_from_users')
+            ->get();
+            return view('user.brokers.index',compact(['brokers',$brokers,'countBroker',$countBroker]));
+        }
+    }
+
+
+    public function assignbroker(Request $request)
+    {
+        $messsages = array(
+            'id.required'=>'Please Select Broker to Request.',
+        );
+
+        $rules = array(
+            'id'=>'required',
+        );
+
+        $validator = Validator::make($request->all(), $rules,$messsages);
+
+        // $validator = Validator::make($request->all(), [
+        //     'id' => 'required',
+        // ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator);
+        }
+        // $broker_request_id = $request->id;
+
+        // $vendor_email = Auth::user()->email;
+        // dd($vendor_email);
+
+        // foreach($broker_request_id as $id ){
+        //     customers::where("email",$vendor_email)->updateOrCreate([
+        //         'broker_request'=>$id,
+        //     ]);
+        // }
+
+     $id = $request->id;
+
+     $vendor_email = Auth::user()->email;
+     $groups_update = customers::where("email",$vendor_email)->first();
+    //  dd($groups_update);
+     $groups_update->broker_request = implode('|',$id);
+     $groups_update->save();
+
+     return back()->with(['success' => 'Broker Request Sent Successfully']);
+
+    }
+
+    public function vendor_remove_broker($id)
+    {
+        $customer = Customers::where(['user_id'=>Auth::user()->id,'broker_request_id'=>$id])->first();
+        $customer->broker_request_id = Null;
+        $customer->broker_request = Null;
+        $customer->save();
+        return back()->with(['success' => 'Broker Cancle Successfully']);
+    }
 
 }

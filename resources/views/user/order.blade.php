@@ -527,10 +527,11 @@
                                                 <div class="woocommerce">
                                                     <nav class="woocommerce-MyAccount-navigation">
                                                         <ul>
-                                                            {{-- <li
-                                                                class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--dashboard is-active">
-                                                                <a href="{{route('MyOrders')}}">Dashboard</a>
-                                                            </li> --}}
+                                                            {{-- <li class="orders {{ Request::route()->getName() == 'show_brokers' ? 'active' : '' }}"><a href="{{route('show_brokers')}}"><i class="fas fa-shopping-cart"></i> Broker</a></li> --}}
+                                                            <li
+                                                                class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--dashboard is-active {{ Request::route()->getName() == 'show_brokers' ? 'active' : '' }}">
+                                                                <a href="{{route('show_brokers')}}">Broker</a>
+                                                            </li>
                                                             <li
                                                                 class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--edit-account">
                                                                 <a href="{{route('edit-account')}}">Account details</a>
@@ -556,13 +557,13 @@
                                                         </ul>
                                                     </nav>
                                                     <div class="woocommerce-MyAccount-content">
-                                                       
+
                                                         <div class="noRecord">
                                                             <div class="table orderTable itemDetail">
                                                                  <h2 class="woocommerce-message woocommerce-message--info woocommerce-Message woocommerce-Message--info woocommerce-info">
                                                                     Order Item Details
                                                                 </h2>
-                                                            
+
                                                                 <table class="table orderTable">
                                                                     <thead>
                                                                         <tr>
@@ -595,7 +596,7 @@
                                                                                 <p>{{date('d-m-Y',strtotime($order->created_at))}}</p>
                                                                             </td>
                                                                         </tr>
-    
+
                                                                     </tbody>
                                                                 </table>
                                                             </div>
@@ -632,7 +633,7 @@
                                                                             <a href="{{URL::to('/').'/shop/'.$order_items_first->product->slug}}" target="_blank">
                                                                                 {{$order_items_first->product->product_name}}
                                                                             </a><br>
-                                                                           @if($order_items_first->orderOptions!==null) 
+                                                                           @if($order_items_first->orderOptions!==null)
                                                                             @forelse($order_items_first->orderOptions as $option)
                                                                                 <p style="margin-bottom: 0 !important;"><b>{{ $option->optionValue['option']['option_name']}}</b> : {{ $option->optionValue['option_value']}}</p>
                                                                             @empty
@@ -660,7 +661,7 @@
                                                                     <thead>
                                                                         <tr>
                                                                             <td style="width: 50%;font-weight: bold" class="text-left">Details</td>
-                                                                        
+
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
@@ -668,21 +669,21 @@
                                                                             <td class="text-left">
                                                                                 <strong>Address</strong> : {{$order->shipping_address}}
                                                                                 <br>
-                                                                               
+
                                                                                 <strong>City</strong> :  {{$order->shipping_city}}
                                                                                 <br>
                                                                             </td>
-                                                                            
+
                                                                         </tr>
                                                                     </tbody>
                                                                 </table>
                                                             </div>
                                                         </div>
-                                                    
 
-                                                    
-                                                        
-                                                        
+
+
+
+
 
 
                                                     </div>
@@ -704,11 +705,11 @@
 <script>
 
     $(window).on('load',function(){
-        
+
         setTimeout(function(){
-            $('.table.orderTable.proDetail,.table.orderTable.shippingDetail').appendTo('.itemDetail .table-overflowx-auto > div');    
+            $('.table.orderTable.proDetail,.table.orderTable.shippingDetail').appendTo('.itemDetail .table-overflowx-auto > div');
         },1000);
-        
+
     });
 </script>
 @endsection

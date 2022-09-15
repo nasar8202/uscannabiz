@@ -25,7 +25,7 @@ use DB;
 use Auth;
 use App\Notifications\ProductApprovedNotificaton;
 use App\Notifications\ProductDeclineNotificaton;
-
+use App\Notifications\AdminNewProductNotification;
 class ProductController extends Controller
 {
     /**
@@ -304,7 +304,7 @@ class ProductController extends Controller
         $products = Product::whereStatus(1)->where('id', '!=', $id)->get();
         $manufacturers = Manufacturer::whereStatus(1)->get();
 
-        return view('admin.product.edit', compact('product', 'mainCategories','subCategories', 'attributeGroups', 'options', 'relatedProducts', 'products', 'option_values', 'manufacturers'));
+        return view('admin.broker.vendorEditProductForm', compact('product', 'mainCategories','subCategories', 'attributeGroups', 'options', 'relatedProducts', 'products', 'option_values', 'manufacturers'));
     }
 
     /**
@@ -457,6 +457,7 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
+
         $check = OrderItem::where('product_id', $id)->count();
         if ($check > 0) {
             echo 0;
@@ -536,5 +537,253 @@ class ProductController extends Controller
         return response()->json([
             'OptionValues' => $OptionValue
         ]);
+    }
+
+    public function vendorBrokerAddProductForm(Request $request)
+    {
+        // $auth = Auth::user()->customers_id;
+        // $find_Customer = Customers::where('id',$auth)->first();
+        // if($find_Customer->broker_request_id == null){
+        //     return back()->with('error','You Dont Have Any Broker');
+        // }
+        // else{
+        $categories = Category::get();
+        $products = Product::whereStatus(1)->get();
+        //return view('vendor.product.addProductForm',compact('categories','products'));
+        return view('admin.broker.vendorAddProductForm',compact('categories','products'));
+    //}
+
+
+    }
+
+    public function addProduct(Request $request)
+    {
+
+
+    //    dd($request->all());
+        $validator = Validator::make($request->all(), array(
+
+            'product_name' => 'required',
+            'product_slug' => 'required|unique:products,slug,',
+            'current_price' => 'required|numeric',
+            'description' => 'required',
+            'product_image_first' => 'required',
+
+            // 'manufacturer' => 'required',
+        ));
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator);
+        }
+        //image uploading
+            DB::beginTransaction();
+            try{
+                if ($request->file('product_image_first')) {
+                    $product_image_first = time() . '_' . $request->file('product_image_first')->getClientOriginalName();
+                    //            $product_image_first_path = $request->file('product_image_first')->storeAs('products', $product_image_first);
+                    $request->file('product_image_first')->move(public_path() . '/uploads/products/', $product_image_first);
+                } else {
+                    $product_image_first = null;
+                }
+
+                $timestamp = mt_rand(1, time());
+
+                $product = Product::create([
+                    'category_id' => $request->get('main_category'),
+                    'product_name' => $request->get('product_name'),
+                    'sku' => $timestamp." ".$request->get('product_name'),
+                    'slug' => $request->get('product_slug'),
+                    'product_current_price' => $request->get('current_price'),
+                    'product_sale' => $request->get('product_sale') ?? 'no',
+                    'product_sale_percentage' => $request->get('product_sale_percentage') ?? 0,
+                    'product_stock' => $request->get('product_stock') ?? 'no',
+                    'product_qty' => $request->get('product_stock_qty') ?? '0',
+                    'product_type' => $request->get('product_featured'),
+                    'length' => 11,
+                    'width' => 11,
+                    'height' => 1,
+                    'weight' =>$request->get('weight'),
+                    'description' => $request->get('description'),
+                    'status' => $request->get('status') ?? 0,
+                    'product_image' => $product_image_first,
+                    'vender_id' => Auth::user()->id,
+
+                ]);
+
+                if ($request->get('meta-title') !== null && $request->get('meta-description') !== null && $request->get('meta-keywords') !== null) {
+                    ProductMetaData::create([
+                        'product_id' => $product->id,
+                        'meta_tag_title' => $request->get('meta-title'),
+                        'meta_tag_description' => $request->get('meta-description'),
+                        'meta_tag_keywords' => $request->get('meta-keywords'),
+                        'status' => 1,
+                    ]);
+                }
+
+                // if ($request->file('product_image')) {
+
+                //     foreach ($request->file('product_image') as $key => $product_image) {
+                //         $product_image_ad = time() . '_' . $product_image->getClientOriginalName();
+                //         $product_image_ad_path = $product_image->storeAs('products', $product_image_ad);
+                //         $product_image->move(public_path() . '/uploads/products/', $product_image_ad);
+
+                //         ProductImage::create([
+                //             'products_id' => $product->id,
+                //             'product_images' => $product_image_ad
+                //         ]);
+                //     }
+                // }
+
+                // Related Products
+                if (!empty($request->get('related_prod_id'))) {
+                    foreach ($request->get('related_prod_id') as $relatedProduct) {
+                        RelatedProduct::create([
+                            'product_id' => $product->id,
+                            'related_id' => $relatedProduct
+                        ]);
+                    }
+                }
+                $administrators = User::where('id',1)->get();
+                foreach($administrators as $administrator){
+                    $administrator->notify(new AdminNewProductNotification($request->get('product_name'), $request->get('product_slug'),$request->get('current_price')));
+                }
+                //return $product;
+
+
+            }
+            catch(\Illuminate\Database\QueryException $e)
+            {
+                // back to form with errors
+                DB::rollback();
+                return Redirect()->back()
+                    ->with('error',$e->getMessage() )
+                    ->withInput();
+
+            }catch(\Exception $e)
+            {
+                DB::rollback();
+                return Redirect()->back()
+                    ->with('error',$e->getMessage() )
+                    ->withInput();
+            }
+            DB::commit();
+
+        return redirect('/admin/vendor-broker-add-product-form')->with(['success' => 'Product Added Successfully']);
+
+
+
+        // $product = new Product;
+        // $product->category_id = $request->input('main_category');
+        // $product->product_name = $request->input('product_name');
+        // $product->product_current_price = $request->input('current_price');
+        // $product->sku = $request->input('product_sku');
+        // $product->slug = $request->input('product_slug');
+        // $product->product_sale_percentage = $request->input('product_sale_percentage');
+        // $product->product_sale = $request->input('product_sale');
+        // $product->product_stock = $request->input('product_stock');
+        // $product->product_qty = $request->input('product_stock_qty');
+        // $product->status = $request->input('status');
+        // $product->description = $request->input('description');
+        // $product->save();
+        // $product_id = $product->id;
+        // if($product){
+
+        //     $meta->product_id = $product_id;
+        //     $meta->meta_tag_title = $product_id;
+
+
+        // }
+
+    }
+
+    public function vendorBrokerViewProduct()
+    {
+        $auth = Auth::user()->id;
+       // $find_Customer = Customers::where('id',$auth)->first();
+       $product =  Product::with('category')->where('approvel_admin_status',1)->where('vender_id',$auth)->orderBy('created_at','desc')->get();
+        try {
+            if (request()->ajax()) {
+                return datatables()->of($product)
+                    ->addIndexColumn()
+                    ->addColumn('category_id', function ($data) {
+                        return $data->category->name ?? '';
+                    })
+                    ->addColumn('product_current_price', function ($data) {
+                        return $data->product_current_price ?? '';
+                    })
+
+                    ->addColumn('action', function ($data) {
+
+                            return '<a title="View" href="vendor-broker-edit-product-form/' . $data->id . '" class="btn btn-dark btn-sm"><i class="fas fa-eye">Edit</i></a><a title="View" href="product/' . $data->id . '" class="btn btn-dark btn-sm"><i class="fas fa-eye"></i></a><button title="Delete" type="button" name="delete" id="' . $data->id . '" class="delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>';
+
+
+
+                    })->rawColumns(['status', 'category_id', 'action'])->make(true);
+            }
+        } catch (\Exception $ex) {
+            return redirect('/')->with('error', 'SomeThing Went Wrong baby');
+        }
+        return view('admin.broker.vendorBrokerViewProduct');
+    }
+    public function updateProduct(Request $request, $id)
+    {
+
+        $product = Product::where('id', $id)->first();
+
+        //image uploading
+
+        if ($request->file('product_image_first')) {
+            $product_image_first = time() . '_' . $request->product_image_first->getClientOriginalName();
+            //            $product_image_first_path = $request->file('product_image_first')->storeAs('products', $product_image_first);
+            $request->file('product_image_first')->move(public_path() . '/uploads/products/', $product_image_first);
+            $product->product_image = $product_image_first;
+        } else {
+            $product_image_first = null;
+        }
+
+        $timestamp = mt_rand(1, time());
+        $product->category_id  = $request->get('main_category');
+        $product->sub_category_id = $request->get('sub_category');
+        $product->product_name = $request->get('product_name');
+        $product->description = $request->get('description');
+        $product->sku = $timestamp." ".$request->get('product_name');
+        $product->slug = $request->get('product_slug');
+        $product->product_current_price = $request->get('current_price');
+        $product->product_sale = $request->get('product_sale') ?? 'no';
+        $product->product_sale_percentage = $request->get('product_sale_percentage') ?? 0;
+        $product->product_stock = $request->get('product_stock') ?? 'no';
+        $product->product_qty = $request->get('product_stock_qty');
+        $product->product_type = $request->get('product_featured');
+        $product->length = 145;
+        $product->width = 12;
+        $product->height = 12;
+        $product->weight =$request->get('weight');
+        $product->status = $request->get('status') ?? 0;
+        $product->vender_id = Auth::user()->id;
+        $product->save();
+
+        ProductMetaData::updateOrCreate([
+            'product_id' => $product->id,
+        ], [
+            'product_id' => $product->id,
+            'meta_tag_title' => $request->get('meta-title'),
+            'meta_tag_description' => $request->get('meta-description'),
+            'meta_tag_keywords' => $request->get('meta-keywords'),
+            'status' => 1,
+        ]);
+
+
+
+        if (!empty($request->get('related_prod_id'))) {
+            foreach ($request->get('related_prod_id') as $relatedProduct) {
+                RelatedProduct::updateOrCreate([
+                    'product_id' => $product->id,
+                    'related_id' => $relatedProduct
+                ]);
+            }
+        }
+
+        return redirect('/admin/view-my-product')->with(['success' => 'Product Updated Successfully']);
+
+
     }
 }

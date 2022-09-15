@@ -19,9 +19,9 @@
 										@if ($errors->any())
 										@foreach ($errors->all() as $error)
 										<div class="alert alert-danger alert-block">
-											
+
 												<strong>{{ $error }}</strong>
-											
+
 										</div>
 										@endforeach
 										@endif
@@ -46,7 +46,7 @@
 								<li class="dashboard {{ Request::route()->getName() == 'dashboard_vendor' ? 'active' : '' }}"><a href="{{route('dashboard_vendor')}}"><i class="fas fa-tachometer"></i> Dashboard</a></li>
 								<li class="products {{ Request::route()->getName() == 'product' ? 'active' : '' }}"><a href="{{route('product')}}"><i class="fas fa-briefcase"></i> Products</a></li>
 								<li class="orders {{ Request::route()->getName() == 'vendor_order' ? 'active' : '' }}"><a href="{{route('vendor_order')}}"><i class="fas fa-shopping-cart"></i> Orders</a></li>
-								<li class="orders {{ Request::route()->getName() == 'show_brokers' ? 'active' : '' }}"><a href="{{route('show_brokers')}}"><i class="fas fa-shopping-cart"></i> Broker</a></li>
+								{{-- <li class="orders {{ Request::route()->getName() == 'show_brokers' ? 'active' : '' }}"><a href="{{route('show_brokers')}}"><i class="fas fa-shopping-cart"></i> Broker</a></li> --}}
 	                            <li class="orders {{ Request::route()->getName() == 'show_inventory' ? 'active' : '' }}"><a href="{{route('show_inventory')}}"><i class="fas fa-shopping-cart"></i> Inventory</a></li>
 								{{-- <li class="withdraw"><a href="{{route('show_brokers_yajra')}}""><i class="fas fa-upload"></i> Broker Yajra</a></li> --}}
 	                              <li class="settings {{ Request::route()->getName() == 'editVendor' ? 'active' : '' }}"><a href="{{ Route('editVendor') }}"><i class="fas fa-cog"></i> Settings <i class="fas fa-angle-right pull-right"></i></a></li>
@@ -117,7 +117,7 @@
 								<form method="GET" action="{{Route('assignbroker')}}">
 								<table class="dokan-table dokan-table-striped product-listing-table dokan-inline-editable-table" id="dokan-product-list-table">
 								<thead>
-									
+
 								   <tr>
 									@if(isset($brokers) && isset($customer_condition) && $customer_condition == $brokers->first()->id)
 									@else
@@ -138,7 +138,7 @@
 									  {{-- <th>Broker Percentage</th> --}}
 									  @else
 										@endif
-									  
+
 								   </tr>
 								</thead>
 								<tbody>
@@ -185,7 +185,7 @@
 										<td data-title="address" class="column-primary">
 											<a href="{{route('vendor_remove_broker',['id'=>$broker->id])}}" class="dokan-btn dokan-btn-theme dokan-add-new-product">Cancle</a>
 										</td>
-										
+
 										@else
 									  @endif
 									{{-- @if(isset($customer_condition) && $customer_condition == $broker->id)
@@ -196,7 +196,7 @@
 									</th>
 									@endif --}}
 									  <td data-title="address" class="column-primary">
-										
+
 									  <td class="diviader"></td>
 								   </tr>
 								   @endforeach
@@ -210,13 +210,13 @@
 						         No Brokers found
 						      </div>
 							  @endif
-							  
+
 						   </article>
 						   @if(isset($customer_condition) && $customer_condition == $broker->id)
 						   @else
 						   <span class="dokan-add-product-link">
 							   <button type="submit" class="dokan-btn dokan-btn-theme dokan-add-new-product float-right">Send Request</button>
-							   
+
 							</span>
 							@endif
 						</form>

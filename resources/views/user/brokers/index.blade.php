@@ -1,5 +1,5 @@
 @extends('front.layout.app')
-@section('title', 'Customer')
+@section('title', 'My Orders')
 @section('content')
     <style id="et-critical-inline-css">
         .woocommerce #respond input#submit,
@@ -496,6 +496,9 @@
                 font-size: 25px
             }
         }
+        .modal-content textarea.form-control{
+            border-radius: 20px;
+        }
     </style>
     <div
         class="page-template-default theme-Divi et-tb-has-template et-tb-has-footer woocommerce-account woocommerce-page woocommerce-js et_button_no_icon et_pb_button_helper_class et_fixed_nav et_show_nav et_secondary_nav_enabled et_primary_nav_dropdown_animation_fade et_secondary_nav_dropdown_animation_fade et_header_style_left et_cover_background et_pb_gutter windows et_pb_gutters3 et_pb_pagebuilder_layout et_no_sidebar et_divi_theme et-db dokan-theme-Divi customize-support chrome">
@@ -511,12 +514,31 @@
                                         <div
                                             class="et_pb_module et_pb_text et_pb_text_0  et_pb_text_align_left et_pb_bg_layout_light">
                                             <div class="et_pb_text_inner">
-                                                <h1>My Account</h1>
+                                                <h1>My Orders</h1>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                        @if(session()->has('error'))
+                            <div class="alert alert-success">
+                                {{ session()->get('error') }}
+                            </div>
+                        @endif
+                        @if (session()->has('success'))
+                                        <div class="alert alert-success">
+                                            {{ session()->get('success') }}
+                                        </div>
+										@endif
+										@if ($errors->any())
+										@foreach ($errors->all() as $error)
+										<div class="alert alert-danger alert-block">
+
+												<strong>{{ $error }}</strong>
+
+										</div>
+										@endforeach
+										@endif
                             <div class="et_pb_section et_pb_section_1 et_pb_with_background et_section_regular">
                                 <div class="et_pb_row et_pb_row_1">
                                     <div
@@ -557,114 +579,181 @@
                                                     </nav>
                                                     <div class="woocommerce-MyAccount-content">
                                                         <div class="woocommerce-notices-wrapper"></div>
-                                                        @if (session()->has('success'))
-                                                            <div class="alert alert-success">
-                                                                {{ session()->get('success') }}
+
+
+                                                            <div class="noRecord">
+                                                                <article class="dokan-orders-area">
+                                                                    <ul class="list-inline order-statuses-filter">
+                                                                       <li class="active">
+                                                                          <a >
+                                                                          All ({{$countBroker??0}})
+                                                                          </a>
+                                                                       </li>
+                                                                       {{-- <li>
+                                                                          <a href="dashboard/orders/?order_status=wc-completed">
+                                                                          Completed (0)
+                                                                          </a>
+                                                                       </li>
+                                                                       <li>
+                                                                          <a href="dashboard/orders/?order_status=wc-processing">
+                                                                          Processing (0)
+                                                                          </a>
+                                                                       </li>
+                                                                       <li>
+                                                                          <a href="dashboard/orders/?order_status=wc-on-hold">
+                                                                          On-hold (0)
+                                                                          </a>
+                                                                       </li>
+                                                                       <li>
+                                                                          <a href="dashboard/orders/?order_status=wc-pending">
+                                                                          Pending (0)
+                                                                          </a>
+                                                                       </li>
+                                                                       <li>
+                                                                          <a href="dashboard/orders/?order_status=wc-cancelled">
+                                                                          Cancelled (0)
+                                                                          </a>
+                                                                       </li>
+                                                                       <li>
+                                                                          <a href="dashboard/orders/?order_status=wc-refunded">
+                                                                          Refunded (0)
+                                                                          </a>
+                                                                       </li>
+                                                                       <li>
+                                                                          <a href="dashboard/orders/?order_status=wc-failed">
+                                                                          Failed (0)
+                                                                          </a>
+                                                                       </li> --}}
+                                                                    </ul>
+                                                                    @if(isset($show_data))
+                                                                    <td data-title="S.no" class="column-thumb">
+                                                                       {{$show_data}}
+                                                                    </td>
+                                                                    @else
+                                                                    @if(!$brokers->isEmpty())
+                                                                    @if(Session::has('success'))
+                                                                          <div class="alert alert-success text-center"><span class="glyphicon glyphicon-ok"></span><em> {!! session('success') !!}</em></div>
+                                                                      @endif
+                                                                    @if(Session::has('error'))
+                                                                          <div class="alert alert-success text-center"><span class="glyphicon glyphicon-ok"></span><em> {!! session('error') !!}</em></div>
+                                                                      @endif
+                                                                      <form method="GET" action="{{Route('assignbroker')}}">
+                                                                      <table class="dokan-table dokan-table-striped product-listing-table dokan-inline-editable-table" id="dokan-product-list-table">
+                                                                      <thead>
+
+                                                                         <tr>
+                                                                          @if(isset($brokers) && isset($customer_condition) && $customer_condition == $brokers->first()->id)
+                                                                          @else
+                                                                          <th>Select</th>
+                                                                          @endif
+                                                                            <th>S.No</th>
+                                                                            <th>Name</th>
+                                                                            <th>Email</th>
+                                                                            {{-- <th>Status</th> --}}
+                                                                            <th>Phone Number</th>
+                                                                            <th>City</th>
+                                                                            <th>State</th>
+                                                                            <th>Country</th>
+                                                                            <th>Address</th>
+                                                                            @if(isset($brokers) && isset($customer_condition) && $customer_condition == $brokers->first()->id)
+                                                                            <th>Status</th>
+                                                                            <th>Action</th>
+                                                                            {{-- <th>Broker Percentage</th> --}}
+                                                                            @else
+                                                                              @endif
+
+                                                                         </tr>
+                                                                      </thead>
+                                                                      <tbody>
+                                                                          @php
+                                                                              $counter = 1;
+                                                                          @endphp
+                                                                       @foreach($brokers as $broker)
+                                                                         <tr class="">
+                                                                          @if(isset($customer_condition) && $customer_condition == $broker->id)
+                                                                          @else
+                                                                          <th class="dokan-product-select check-column">
+                                                                              <label for="cb-select-432"></label>
+                                                                              <input class="cb-select-items dokan-checkbox" type="checkbox" data-product-name="Testing Products" name="id[]" value="{{$broker->id}}">
+                                                                          </th>
+                                                                          @endif
+                                                                            <td data-title="S.no" class="column-thumb">
+                                                                               {{$counter++}}
+                                                                            </td>
+                                                                            <td data-title="name" class="column-primary">
+                                                                              {{$broker->first_name}} {{$broker->last_name}}
+                                                                            </td>
+                                                                            <td data-title="email" class="column-primary">
+                                                                              {{$broker->email}}
+                                                                            </td>
+                                                                            <td data-title="phone" class="column-primary">
+                                                                              {{$broker->phone_no}}
+                                                                            </td>
+                                                                            <td data-title="city" class="column-primary">
+                                                                              {{$broker->city}}
+                                                                            </td>
+                                                                            <td data-title="state" class="column-primary">
+                                                                              {{$broker->state}}
+                                                                            </td>
+                                                                            <td data-title="country" class="column-primary">
+                                                                              {{$broker->country}}
+                                                                            </td>
+                                                                            <td data-title="address" class="column-primary">
+                                                                              {{$broker->address}}
+                                                                            </td>
+                                                                            @if(isset($customer_condition) && $customer_condition == $broker->id)
+                                                                            <td data-title="address" class="column-primary">
+                                                                                This Broker Assigned by admin
+                                                                              </td>
+                                                                              <td data-title="address" class="column-primary">
+                                                                                  <a href="{{route('vendor_remove_broker',['id'=>$broker->id])}}" class="dokan-btn dokan-btn-theme dokan-add-new-product">Cancle</a>
+                                                                              </td>
+
+                                                                              @else
+                                                                            @endif
+                                                                          {{-- @if(isset($customer_condition) && $customer_condition == $broker->id)
+                                                                          @else
+                                                                          <th class="dokan-product-select check-column">
+                                                                              <label for="cb-select-432"></label>
+                                                                              <input class="cb-select-items dokan-checkbox" type="checkbox" data-product-name="Testing Products" name="id[]" value="{{$broker->id}}">
+                                                                          </th>
+                                                                          @endif --}}
+                                                                            <td data-title="address" class="column-primary">
+
+                                                                            <td class="diviader"></td>
+                                                                         </tr>
+                                                                         @endforeach
+                                                                      </tbody>
+                                                                   </table>
+                                                                    @else
+                                                                    @php
+                                                                      $counter;
+                                                                  @endphp
+                                                                    <div class="dokan-error">
+                                                                       No Brokers found
+                                                                    </div>
+                                                                    @endif
+
+                                                                 </article>
+                                                                 @if(isset($customer_condition) && $customer_condition == $broker->id)
+                                                                 @else
+                                                                 <span class="dokan-add-product-link">
+                                                                     <button type="submit" class="dokan-btn dokan-btn-theme dokan-add-new-product float-right">Send Request</button>
+
+                                                                  </span>
+                                                                  @endif
+                                                              </form>
+                                                              @endif
+                                                                  <br>
+                                                              </div>
                                                             </div>
-                                                            @endif
-                                                            @if (session()->has('error'))
-                                                            <div class="alert alert-danger">
-                                                                {{ session()->get('error') }}
-                                                            </div>
-                                                            @endif
-                                                            @if ($errors->any())
-                                                                <div class="alert alert-danger alert-block">
-                                                                    @foreach ($errors->all() as $error)
-                                                                        <strong>{{ $error }}</strong>
-                                                                    @endforeach
-                                                                </div>
-                                                            @endif
-                                                        <form action = "{{Route('update-account',$user->id)}}" method="post">
-                                                            @csrf
-                                                            <h3>Edit Profile</h3>
-
-                                                            <div class="woocommerce-address-fields">
-
-                                                                <div class="woocommerce-address-fields__field-wrapper">
-                                                                    <p class="form-row form-row-first validate-required"
-                                                                        id="shipping_first_name_field" data-priority="10">
-                                                                        <label for="shipping_first_name" class="">First name&nbsp;<abbr
-                                                                                class="required"
-                                                                                title="required">*</abbr></label><span
-                                                                            class="woocommerce-input-wrapper"><input
-                                                                                type="text" class="input-text "
-                                                                                id="first_name" placeholder=""
-                                                                                name="first_name" value="{{$customer->first_name}}"
-                                                                               ></span></p>
-                                                                    <p class="form-row form-row-last validate-required"
-                                                                        id="shipping_last_name_field" data-priority="20">
-                                                                        <label for="shipping_last_name" class="">Last
-                                                                            name&nbsp;<abbr class="required"
-                                                                                title="required">*</abbr></label><span
-                                                                            class="woocommerce-input-wrapper"><input
-                                                                                type="text" class="input-text "
-                                                                                name="last_name"
-                                                                                id="last_name" placeholder=""
-                                                                                value="{{$customer->last_name}}"
-                                                                                ></span></p>
-
-                                                                                <p class="form-row form-row-first validate-required"
-                                                                        id="shipping_first_name_field" data-priority="10">
-                                                                        <label for="shipping_first_name"
-                                                                            class="">Phone No.&nbsp;<abbr
-                                                                                class="required"
-                                                                                title="required">*</abbr></label><span
-                                                                            class="woocommerce-input-wrapper"><input
-                                                                                type="text" class="input-text "
-                                                                                value="{{$customer->phone_no}}"
-                                                                                id="phone_no_code" placeholder=""
-                                                                                name="phone_no"
-                                                                                ></span></p>
-
-
-                                                                                <p class="form-row form-row-last validate-required"
-                                                                        id="shipping_last_name_field" data-priority="20">
-                                                                        <label for="shipping_last_name" class="">
-                                                                            Email&nbsp;</label><span
-                                                                            class="woocommerce-input-wrapper"><input
-                                                                                type="text" class="input-text "
-                                                                                name="email"
-                                                                                id="title" placeholder="" value="{{$customer->email}}"
-
-                                                                            ></span></p>
-
-                                                                </div>
-                                                            </form>
-                                                            <p>
-                                                                <button type="submit" class="button chngPassBtn"
-                                                                    name="save_address" value="Save address">Update
-                                                                    User</button>
-                                                            </p>
-                                                            <br>
-
-                                                        <form action = "{{Route('update-account-password',$user->id)}}" method="post">
-                                                            @csrf
-                                                                <fieldset>
-                                                                <h3 class="changPassHead">Change Password</h3>
-                                                                <p class="form-row form-row-wide">
-                                                                    <label for="password_current">Current Password (leave blank to leave unchanged)</label>
-                                                                    <input type="password" class="input-text" name="password_current" id="password_current">
-                                                                </p>
-                                                                <p class="form-row form-row-wide">
-                                                                    <label for="password_1">New Password (leave blank to leave unchanged)</label>
-                                                                    <input type="password" class="input-text" name="password" id="password">
-                                                                </p>
-                                                                <p class="form-row form-row-wide">
-                                                                    <label for="password_2">Confirm New Password</label>
-                                                                    <input type="password" class="input-text" name="confirm_password" id="confirm_password">
-                                                                </p>
-                                                                </fieldset>
-
-                                                                <p>
-                                                                    <button type="submit" class="button chngPassBtn"
-                                                                        name="save_address" value="Save address">Update
-                                                                        User Password</button>
-                                                                </p>
+                                                         </div>
+                                                      </article>
                                                             </div>
 
-                                                        </form>
 
                                                     </div>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -676,238 +765,13 @@
                 </div>
             </article>
         </div>
+
+
     </div>
 
-    <script>
-
-        $('document').ready(function () {
-            $(".phone_no").intlTelInput({
-                utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/8.4.6/js/utils.js"
-            });
-            // $('.country_code').on('click',function () {
-            //     $('#country_code').val($(this).data('code'));
-            // });
-            //
-            // $('.address_country_code').on('click',function () {
-            //     $('input[name="phone_no_code"]').val($(this).data('code'));
-            // });
-            // $('.address_country_code_e').on('click',function () {
-            //     $('input[name="phone_no_code_e"]').val($(this).data('code'));
-            // });
-            $("#phone_no").intlTelInput("setNumber", '{{Auth::user()->customers->country_code.Auth::user()->customers->phone_no}}');
-
-
-            $('.orderDetailBtn').on('click',function () {
-                $order_id = $(this).data('order_id');
-
-                $.ajax({
-                    url: "{{url('user/getOrderDetail')}}/"+$order_id,
-                    method: 'GET',
-                    dataType: 'json',
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    success: function(res){
-                        // console.log(res);
-                        var html = '';
-                        let total_amount = parseInt(res.total_amount)+parseInt(res.shipping_cost);
-                        html += `<div class="alert alert-success" role="alert">
-                            <span>Order# ${res.order_no}</span>
-                            <span>Total: $${total_amount}</span>
-                            <span>Placed on ${new Date(res.created_at).toDateString()}</span>
-                            <span style="text-transform: capitalize" >Payment Method: ${res.payment.pay_method_name}</span>
-                            <span>Ship to: ${res.customer.first_name}</span>
-                        </div>
-                        <table class="table orderTable">
-                            <thead>
-                                <tr>
-                                    <th>Product</th>
-                                    <th>Price</th>
-                                    <th>Quantity</th>
-                                    <th>Subtotal</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>`
-
-                            res.order_items.map(function (item) {
-                               html += `<tr>
-                                    <td><p><img src="images/cart-item1.jpg" alt="">${item.product.product_name}</p></td>
-                                    <td><p>$ ${item.product_per_price}</p></td>
-                                    <td><p>${item.product_qty}</p></td>
-                                    <td><p>$ ${item.product_per_price*item.product_qty}</p></td>
-                                    <td>
-                                    <form action="{{ url('cart/store') }}/${item.product.id}" method="POST" id="cart-form">
-                                        {{ csrf_field() }}
-                                    <button type="submit" href="#" class="btnStyle">Reorder</button>
-                                    </form>
-                                    </td>
-                                   </tr>`
-                            });
-                           html += `</tbody>
-                                    </table>`;
-                        $('#OrderDetailModalBody').html(html);
-                        $('#OrderDetailModal').modal('show');
-
-                    }
-                })
-            });
-
-
-            //Edit Address
-            $('.editAddress').on('click',function () {
-                $id = $(this).data('id');
-
-                $.ajax({
-                    url: "{{url('user/getAddressDetail')}}/"+$id,
-                    method: 'GET',
-                    dataType: 'json',
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    success: function(res){
-                        console.log(res);
-
-                        $('#add_id').val(res.customer_address.id);
-                        $('#first_name_e').val(res.customer_address.first_name);
-                        $('#last_name_e').val(res.customer_address.last_name);
-                        $('#phone_no_e').val(res.customer_address.phone_no);
-                        $("#phone_no_e").intlTelInput("setNumber", res.customer_address.phone_no);
-                        $('#title_e').val(res.customer_address.title);
-                        $('#address_e').val(res.customer_address.address);
-                        $("#city_e").append(new Option(res.city.name, res.city.id));
-
-                        $('#company_name_e').val(res.customer_address.company_name);
-                        $('#zip_code_e').val(res.customer_address.zip_code);
-                        $('#country_e').val(res.customer_address.country);
-                        // $('#country_e option[value="res.country"]').attr("selected", "selected");
-
-
-                        $("#state_e").append(new Option(res.state.name, res.state.id));
-                        $('#shipping_billing_e').val(res.customer_address.shipping_billing);
-
-                        $('#editAddressModal').modal('show');
-
-                    }
-                })
-            });
-        });
-    </script>
-    <script>
-        $(document).on('click', ".add_to_wishlist", function(){
-            let el = $(this);
-            $.post(base_url + '/user/add-wishlist', {
-                "product_id": el.data('product'),
-                "customer_id": el.data('customer'),
-                "_token": $("meta[name=csrf-token]").attr('content')
-            }, function(d){
-                if(d.status){
-                    el.addClass('wishlist-added');
-                    el.addClass('remove_to_wishlist');
-                    el.removeClass('add_to_wishlist');
-                    el.attr('data-wishlist', d.data.id);
-                    el.css('color', 'red');
-                    toastr.success('Whishlist Added Successfully!', 'Success!')
-                } else {
-                    toastr.error(d.message, 'Error!')
-                }
-            })
-        })
-
-        $(document).on('click', ".remove_to_wishlist", function(){
-            let el = $(this);
-            $.post(base_url + '/user/add-wishlist', {
-                "product_id": el.data('product'),
-                "customer_id": el.data('customer'),
-                "_token": $("meta[name=csrf-token]").attr('content'),
-                "remove": 1,
-                "wishlist_id": el.attr('data-wishlist')
-            }, function(d){
-                if(d.status){
-                    el.removeClass('remove_to_wishlist');
-                    el.removeClass('wishlist-added');
-                    el.addClass('add_to_wishlist')
-                    el.css('color', '');
-                    toastr.success(d.message, 'Success!');
-                    location.reload();
-
-                } else {
-                    toastr.error(d.message, 'Error!')
-                }
-            })
-        })
-
-        $('document').ready(function () {
-
-            $("#country_e").on("change", function(ev) {
-                var countryId = $(this).val();
-                if(countryId != ''){
-                    $("#state_e option").remove();
-                    $("#cities_e option").remove();
-
-                    $.ajax({
-                        url: '{{url("user/getStates")}}/countryId/'+countryId,
-                        type: 'get',
-                        dataType: 'json',
-                        success: function (data) {
-                            if(data.tp == 1){
-                                $.each(data['result'], function(key, val) {
-                                    var option = $('<option />');
-                                    option.attr('value', val.id).text(val.name);
-                                    $('#state_e').append(option);
-                                });
-                                $("#state_e").prop("disabled",false);
-                            }
-                            else{
-                                alert(data.msg);
-                            }
-                        }
-                    });
-                }
-                else{
-                    $("#state_e option").remove();
-                }
-            });
-
-            $("#state_e").on("change", function(ev) {
-                var stateId = $(this).val();
-                if(stateId != ''){
-                    $("#cities_e option").remove();
-
-                    $.ajax({
-                        url: '{{url("user/getCities")}}/stateId/'+stateId,
-                        type: 'get',
-                        dataType: 'json',
-                        success: function (data) {
-                            if(data.tp == 1){
-                                $.each(data['result'], function(key, val) {
-                                    var option = $('<option />');
-                                    option.attr('value', val.id).text(val.name);
-                                    $('#city_e').append(option);
-                                });
-                                $("#city_e").prop("disabled",false);
-                            }
-                        }
-                    });
-                }
-                else{
-                    $("#states_e option:gt(0)").remove();
-                }
-            });
-
-            $(".formStyle").submit(function() {
-                $("#country_code").val($("#phone_no").intlTelInput("getSelectedCountryData").dialCode);
-            });
-
-            $("#addAddressForm").submit(function() {
-                $("input[name='phone_no_code']").val($("input[name='add_phone_no']").intlTelInput("getSelectedCountryData").dialCode);
-            });
-
-            $("#updateAddress").submit(function() {
-                $("input[name='phone_no_code_e']").val($("#phone_no_e").intlTelInput("getSelectedCountryData").dialCode);
-            });
-        })
-    </script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 
 @endsection

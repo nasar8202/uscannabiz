@@ -77,7 +77,7 @@ class VendorRequestController extends Controller
                 $vendor->full_name = $request->input('full_name');
                 $vendor->phone_num = $request->input('phone_num');
                 $vendor->email = $request->input('email');
-                $vendor->address = $request->input('add_note');
+                $vendor->address = $request->input('address');
                 $vendor->city ="city";
                 $vendor->quantity = $request->input('quantity');
                 $auth = Auth::user();

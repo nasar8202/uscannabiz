@@ -42,7 +42,7 @@ class ProductController extends Controller
         }
         else{
             $category_filter = Product::where(['category_id'=>$request->product_cat,'vender_id'=>$vendor_id])->get();
-            
+
         }
         return view('vendor.product.index',compact(['category',$category ,'product',$product,'category_filter',$category_filter,'product_stock','product_count']));
     }
@@ -61,19 +61,19 @@ class ProductController extends Controller
     public function addProductForm()
     {
         $auth = Auth::user()->customers_id;
-        $find_Customer = Customers::where('id',$auth)->first();
-        if($find_Customer->broker_request_id == null){
-            return back()->with('error','You Dont Have Any Broker');
-        }
-        else{
+        // $find_Customer = Customers::where('id',$auth)->first();
+        // if($find_Customer->broker_request_id == null){
+        //     return back()->with('error','You Dont Have Any Broker');
+        // }
+        // else{
         $categories = Category::get();
         $products = Product::whereStatus(1)->get();
         return view('vendor.product.addProductForm',compact('categories','products'));
-    }
+    //}
 }
     public function addProduct(Request $request)
     {
-        
+
 
     //    dd($request->all());
         $validator = Validator::make($request->all(), array(
@@ -99,7 +99,7 @@ class ProductController extends Controller
                 } else {
                     $product_image_first = null;
                 }
-               
+
                 $timestamp = mt_rand(1, time());
 
                 $product = Product::create([
@@ -225,9 +225,13 @@ class ProductController extends Controller
     public function vendorAddProductForm(Request $request,$id)
     {
 
-
+        $auth = Auth::user()->customers_id;
+        $find_Customer = Customers::where('id',$auth)->first();
+        if($find_Customer->broker_request_id == null){
+            return back()->with('error','You Dont Have Any Broker');
+        }
         $product = Product::where('id', $id)->first();
-        
+
         $pro = $product->product_qty;
         if($pro > 0){
             $data = Product::find($id);
@@ -267,11 +271,11 @@ class ProductController extends Controller
         $messsages = array(
             'bulk_products.required'=>'Please Select Products to delete.',
         );
-    
+
         $rules = array(
             'bulk_products'=>'required',
         );
-    
+
         $validator = Validator::make($request->all(), $rules,$messsages);
         // $validator = Validator::make($request->all(), [
         //     'bulk_products' => 'required',
@@ -331,7 +335,7 @@ class ProductController extends Controller
         } else {
             $product_image_first = null;
         }
-        
+
         $timestamp = mt_rand(1, time());
         $product->category_id  = $request->get('main_category');
         $product->sub_category_id = $request->get('sub_category');
@@ -378,4 +382,6 @@ class ProductController extends Controller
 
 
     }
+
+   
 }

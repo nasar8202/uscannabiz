@@ -17,6 +17,7 @@ use app\Http\Controllers\Admin\VendorController;
 
 
 
+
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::get('/', 'Front\FrontController@index')->name('homepage');
 // login register front
@@ -73,6 +74,14 @@ Route::get('/faq', 'Front\ContactUsController@faq')->name('faq');
 Route::middleware(['user'])->prefix('user')->group(function () {
     Route::get('/dashboard', 'User\UserController@dashboard')->name('dashboard');
 
+    // new code for broker
+    Route::get('/brokers', 'User\UserController@show_broker')->name('show_brokers');
+    Route::get('assignbroker', 'User\UserController@assignbroker')->name('assignbroker');
+    Route::get('vendor_remove_broker/{id}', 'User\UserController@vendor_remove_broker')->name('vendor_remove_broker');
+
+
+    //end for broker
+
     Route::get('edit-account/', 'User\UserController@editUserAccount')->name('edit-account');
 
     Route::post('update-account/{id}', 'User\UserController@updateUserAccount')->name('update-account');
@@ -101,12 +110,13 @@ Route::middleware(['user'])->prefix('user')->group(function () {
 });
 Route::namespace('Vendor')->prefix('/vendor')->middleware('vendor')->group(function () {
     //Dashboard
-    Route::get('assignbroker', 'VendorController@assignbroker')->name('assignbroker');
-    Route::get('vendor_remove_broker/{id}', 'VendorController@vendor_remove_broker')->name('vendor_remove_broker');
+    // Route::get('assignbroker', 'VendorController@assignbroker')->name('assignbroker');
+    // Route::get('vendor_remove_broker/{id}', 'VendorController@vendor_remove_broker')->name('vendor_remove_broker');
+
     Route::get('export', 'VendorController@export')->name('export');
     Route::get('dashboard', 'VendorController@dashboard')->name('dashboard_vendor');
     Route::get('/order', 'VendorController@order')->name('vendor_order');
-    Route::get('/brokers', 'VendorController@show_broker')->name('show_brokers');
+    // Route::get('/brokers', 'VendorController@show_broker')->name('show_brokers');
     Route::get('/inventory', 'VendorController@show_inventory')->name('show_inventory');
 
     Route::get('/show_brokers_yajra', 'VendorController@show_brokers_yajra')->name('show_brokers_yajra');
@@ -137,7 +147,16 @@ Route::namespace('Admin')->prefix('/admin')->middleware('admin')->group(function
     //Dashboard
     Route::get('/dashboard', 'AdminController@dashboard')->name('dashboard');
     //vendor request
+    Route::get('vendor-broker-add-product-form', 'ProductController@vendorBrokerAddProductForm')->name('vendorBrokerAddProductForm');
+    Route::get('vendor-broker-edit-product-form/{id}', 'ProductController@edit')->name('vendorEditProductForm');
+    Route::post('update-products/{id}', 'ProductController@updateProduct')->name('updateProduct');
+    Route::get('view-my-product', 'ProductController@vendorBrokerViewProduct')->name('vendorBrokerViewProduct');
 
+
+    Route::get('delete_product/{id}', 'ProductController@destroy')->name('delete_product');
+
+
+    Route::post('new-product/add', 'ProductController@addProduct')->name('add_product');
     Route::get('brokerAssignToVendor/{id}/{vendor_id}', 'VendorController@brokerAssignToVendor')->name('brokerAssignToVendor');
     Route::get('/vendors', 'VendorController@vendor_get')->name('vendor_get');
     Route::get('/customers/get', 'VendorController@customer_get')->name('customer_get');

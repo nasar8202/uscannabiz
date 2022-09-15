@@ -51,10 +51,11 @@ class ShopController extends Controller
         $productCount = Product::where('category_id',$id)->where('approvel_admin_status',1)->count();
         $categories = Category::where('status',1)->with('products')->first();
         return view('front.shop.show',compact('products','categories','productCount','title'));
-        
+
     }
     public function show($slug)
     {
+
          $product = Product::where('slug', $slug)->with('product_images','products_attributes','products_attributes.attribute','products_options')->firstOrFail();
         $options = [];
         foreach($product->products_options as  $option){
@@ -87,7 +88,7 @@ class ShopController extends Controller
             $stockLevel = '<div class="badge badge-danger">Not available</div>';
         }
         $productReviews = ProductReview::where('product_id', $product->id)->get();
-        
+
         $categories = Category::where(['status'=>1,'id' => $product->category_id])->with('products')->first();
         // dd($product->id);
         //return $categories;
