@@ -107,12 +107,12 @@ class OrderController extends Controller
     {
         $users = User::where(['id'=>Auth::user()->id,'email'=>Auth::user()->email])->first();
         $order = Order::with('customer')->orderBy('created_at','desc')->get();
-        //  dd($users->customers_id);
+         
         try {
             if (request()->ajax()) {
                 if($users->role_id == 1){
 
-                    return datatables()->of(Order::with('customer')->where('order_status','completed')->orderBy('created_at','desc')->get())
+                    return datatables()->of(Order::with('customer')->orderBy('created_at','desc')->get())
                     ->addIndexColumn()
                     ->addColumn('order_no', function ($data) {
                         return $data->order_no ?? '';
@@ -216,15 +216,18 @@ class OrderController extends Controller
         else{
 
             $check = Customers::where('broker_request_id', $users->customers_id)->first();
+            
                 if($check == null){
                     $message_broker = "Not Assign Yet From Vendor!";
                     return view('admin.order.broker_index',compact('message_broker') );
                 }
                 $user_check = Auth::user()->id;
-                $customer = Customers::where('id',$user_check)->first();
-                // dd($user_check,$customer->broker_request_id);
+                
+                $customer = Customers::where('user_id',$user_check)->first();
+                //dd($customer);
                 // $vendor_request = VendorRequest::where('vendor_id',$check->user_id)->orderBy('created_at','desc')->get();
-                $vendor_request = VendorRequest::where('vendor_id',$customer->broker_request_id)->orderBy('created_at','desc')->get();
+                $vendor_request = VendorRequest::where('vendor_id',$customer->id)->orderBy('created_at','desc')->get();
+                 //dd($vendor_request);
                 // $vendor_request = VendorRequest::get();
 
                 foreach($vendor_request as $items){
@@ -237,8 +240,10 @@ class OrderController extends Controller
                     }
                      if(!$vendor_request->isEmpty()){
 
-                    $check_vendor = Customers::where('user_id', $product_id)->first();
-                    $vender_request = VendorRequest::where('vendor_id',$check_vendor->user_id)->orderBy('created_at','desc')->get();
+                    $check_vendor = Customers::where('id', $product_id)->first();
+                    // dd($product_id);
+                     //dd($check_vendor);
+                    $vender_request = VendorRequest::where('vendor_id',$check_vendor->id)->orderBy('created_at','desc')->get();
                     return view('admin.order.broker_index',compact('vender_request') );
                 }
                 }

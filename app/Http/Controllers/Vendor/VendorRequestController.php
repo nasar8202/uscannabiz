@@ -124,7 +124,7 @@ class VendorRequestController extends Controller
                     $vendor->customer_id = $auth->id;
                 }
                 $vendor->save();
-                $category = Category::where('id',$request->input('product_id'))->first();
+                $product = Product::where('id',$request->input('product_id'))->first();
 
                 $details = [
                     'name'=> $request->full_name,
@@ -132,8 +132,8 @@ class VendorRequestController extends Controller
                     'phone_num' => $request->input('phone_num'),
                     'city' => $request->input('city'),
                     'quantity' => $request->input('quantity'),
-                    'address'=>  $request->input('add_note'),
-                    'product_name'=>$category->name,
+                    'address'=>  $request->input('address'),
+                    'product_name'=>$product->product_name,
 
                 ];
                 $vendorBrokerEmails = DB::table('customers')

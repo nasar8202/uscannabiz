@@ -209,7 +209,7 @@ class VendorController extends Controller
 
         try {
             $check =Customers::join('users','users.email','=','customers.email')->where('role_id','=',2)->where('broker_request','!=',null)->get();
-            // dd($check);
+             //dd($check);
             if (request()->ajax()) {
                 // return datatables()->of(Customers::join('Users','Users.id' ,'=' ,'Customers.user_id')->where('role_id','=',3)->get())
                 return datatables()->of(Customers::join('users','users.email','=','customers.email')->where('role_id','=',2)->where('broker_request','!=',null)->get())
@@ -240,6 +240,7 @@ class VendorController extends Controller
         $vendor_id = $id;
 
         $customer_search = Customers::where('user_id',$id)->first();
+        
         foreach($customer_search as $customers){
             $data_item = explode('|', $customer_search->broker_request);
             foreach($data_item as $data_items){
@@ -255,6 +256,7 @@ class VendorController extends Controller
     public function brokerAssignToVendor($id,$vendor_id)
     {
         $assigned_broker = Customers::find($id);
+        
         $check_user_id = Customers::where('user_id',$vendor_id)->first();
         if($check_user_id->broker_request_id != null){
             return back()->with('error','You Have Already Assigned Broker');

@@ -150,8 +150,12 @@ ul.et_pb_social_media_follow{list-style-type:none!important;margin:0 0 22px;padd
                  @if ($check_broker != 4 && $check_broker != 3)
     	             <div class="et_pb_module et_pb_wc_add_to_cart et_pb_wc_add_to_cart_0_tb_body et_pb_fields_label_position_default et_pb_bg_layout_  et_pb_text_align_left">
     	                <div class="et_pb_module_inner">
-
-    	                      <a href="{{ Route('vendorAddProductForm',$product->id ) }}" name="add-to-cart" value="381" class="single_add_to_cart_button button alt">Request to Broker</a>
+                            @if($check_broker == 1)
+                            
+                            @else
+                            <a href="{{ Route('vendorAddProductForm',$product->id ) }}" name="add-to-cart" value="381" class="single_add_to_cart_button button alt">Request to Broker</a>
+                            @endif
+    	                      
 
     	                </div>
     	             </div>
