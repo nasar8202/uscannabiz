@@ -107,12 +107,12 @@ class OrderController extends Controller
     {
         $users = User::where(['id'=>Auth::user()->id,'email'=>Auth::user()->email])->first();
         $order = Order::with('customer')->orderBy('created_at','desc')->get();
-        //  dd($users->customers_id);
+
         try {
             if (request()->ajax()) {
                 if($users->role_id == 1){
 
-                    return datatables()->of(Order::with('customer')->where('order_status','completed')->orderBy('created_at','desc')->get())
+                    return datatables()->of(Order::with('customer')->orderBy('created_at','desc')->get())
                     ->addIndexColumn()
                     ->addColumn('order_no', function ($data) {
                         return $data->order_no ?? '';
@@ -216,6 +216,7 @@ class OrderController extends Controller
         else{
 
             $check = Customers::where('broker_request_id', $users->customers_id)->first();
+
                 if($check == null){
                     $message_broker = "Not Assign Yet From Vendor!";
                     return view('admin.order.broker_index',compact('message_broker') );
@@ -228,7 +229,7 @@ class OrderController extends Controller
                 // $vendor_request = VendorRequest::get();
                 //dd($vendor_request);
                 foreach($vendor_request as $items){
-                    // dd($items->customer_id);
+                     //dd($items->vendor_id);
                     // $user_get = Customers::where('user_id',$items->customer_id)->first();
                     // dd($user_get->broker_request_id);
                     $products1 = Product::where('id',$items->product_id)->get();

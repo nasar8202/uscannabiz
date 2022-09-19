@@ -132,6 +132,7 @@ use Illuminate\Support\Facades\Request;
 
                            @php
                               $role = Auth::user()->role_id;
+                              
                               @endphp
                               @if($role == 3)
                            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-44 {{ Request::route()->getName() == 'editVendor' ? 'current-menu-item' : '' }}"><a href="{{ route('editVendor') }}">My Account</a></li>
@@ -141,7 +142,7 @@ use Illuminate\Support\Facades\Request;
                               {{-- <a href="{{ Route('edit-account') }}">My Account</a> --}}
                               @endif
                             </li>
-                           @if($role == 1)
+                           @if($role == 1 || $role == 4)
                             <li class="logoutBtn">
                                 <a href="{{ route('dashboard') }}">
                                     Dashboard
