@@ -270,7 +270,7 @@
                                 <div class="tab-pane" role="tabpanel" class="tab-pane fade in active" id="additionalImages">
                                     <div class="col-md-12 text-right">
                                     </div>
-                                    <table class="table">
+                                    {{-- <table class="table">
                                         <tr>
                                             <th>Product Image</th>
                                             <th>Select Image</th>
@@ -293,7 +293,7 @@
                                             </td>
                                         </tr>
                                         </tbody>
-                                    </table>
+                                    </table> --}}
                                 </div>
                                 <div class="tab-pane" role="tabpanel" class="tab-pane fade in active" id="attributes">
                                     <div class="col-md-12 text-right">
@@ -434,5 +434,18 @@
                     }
                 })
             });
-    </script>
+            function PreviewImage(counter) {
+            var oFReader = new FileReader();
+            oFReader.readAsDataURL(document.getElementById('gallery_'+counter).files[0]);
+
+            oFReader.onload = function (oFREvent) {
+                document.getElementById('img_'+counter).src = oFREvent.target.result;
+            };
+        }
+        document.querySelector('.custom-file-input').addEventListener('change',function(e){
+  var fileName = document.getElementById("gallery_0").files[0].name;
+  var nextSibling = e.target.nextElementSibling
+  nextSibling.innerText = fileName
+})
+</script>
 @endsection
