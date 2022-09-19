@@ -218,7 +218,7 @@ class OrderController extends Controller
             $check = Customers::where('broker_request_id', $users->customers_id)->first();
 
                 if($check == null){
-                    $message_broker = "Not Assign Yet From Vendor!";
+                    $message_broker = "Not User Assign Yet!";
                     return view('admin.order.broker_index',compact('message_broker') );
                 }
                 $user_check = Auth::user()->id;
@@ -226,6 +226,7 @@ class OrderController extends Controller
                 //dd($user_check,$customer->broker_request_id);
                 // $vendor_request = VendorRequest::where('vendor_id',$check->user_id)->orderBy('created_at','desc')->get();
                 $vendor_request = VendorRequest::where('broker_id',$customer->broker_request_id)->orderBy('created_at','desc')->get();
+                // dd($vendor_request);
                 // $vendor_request = VendorRequest::get();
                 //dd($vendor_request);
                 foreach($vendor_request as $items){
