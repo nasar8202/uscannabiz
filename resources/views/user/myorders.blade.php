@@ -547,6 +547,10 @@
                                                                 class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--orders">
                                                                 <a href="{{route('MyOrders')}}">Orders</a>
                                                             </li>
+                                                            <li
+                                                                class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--orders">
+                                                                <a href="{{route('PendingOrders')}}">Pending Orders</a>
+                                                            </li>
                                                             {{-- <li
                                                                 class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--downloads">
                                                                 <a href="my-account/downloads/">Downloads</a>
@@ -600,7 +604,7 @@
                                                                                     @elseif ($order->order_status == 'shipped')
                                                                                     <label class="dokan-label dokan-label-info">{{$order->order_status}}</label>
                                                                                 @endif
-                                                                                {{-- <p style="text-transform: uppercase;">{{$order->order_status}}</p> --}}
+                                                                               <p style="text-transform: uppercase;">{{$order->order_status}}</p> 
                                                                             </td>
                                                                             <td>
                                                                                 {{--                                                <a href="#" class="btnStyle btn-block">Track Order</a>--}}

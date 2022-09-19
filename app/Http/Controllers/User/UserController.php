@@ -17,7 +17,7 @@ use App\Models\CustomerWishlist;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-
+use DB;
 class UserController extends Controller
 {
     public function dashboard()
@@ -61,6 +61,26 @@ class UserController extends Controller
             $first_time_login = false;
         }
         return view('user.myorders',compact('orders','recentOrders','first_time_login'));
+    }
+    public function PendingOrders()
+    {
+        
+        $pendingorders = DB::table('vendor_requests')->where('customer_id',Auth::user()->id)->where('order_id',null)
+                            ->select('products.product_name','vendor_requests.quantity','vendor_requests.created_at')    
+                             ->join('products', 'products.id', '=', 'vendor_requests.product_id')
+                            ->paginate(10);
+                    
+        $recentOrders = Order::where('customer_id',Auth::user()->id)->orderBy('id','desc')->take(10)->get();
+        $first_time_login = false;
+
+        if (Auth::user()->first_time_login) {
+            $first_time_login = true;
+            Auth::user()->first_time_login = false;
+            Auth::user()->save();
+        } else {
+            $first_time_login = false;
+        }
+        return view('user.pendingorders',compact('pendingorders','recentOrders','first_time_login'));
     }
     public function getOrderDetail($id)
     {

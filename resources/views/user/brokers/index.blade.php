@@ -561,6 +561,10 @@
                                                                 class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--orders">
                                                                 <a href="{{route('MyOrders')}}">Orders</a>
                                                             </li>
+                                                            <li
+                                                                class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--orders">
+                                                                <a href="{{route('PendingOrders')}}">Pending Orders</a>
+                                                            </li>
                                                             {{-- <li
                                                                 class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--downloads">
                                                                 <a href="my-account/downloads/">Downloads</a>

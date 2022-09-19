@@ -92,6 +92,7 @@ Route::middleware(['user'])->prefix('user')->group(function () {
 
     Route::get('/getVendor', 'User\UserController@getVendor')->name('getVendor');
     Route::get('/my-orders', 'User\UserController@MyOrders')->name('MyOrders');
+    Route::get('/pending-orders', 'User\UserController@PendingOrders')->name('PendingOrders');
     Route::get('/order/{id}', 'User\UserController@show')->name('order');
     //WishList
     Route::get('/getOrderDetail/{id}', 'User\UserController@getOrderDetail')->name('getOrderDetail');

@@ -1,6 +1,7 @@
 @extends('front.layout.app')
 @section('title', 'My Orders')
 @section('content')
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.css" rel="stylesheet">
     <style id="et-critical-inline-css">
         .woocommerce #respond input#submit,
         .woocommerce-page #respond input#submit,
@@ -13,6 +14,13 @@
             border-top-color: #0d4400;
         }
 
+.pagination > .active > a, .pagination > .active > a:focus, .pagination > .active > a:hover, .pagination > .active > span, .pagination > .active > span:focus, .pagination > .active > span:hover {
+    z-index: 2;
+    color: #fff;
+    cursor: default;
+    background-color: #77a464;
+    border-color: #77a464;
+}
         #et_search_icon:hover,
         .mobile_menu_bar:before,
         .mobile_menu_bar:after,
@@ -496,6 +504,9 @@
                 font-size: 25px
             }
         }
+        .modal-content textarea.form-control{
+            border-radius: 20px;
+        }
     </style>
     <div
         class="page-template-default theme-Divi et-tb-has-template et-tb-has-footer woocommerce-account woocommerce-page woocommerce-js et_button_no_icon et_pb_button_helper_class et_fixed_nav et_show_nav et_secondary_nav_enabled et_primary_nav_dropdown_animation_fade et_secondary_nav_dropdown_animation_fade et_header_style_left et_cover_background et_pb_gutter windows et_pb_gutters3 et_pb_pagebuilder_layout et_no_sidebar et_divi_theme et-db dokan-theme-Divi customize-support chrome">
@@ -517,6 +528,11 @@
                                     </div>
                                 </div>
                             </div>
+                        @if(session()->has('error'))
+                            <div class="alert alert-success">
+                                {{ session()->get('error') }}
+                            </div>
+                        @endif
                             <div class="et_pb_section et_pb_section_1 et_pb_with_background et_section_regular">
                                 <div class="et_pb_row et_pb_row_1">
                                     <div
@@ -527,7 +543,6 @@
                                                 <div class="woocommerce">
                                                     <nav class="woocommerce-MyAccount-navigation">
                                                         <ul>
-                                                            {{-- <li class="orders {{ Request::route()->getName() == 'show_brokers' ? 'active' : '' }}"><a href="{{route('show_brokers')}}"><i class="fas fa-shopping-cart"></i> Broker</a></li> --}}
                                                             <li
                                                                 class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--dashboard is-active {{ Request::route()->getName() == 'show_brokers' ? 'active' : '' }}">
                                                                 <a href="{{route('show_brokers')}}">Broker</a>
@@ -561,137 +576,54 @@
                                                         </ul>
                                                     </nav>
                                                     <div class="woocommerce-MyAccount-content">
+                                                        <div class="woocommerce-notices-wrapper"></div>
+                                                            @if(count($recentOrders) > 0)
 
-                                                        <div class="noRecord">
-                                                            <div class="table orderTable itemDetail">
-                                                                 <h2 class="woocommerce-message woocommerce-message--info woocommerce-Message woocommerce-Message--info woocommerce-info">
-                                                                    Order Item Details
-                                                                </h2>
-
+                                                            <div class="noRecord">
                                                                 <table class="table orderTable">
                                                                     <thead>
-                                                                        <tr>
-                                                                            <th>Order#</th>
-                                                                            <th>Customer Name</th>
-                                                                            <th>Phone No</th>
-                                                                            <th>Order Total</th>
-                                                                            <th>Order Status</th>
-                                                                            <th>Order Date</th>
-                                                                        </tr>
+                                                                    <tr>
+                                                                        <th>Product Name</th>
+                                                                        <th>Qty</th>
+                                                                        <th>Date</th>
+                                                                        <th>Order Status</th>
+                                                                        
+                                                                    </tr>
                                                                     </thead>
                                                                     <tbody>
+                                                                    @forelse($pendingorders as $order)
                                                                         <tr>
                                                                             <td>
-                                                                                <p>{{$order->order_no}}</p>
+                                                                                <p>{{$order->product_name}}</p>
                                                                             </td>
                                                                             <td>
-                                                                                <p>{{$order->customer_name}}</p>
-                                                                            </td>
-                                                                            <td>
-                                                                                <p>{{$order->phone_no}}</p>
-                                                                            </td>
-                                                                            <td>
-                                                                                <p>${{$order->total_amount+$order->shipping_cost}}</p>
-                                                                            </td>
-                                                                            <td>
-                                                                                <p style="text-transform: uppercase;">{{$order->order_status}}</p>
+                                                                                <p>{{$order->quantity}}</p>
                                                                             </td>
                                                                             <td>
                                                                                 <p>{{date('d-m-Y',strtotime($order->created_at))}}</p>
                                                                             </td>
-                                                                        </tr>
-
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-                                                            <div class="table orderTable proDetail">
-                                                                <h2 class="woocommerce-message woocommerce-message--info woocommerce-Message woocommerce-Message--info woocommerce-info">
-                                                                    Product Details
-                                                                </h2>
-                                                                <table class="table orderTable">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th>#</th>
-                                                                            <th>Image</th>
-                                                                            <th>Item</th>
-                                                                            <th>Quantity</th>
-                                                                            <th>Unit Price</th>
-                                                                            <th>Sub Total</th>
-                                                                            <th>Broker Price</th>
-                                                                            <th>Total Price</th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                            @php
-                                                                            $counter = 1;
-                                                                            // $subTotal = 0;
-                                                                        @endphp
-                                                                       <tr>
-                                                                        <td class="center">{{$counter++}}</td>
-                                                                        <td class="center">
-                                                                            <img src="{{asset('uploads/products/'.$product->product_image)}}" width="50" height="50" alt="">
-                                                                        </td>
-                                                                        <td class="left strong">
-                                                                            {{-- <input type="hidden" name="" value="{{$product->product_name}}"> --}}
-                                                                            {{-- {{$product->product_name}} --}}
-                                                                            <a href="{{URL::to('/').'/shop/'.$order_items_first->product->slug}}" target="_blank">
-                                                                                {{$order_items_first->product->product_name}}
-                                                                            </a><br>
-                                                                           @if($order_items_first->orderOptions!==null)
-                                                                            @forelse($order_items_first->orderOptions as $option)
-                                                                                <p style="margin-bottom: 0 !important;"><b>{{ $option->optionValue['option']['option_name']}}</b> : {{ $option->optionValue['option_value']}}</p>
-                                                                            @empty
-                                                                            @endforelse
-                                                                            @endif
-                                                                        </td>
-                                                                        <td class="right">{{$order_items_first->product_qty}}</td>
-                                                                        {{-- @php
-                                                                        $total_price = $vender_request->quantity*$product->product_current_price;
-                                                                        @endphp --}}
-                                                                        <td class="right">${{$order->sub_total}}</td>
-                                                                        <td class="right">${{$order_items_first->product_subtotal_price}}</td>
-                                                                        <td class="right">${{$order->broker_price}}</td>
-                                                                        <td class="right">${{$order->total_amount + $order->broker_price }}</td>
-                                                                    </tr>
-
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-                                                            <div class="table orderTable shippingDetail">
-                                                                <h2 class="woocommerce-message woocommerce-message--info woocommerce-Message woocommerce-Message--info woocommerce-info">
-                                                                    Shipping Details
-                                                                </h2>
-                                                                <table class="table orderTable">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <td style="width: 50%;font-weight: bold" class="text-left">Details</td>
-
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        <tr>
-                                                                            <td class="text-left">
-                                                                                <strong>Address</strong> : {{$order->shipping_address}}
-                                                                                <br>
-
-                                                                                <strong>City</strong> :  {{$order->shipping_city}}
-                                                                                <br>
+                                                                            
+                                                                            <td>
+                                                                                
+                                                                               <p style="text-transform: uppercase;">Pending</p> 
                                                                             </td>
-
+                                                                                
                                                                         </tr>
+                                                                        
+                                                                    @empty
+                                                                    @endforelse
+                                                                    
                                                                     </tbody>
                                                                 </table>
+                                                                {!!$pendingorders->links() !!}
                                                             </div>
-                                                        </div>
-
-
-
-
-
-
+                                                            @else
+                                                            <div class="woocommerce-message woocommerce-message--info woocommerce-Message woocommerce-Message--info woocommerce-info">
+                                                                <a class="woocommerce-Button button" href="/">Browse products</a>
+                                                                Recent Orders No order has been made yet.	</div>
+                                                            @endif
 
                                                     </div>
-
 
                                                 </div>
                                             </div>
@@ -704,17 +636,244 @@
                 </div>
             </article>
         </div>
+
+        @if ($first_time_login)
+
+        <div class="modal modalTn login">
+            <div class="modal-content">
+                <span class="close-button">×</span>
+                <div class="u-column2 col-2">
+                 <h2>Add To Request</h2>
+                 <form method="Post" action="{{ route('vendorRequest_shop') }}" class="woocommerce-form woocommerce-form-register register">
+                  {{ csrf_field() }}
+
+                       <div class="split-row form-row-wide">
+                          <p class="form-row form-group">
+                             <!-- <label for="first-name">Full Name <span class="required">*</span></label> -->
+                             <input type="text" class="input-text form-control" name="full_name" id="first-name" required="required" placeholder="Full Name">
+                          </p>
+                          <p class="form-row form-group">
+                             <!-- <label for="last-name">Phone Number <span class="required">*</span></label> -->
+                             <input type="number" class="input-text form-control" name="phone_num" id="last-name" required="required" placeholder="Phone Number">
+
+                          </p>
+
+                          <p class="form-row form-group">
+                             <!-- <label for="last-name">Email <span class="required">*</span></label> -->
+                             <input type="email" class="input-text form-control" name="email" id="last-name" required="required" placeholder="Email">
+                          </p>
+                          {{-- <p class="form-row form-group">
+                             <!-- <label for="last-name">Address <span class="required">*</span></label> -->
+                             <input type="text" class="input-text form-control" name="address" id="last-name" required="required" placeholder="Address">
+                          </p> --}}
+                          {{-- <p class="form-row form-group">
+                             <!-- <label for="last-name">City <span class="required">*</span></label> -->
+                             <input type="text" class="input-text form-control" name="city" id="last-name" required="required" placeholder="City">
+                          </p> --}}
+                          <p class="form-row form-group">
+                             <!-- <label for="last-name">Select Product <span class="required">*</span></label> -->
+                             <select name="product_id" id="product_vendor_find" class="input-text form-control">
+                                <option value="" selected disabled>Select Product</option>
+                                @foreach(GetProducts() as $products)
+                                <option value="{{$products->id}}" data-vendor="{{$products->vender_id}}">{{$products->product_name}}</option>
+                                @endforeach
+                             </select>
+                          </p>
+                          <input type="hidden" value="" name="vendor_id" id="set_vendor_id">
+                          <p class="form-row form-group">
+                             <!-- <label for="last-name">Quantity <span class="required">*</span></label> -->
+                             <input type="number" class="input-text form-control" name="quantity" title="Qty" size="4" required="required" inputmode="numeric" autocomplete="off" placeholder="Quantity">
+                          </p>
+                          <p class="form-row form-group">
+                            <textarea class="input-text form-control textarea-qa" name="add_note" id="add_note" rows="9" cols="80" required="required" placeholder="       Add Notes"></textarea>
+                          </p>
+
+                       <br>
+                    <p class="woocommerce-form-row form-row">
+                       <button type="submit" class="woocommerce-Button woocommerce-button button woocommerce-form-register__submit" name="register" value="Register">Add Product Request</button>
+
+                    </p>
+                 </form>
+              </div>
+
+            </div>
+
+        </div>
+        <script>
+            $('document').ready(function () {
+       $('.modal.modalTn.login').slideDown();
+    $('.modal.modalTn span.close-button').click(function(){
+        $(this).closest('.modalTn').slideUp();
+    });
+    });
+    </script>
+        @endif
     </div>
 
-<script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-    $(window).on('load',function(){
+    <script>
+        $('document').ready(function () {
 
-        setTimeout(function(){
-            $('.table.orderTable.proDetail,.table.orderTable.shippingDetail').appendTo('.itemDetail .table-overflowx-auto > div');
-        },1000);
 
-    });
-</script>
+            // $('.country_code').on('click',function () {
+            //     $('#country_code').val($(this).data('code'));
+            // });
+            //
+            // $('.address_country_code').on('click',function () {
+            //     $('input[name="phone_no_code"]').val($(this).data('code'));
+            // });
+            // $('.address_country_code_e').on('click',function () {
+            //     $('input[name="phone_no_code_e"]').val($(this).data('code'));
+            // });
+
+
+
+            //Edit Address
+            $('.editAddress').on('click',function () {
+                $id = $(this).data('id');
+
+                $.ajax({
+                    url: "{{url('user/getAddressDetail')}}/"+$id,
+                    method: 'GET',
+                    dataType: 'json',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(res){
+                        console.log(res);
+
+                        $('#add_id').val(res.customer_address.id);
+                        $('#first_name_e').val(res.customer_address.first_name);
+                        $('#last_name_e').val(res.customer_address.last_name);
+                        $('#phone_no_e').val(res.customer_address.phone_no);
+
+                        $('#title_e').val(res.customer_address.title);
+                        $('#address_e').val(res.customer_address.address);
+                        $("#city_e").append(new Option(res.city.name, res.city.id));
+
+                        $('#company_name_e').val(res.customer_address.company_name);
+                        $('#zip_code_e').val(res.customer_address.zip_code);
+                        $('#country_e').val(res.customer_address.country);
+                        // $('#country_e option[value="res.country"]').attr("selected", "selected");
+
+
+                        $("#state_e").append(new Option(res.state.name, res.state.id));
+                        $('#shipping_billing_e').val(res.customer_address.shipping_billing);
+
+                        $('#editAddressModal').modal('show');
+
+                    }
+                })
+            });
+        });
+    </script>
+    <script>
+        $(document).on('click', ".add_to_wishlist", function(){
+            let el = $(this);
+            $.post(base_url + '/user/add-wishlist', {
+                "product_id": el.data('product'),
+                "customer_id": el.data('customer'),
+                "_token": $("meta[name=csrf-token]").attr('content')
+            }, function(d){
+                if(d.status){
+                    el.addClass('wishlist-added');
+                    el.addClass('remove_to_wishlist');
+                    el.removeClass('add_to_wishlist');
+                    el.attr('data-wishlist', d.data.id);
+                    el.css('color', 'red');
+                    toastr.success('Whishlist Added Successfully!', 'Success!')
+                } else {
+                    toastr.error(d.message, 'Error!')
+                }
+            })
+        })
+
+        $(document).on('click', ".remove_to_wishlist", function(){
+            let el = $(this);
+            $.post(base_url + '/user/add-wishlist', {
+                "product_id": el.data('product'),
+                "customer_id": el.data('customer'),
+                "_token": $("meta[name=csrf-token]").attr('content'),
+                "remove": 1,
+                "wishlist_id": el.attr('data-wishlist')
+            }, function(d){
+                if(d.status){
+                    el.removeClass('remove_to_wishlist');
+                    el.removeClass('wishlist-added');
+                    el.addClass('add_to_wishlist')
+                    el.css('color', '');
+                    toastr.success(d.message, 'Success!');
+                    location.reload();
+
+                } else {
+                    toastr.error(d.message, 'Error!')
+                }
+            })
+        })
+
+        $('document').ready(function () {
+
+            $("#country_e").on("change", function(ev) {
+                var countryId = $(this).val();
+                if(countryId != ''){
+                    $("#state_e option").remove();
+                    $("#cities_e option").remove();
+
+                    $.ajax({
+                        url: '{{url("user/getStates")}}/countryId/'+countryId,
+                        type: 'get',
+                        dataType: 'json',
+                        success: function (data) {
+                            if(data.tp == 1){
+                                $.each(data['result'], function(key, val) {
+                                    var option = $('<option />');
+                                    option.attr('value', val.id).text(val.name);
+                                    $('#state_e').append(option);
+                                });
+                                $("#state_e").prop("disabled",false);
+                            }
+                            else{
+                                alert(data.msg);
+                            }
+                        }
+                    });
+                }
+                else{
+                    $("#state_e option").remove();
+                }
+            });
+
+            $("#state_e").on("change", function(ev) {
+                var stateId = $(this).val();
+                if(stateId != ''){
+                    $("#cities_e option").remove();
+
+                    $.ajax({
+                        url: '{{url("user/getCities")}}/stateId/'+stateId,
+                        type: 'get',
+                        dataType: 'json',
+                        success: function (data) {
+                            if(data.tp == 1){
+                                $.each(data['result'], function(key, val) {
+                                    var option = $('<option />');
+                                    option.attr('value', val.id).text(val.name);
+                                    $('#city_e').append(option);
+                                });
+                                $("#city_e").prop("disabled",false);
+                            }
+                        }
+                    });
+                }
+                else{
+                    $("#states_e option:gt(0)").remove();
+                }
+            });
+
+
+        })
+    </script>
+
 @endsection
-

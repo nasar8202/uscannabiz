@@ -116,7 +116,7 @@ class VendorController extends Controller
                                 {
                                     return '<label class="dokan-label dokan-label-success">'.$data->order_status.'</label>';
                                 }
-                                elseif ($data->order_status == 'shipped')
+                                elseif ($data->order_status == 'paid')
                                 {
                                    return  '<label class="dokan-label dokan-label-info">'.$data->order_status.'</label>';
                                 }

@@ -378,7 +378,7 @@ class ProductController extends Controller
             }
         }
 
-        return redirect('/vendor/product')->with(['success' => 'Product Updated Successfully']);
+         return back()->with(['success' => 'Product Updated Successfully']);
 
 
     }
