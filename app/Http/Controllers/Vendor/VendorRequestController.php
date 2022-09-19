@@ -53,7 +53,7 @@ class VendorRequestController extends Controller
                 $vendor->full_name = $request->input('full_name');
                 $vendor->phone_num = $request->input('phone_num');
                 $vendor->email = $request->input('email');
-                $vendor->address = $request->input('address');
+                $vendor->address = $request->input('add_note');
                 $vendor->broker_id = $broke_id->broker_request_id;
                 $vendor->city ="city";
                 $vendor->quantity = $request->input('quantity');
@@ -156,7 +156,7 @@ class VendorRequestController extends Controller
                     'phone_num' => $request->input('phone_num'),
                     'city' => $request->input('city'),
                     'quantity' => $request->input('quantity'),
-                    'address'=>  $request->input('add_note'),
+                    'address'=>  $request->input('address'),
                     'product_name'=>"$product->product_name",
 
                 ];
