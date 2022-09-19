@@ -130,6 +130,7 @@ class VendorRequestController extends Controller
              $qty = $request->input('quantity');
 
              if($qty < $pro){
+                $auth = Auth::user();
                 $broke_id = Customers::where('id',$auth->customers_id)->first();
                 $vendor = new VendorRequest;
                 $vendor->product_id = $request->input('product_id');
@@ -140,7 +141,7 @@ class VendorRequestController extends Controller
                 $vendor->address = $request->input('address');
                 $vendor->city ="city";
                 $vendor->quantity = $request->input('quantity');
-                $auth = Auth::user();
+
                 if(isset($auth) && $auth->role_id == 2){
                     $vendor->customer_id = $auth->id;
                 }
