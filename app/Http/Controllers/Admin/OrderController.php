@@ -216,24 +216,24 @@ class OrderController extends Controller
         else{
 
             $check = Customers::where('broker_request_id', $users->customers_id)->first();
-
+//   dd($check);
                 if($check == null){
                     $message_broker = "Not User Assign Yet!";
                     return view('admin.order.broker_index',compact('message_broker') );
                 }
                 $user_check = Auth::user()->id;
-                $customer = Customers::where('id',$user_check)->first();
-                //dd($user_check,$customer->broker_request_id);
+                $customer = Customers::where('user_id',$user_check)->first();
+                 //dd($user_check,$customer);
                 // $vendor_request = VendorRequest::where('vendor_id',$check->user_id)->orderBy('created_at','desc')->get();
-                $vendor_request = VendorRequest::where('broker_id',$customer->broker_request_id)->orderBy('created_at','desc')->get();
-                // dd($vendor_request);
+                $vendor_request = VendorRequest::where('broker_id',$customer->id)->orderBy('created_at','desc')->get();
+                 //dd($vendor_request);
                 // $vendor_request = VendorRequest::get();
                 //dd($vendor_request);
                 foreach($vendor_request as $items){
-                     //dd($items->vendor_id);
+                     //dd($items);
                     // $user_get = Customers::where('user_id',$items->customer_id)->first();
                     // dd($user_get->broker_request_id);
-                    $products1 = Product::where('id',$items->product_id)->get();
+                    $products1 = Product::where('id',$items->customer_id)->get();
                     //dd($products1);
                     // foreach($products1 as $item1){
                     //     $product_id = $item1->id;
@@ -242,7 +242,7 @@ class OrderController extends Controller
 
                    //$check_vendor = Customers::where('user_id', $product_id)->first();
                     //dd($check_vendor);
-                    $vender_request = VendorRequest::where('broker_id',$customer->broker_request_id)->orderBy('created_at','desc')->get();
+                    $vender_request = VendorRequest::where('broker_id',$customer->id)->orderBy('created_at','desc')->get();
                     return view('admin.order.broker_index',compact('vender_request') );
                 }
                 }

@@ -155,8 +155,8 @@
                                             <span class="badge badge-danger">Cancelled</span>
                                             @elseif ($latestOrders->order_status == 'paid')
                                             <span class="badge badge-success">Paid</span>
-                                            @elseif ($latestOrders->order_status == 'shipped')
-                                            <span class="badge badge-info">Shipped</span>
+                                            @elseif ($latestOrders->order_status == 'completed')
+                                            <span class="badge badge-info">Completed</span>
                                             @endif
                                             {{-- {{ucfirst($latestOrders->order_status)}}  --}}
                                         </td>
@@ -217,8 +217,8 @@
                                             <span class="badge badge-danger">Cancelled</span>
                                             @elseif ($latestOrders->order_status == 'completed')
                                             <span class="badge badge-success">Completed</span>
-                                            @elseif ($latestOrders->order_status == 'shipped')
-                                            <span class="badge badge-info">Shipped</span>
+                                            @elseif ($latestOrders->order_status == 'paid')
+                                            <span class="badge badge-info">Paid</span>
                                             @endif
                                             {{-- {{ucfirst($latestOrders->order_status)}}  --}}
                                         </td>
