@@ -667,7 +667,7 @@ class ProductController extends Controller
             }
             DB::commit();
 
-        return redirect('/admin/vendor-broker-add-product-form')->with(['success' => 'Product Added Successfully']);
+        return redirect('/vendor/product')->with(['success' => 'Product Added Successfully']);
 
 
 
