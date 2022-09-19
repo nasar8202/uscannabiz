@@ -698,6 +698,7 @@ class ProductController extends Controller
     public function vendorBrokerViewProduct()
     {
         $auth = Auth::user()->id;
+        
        // $find_Customer = Customers::where('id',$auth)->first();
        $product =  Product::with('category')->where('approvel_admin_status',1)->where('vender_id',$auth)->orderBy('created_at','desc')->get();
         try {
