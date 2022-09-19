@@ -17,13 +17,13 @@
              {{ session()->get('error') }}
          </div>
          @endif
-           
+
          <div class="u-column2 col-2">
             <h2>Add To Request</h2>
             <form method="Post" action="{{ route('vendor_request_store') }}" class="woocommerce-form woocommerce-form-register register">
              {{ csrf_field() }}
-              
-             
+
+
              <div class="row">
                <table class="table">
                    <tr>
@@ -39,19 +39,19 @@
                                    <div class="custom-file">
                                    <label>Product Name</label>
                                   <h3>{{$data->product_name}}
-                                    
+
                                  <input type="hidden" value="{{$data->id}}" name="product_id">
                                  <input type="hidden" value="{{$data->vender_id}}" name="vendor_id">
-                                 </h3> 
+                                 </h3>
                                  @if (Auth::check())
                                  @php
                                  $check_broker = Auth::user()->role_id;
                              @endphp
                              @if ($check_broker == 4)
-                                      
+
                                   <label>Product Price</label>
                                   <h3>{{$data->product_current_price}}
-                                    </h3> 
+                                    </h3>
                                     @endif
                                     @endif
                                  </div>
@@ -62,8 +62,8 @@
                    </tbody>
                </table>
            </div>
-           
-             
+
+
                   <div class="split-row form-row-wide addToReqForm">
                      <p class="form-row form-group">
                         <label for="first-name">Full Name <span class="required">*</span></label>
@@ -72,9 +72,9 @@
                      <p class="form-row form-group">
                         <label for="last-name">Phone Number <span class="required">*</span></label>
                         <input type="number" class="input-text form-control" name="phone_num" id="last-name" @if(isset($customer_check)) value="{{$customer_check->phone_no}}" @endif  required="required">
-                    
+
                      </p>
-                  
+
                      <p class="form-row form-group">
                         <label for="last-name">Email <span class="required">*</span></label>
                         <input type="email" class="input-text form-control" name="email" id="last-name" @if(isset($customer_check)) value="{{$customer_check->email}}" @endif  required="required">
@@ -92,7 +92,7 @@
                          <label> Quantity </label>
                         <input type="number" name="quantity" id="quantity_62b36070a592a" class="input-text qty text" step="1" min="1" max="" name="quantity" value="1" title="Qty" size="4" placeholder="" inputmode="numeric" autocomplete="off">
                      </div>
-                  
+
                   <br>
                <p class="woocommerce-form-row form-row bntAddProdReq">
                   <button type="submit" class="woocommerce-Button woocommerce-button button woocommerce-form-register__submit addProdReqBtn" name="register" value="Register">Add Product Request</button>
@@ -100,9 +100,9 @@
                </p>
             </form>
          </div>
-         
+
            </div>
-           
+
         </div>
      </div>
   </div>

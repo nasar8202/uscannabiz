@@ -404,8 +404,9 @@ class UserController extends Controller
 
      $vendor_email = Auth::user()->email;
      $groups_update = customers::where("email",$vendor_email)->first();
-    //  dd($groups_update);
+      
      $groups_update->broker_request = implode('|',$id);
+     
      $groups_update->save();
 
      return back()->with(['success' => 'Broker Request Sent Successfully']);

@@ -706,7 +706,7 @@
                                                                                 This Broker Assigned by admin
                                                                               </td>
                                                                               <td data-title="address" class="column-primary">
-                                                                                  <a href="{{route('vendor_remove_broker',['id'=>$broker->id])}}" class="dokan-btn dokan-btn-theme dokan-add-new-product">Cancle</a>
+                                                                                  <a href="{{route('vendor_remove_broker',['id'=>$broker->id])}}" class="dokan-btn dokan-btn-theme dokan-add-new-product">Cancel</a>
                                                                               </td>
 
                                                                               @else

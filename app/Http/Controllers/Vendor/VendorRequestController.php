@@ -43,6 +43,25 @@ class VendorRequestController extends Controller
     public function ProductRequest(Request $request)
     {
         // dd($request->all());
+        $auth = Auth::user();
+
+        $broke_id = Customers::where('id',$auth->customers_id)->first();
+
+        $vendor = new VendorRequest;
+                $vendor->product_id = $request->input('product_id');
+                $vendor->vendor_id = $request->input('vendor_id');
+                $vendor->full_name = $request->input('full_name');
+                $vendor->phone_num = $request->input('phone_num');
+                $vendor->email = $request->input('email');
+                $vendor->address = $request->input('address');
+                $vendor->broker_id = $broke_id->broker_request_id;
+                $vendor->city ="city";
+                $vendor->quantity = $request->input('quantity');
+
+                if(isset($auth) && $auth->role_id == 2){
+                    $vendor->customer_id = $auth->id;
+                }
+        $vendor->save();
         $category = Category::where('id',$request->input('category_id'))->first();
 
         $details = [
@@ -52,9 +71,11 @@ class VendorRequestController extends Controller
             'city' => $request->input('city'),
             'quantity' => $request->input('quantity'),
             'address'=>  $request->input('add_note'),
-            'product_name'=>$category->name,
+            'product_name'=>"$category->name",
 
         ];
+
+
         $vendorBrokerEmails = DB::table('customers')
         ->select('users.approvel_status','users.email','customers.product_request','users.role_id')
         ->join('users', 'users.id', '=', 'customers.user_id')
@@ -63,8 +84,8 @@ class VendorRequestController extends Controller
         ->where('customers.product_request', '=', 1)
         ->where('users.approvel_status', '=', 1)
         ->get();
-    
-        
+
+
         // dd($vendorBrokerEmails);
         foreach($vendorBrokerEmails as $user){
             //echo $user;
@@ -103,12 +124,12 @@ class VendorRequestController extends Controller
             //     'role_id' => 4,
             // ]);
 
-            // $product = Product::where('id',$request->input('product_id'))->first();
+             $product = Product::where('id',$request->input('product_id'))->first();
 
-            // $pro = $product->product_qty;
-            // $qty = $request->input('quantity');
+            $pro = $product->product_qty;
+             $qty = $request->input('quantity');
 
-            // if($qty < $pro){
+             if($qty < $pro){
 
                 $vendor = new VendorRequest;
                 $vendor->product_id = $request->input('product_id');
@@ -123,7 +144,9 @@ class VendorRequestController extends Controller
                 if(isset($auth) && $auth->role_id == 2){
                     $vendor->customer_id = $auth->id;
                 }
+                $vendor->broker_id = $broke_id->broker_request_id;
                 $vendor->save();
+                $broke_id = Customers::where('id',$auth->customers_id)->first();
                 $category = Category::where('id',$request->input('product_id'))->first();
 
                 $details = [
@@ -133,7 +156,7 @@ class VendorRequestController extends Controller
                     'city' => $request->input('city'),
                     'quantity' => $request->input('quantity'),
                     'address'=>  $request->input('add_note'),
-                    'product_name'=>$category->name,
+                    'product_name'=>"$category->product_name",
 
                 ];
                 $vendorBrokerEmails = DB::table('customers')
@@ -187,12 +210,12 @@ class VendorRequestController extends Controller
                  return redirect()->route('order_thanks')->with('success',"Request Has Been Submited");
 
             }
-            // else{
-            //     return back()->with('error',"Only: {$pro} available in Stock");
-            // }
+            else{
+                return back()->with('error',"Only: {$pro} available in Stock");
+            }
 
     }
-
+    }
     /**
      * Display the specified resource.
      *

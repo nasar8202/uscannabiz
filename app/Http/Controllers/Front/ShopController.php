@@ -90,7 +90,7 @@ class ShopController extends Controller
         $productReviews = ProductReview::where('product_id', $product->id)->get();
 
         $categories = Category::where(['status'=>1,'id' => $product->category_id])->with('products')->first();
-        // dd($product->id);
+        //  dd($product);
         //return $categories;
         return view('front.shop.showProduct')->with([
             'product' => $product,

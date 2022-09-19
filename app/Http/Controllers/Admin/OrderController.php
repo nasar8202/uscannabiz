@@ -107,12 +107,12 @@ class OrderController extends Controller
     {
         $users = User::where(['id'=>Auth::user()->id,'email'=>Auth::user()->email])->first();
         $order = Order::with('customer')->orderBy('created_at','desc')->get();
-        //  dd($users->customers_id);
+
         try {
             if (request()->ajax()) {
                 if($users->role_id == 1){
 
-                    return datatables()->of(Order::with('customer')->where('order_status','completed')->orderBy('created_at','desc')->get())
+                    return datatables()->of(Order::with('customer')->orderBy('created_at','desc')->get())
                     ->addIndexColumn()
                     ->addColumn('order_no', function ($data) {
                         return $data->order_no ?? '';
@@ -147,7 +147,7 @@ class OrderController extends Controller
             else{
 
                 $check = Customers::where('broker_request_id', $users->customers_id)->first();
-               dd($check);
+
                 $vendor_request = VendorRequest::where('vendor_id',$check->user_id)->orderBy('created_at','desc')->get();
                 //dd($vendor_request);
                 foreach($vendor_request as $items){
@@ -214,31 +214,34 @@ class OrderController extends Controller
             return view('admin.order.index');
         }
         else{
-            
+
             $check = Customers::where('broker_request_id', $users->customers_id)->first();
+
                 if($check == null){
                     $message_broker = "Not Assign Yet From Vendor!";
                     return view('admin.order.broker_index',compact('message_broker') );
                 }
                 $user_check = Auth::user()->id;
                 $customer = Customers::where('id',$user_check)->first();
-                // dd($user_check,$customer->broker_request_id);
+                //dd($user_check,$customer->broker_request_id);
                 // $vendor_request = VendorRequest::where('vendor_id',$check->user_id)->orderBy('created_at','desc')->get();
-                $vendor_request = VendorRequest::where('vendor_id',$customer->broker_request_id)->orderBy('created_at','desc')->get();
+                $vendor_request = VendorRequest::where('broker_id',$customer->broker_request_id)->orderBy('created_at','desc')->get();
                 // $vendor_request = VendorRequest::get();
-                
+                //dd($vendor_request);
                 foreach($vendor_request as $items){
-                    // dd($items->customer_id);
+                     //dd($items->vendor_id);
                     // $user_get = Customers::where('user_id',$items->customer_id)->first();
                     // dd($user_get->broker_request_id);
                     $products1 = Product::where('id',$items->product_id)->get();
-                    foreach($products1 as $item1){
-                        $product_id = $item1->vender_id;
-                    }
+                    //dd($products1);
+                    // foreach($products1 as $item1){
+                    //     $product_id = $item1->id;
+                    // }
                      if(!$vendor_request->isEmpty()){
-                        
-                    $check_vendor = Customers::where('user_id', $product_id)->first();
-                    $vender_request = VendorRequest::where('vendor_id',$check_vendor->user_id)->orderBy('created_at','desc')->get();
+
+                   //$check_vendor = Customers::where('user_id', $product_id)->first();
+                    //dd($check_vendor);
+                    $vender_request = VendorRequest::where('broker_id',$customer->broker_request_id)->orderBy('created_at','desc')->get();
                     return view('admin.order.broker_index',compact('vender_request') );
                 }
                 }
@@ -246,7 +249,7 @@ class OrderController extends Controller
                     return view('admin.order.broker_index');
                 }
                 // }
-                   
+
         }
     }
 
@@ -264,7 +267,7 @@ class OrderController extends Controller
         $order = Order::where('id', $order_id)->first();
         $product = Product::where('id', $id)->first();
         $vender_request = VendorRequest::where('id',$request_id)->first();
-        $vender_detail = User::where('id',$vender_request->vendor_id)->first();
+        $vender_detail = User::where('id',$vender_request->broker_id)->first();
         $vender_detail_no = Customers::where('user_id',$vender_detail->id)->first();
         return view('admin.order.broker_show', compact(['product','vender_request','vender_detail','order','vender_detail_no']));
 
@@ -275,7 +278,8 @@ class OrderController extends Controller
         // $order = Order::where('id', $order_id)->first();
         $product = Product::where('id', $id)->first();
         $vender_request = VendorRequest::where('id',$request_id)->first();
-        $vender_detail = User::where('id',$vender_request->vendor_id)->first();
+        //dd($vender_request);
+        $vender_detail = User::where('id',$vender_request->broker_id)->first();
         $vender_detail_no = Customers::where('user_id',$vender_detail->id)->first();
         $login_vendor = Customers::where('user_id',Auth::user()->id)->first();
         // dd($login_vendor);
@@ -426,12 +430,12 @@ class OrderController extends Controller
         ];
         $vendor = Customers::where('user_id',$request->input('vendor_id'))->first();
 // dd($vendor);
-        $usersArray = [$request->input('customer_email'), $vendor->email];
-        foreach($usersArray as $user){
-            //echo $user;
-            \Mail::to($user)->send(new \App\Mail\SendEmailCustomerBroker($details));
+        // $usersArray = [$request->input('customer_email'), $vendor->email];
+        // foreach($usersArray as $user){
+        //     //echo $user;
+        //     \Mail::to($user)->send(new \App\Mail\SendEmailCustomerBroker($details));
 
-        }
+        // }
         return redirect()->route('order.index')->with(['success' => 'Order Updated Successfully']);
     }
 
