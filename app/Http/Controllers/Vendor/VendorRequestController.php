@@ -130,7 +130,7 @@ class VendorRequestController extends Controller
              $qty = $request->input('quantity');
 
              if($qty < $pro){
-
+                $broke_id = Customers::where('id',$auth->customers_id)->first();
                 $vendor = new VendorRequest;
                 $vendor->product_id = $request->input('product_id');
                 $vendor->vendor_id = $request->input('vendor_id');
@@ -146,7 +146,7 @@ class VendorRequestController extends Controller
                 }
                 $vendor->broker_id = $broke_id->broker_request_id;
                 $vendor->save();
-                $broke_id = Customers::where('id',$auth->customers_id)->first();
+
                 $category = Category::where('id',$request->input('product_id'))->first();
 
                 $details = [
