@@ -40,7 +40,7 @@ class AdminController extends Controller
             // dd($check);
             $data['latestOrders']= VendorRequest::where('vendor_id',$check->user_id)->take(7)->get();
             $data['orders'] = VendorRequest::where('vendor_id',$check->user_id)->count();
-            dd($data['latestOrders']);
+            //dd($data['latestOrders']);
             }
              //dd($data['orders'],$check_broker);
 
