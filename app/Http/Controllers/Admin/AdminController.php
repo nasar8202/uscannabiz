@@ -28,17 +28,17 @@ class AdminController extends Controller
             $data['latestReviews']=ProductReview::with('product','customer')->orderBy('created_at', 'desc')->take(7)->get();
             $data['vendors']= User::where(['approvel_status'=>1])->where('role_id',3)->count();
         }elseif($check_user->role_id == 4){
-
-            $check = Customers::where('id', $check_user->customers_id)->first();
+            
+            $check = Customers::where('user_id', $check_user->id)->first();
             // dd($check);
             $check_broker = Customers::where('broker_request_id', $check->id)->first();
             
             //  dd($check_broker);
             if($check_broker != null){
                 // dd($check_broker);
-            $data['orders'] = VendorRequest::where('customer_id',$check_broker->user_id)->count();
+            $data['orders'] = VendorRequest::where('broker_id',$check_broker->broker_request_id)->count();
             // dd($data['orders']);
-            $data['latestOrders']= VendorRequest::where('customer_id',$check_broker->user_id)->take(7)->get();
+            $data['latestOrders']= VendorRequest::where('broker_id',$check_broker->broker_request_id)->take(7)->get();
             }else{
             // dd($check);
             $data['latestOrders']= VendorRequest::where('vendor_id',$check->user_id)->take(7)->get();
