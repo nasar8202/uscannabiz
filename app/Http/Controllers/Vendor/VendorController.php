@@ -47,6 +47,7 @@ class VendorController extends Controller
     }
     public function order(Type $var = null)
     {
+        
         $check = Auth::user();
         if($check->role_id == 3){
             // $order_item = OrderItem::where('')
@@ -59,7 +60,9 @@ class VendorController extends Controller
             get();
             // dd($orders);
             $vendor_id = Auth::user()->id;
+            
             $orderCount = Order::where('vendor_id',$vendor_id)->count();
+            
             $orderCompletedCount = Order::where('vendor_id',$vendor_id)->where('order_status','completed')->count();
 
             $orderPendingCount = Order::where('vendor_id',$vendor_id)->where('order_status','pending')->count();

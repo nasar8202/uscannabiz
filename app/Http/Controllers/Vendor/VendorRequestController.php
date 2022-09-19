@@ -139,7 +139,7 @@ class VendorRequestController extends Controller
                 $vendor->phone_num = $request->input('phone_num');
                 $vendor->email = $request->input('email');
                 $vendor->address = $request->input('address');
-                $vendor->city ="city";
+                $vendor->city =$request->input('city');
                 $vendor->quantity = $request->input('quantity');
 
                 if(isset($auth) && $auth->role_id == 2){
