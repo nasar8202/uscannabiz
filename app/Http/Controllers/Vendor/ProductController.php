@@ -182,7 +182,7 @@ class ProductController extends Controller
             }
             DB::commit();
 
-        return redirect('/vendor/product')->with(['success' => 'Product Added Successfully']);
+        return back('/vendor/product')->with(['success' => 'Product Added Successfully']);
 
 
 
@@ -383,5 +383,5 @@ class ProductController extends Controller
 
     }
 
-   
+
 }
