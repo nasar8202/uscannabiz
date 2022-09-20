@@ -642,7 +642,7 @@
                                                                           <div class="alert alert-success text-center"><span class="glyphicon glyphicon-ok"></span><em> {!! session('error') !!}</em></div>
                                                                       @endif
                                                                       <form method="GET" action="{{Route('assignbroker')}}">
-                                                                      <table class="dokan-table dokan-table-striped product-listing-table dokan-inline-editable-table" id="dokan-product-list-table">
+                                                                      <table class="broker-table-qa dokan-table dokan-table-striped product-listing-table dokan-inline-editable-table" id="dokan-product-list-table">
                                                                       <thead>
 
                                                                          <tr>
@@ -722,9 +722,8 @@
                                                                               <input class="cb-select-items dokan-checkbox" type="checkbox" data-product-name="Testing Products" name="id[]" value="{{$broker->id}}">
                                                                           </th>
                                                                           @endif --}}
-                                                                            <td data-title="address" class="column-primary">
 
-                                                                            <td class="diviader"></td>
+                                                                            <!--<td class="diviader"></td>-->
                                                                          </tr>
                                                                          @endforeach
                                                                       </tbody>
