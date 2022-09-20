@@ -393,7 +393,9 @@ a.dokan-btn.dokan-btn-sm.dokan-btn-danger.dokan-btn-theme {
 .broker-table-qa th{
     min-width: 130px;
 }
-
+.entry-content table.broker-table-qa{
+    margin: 0;
+}
 
 @media (max-width: 430px) {
   .dokan-form-horizontal .dokan-control-label {
