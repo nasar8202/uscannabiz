@@ -320,7 +320,7 @@ class ProductController extends Controller
 
     }
     public function updateProduct(Request $request, $id)
-    {
+    {   
 
         $product = Product::where('id', $id)->first();
 
