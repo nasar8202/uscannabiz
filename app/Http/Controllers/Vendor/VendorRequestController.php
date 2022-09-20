@@ -129,7 +129,7 @@ class VendorRequestController extends Controller
             $pro = $product->product_qty;
              $qty = $request->input('quantity');
 
-             if($qty < $pro){
+             if($qty <= $pro){
                 $auth = Auth::user();
                 $broke_id = Customers::where('id',$auth->customers_id)->first();
                 $vendor = new VendorRequest;
