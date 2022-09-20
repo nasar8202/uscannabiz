@@ -31,10 +31,12 @@ class VendorController extends Controller
         //                 ->count();
         $orderCount = Order::where('vendor_id',$vendor_id)->count();
         $orderCompletedCount = Order::where('vendor_id',$vendor_id)->where('order_status','completed')->count();
+        
+        $orderPaidCount = Order::where('vendor_id',$vendor_id)->where('order_status','paid')->count();
 
         // $orderPendingCount = Order::where('vendor_id',$vendor_id)->where('order_status','pending')->count();
-        $orderPendingCount = VendorRequest::where('vendor_id',$vendor_id)->count();
-        $orderCancelledCount = Order::where('vendor_id',$vendor_id)->where('order_status','cancelled')->count();
+        // $orderPendingCount = VendorRequest::where('vendor_id',$vendor_id)->count();
+        // $orderCancelledCount = Order::where('vendor_id',$vendor_id)->where('order_status','cancelled')->count();
 
         $productCount = DB::table('products')
                         ->where('vender_id',$vendor_id)
@@ -43,7 +45,7 @@ class VendorController extends Controller
         // dd($productCount);
         $productViewed = \DB::table('products')->where('vender_id',$vendor_id)->first();
 
-        return view('vendor.dashboard',compact('orderCount','productCount','productViewed','orderPendingCount','orderCompletedCount','orderCancelledCount'));
+        return view('vendor.dashboard',compact('orderCount','productCount','productViewed','orderPaidCount'));
     }
     public function order(Type $var = null)
     {
