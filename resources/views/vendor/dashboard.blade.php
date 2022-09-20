@@ -76,7 +76,7 @@
 	                                       </li>
 	                                       <li>
 	                                          <a  style="color: #999">
-	                                          <span class="title">Pending</span> <span class="count">{{$orderPendingCount??0}}</span>
+	                                          <span class="title">Paid</span> <span class="count">{{$orderPaidCount??0}}</span>
 	                                          </a>
 	                                       </li>
 	                                       {{-- <li>
@@ -84,11 +84,11 @@
 	                                          <span class="title">Processing</span> <span class="count">0</span>
 	                                          </a>
 	                                       </li> --}}
-	                                       <li>
+	                                       {{-- <li>
 	                                          <a style="color: #d54e21">
 	                                          <span class="title">Cancelled</span> <span class="count">{{$orderCancelledCount??0}}</span>
 	                                          </a>
-	                                       </li>
+	                                       </li> --}}
 	                                       {{-- <li>
 	                                          <a href="orders/?order_status=wc-refunded" style="color: #e6db55">
 	                                          <span class="title">Refunded</span> <span class="count">0</span>

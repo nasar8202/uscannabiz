@@ -250,12 +250,16 @@ ul.et_pb_social_media_follow{list-style-type:none!important;margin:0 0 22px;padd
                                             $check_user = Auth::user();
                                             @endphp
                                             {{-- @dd($check_user) --}}
-                                            @if(isset($check_user))
+                                            @if(isset($check_user) && $check_user->role_id == 2)
                                             <input type="hidden" name="user_id" id="" value="{{$check_user->id}}">
                                             <button type="submit" id="button-review" >send</button>
                                             @else
                                             <input type="hidden" name="user_id" id="" value="">
+                                            @if(isset($check_user) && $check_user->role_id != 2)
+                                            <span style="color: red;font-weight: bold;">You Cant Access to Review</span>
+                                            @else
                                             <span style="color: red;font-weight: bold;">You Cant Send Review Without Login</span>
+                                            @endif
                                             @endif
 
 	                                     </form>

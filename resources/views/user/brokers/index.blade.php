@@ -514,7 +514,7 @@
                                         <div
                                             class="et_pb_module et_pb_text et_pb_text_0  et_pb_text_align_left et_pb_bg_layout_light">
                                             <div class="et_pb_text_inner">
-                                                <h1>My Orders</h1>
+                                                <h1>Available Brokers</h1>
                                             </div>
                                         </div>
                                     </div>
