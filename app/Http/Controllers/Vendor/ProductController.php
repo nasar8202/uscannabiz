@@ -66,7 +66,7 @@ class ProductController extends Controller
         //     return back()->with('error','You Dont Have Any Broker');
         // }
         // else{
-        $categories = Category::get();
+        $categories = Category::where('status',1)->get();
         $products = Product::whereStatus(1)->get();
         return view('vendor.product.addProductForm',compact('categories','products'));
     //}
@@ -75,114 +75,113 @@ class ProductController extends Controller
     {
 
 
-       //dd($request->all());
-        $validator = Validator::make($request->all(), array(
+     $validator = Validator::make($request->all(), array(
 
-            'product_name' => 'required',
-            'product_slug' => 'required|unique:products,slug,',
-            'current_price' => 'required|numeric',
-            'description' => 'required',
-            'product_image_first' => 'required',
+        'product_name' => 'required',
+        'product_slug' => 'required|unique:products,slug,',
+        'current_price' => 'required|numeric',
+        'description' => 'required',
+        'product_image_first' => 'required',
 
-            // 'manufacturer' => 'required',
-        ));
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator);
-        }
-        //image uploading
-            DB::beginTransaction();
-            try{
-                if ($request->file('product_image_first')) {
-                    $product_image_first = time() . '_' . $request->file('product_image_first')->getClientOriginalName();
-                    //            $product_image_first_path = $request->file('product_image_first')->storeAs('products', $product_image_first);
-                    $request->file('product_image_first')->move(public_path() . '/uploads/products/', $product_image_first);
-                } else {
-                    $product_image_first = null;
-                }
+        // 'manufacturer' => 'required',
+    ));
+    if ($validator->fails()) {
+        return redirect()->back()->withErrors($validator);
+    }
+    //image uploading
+        DB::beginTransaction();
+        try{
+            if ($request->file('product_image_first')) {
+                $product_image_first = time() . '_' . $request->file('product_image_first')->getClientOriginalName();
+                //            $product_image_first_path = $request->file('product_image_first')->storeAs('products', $product_image_first);
+                $request->file('product_image_first')->move(public_path() . '/uploads/products/', $product_image_first);
+            } else {
+                $product_image_first = null;
+            }
 
-                $timestamp = mt_rand(1, time());
+            $timestamp = mt_rand(1, time());
 
-                $product = Product::create([
-                    'category_id' => $request->get('main_category'),
-                    'product_name' => $request->get('product_name'),
-                    'sku' => $timestamp." ".$request->get('product_name'),
-                    'slug' => $request->get('product_slug'),
-                    'product_current_price' => $request->get('current_price'),
-                    'product_sale' => $request->get('product_sale') ?? 'no',
-                    'product_sale_percentage' => $request->get('product_sale_percentage') ?? 0,
-                    'product_stock' => $request->get('product_stock') ?? 'no',
-                    'product_qty' => $request->get('product_stock_qty') ?? '0',
-                    'product_type' => $request->get('product_featured'),
-                    'length' => 11,
-                    'width' => 11,
-                    'height' => 1,
-                    'weight' =>$request->get('weight'),
-                    'description' => $request->get('description'),
-                    'status' => $request->get('status') ?? 0,
-                    'product_image' => $product_image_first,
-                    'vender_id' => Auth::user()->id,
+            $product = Product::create([
+                'category_id' => $request->get('main_category'),
+                'product_name' => $request->get('product_name'),
+                'sku' => $timestamp." ".$request->get('product_name'),
+                'slug' => $request->get('product_slug'),
+                'product_current_price' => $request->get('current_price'),
+                'product_sale' => $request->get('product_sale') ?? 'no',
+                'product_sale_percentage' => $request->get('product_sale_percentage') ?? 0,
+                'product_stock' => $request->get('product_stock') ?? 'no',
+                'product_qty' => $request->get('product_stock_qty') ?? '0',
+                'product_type' => $request->get('product_featured'),
+                'length' => 11,
+                'width' => 11,
+                'height' => 1,
+                'weight' =>$request->get('weight'),
+                'description' => $request->get('description'),
+                'status' => $request->get('status') ?? 0,
+                'product_image' => $product_image_first,
+                'vender_id' => Auth::user()->id,
 
+            ]);
+
+            if ($request->get('meta-title') !== null && $request->get('meta-description') !== null && $request->get('meta-keywords') !== null) {
+                ProductMetaData::create([
+                    'product_id' => $product->id,
+                    'meta_tag_title' => $request->get('meta-title'),
+                    'meta_tag_description' => $request->get('meta-description'),
+                    'meta_tag_keywords' => $request->get('meta-keywords'),
+                    'status' => 1,
                 ]);
+            }
 
-                if ($request->get('meta-title') !== null && $request->get('meta-description') !== null && $request->get('meta-keywords') !== null) {
-                    ProductMetaData::create([
+            // if ($request->file('product_image')) {
+
+            //     foreach ($request->file('product_image') as $key => $product_image) {
+            //         $product_image_ad = time() . '_' . $product_image->getClientOriginalName();
+            //         $product_image_ad_path = $product_image->storeAs('products', $product_image_ad);
+            //         $product_image->move(public_path() . '/uploads/products/', $product_image_ad);
+
+            //         ProductImage::create([
+            //             'products_id' => $product->id,
+            //             'product_images' => $product_image_ad
+            //         ]);
+            //     }
+            // }
+
+            // Related Products
+            if (!empty($request->get('related_prod_id'))) {
+                foreach ($request->get('related_prod_id') as $relatedProduct) {
+                    RelatedProduct::create([
                         'product_id' => $product->id,
-                        'meta_tag_title' => $request->get('meta-title'),
-                        'meta_tag_description' => $request->get('meta-description'),
-                        'meta_tag_keywords' => $request->get('meta-keywords'),
-                        'status' => 1,
+                        'related_id' => $relatedProduct
                     ]);
                 }
-
-                // if ($request->file('product_image')) {
-
-                //     foreach ($request->file('product_image') as $key => $product_image) {
-                //         $product_image_ad = time() . '_' . $product_image->getClientOriginalName();
-                //         $product_image_ad_path = $product_image->storeAs('products', $product_image_ad);
-                //         $product_image->move(public_path() . '/uploads/products/', $product_image_ad);
-
-                //         ProductImage::create([
-                //             'products_id' => $product->id,
-                //             'product_images' => $product_image_ad
-                //         ]);
-                //     }
-                // }
-
-                // Related Products
-                if (!empty($request->get('related_prod_id'))) {
-                    foreach ($request->get('related_prod_id') as $relatedProduct) {
-                        RelatedProduct::create([
-                            'product_id' => $product->id,
-                            'related_id' => $relatedProduct
-                        ]);
-                    }
-                }
-                $administrators = User::where('id',1)->get();
-                foreach($administrators as $administrator){
-                    $administrator->notify(new AdminNewProductNotification($request->get('product_name'), $request->get('product_slug'),$request->get('current_price')));
-                }
-                //return $product;
-
-
             }
-            catch(\Illuminate\Database\QueryException $e)
-            {
-                // back to form with errors
-                DB::rollback();
-                return Redirect()->back()
-                    ->with('error',$e->getMessage() )
-                    ->withInput();
-
-            }catch(\Exception $e)
-            {
-                DB::rollback();
-                return Redirect()->back()
-                    ->with('error',$e->getMessage() )
-                    ->withInput();
+            $administrators = User::where('id',1)->get();
+            foreach($administrators as $administrator){
+                $administrator->notify(new AdminNewProductNotification($request->get('product_name'), $request->get('product_slug'),$request->get('current_price')));
             }
-            DB::commit();
+            //return $product;
 
-        return back('/vendor/product')->with(['success' => 'Product Added Successfully']);
+
+        }
+        catch(\Illuminate\Database\QueryException $e)
+        {
+            // back to form with errors
+            DB::rollback();
+            return Redirect()->back()
+                ->with('error',$e->getMessage() )
+                ->withInput();
+
+        }catch(\Exception $e)
+        {
+            DB::rollback();
+            return Redirect()->back()
+                ->with('error',$e->getMessage() )
+                ->withInput();
+        }
+        DB::commit();
+
+    return redirect('/vendor/product')->with(['success' => 'Product Added Successfully']);
 
 
 

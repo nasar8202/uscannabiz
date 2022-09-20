@@ -295,7 +295,7 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = Product::where('id', $id)->with('product_meta_data', 'product_images', 'products_attributes', 'products_options', 'products_options.option_val')->firstOrFail();
-        $mainCategories = Category::where('status', 1)->where('parent_id', 0)->get();
+        $mainCategories = Category::where('status', 1)->get();
         $subCategories = Category::where('status', 1)->where('parent_id', $product->category_id)->get();
         $attributeGroups = AttributeGroup::with('attributes')->get();
         $options = Option::where('status', 1)->get();
@@ -547,7 +547,7 @@ class ProductController extends Controller
         //     return back()->with('error','You Dont Have Any Broker');
         // }
         // else{
-        $categories = Category::get();
+        $categories = Category::where('status',1)->get();
         $products = Product::whereStatus(1)->get();
         //return view('vendor.product.addProductForm',compact('categories','products'));
         return view('admin.broker.vendorAddProductForm',compact('categories','products'));
@@ -667,7 +667,7 @@ class ProductController extends Controller
             }
             DB::commit();
 
-        return redirect('/vendor/product')->with(['success' => 'Product Added Successfully']);
+        return redirect('/admin/view-my-product')->with(['success' => 'Product Added Successfully']);
 
 
 
@@ -698,7 +698,7 @@ class ProductController extends Controller
     public function vendorBrokerViewProduct()
     {
         $auth = Auth::user()->id;
-
+        // dd($auth);
        // $find_Customer = Customers::where('id',$auth)->first();
        $product =  Product::with('category')->where('approvel_admin_status',1)->where('vender_id',$auth)->orderBy('created_at','desc')->get();
         try {
@@ -783,7 +783,7 @@ class ProductController extends Controller
             }
         }
 
-        return redirect('/vendor/product')->with(['success' => 'Product Updated Successfully']);
+        return redirect('/admin/view-my-product')->with(['success' => 'Product Updated Successfully']);
 
 
     }

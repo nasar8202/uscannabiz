@@ -109,7 +109,7 @@
                                             {{ session()->get('success') }}
                                         </div>
                                         @endif
-            <form method="post" action="{{ route('updateProduct', ['id' => $product->id])}}" class="woocommerce-form woocommerce-form-register register" enctype="multipart/form-data">
+            <form method="post" action="{{ route('updateProductFromVendor', ['id' => $product->id])}}" class="woocommerce-form woocommerce-form-register register" enctype="multipart/form-data">
              {{ csrf_field() }}
 
              <p class="form-row form-group">

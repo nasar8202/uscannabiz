@@ -130,11 +130,11 @@ Route::namespace('Vendor')->prefix('/vendor')->middleware('vendor')->group(funct
     Route::get('/product/filter', 'ProductController@filter')->name('product_filter');
     Route::get('/product/search', 'ProductController@search')->name('product_filter_search');
     Route::get('new-product', 'ProductController@addProductForm')->name('productForm');
-    Route::post('new-product/add', 'ProductController@addProduct')->name('add_product');
+    Route::post('new-product/add', 'ProductController@addProduct')->name('add_product_from_vendor');
     Route::get('delete-product/{id}', 'ProductController@destroyProduct')->name('deleteProduct');
     Route::get('delete-product-bulk', 'ProductController@destroyProductBulk')->name('deleteProductbulk');
     Route::get('edit-products/{id}', 'ProductController@editProduct')->name('editProduct');
-    Route::post('update-products/{id}', 'ProductController@updateProduct')->name('updateProduct');
+    Route::post('update-products/{id}', 'ProductController@updateProduct')->name('updateProductFromVendor');
     Route::get('editVendor', 'VendorController@vendorEdit')->name('editVendor');
     Route::post('updateVendor/{id}', 'VendorController@vendorUpdate')->name('updateVendor');
 
@@ -159,7 +159,7 @@ Route::namespace('Admin')->prefix('/admin')->middleware('admin')->group(function
     Route::get('delete_product/{id}', 'ProductController@destroy')->name('delete_product');
 
 
-    Route::post('new-product/add', 'ProductController@addProduct')->name('add_product');
+    Route::post('new-product/add', 'ProductController@addproduct')->name('add_product_from_broker');
     Route::get('brokerAssignToVendor/{id}/{vendor_id}', 'VendorController@brokerAssignToVendor')->name('brokerAssignToVendor');
     Route::get('/vendors', 'VendorController@vendor_get')->name('vendor_get');
     Route::get('/customers/get', 'VendorController@customer_get')->name('customer_get');

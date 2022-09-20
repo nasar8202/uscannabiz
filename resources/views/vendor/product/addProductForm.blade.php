@@ -124,7 +124,7 @@
                                             </ul>
                                         </div>
                                     @endif
-            <form method="post" action="{{ route('add_product') }}" class="woocommerce-form woocommerce-form-register register" enctype="multipart/form-data">
+            <form method="post" action="{{ route('add_product_from_vendor') }}" class="woocommerce-form woocommerce-form-register register" enctype="multipart/form-data">
              {{ csrf_field() }}
 
 

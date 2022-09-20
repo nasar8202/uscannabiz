@@ -99,7 +99,7 @@
                         <!-- general form elements -->
                         <div class="card card-primary">
 
-                            <form class="category-form" method="post" action="{{route('add_product')}}" enctype="multipart/form-data">
+                            <form class="category-form" method="post" action="{{route('add_product_from_broker')}}" enctype="multipart/form-data">
                             <div class="tab-content ">
                                 <div class="tab-pane active" role="tabpanel" class="tab-pane fade in active" id="product">
 
