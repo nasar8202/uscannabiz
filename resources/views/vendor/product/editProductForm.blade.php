@@ -222,7 +222,7 @@
                          <tbody>
                              <tr>
                                  <td>
-                                     <img src="{{asset('admin/images/placeholder.png')}}" alt="" id="img_0" style="height: 150px;width: 150px;">
+                                     <img src="{{asset('uploads/products/'.$product->product_image)}}" alt="" id="img_0" style="height: 150px;width: 150px;">
                                  </td>
                                  <td>
                                      <div class="input-group">
@@ -289,7 +289,12 @@
 
 
 <script>
-
+window.onload = function () {
+            CKEDITOR.replace('description', {
+                {{--filebrowserUploadUrl: '{{ route('project.document-image-upload',['_token' => csrf_token() ]) }}',--}}
+                {{--filebrowserUploadMethod: 'form'--}}
+            });
+        };
     $(document).ready(function () {
         $('#gallery_0').on('change',function(e) {
            var oFReader = new FileReader();
