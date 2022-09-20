@@ -385,6 +385,15 @@ a.dokan-btn.dokan-btn-sm.dokan-btn-danger.dokan-btn-theme {
     margin-right: 1em;
 }
 
+.table-overflowx-auto {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+}
+.broker-table-qa th{
+    min-width: 130px;
+}
+
 
 @media (max-width: 430px) {
   .dokan-form-horizontal .dokan-control-label {
